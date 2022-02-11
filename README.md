@@ -5,7 +5,7 @@
 - feat : 새로운 기능 추가
 - fix : 버그 수정
 - docs : 문서 수정
-- refactor : 코드 리팩터링
+- refactor : 리팩터링
 - style : 포맷팅, 세미콜론 누락 등 코드 변경이 없는 경우
 - test : 테스트 관련
 - chore : 설정 관련
