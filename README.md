@@ -1,13 +1,9 @@
 # myproject1
 ## 내 깃허브 컨벤션
-- 커밋 메시지는 제목(필수), 본문(선택), 꼬리말(선택)으로 구성한다.
-### type
-- feat : 새로운 기능 추가
+- feat : 새로운 기능
 - fix : 버그 수정
 - docs : 문서 수정
-- refactor : 리팩터링
 - style : 포맷팅, 세미콜론 누락 등 코드 변경이 없는 경우
-- test : 테스트 관련
-- chore : 설정 관련
-- add : 단순한 코드나 파일 추가
-- remove : 삭제가 생기면 사용
+- refactor : production 코드 리팩토링
+- test : 테스트 추가, 테스트 리팩토링 등 production 코드 변경 x
+- chore : updating build tasks, 패키지 매니저 configs 등 production 코드 변경 x
