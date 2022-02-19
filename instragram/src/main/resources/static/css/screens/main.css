@@ -1,3 +1,18 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-nav {
+  display: flex;
+}
+
+.post-profile__image {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
 .post-images {
   display: flex;
 }
@@ -5,4 +20,8 @@
 .post-image {
   width: 250px;
   height: 250px;
+}
+
+.add-comment {
+  display: flex;
 }
