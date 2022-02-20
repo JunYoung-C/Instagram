@@ -1,0 +1,9 @@
+.signup-form * {
+  display: block;
+}
+
+.signup-form input {
+  width: 250px;
+  height: 30px;
+  margin-bottom: 10px;
+}
