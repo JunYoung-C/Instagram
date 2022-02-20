@@ -1,10 +1,11 @@
-const addPostCancleBtn = document.querySelector(".add-post__cancle");
+const showAddPostBtn = document.querySelector(".show-add-post");
 const addPostDiv = document.querySelector("#add-post");
+const addPostCancleBtn = document.querySelector(".add-post__cancle");
 
 addPostCancleBtn.addEventListener('click', () => {
-  if (addPostDiv.getAttribute("display") == "none") {
-    addPostDiv.setAttribute("display") = block;
-  } else {
-    addPostDiv.setAttribute("display") = "none";
-  }
+  addPostDiv.style.display = "none";
+})
+
+showAddPostBtn.addEventListener('click', () => {
+  addPostDiv.style.display = "";
 })
