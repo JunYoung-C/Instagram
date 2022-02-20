@@ -1,0 +1,18 @@
+.signin-main {
+  display: flex;
+}
+
+.sign-main__image {
+  width: 250px;
+  height: 400px;
+}
+
+.signin-form * {
+  display: block;
+}
+
+.signin-form input {
+  width: 250px;
+  height: 30px;
+  margin-bottom: 10px;
+}
