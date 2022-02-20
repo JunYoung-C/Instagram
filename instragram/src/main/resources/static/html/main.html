@@ -24,7 +24,9 @@
         <div>
           <i class="far fa-paper-plane"></i>
         </div>
-        <i class="far fa-plus-square"></i>
+        <div class="show-add-post">
+          <i class="far fa-plus-square"></i>
+        </div>
         <div>
           <i class="far fa-compass"></i>
         </div>
@@ -98,6 +100,27 @@
         </article>
       </section>
       <aside></aside>
+      <div id="add-post" style="display: none">
+        <div>
+          <form action="" method="post" class="add-post__form">
+            <header class="add-post__form-header">
+              <div class="add-post__cancle">
+                <i class="fas fa-arrow-left"></i>
+              </div>
+              <span>새 게시물 만들기</span>
+              <input type="submit" value="공유하기" />
+            </header>
+            <div>
+              <div class="post-profile">
+                <img src="../images/03.png" class="post-profile__image" />
+                <span>최준영</span>
+              </div>
+              <textarea name="" id="" cols="30" rows="10"></textarea>
+              <input type="file" name="" id="" />
+            </div>
+          </form>
+        </div>
+      </div>
     </main>
     <footer></footer>
 
@@ -105,5 +128,6 @@
       src="https://kit.fontawesome.com/b17793764c.js"
       crossorigin="anonymous"
     ></script>
+    <script src="../javascript/addform.js"></script>
   </body>
 </html>
