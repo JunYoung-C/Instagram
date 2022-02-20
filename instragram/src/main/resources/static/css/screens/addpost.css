@@ -1,0 +1,25 @@
+#add-post {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#add-post > div {
+  background: white;
+}
+
+.add-post__form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-post__form input {
+  display: block;
+  margin-bottom: 10px;
+}
