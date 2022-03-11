@@ -1,7 +1,13 @@
 @import "reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto&display=swap");
 
 /* screens */
 @import "screens/main.css";
 @import "screens/signin.css";
 @import "screens/signup.css";
 @import "screens/addpost.css";
+
+body {
+  /* font-family: "Cookie", cursive; */
+  font-family: "Roboto", sans-serif;
+}
