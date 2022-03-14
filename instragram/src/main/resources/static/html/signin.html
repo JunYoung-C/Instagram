@@ -11,32 +11,45 @@
     <nav></nav>
     <main class="signin-main">
       <section>
-        <img src="../images/01.png" class="sign-main__image" />
-      </section>
-      <section>
         <article>
-          <header>
-            <span>Instagram</span>
-          </header>
-          <div>
-            <form action="" method="post" class="signin-form">
-              <input
-                type="text"
-                placeholder="전화번호, 사용자 이름 또는 이메일"
-              />
-              <input type="text" placeholder="비밀번호" />
-              <input type="submit" value="로그인" />
-            </form>
-          </div>
-          <div>
-            <span>또는</span>
-          </div>
-          <div>
-            <div>
-              <span>Facebook으로 로그인</span>
+          <div class="signin">
+            <div class="signin__form">
+              <header class="signin-header">
+                <h1>Instagram</h1>
+              </header>
+              <form action="" method="post" class="signin-form">
+                <input
+                  class="signin-form__text"
+                  type="text"
+                  placeholder="전화번호, 사용자 이름 또는 이메일"
+                />
+                <input
+                  class="signin-form__text"
+                  type="text"
+                  placeholder="비밀번호"
+                />
+                <input
+                  class="signin-form__button"
+                  type="submit"
+                  value="로그인"
+                />
+              </form>
             </div>
-            <div>
-              <span>비밀번호를 잊으셨나요?</span>
+            <div class="signin__division">
+              <div></div>
+              <span>또는</span>
+              <div></div>
+            </div>
+            <div class="signin__etc">
+              <div class="facebook-login">
+                <a href="">
+                  <img src="../images/facebook_logo.png" alt="" />
+                  Facebook으로 로그인</a
+                >
+              </div>
+              <div>
+                <span>비밀번호를 잊으셨나요?</span>
+              </div>
             </div>
           </div>
         </article>
@@ -50,11 +63,16 @@
           </div>
           <div>
             <div>
-              <span>AppStore에서 다운로드 하기</span>
+              <a href="">
+                <span>AppStore에서<br /></span>
+                <span>다운로드 하기</span>
+              </a>
             </div>
             <div>
-              <span>다운로드 하기</span>
-              <span>Google Play</span>
+              <a href="">
+                <span>다운로드 하기<br /></span>
+                <span>Google Play</span>
+              </a>
             </div>
           </div>
         </div>
