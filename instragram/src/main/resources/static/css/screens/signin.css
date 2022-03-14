@@ -57,8 +57,9 @@
   font-size: 12px;
 }
 
-.signin-form__text:active {
+.signin-form__text:focus {
   outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .signin-form__button {
@@ -71,10 +72,6 @@
   border-radius: 5px;
   font-size: 15px;
   font-weight: bold;
-}
-
-.signin-form__button:focus {
-  background-color: #96d2fa;
 }
 
 .signin__division {
