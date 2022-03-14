@@ -1,18 +1,219 @@
 .signin-main {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.sign-main__image {
-  width: 250px;
-  height: 400px;
+.signin-main__signin-column,
+.signin-main__signup-column,
+.signin-main__download-column {
+  text-align: center;
+  width: 350px;
 }
 
-.signin-form * {
-  display: block;
+.signin-main__signin-column,
+.signin-main__signup-column {
+  border: var(--main-border);
+  background-color: white;
+  box-sizing: border-box;
 }
 
-.signin-form input {
-  width: 250px;
-  height: 30px;
+.signin-main__signin-column {
   margin-bottom: 10px;
+  padding: 27px 35px 20px 35px;
+  height: 380px;
 }
+
+.signin-main__signup-column {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+/* signin-main__signin-column 하위 클래스 시작 */
+.signin-header {
+  font-family: "Cookie", cursive;
+  font-size: 56px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.signin-form__text,
+.signin-form__button {
+  width: 270px;
+  height: 35px;
+}
+
+.signin-form__text {
+  box-sizing: border-box;
+  border: var(--main-border);
+  margin-top: 5px;
+  background-color: var(--main-bg-color);
+  border-radius: 3px;
+  padding-left: 7px;
+  padding-top: 2px;
+  font-size: 12px;
+}
+
+.signin-form__text:active {
+  outline: none;
+}
+
+.signin-form__button {
+  border: none;
+  background-color: #b2dffc;
+  color: white;
+  margin-top: 14px;
+  margin-bottom: 20px;
+  width: 270px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.signin-form__button:focus {
+  background-color: #96d2fa;
+}
+
+.signin__division {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.signin__division-line {
+  height: 0.1px;
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.signin__division-line:first-child {
+  margin-left: 4px;
+}
+
+.signin__division-line:last-child {
+  margin-right: 4px;
+}
+
+.signin__etc {
+  color: #385185;
+}
+
+.facebook-login img {
+  width: 17px;
+  height: 17px;
+}
+
+.facebook-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 29px;
+  margin-bottom: 23px;
+}
+.facebook-login__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 170px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.facebook-login__link:visited,
+.forget-password a:visited {
+  color: #385185;
+}
+
+.forget-password {
+  font-size: 12px;
+  font-weight: bold;
+}
+/* signin-main__signin-column 하위 클래스 끝 */
+
+/* signin-main__signup-column 하위 클래스 시작 */
+.signup-link {
+  font-weight: bold;
+  color: #00b2fa;
+}
+/* signin-main__signup-column 하위 클래스 끝 */
+
+/* signin-main__download-column 하위 클래스 시작 */
+.app-download__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 14px;
+}
+
+.app-download__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-download__box {
+  border: none;
+  background-color: black;
+  width: 135px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 1px 2px 1px 2px;
+}
+
+.app-download__apple-box {
+  margin-right: 5px;
+}
+
+.app-download__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-download__apple-logo {
+  width: 27px;
+  height: 27px;
+  filter: invert();
+}
+
+.app-download__google-logo {
+  width: 23px;
+  height: 27px;
+}
+
+.app-download__box span {
+  color: white;
+}
+
+.app-download__apple-text,
+.app-download__google-text {
+  margin-left: 8px;
+  text-align: left;
+}
+
+.app-download__apple-text span:first-child {
+  line-height: 1.5;
+}
+.app-download__apple-text,
+.app-download__google-text span:first-child {
+  font-size: 8px;
+}
+
+.app-download__apple-text b {
+  font-size: 13px;
+}
+
+.app-download__google-text {
+  font-size: 15px;
+}
+/* signin-main__download-column 하위 클래스 끝 */

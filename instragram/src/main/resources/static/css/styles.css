@@ -1,4 +1,5 @@
 @import "reset.css";
+@import "variables.css";
 @import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto&display=swap");
 
 /* screens */
@@ -8,6 +9,10 @@
 @import "screens/addpost.css";
 
 body {
-  /* font-family: "Cookie", cursive; */
   font-family: "Roboto", sans-serif;
+  background-color: var(--main-bg-color);
+}
+
+a {
+  text-decoration: none;
 }
