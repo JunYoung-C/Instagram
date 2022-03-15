@@ -1,0 +1,196 @@
+.signin-main,
+.signup-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signin-main__signin-column,
+.signin-main__signup-column,
+.signin-main__download-column,
+.signup-main__signup-column,
+.signup-main__signin-column,
+.signup-main__download-column {
+  text-align: center;
+  width: 350px;
+}
+
+.signin-main__signin-column,
+.signin-main__signup-column,
+.signup-main__signup-column,
+.signup-main__signin-column {
+  border: var(--main-border);
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.signin-main__signin-column,
+.signup-main__signup-column {
+  margin-bottom: 10px;
+  padding: 27px 35px 20px 35px;
+}
+
+.signin-main__signup-column,
+.signup-main__signin-column {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.signin-header,
+.signup-header {
+  font-family: "Cookie", cursive;
+  font-size: 56px;
+  text-align: center;
+}
+
+.signin-form__text,
+.signin-form__button,
+.signup-form__text,
+.signup-form__button {
+  width: 270px;
+  height: 35px;
+}
+
+.signin-form__text,
+.signup-form__text {
+  box-sizing: border-box;
+  border: var(--main-border);
+  background-color: var(--main-bg-color);
+  border-radius: 3px;
+  padding-left: 7px;
+  padding-top: 2px;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.signin-form__text:focus,
+.signup-form__text:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.signin-form__button,
+.signup-form__button {
+  border: none;
+  background-color: var(--sky-blue);
+  color: white;
+  margin-top: 14px;
+  margin-bottom: 20px;
+  width: 270px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.signin__division,
+.signup__division {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.signin__division-line,
+.signup__division-line {
+  height: 0.1px;
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.signin__division-line:first-child,
+.signup__division-line:first-child {
+  margin-left: 4px;
+}
+
+.signin__division-line:last-child,
+.signup__division-line:last-child {
+  margin-right: 4px;
+}
+
+.signup-link,
+.signin-link {
+  font-weight: bold;
+  color: var(--dark-sky-blue);
+}
+
+/* download 영역 시작 */
+.app-download__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 14px;
+}
+
+.app-download__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-download__box {
+  border: none;
+  background-color: black;
+  width: 135px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 1px 2px 1px 2px;
+}
+
+.app-download__apple-box {
+  margin-right: 5px;
+}
+
+.app-download__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-download__apple-logo {
+  width: 27px;
+  height: 27px;
+  filter: invert();
+}
+
+.app-download__google-logo {
+  width: 23px;
+  height: 27px;
+}
+
+.app-download__box span {
+  color: white;
+}
+
+.app-download__apple-text,
+.app-download__google-text {
+  margin-left: 8px;
+  text-align: left;
+}
+
+.app-download__apple-text span:first-child {
+  line-height: 1.5;
+}
+.app-download__apple-text,
+.app-download__google-text span:first-child {
+  font-size: 8px;
+}
+
+.app-download__apple-text b {
+  font-size: 13px;
+}
+
+.app-download__google-text {
+  font-size: 15px;
+}
+/* download 영역 끝 */

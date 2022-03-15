@@ -2,6 +2,9 @@
 @import "variables.css";
 @import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto&display=swap");
 
+/* components */
+@import "components/signin-signup.css";
+
 /* screens */
 @import "screens/main.css";
 @import "screens/signin.css";
