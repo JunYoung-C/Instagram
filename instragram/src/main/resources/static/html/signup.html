@@ -9,46 +9,95 @@
   </head>
   <body>
     <nav></nav>
-    <main>
+    <main class="signup-main">
       <section>
-        <article>
-          <header>
-            <span>Instagram</span>
-          </header>
-          <div>
-            <div>
-              <span>친구들의 사진과 동영상을 보려면 가입하세요</span>
+        <article class="signup-main__signup-column">
+          <div class="signup">
+            <div class="signup__form">
+              <header class="signup-header">
+                <h1>Instagram</h1>
+              </header>
+              <div class="signup-suggestion">
+                <p>
+                  친구들의 사진과 동영상을 보려면<br />
+                  가입하세요.
+                </p>
+              </div>
+              <div class="signup-facebook-login">
+                <button class="signup-facebook-login__button">
+                  <img
+                    class="signup-facebook-login__img"
+                    src="../images/facebook_logo.png"
+                    alt=""
+                  />
+                  <span> Facebook으로 로그인 </span>
+                </button>
+              </div>
+              <div class="signup__division">
+                <div class="signup__division-line"></div>
+                <span class="signup__division-text">또는</span>
+                <div class="signup__division-line"></div>
+              </div>
+              <form action="" method="post" class="signup-form">
+                <input
+                  class="signup-form__text"
+                  type="text"
+                  placeholder="휴대폰 번호 또는 이메일 주소"
+                />
+                <input
+                  class="signup-form__text"
+                  type="text"
+                  placeholder="성명"
+                />
+                <input
+                  class="signup-form__text"
+                  type="text"
+                  placeholder="사용자 이름"
+                />
+                <input
+                  class="signup-form__text"
+                  type="text"
+                  placeholder="비밀번호"
+                />
+                <input class="signup-form__button" type="submit" value="가입" />
+              </form>
             </div>
-            <div>
-              <span>Facebook으로 로그인</span>
-            </div>
-            <div>
-              <span>또는</span>
-            </div>
-            <form action="" method="post" class="signup-form">
-              <input type="text" placeholder="휴대폰 번호 또는 이메일 주소" />
-              <input type="text" placeholder="성명" />
-              <input type="text" placeholder="사용자 이름" />
-              <input type="text" placeholder="비밀번호" />
-              <input type="submit" value="가입" />
-            </form>
           </div>
         </article>
-        <div>
-          <span>계정이 있으신가요?</span>
-          <a href="signin.html">로그인</a>
+        <div class="signup-main__signin-column">
+          <span>계정이 있으신가요?&nbsp;</span>
+          <a class="signin-link" href="signin.html">로그인</a>
         </div>
-        <div>
-          <div>
-            <span>앱을 다운로드하세요</span>
+        <div class="signup-main__download-column">
+          <div class="app-download__header">
+            <span>앱을 다운로드하세요.</span>
           </div>
-          <div>
-            <div>
-              <span>AppStore에서 다운로드 하기</span>
+          <div class="app-download__body">
+            <div class="app-download__box app-download__apple-box">
+              <a class="app-download__link" href="">
+                <img
+                  class="app-download__apple-logo"
+                  src="../images/apple-logo.png"
+                  alt=""
+                />
+                <div class="app-download__apple-text">
+                  <span><b>App Store</b>에서<br /></span>
+                  <span>다운로드 하기</span>
+                </div>
+              </a>
             </div>
-            <div>
-              <span>다운로드 하기</span>
-              <span>Google Play</span>
+            <div class="app-download__box app-download__google-box">
+              <a class="app-download__link" href="">
+                <img
+                  class="app-download__google-logo"
+                  src="../images/playstore.png"
+                  alt=""
+                />
+                <div class="app-download__google-text">
+                  <span>다운로드 하기<br /></span>
+                  <span>Google Play</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>

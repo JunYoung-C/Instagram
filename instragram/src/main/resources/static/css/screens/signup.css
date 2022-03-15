@@ -1,9 +1,42 @@
-.signup-form * {
-  display: block;
+.signup-main__signup-column {
+  height: 480px;
 }
 
-.signup-form input {
-  width: 250px;
-  height: 30px;
-  margin-bottom: 10px;
+.signup-header {
+  margin-bottom: 15px;
+}
+
+.signup-suggestion {
+  color: #8e8e8e;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.signup-facebook-login {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.signup-facebook-login__button {
+  width: 270px;
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: var(--blue);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-facebook-login__img {
+  width: 17px;
+  height: 17px;
+  margin-right: 6px;
+}
+
+.signup__division {
+  margin-bottom: 15px;
 }
