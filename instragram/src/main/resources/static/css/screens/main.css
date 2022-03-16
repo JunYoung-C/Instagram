@@ -1,10 +1,89 @@
+.main-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  border: var(--main-border);
+}
+
+.header-inner {
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  max-width: 950px;
+  width: 100vw;
+  padding: 14px 17px 14px 17px;
+}
+
+.header-title {
+  font-family: var(--title-font);
+  font-size: 30px;
+  flex-basis: 300px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-search {
+  position: relative;
+  color: #909090;
+  opacity: 0.7;
+}
+.header-search__input {
+  box-sizing: border-box;
+  width: 267px;
+  height: 35px;
+  padding-left: 40px;
+  font-size: 16px;
+  background-color: #efefef;
+  border: none;
+  border-radius: 8px;
+}
+
+.header-search__input:focus {
+  outline: none;
+}
+
+.header-search .fa-search {
+  position: absolute;
+  left: 15px;
+  top: 9px;
 }
 
 .header-nav {
   display: flex;
+}
+
+.nav-icon-wrap {
+  margin-left: 24px;
+}
+.nav-icon {
+  font-size: 25px;
+}
+
+.go-home:visited,
+.go-chat:visited,
+.go-adventure:visited {
+  color: black;
+}
+
+.show-add-post:hover,
+.show-alarm:hover,
+.show-user-info:hover {
+  cursor: pointer;
+}
+.main-content {
+  margin-top: 70px;
 }
 
 .post-profile__image {

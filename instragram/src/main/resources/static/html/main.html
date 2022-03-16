@@ -7,38 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Instagram</title>
   </head>
-  <body>
-    <nav class="main-header">
-      <div>
-        <a class="main-title">Instagram</a>
+  <body class="main-body">
+    <header class="main-header">
+      <div class="header-inner">
+        <div class="header-title">
+          <a class="main-title">Instagram</a>
+        </div>
+
+        <!-- <div class="header-content"> -->
+        <div class="header-search">
+          <i class="fas fa-search"></i>
+          <input class="header-search__input" type="text" placeholder="검색" />
+        </div>
+
+        <div class="header-nav">
+          <a href="" class="nav-icon-wrap go-home">
+            <i class="fas fa-home nav-icon"></i>
+          </a>
+          <a href="" class="nav-icon-wrap go-chat">
+            <i class="far fa-paper-plane nav-icon"></i>
+          </a>
+          <div class="nav-icon-wrap show-add-post">
+            <i class="far fa-plus-square nav-icon"></i>
+          </div>
+          <a href="" class="nav-icon-wrap go-adventure">
+            <i class="far fa-compass nav-icon"></i>
+          </a>
+          <div class="nav-icon-wrap show-alarm">
+            <i class="far fa-heart nav-icon"></i>
+          </div>
+          <div class="nav-icon-wrap show-user-info">
+            <i class="fas fa-user nav-icon"></i>
+          </div>
+        </div>
       </div>
-      <div>
-        <div></div>
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="검색" />
-      </div>
-      <div class="header-nav">
-        <div>
-          <i class="fas fa-home"></i>
-        </div>
-        <div>
-          <i class="far fa-paper-plane"></i>
-        </div>
-        <div class="show-add-post">
-          <i class="far fa-plus-square"></i>
-        </div>
-        <div>
-          <i class="far fa-compass"></i>
-        </div>
-        <div>
-          <i class="far fa-heart"></i>
-        </div>
-        <div>
-          <i class="fas fa-user"></i>
-        </div>
-      </div>
-    </nav>
-    <main>
+      <!-- </div> -->
+    </header>
+
+    <main class="main-content">
       <section>
         <article class="post">
           <div>
@@ -99,7 +105,6 @@
           </div>
         </article>
       </section>
-      <aside></aside>
       <div id="add-post" style="display: none">
         <div>
           <form action="" method="post" class="add-post__form">
@@ -122,6 +127,7 @@
         </div>
       </div>
     </main>
+
     <footer></footer>
 
     <script
