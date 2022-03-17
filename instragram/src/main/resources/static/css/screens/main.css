@@ -11,10 +11,11 @@
   justify-content: center;
   width: 100vw;
   border: var(--main-border);
+  background-color: white;
+  z-index: 99;
 }
 
 .header-inner {
-  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,23 +30,18 @@
   flex-basis: 300px;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .header-search {
   position: relative;
   color: #909090;
   opacity: 0.7;
 }
+
 .header-search__input {
-  box-sizing: border-box;
   width: 267px;
   height: 35px;
   padding-left: 40px;
   font-size: 16px;
-  background-color: #efefef;
+  background-color: #e6e6e6;
   border: none;
   border-radius: 8px;
 }
@@ -82,23 +78,117 @@
 .show-user-info:hover {
   cursor: pointer;
 }
+
+/* header 영역 끝 */
 .main-content {
-  margin-top: 70px;
+  margin-top: 90px;
+}
+
+.post {
+  background-color: white;
+  width: 600px;
+  border: var(--main-border);
+  margin-bottom: 27px;
+}
+
+.post-header,
+.post-media-wrap,
+.post-contents {
+  width: 600px;
+}
+
+/* post-header 시작 */
+.post-header {
+  height: 70px;
+}
+.post-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.post-profile__info {
+  display: flex;
+  align-items: center;
 }
 
 .post-profile__image {
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  margin-right: 15px;
+}
+
+.post-profile__name {
+  font-weight: bold;
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.post-profile__more {
+  opacity: 0.7;
+}
+/* post-header 끝 */
+
+/* post-images 시작 */
+.post-images-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 600px;
+  /* 추후 조정 필요 */
+  height: 500px;
+}
+
+.image-prev-button {
+  left: 10px;
+}
+
+.image-next-button {
+  right: 10px;
+}
+
+.unvisible-button {
+  display: none !important;
+}
+
+.image-prev-button .fa-chevron-circle-left,
+.image-next-button .fa-chevron-circle-right {
+  font-size: 24px;
+  color: white;
+  opacity: 0.7;
 }
 
 .post-images {
   display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.25s ease-out;
 }
 
 .post-image {
-  width: 250px;
-  height: 250px;
+  width: 600px;
+  /* 추후 조정 필요 */
+  height: 500px;
+}
+
+.image-prev-button,
+.image-next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+/* post-images 끝 */
+
+.post-contents {
+  height: 207px;
+  padding: 20px 16px 0px 16px;
 }
 
 .add-comment {

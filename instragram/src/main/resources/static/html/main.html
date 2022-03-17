@@ -14,7 +14,6 @@
           <a class="main-title">Instagram</a>
         </div>
 
-        <!-- <div class="header-content"> -->
         <div class="header-search">
           <i class="fas fa-search"></i>
           <input class="header-search__input" type="text" placeholder="검색" />
@@ -41,32 +40,47 @@
           </div>
         </div>
       </div>
-      <!-- </div> -->
     </header>
 
     <main class="main-content">
       <section>
         <article class="post">
-          <div>
+          <div class="post-header">
             <header class="post-profile">
-              <img src="../images/03.png" class="post-profile__image" />
-              <span>meenoie</span>
-              <div>
+              <div class="post-profile__info">
+                <img src="../images/03.png" class="post-profile__image" />
+                <span class="post-profile__name">meenoie</span>
+              </div>
+              <div class="post-profile__more">
                 <i class="fas fa-ellipsis-h fa-lg"></i>
               </div>
             </header>
           </div>
-          <div>
-            <ul class="post-images">
-              <li>
-                <img src="../images/01.png" class="post-image" />
-              </li>
-              <li>
-                <img src="../images/02.png" class="post-image" />
-              </li>
-            </ul>
+          <div class="post-media-wrap">
+            <div class="post-images-wrap">
+              <div class="image-prev-button unvisible-button">
+                <i class="fas fa-chevron-circle-left"></i>
+              </div>
+
+              <div class="image-next-button">
+                <i class="fas fa-chevron-circle-right"></i>
+              </div>
+
+              <ul class="post-images">
+                <li class="post-images__list">
+                  <img src="../images/01.png" class="post-image" />
+                </li>
+                <!-- <li class="post-images__list">
+                  <img src="../images/02.png" class="post-image" />
+                </li>
+                <li class="post-images__list">
+                  <img src="../images/03.png" class="post-image" />
+                </li> -->
+              </ul>
+            </div>
+            <!-- <div class="post-video-wrap"></div> -->
           </div>
-          <div>
+          <div class="post-contents">
             <div>
               <div>
                 <div>
@@ -128,12 +142,11 @@
       </div>
     </main>
 
-    <footer></footer>
-
     <script
       src="https://kit.fontawesome.com/b17793764c.js"
       crossorigin="anonymous"
     ></script>
+    <script src="../javascript/main.js"></script>
     <script src="../javascript/addform.js"></script>
   </body>
 </html>
