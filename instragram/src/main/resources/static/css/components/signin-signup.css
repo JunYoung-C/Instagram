@@ -22,7 +22,6 @@
 .signup-main__signin-column {
   border: var(--main-border);
   background-color: white;
-  box-sizing: border-box;
 }
 
 .signin-main__signin-column,
@@ -57,7 +56,6 @@
 
 .signin-form__text,
 .signup-form__text {
-  box-sizing: border-box;
   border: var(--main-border);
   background-color: var(--main-bg-color);
   border-radius: 3px;
@@ -88,7 +86,6 @@
 
 .signin__division,
 .signup__division {
-  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -143,7 +140,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  box-sizing: border-box;
   padding: 1px 2px 1px 2px;
 }
 
