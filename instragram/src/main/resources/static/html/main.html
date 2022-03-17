@@ -70,55 +70,63 @@
                 <li class="post-images__list">
                   <img src="../images/01.png" class="post-image" />
                 </li>
-                <!-- <li class="post-images__list">
+                <li class="post-images__list">
                   <img src="../images/02.png" class="post-image" />
                 </li>
                 <li class="post-images__list">
                   <img src="../images/03.png" class="post-image" />
-                </li> -->
+                </li>
               </ul>
             </div>
             <!-- <div class="post-video-wrap"></div> -->
           </div>
           <div class="post-contents">
-            <div>
-              <div>
-                <div>
-                  <i class="far fa-heart"></i>
-                  <i class="far fa-comment"></i>
-                  <i class="far fa-paper-plane"></i>
-                </div>
-                <div>
-                  <i class="far fa-bookmark"></i>
-                </div>
+            <div class="post-options">
+              <div class="post-options-column">
+                <i class="far fa-heart post-options__heart"></i>
+                <i class="far fa-comment post-options__comment"></i>
+                <i class="far fa-paper-plane post-options__share"></i>
               </div>
-              <span>좋아요 8000개</span>
+              <div class="post-options-column">
+                <i class="far fa-bookmark post-options__bookmark"></i>
+              </div>
             </div>
-            <div>
-              <div>
-                <span>meenoie</span>
-                <span> 요리조리 2가 끝났어요ㅜㅜ..</span>
-              </div>
+            <div class="post-like-text">
+              <span>좋아요 <span class="post-like-count">8000</span>개</span>
+            </div>
+            <div class="post-explanation">
+              <a class="post-explanation__owner">meenoie</a>
+              <span class="post-explanation__text">
+                요리조리 2가 끝났어요ㅜㅜ..</span
+              >
+            </div>
+            <div class="post-comments-count">
               <span>댓글 660개 모두 보기</span>
-              <div>
-                <div>
-                  <span>kyd</span>
-                  <span> 고맙습니다~</span>
-                </div>
-                <i class="far fa-heart fa-xs"></i>
-              </div>
-              <span>4시간 전</span>
             </div>
-            <div class="add-comment">
-              <i class="far fa-smile"></i>
-              <form action="" method="post">
-                <input type="text" placeholder="댓글 달기" />
-                <input type="submit" value="게시" />
+            <div class="post-time-wrap">
+              <a>4시간 전</a>
+            </div>
+            <div class="post-comment">
+              <form action="" method="post" class="post-comment__form">
+                <div class="post-comment__icons-wrap">
+                  <i class="far fa-smile"></i>
+                </div>
+                <input
+                  type="text"
+                  placeholder="댓글 달기..."
+                  class="post-comment__text"
+                />
+                <input
+                  type="submit"
+                  value="게시"
+                  class="post-comment__button"
+                />
               </form>
             </div>
           </div>
         </article>
       </section>
+
       <div id="add-post" style="display: none">
         <div>
           <form action="" method="post" class="add-post__form">
