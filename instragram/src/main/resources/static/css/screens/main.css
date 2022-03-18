@@ -140,20 +140,12 @@
   height: 500px;
 }
 
-.image-prev-button {
-  left: 10px;
-}
-
-.image-next-button {
-  right: 10px;
-}
-
 .unvisible-button {
   display: none !important;
 }
 
-.image-prev-button .fa-chevron-circle-left,
-.image-next-button .fa-chevron-circle-right {
+.image-control-button .fa-chevron-circle-left,
+.image-control-button .fa-chevron-circle-right {
   font-size: 24px;
   color: white;
   opacity: 0.7;
@@ -173,8 +165,7 @@
   height: 500px;
 }
 
-.image-prev-button,
-.image-next-button {
+.image-control-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -183,6 +174,14 @@
   align-items: center;
   cursor: pointer;
   z-index: 2;
+}
+
+.image-control-buttons .image-next-button {
+  right: 10px;
+}
+
+.image-control-buttons .image-prev-button {
+  left: 10px;
 }
 /* post-images 끝 */
 

@@ -3,27 +3,31 @@ const imageNextButton = document.querySelector(".image-next-button");
 const postImages = document.querySelector(".post-images");
 const postImagesCnt = document.querySelectorAll(".post-images__list").length;
 const slideWitdh = 600;
-let currentIdx = 0;
+let index = 0;
 const delayTime = 500;
 
 function slide(event) {
   const target = event.currentTarget;
   const increment = (target === imagePrevButton) ? -1 : 1;
 
-  currentIdx += increment;
-  postImages.style.left = -(currentIdx * slideWitdh) + "px";
+  index += increment;
+  postImages.style.left = -(index * slideWitdh) + "px";
 
-  if (currentIdx <= 0) {
+  controlButtons(index, imagePrevButton, imageNextButton);
+}
+
+function controlButtons(index, imagePrevButton, imageNextButton) {
+  if (index <= 0) {
     removeButton(imagePrevButton);
-  } 
-  if (currentIdx >= postImagesCnt - 1) {
+  }
+  if (index >= postImagesCnt - 1) {
     removeButton(imageNextButton);
   }
 
-  if (currentIdx < postImagesCnt - 1 && !isVisible(imageNextButton)) {
+  if (index < postImagesCnt - 1 && !isVisible(imageNextButton)) {
     addButton(imageNextButton);
   }
-  if (0 < currentIdx && !isVisible(imagePrevButton)) {
+  if (0 < index && !isVisible(imagePrevButton)) {
     addButton(imagePrevButton);
   }
 }
@@ -38,8 +42,13 @@ function isVisible(imageButton) {
   imageButton.classList.contains("unvisible-button");
 }
 
-imagePrevButton.addEventListener("click", slide);
-imageNextButton.addEventListener("click", slide);
+imagePrevButton.addEventListener("click", (event) => {
+  slide(event);
+});
+
+imageNextButton.addEventListener("click", (event) => {
+  slide(event);
+});
 
 window.onload = function() {
   if (postImagesCnt === 1) {
