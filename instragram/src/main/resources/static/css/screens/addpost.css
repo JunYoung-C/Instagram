@@ -21,6 +21,7 @@
 
 .add-post__form-wrap {
   width: 100vw;
+  min-width: 900px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -29,9 +30,7 @@
 
 .add-post__form {
   background: white;
-  width: 94%;
-  max-width: 840px;
-  min-width: 690px;
+  width: 840px;
   height: 445px;
   border-radius: 10px;
 }
@@ -82,6 +81,21 @@
   align-items: center;
   padding-left: 25px;
   padding-right: 25px;
+  position: relative;
+}
+
+.add-post__preview {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 453.6px;
+  overflow: hidden;
+  transition: left 0.25s ease-out;
+}
+
+.add-post__preview-image {
+  width: 453.6px;
 }
 
 .add-post__file-log-wrap {

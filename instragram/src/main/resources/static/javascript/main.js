@@ -1,12 +1,11 @@
 const imagePrevButton = document.querySelector(".image-prev-button");
 const imageNextButton = document.querySelector(".image-next-button");
-const postImages = document.querySelector(".post-images");
 const postImagesCnt = document.querySelectorAll(".post-images__list").length;
+const postImages = document.querySelector(".post-images");
 const slideWitdh = 600;
 let index = 0;
-const delayTime = 500;
 
-function slide(event) {
+function slide (event, slideWitdh) {
   const target = event.currentTarget;
   const increment = (target === imagePrevButton) ? -1 : 1;
 
@@ -43,11 +42,11 @@ function isVisible(imageButton) {
 }
 
 imagePrevButton.addEventListener("click", (event) => {
-  slide(event);
+  slide(event, slideWitdh);
 });
 
 imageNextButton.addEventListener("click", (event) => {
-  slide(event);
+  slide(event, slideWitdh);
 });
 
 window.onload = function() {
