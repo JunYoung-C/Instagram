@@ -101,7 +101,7 @@
               >
             </div>
             <div class="post-comments-count">
-              <span>댓글 660개 모두 보기</span>
+              <a>댓글 660개 모두 보기</a>
             </div>
             <div class="post-time-wrap">
               <a>4시간 전</a>
@@ -126,29 +126,87 @@
           </div>
         </article>
       </section>
-
-      <div id="add-post" style="display: none">
-        <div>
-          <form action="" method="post" class="add-post__form">
-            <header class="add-post__form-header">
-              <div class="add-post__cancle">
-                <i class="fas fa-arrow-left"></i>
-              </div>
-              <span>새 게시물 만들기</span>
-              <input type="submit" value="공유하기" />
-            </header>
-            <div>
-              <div class="post-profile">
-                <img src="../images/03.png" class="post-profile__image" />
-                <span>최준영</span>
-              </div>
-              <textarea name="" id="" cols="30" rows="10"></textarea>
-              <input type="file" name="" id="" />
-            </div>
-          </form>
-        </div>
-      </div>
     </main>
+
+    <div id="add-post" style="display: none">
+      <div class="add-post__cancel-wrap add-post-cancel">
+        <i class="fas fa-times add-post__cancel-btn"></i>
+      </div>
+      <div class="add-post__form-wrap">
+        <form action="" method="post" class="add-post__form">
+          <header class="add-post__header">
+            <div class="add-post__header-column">
+              <div class="add-post__return-wrap add-post-cancel">
+                <i class="fas fa-arrow-left add-post__return"></i>
+              </div>
+            </div>
+
+            <div class="add-post__header-column">
+              <span class="add-post__header-title">새 게시물 만들기</span>
+            </div>
+
+            <div class="add-post__header-column">
+              <input type="submit" value="공유하기" class="add-post__submit" />
+            </div>
+          </header>
+
+          <div class="add-post__contents">
+            <div class="add-post__file-contents">
+              <div class="add-post__preview-images">
+                <img
+                  class="add-post__preview-image"
+                  src="../images/01.png"
+                  alt=""
+                />
+              </div>
+              <div class="add-post__file-log-wrap">
+                <i class="fas fa-photo-video add-post__file-log"></i>
+              </div>
+              <div class="add-post__file-explanation-wrap">
+                <span class="add-post__file-explanation"
+                  >사진과 동영상을 여기에 끌어다 놓으세요</span
+                >
+              </div>
+              <div class="add-post__file-input-wrap">
+                <label for="add-post-file" class="add-post__file-label"
+                  >컴퓨터에서 선택</label
+                >
+                <input
+                  type="file"
+                  name=""
+                  id="add-post-file"
+                  multiple
+                  class="add-post__file-input"
+                />
+              </div>
+            </div>
+
+            <div class="add-post__text-contents">
+              <div class="add-post__profile">
+                <img src="../images/03.png" class="add-post__profile-image" />
+                <span class="add-post__profile-name">최준영</span>
+              </div>
+
+              <div class="add-post__text-wrap">
+                <textarea
+                  name=""
+                  id=""
+                  placeholder="문구 입력..."
+                  class="add-post__text"
+                ></textarea>
+              </div>
+
+              <div class="add-post__text-options">
+                <i class="far fa-smile add-post__text-icons"></i>
+                <span class="add-post__text-info"
+                  ><span class="add-post__text-count">0</span>/2,200</span
+                >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script
       src="https://kit.fontawesome.com/b17793764c.js"

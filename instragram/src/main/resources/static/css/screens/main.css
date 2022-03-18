@@ -237,7 +237,7 @@
   color: #9d9095;
 }
 /* post-contents 끝 */
-
+/* post-comment 시작 */
 .post-comment {
   position: absolute;
   bottom: 0;
@@ -281,3 +281,4 @@
   font-size: 15px;
   cursor: pointer;
 }
+/* post-comment 끝 */
