@@ -20,4 +20,8 @@ public class Reply extends BaseEntity {
     @JoinColumn(name = "comment_id")
     private Comment comment;
     private String text;
+
+    public void changeComment(Comment comment) {
+        this.comment = comment;
+    }
 }
