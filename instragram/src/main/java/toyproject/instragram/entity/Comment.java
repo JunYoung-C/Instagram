@@ -25,4 +25,14 @@ public class Comment extends BaseEntity {
 
     @OneToMany(mappedBy = "comment")
     List<Reply> replies = new ArrayList<>();
+
+    public void changePost(Post post) {
+        this.post = post;
+    }
+
+    // 연관관계 편의 메소드
+    public void addReply(Reply reply) {
+        replies.add(reply);
+        reply.changeComment(this);
+    }
 }
