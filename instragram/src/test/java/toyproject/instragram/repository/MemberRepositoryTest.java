@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import toyproject.instragram.AppConfig;
 import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Privacy;
 import toyproject.instragram.entity.Profile;
 
 import java.util.List;
