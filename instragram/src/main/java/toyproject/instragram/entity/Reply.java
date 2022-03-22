@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reply extends BaseEntity {
 
@@ -22,6 +21,11 @@ public class Reply extends BaseEntity {
     @JoinColumn(name = "comment_id")
     private Comment comment;
     private String text;
+
+    public Reply(Comment comment, String text) {
+        this.comment = comment;
+        this.text = text;
+    }
 
     public void changeComment(Comment comment) {
         this.comment = comment;

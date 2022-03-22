@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseEntity {
 
@@ -28,6 +27,12 @@ public class Post extends BaseEntity {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
+
+    public Post(Member member, String photoPath, List<Comment> comments) {
+        this.member = member;
+        this.photoPath = photoPath;
+        this.comments = comments;
+    }
 
     //연관관계 편의 메소드
     public void addComment(Comment comment) {

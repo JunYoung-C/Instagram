@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
@@ -23,4 +22,9 @@ public class Member extends BaseEntity {
 
     @Embedded
     private Profile profile;
+
+    public Member(Privacy privacy, Profile profile) {
+        this.privacy = privacy;
+        this.profile = profile;
+    }
 }

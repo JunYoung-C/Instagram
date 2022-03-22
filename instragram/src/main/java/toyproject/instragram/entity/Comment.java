@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseEntity {
 
@@ -27,6 +26,11 @@ public class Comment extends BaseEntity {
 
     @OneToMany(mappedBy = "comment")
     List<Reply> replies = new ArrayList<>();
+
+    public Comment(Post post, String text) {
+        this.post = post;
+        this.text = text;
+    }
 
     public void changePost(Post post) {
         this.post = post;
