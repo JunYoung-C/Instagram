@@ -17,6 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public void signUp(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
