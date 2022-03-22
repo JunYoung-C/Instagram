@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+#추가 설정
+spy.log
