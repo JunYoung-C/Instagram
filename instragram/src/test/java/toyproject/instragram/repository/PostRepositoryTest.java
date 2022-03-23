@@ -1,5 +1,6 @@
 package toyproject.instragram.repository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,19 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.test.annotation.Commit;
 import toyproject.instragram.AppConfig;
+import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
 import toyproject.instragram.entity.Profile;
+import toyproject.instragram.repository.dto.PostCommentDto;
+import toyproject.instragram.repository.dto.PostDto;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,25 +45,31 @@ class PostRepositoryTest {
         Member member2 = new Member(null, profile2);
         em.persist(member2);
 
-        for (int i = 0; i < 100; i++) {
+        int commentCnt = 3;
+        for (int i = 0; i < 25; i++) {
             Member member = i % 2 == 0 ? member1 : member2;
             Post post = new Post(member, null);
-
+            for (int j = 0; j < commentCnt; j++) {
+                post.addComment(new Comment(post, "안녕하세요" + i + j));
+            }
             postRepository.save(post);
         }
 
+        em.flush();
+        em.clear();
+
         //when
         int size = 10;
-        PageRequest pageRequest1 = PageRequest.of(0, size);
-        Slice<Post> slice1 = postRepository.getPostsByOrderByCreatedDateDesc(pageRequest1);
-        PageRequest pageRequest2 = PageRequest.of(10, size);
-        Slice<Post> slice2 = postRepository.getPostsByOrderByCreatedDateDesc(pageRequest2);
+        PageRequest pageRequest1 = PageRequest.of(0, size); // 첫번째 페이지 선택
+        Slice<PostDto> slice1 = postRepository.getPostsByOrderByCreatedDateDesc(pageRequest1);
 
         //then
-        List<Post> posts = slice1.getContent();
-        assertThat(slice1.isFirst());
-        assertThat(slice2.isLast());
+        List<PostDto> posts = slice1.getContent();
+        assertThat(slice1.isFirst()).isTrue();
+        assertThat(slice1.isLast()).isFalse();
+        assertThat(slice1.hasNext()).isTrue();
         assertThat(posts.size()).isEqualTo(size);
         assertThat(posts).isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
+        IntStream.range(0, size).forEach(i -> assertThat(posts.get(i).getCommentDtoList().size()).isEqualTo(commentCnt));
     }
 }
