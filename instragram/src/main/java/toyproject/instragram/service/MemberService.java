@@ -18,9 +18,10 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void signUp(Member member) {
+    public Long signUp(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
+        return member.getId();
     }
 
     public List<Profile> searchProfiles(String nickname) {

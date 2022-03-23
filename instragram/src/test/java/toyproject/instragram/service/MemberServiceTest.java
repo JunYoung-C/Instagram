@@ -49,11 +49,10 @@ class MemberServiceTest {
         Member member = new Member(null, profile);
 
         //when
-        memberService.signUp(member);
+        Long memberId = memberService.signUp(member);
 
         //then
-        System.out.println(member.getId());
-        Member findMember = memberRepository.findById(member.getId()).orElse(null);
+        Member findMember = memberRepository.findById(memberId).orElse(null);
         assertThat(findMember).isEqualTo(member);
     }
 
