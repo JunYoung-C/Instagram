@@ -72,4 +72,19 @@ class PostRepositoryTest {
         assertThat(posts).isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
         IntStream.range(0, size).forEach(i -> assertThat(posts.get(i).getCommentDtoList().size()).isEqualTo(commentCnt));
     }
+
+    @DisplayName("먼저 생성된 날짜 순으로 10개씩 조회 - 조회 결과 없음")
+    @Test
+    public void getPostsByOrderByCreatedDateDesc_empty() {
+        //given
+
+        //when
+        // 첫번째 페이지 선택
+        Slice<PostDto> slice = postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(0, 10));
+
+        //then
+        assertThat(slice.getContent()).hasSize(0);
+        assertThat(slice.isFirst()).isTrue();
+        assertThat(slice.isLast()).isTrue();
+    }
 }
