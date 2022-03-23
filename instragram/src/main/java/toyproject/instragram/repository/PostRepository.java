@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import toyproject.instragram.entity.Post;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Long>, PostCustomRepository {
+public interface PostRepository extends JpaRepository<Post, Long>{
 
+    @EntityGraph(attributePaths = {"member"})
+    Slice<Post> getPostsByOrderByCreatedDateDesc(Pageable pageable);
 }
