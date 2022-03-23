@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
 
@@ -42,6 +43,9 @@ public class InitPost {
             for (int i = 0; i < 100; i++) {
                 Member member = i % 2 == 0 ? member1 : member2;
                 Post post = new Post(member, null);
+                for (int j = 0; j < i; j++) {
+                    post.addComment(new Comment(post, "안녕하세요" + i + j));
+                }
                 em.persist(post);
             }
         }
