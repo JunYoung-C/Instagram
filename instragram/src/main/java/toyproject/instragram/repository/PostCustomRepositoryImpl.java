@@ -5,11 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
-import org.springframework.data.support.PageableExecutionUtils;
-import toyproject.instragram.entity.Post;
-import toyproject.instragram.entity.QComment;
-import toyproject.instragram.entity.QMember;
-import toyproject.instragram.entity.QPost;
 import toyproject.instragram.repository.dto.*;
 
 import java.util.List;
@@ -27,7 +22,19 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
 
     @Override
     public Slice<PostDto> getPostsByOrderByCreatedDateDesc(Pageable pageable) {
-        List<PostDto> content = queryFactory
+        List<PostDto> content = getPostsWithoutComments(pageable);
+
+        content.stream().forEach(postDto -> postDto.setCommentDtoList(getCommentMap(content).get(postDto.getId())));
+
+        if (hasNext(pageable, content)) {
+            return new SliceImpl(content.subList(0, pageable.getPageSize()), pageable, true);
+        } else {
+            return new SliceImpl(content, pageable, false);
+        }
+    }
+
+    private List<PostDto> getPostsWithoutComments(Pageable pageable) {
+        return queryFactory
                 .select(new QPostDto(
                         post.id,
                         new QPostMemberDto(member.id,
@@ -42,24 +49,19 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
+    }
 
+    private Map<Long, List<PostCommentDto>> getCommentMap(List<PostDto> content) {
+        Map<Long, List<PostCommentDto>> commentMap = getPostCommentDtos(getPostIds(content)).stream()
+                .collect(Collectors.groupingBy(PostCommentDto::getCommentId));
+        return commentMap;
+    }
+
+    private List<Long> getPostIds(List<PostDto> content) {
         List<Long> postIds = content.stream()
                 .map(postDto -> postDto.getId())
                 .collect(Collectors.toList());
-
-        List<PostCommentDto> comments = getPostCommentDtos(postIds);
-
-        Map<Long, List<PostCommentDto>> commentMap = comments.stream()
-                .collect(Collectors.groupingBy(PostCommentDto::getCommentId));
-
-        content.stream()
-                .forEach(postDto -> postDto.setCommentDtoList(commentMap.get(postDto.getId())));
-
-        if (hasNext(pageable, content)) {
-            return new SliceImpl(content.subList(0, pageable.getPageSize()), pageable, true);
-        } else {
-            return new SliceImpl(content, pageable, false);
-        }
+        return postIds;
     }
 
     private List<PostCommentDto> getPostCommentDtos(List<Long> postIds) {
