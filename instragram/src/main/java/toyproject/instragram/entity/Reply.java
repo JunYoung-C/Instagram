@@ -20,10 +20,15 @@ public class Reply extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private Comment comment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
     private String text;
 
-    public Reply(Comment comment, String text) {
+    public Reply(Comment comment, Member member, String text) {
         this.comment = comment;
+        this.member = member;
         this.text = text;
     }
 

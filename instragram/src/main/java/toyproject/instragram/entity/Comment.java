@@ -22,13 +22,18 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
     private String text;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
     List<Reply> replies = new ArrayList<>();
 
-    public Comment(Post post, String text) {
+    public Comment(Post post, Member member, String text) {
         this.post = post;
+        this.member = member;
         this.text = text;
     }
 
