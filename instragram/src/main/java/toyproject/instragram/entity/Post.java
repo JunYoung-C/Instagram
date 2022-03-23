@@ -25,7 +25,7 @@ public class Post extends BaseEntity {
 
     private String photoPath;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     public Post(Member member, String photoPath) {
