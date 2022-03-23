@@ -12,15 +12,15 @@ import java.util.List;
 public class PostDto {
 
     @JsonIgnore
-    private Long id;
+    private Long postId;
     private PostMemberDto memberDto;
     private String photoPath;
     private LocalDateTime createdDate;
     private List<PostCommentDto> commentDtoList;
 
     @QueryProjection
-    public PostDto(Long id, PostMemberDto memberDto, String photoPath, LocalDateTime createdDate) {
-        this.id = id;
+    public PostDto(Long postId, PostMemberDto memberDto, String photoPath, LocalDateTime createdDate) {
+        this.postId = postId;
         this.memberDto = memberDto;
         this.photoPath = photoPath;
         this.createdDate = createdDate;

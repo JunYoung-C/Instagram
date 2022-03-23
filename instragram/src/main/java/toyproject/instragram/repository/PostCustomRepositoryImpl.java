@@ -24,7 +24,7 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
     public Slice<PostDto> getPostsByOrderByCreatedDateDesc(Pageable pageable) {
         List<PostDto> content = getPostsWithoutComments(pageable);
 
-        content.stream().forEach(postDto -> postDto.setCommentDtoList(getCommentMap(content).get(postDto.getId())));
+        content.stream().forEach(postDto -> postDto.setCommentDtoList(getCommentMap(content).get(postDto.getPostId())));
 
         if (hasNext(pageable, content)) {
             return new SliceImpl(content.subList(0, pageable.getPageSize()), pageable, true);
@@ -59,7 +59,7 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
 
     private List<Long> getPostIds(List<PostDto> content) {
         List<Long> postIds = content.stream()
-                .map(postDto -> postDto.getId())
+                .map(postDto -> postDto.getPostId())
                 .collect(Collectors.toList());
         return postIds;
     }
