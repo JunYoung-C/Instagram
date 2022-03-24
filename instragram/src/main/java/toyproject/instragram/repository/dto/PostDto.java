@@ -3,6 +3,7 @@ package toyproject.instragram.repository.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import toyproject.instragram.entity.Post;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,13 +17,17 @@ public class PostDto {
     private PostMemberDto memberDto;
     private String photoPath;
     private LocalDateTime createdDate;
-    private List<PostCommentDto> commentDtoList;
+    private Long totalComments;
+    private List<PostCommentDto> myCommentDtoList;
 
-    @QueryProjection
-    public PostDto(Long postId, PostMemberDto memberDto, String photoPath, LocalDateTime createdDate) {
-        this.postId = postId;
-        this.memberDto = memberDto;
-        this.photoPath = photoPath;
-        this.createdDate = createdDate;
+    public PostDto(Post post, Long totalComments, List<PostCommentDto> myCommentDtoList) {
+        this.postId = post.getId();
+        this.memberDto = new PostMemberDto(post.getMember().getId(),
+                post.getMember().getProfile().getNickname(),
+                post.getMember().getProfile().getPhotoPath());
+        this.photoPath = post.getPhotoPath();
+        this.createdDate = post.getCreatedDate();
+        this.totalComments = totalComments;
+        this.myCommentDtoList = myCommentDtoList;
     }
 }
