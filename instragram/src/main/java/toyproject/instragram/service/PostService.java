@@ -10,8 +10,8 @@ import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Post;
 import toyproject.instragram.repository.CommentRepository;
 import toyproject.instragram.repository.PostRepository;
-import toyproject.instragram.repository.dto.PostCommentDto;
-import toyproject.instragram.repository.dto.PostDto;
+import toyproject.instragram.dto.PostCommentDto;
+import toyproject.instragram.dto.PostDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,10 +36,10 @@ public class PostService {
     public Slice<PostDto> getPostDtoSlice(Pageable pageable) {
         Slice<Post> postSlice = postRepository.getPostsByOrderByCreatedDateDesc(pageable);
         return postSlice
-                .map(post -> new PostDto(post, getTotalComments(post), getCommentDtoLists(getComments(post))));
+                .map(post -> new PostDto(post, getCommentCount(post), getCommentDtoLists(getComments(post))));
     }
 
-    private Long getTotalComments(Post post) {
+    private Long getCommentCount(Post post) {
         return commentRepository.countCommentsByPostId(post.getId());
     }
 
