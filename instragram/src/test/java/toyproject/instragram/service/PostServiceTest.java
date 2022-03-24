@@ -11,7 +11,7 @@ import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
 import toyproject.instragram.entity.Profile;
-import toyproject.instragram.repository.dto.PostDto;
+import toyproject.instragram.dto.PostDto;
 
 import javax.persistence.EntityManager;
 
@@ -73,7 +73,14 @@ class PostServiceTest {
         post.addComment(comment6);
         post.addComment(comment7);
 
-        em.persist(post); // cascade.all
+        em.persist(post);
+        em.persist(comment1);
+        em.persist(comment2);
+        em.persist(comment3);
+        em.persist(comment4);
+        em.persist(comment5);
+        em.persist(comment6);
+        em.persist(comment7);
 
         em.flush();
         em.clear();
@@ -85,7 +92,7 @@ class PostServiceTest {
         //then
         assertThat(postDtos).hasSize(1);
         assertThat(postDtos.get(0).getPostId()).isEqualTo(post.getId());
-        assertThat(postDtos.get(0).getTotalComments()).isEqualTo(7);
+        assertThat(postDtos.get(0).getCommentCount()).isEqualTo(7);
         assertThat(postDtos.get(0).getMyCommentDtoList()).as("게시물 조회시 조회되는 게시자의 댓글은 최대 3개이다.")
                 .hasSize(3);
     }

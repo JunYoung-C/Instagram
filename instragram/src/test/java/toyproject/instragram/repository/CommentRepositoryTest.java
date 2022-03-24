@@ -38,6 +38,8 @@ class CommentRepositoryTest {
         em.persist(member2);
 
         Post post = new Post(member1, null);
+        em.persist(post);
+
         Comment comment1 = new Comment(post, member1, null);
         Comment comment2 = new Comment(post, member2, null);
         Comment comment3 = new Comment(post, member1, null);
@@ -50,16 +52,20 @@ class CommentRepositoryTest {
         post.addComment(comment4);
         post.addComment(comment5);
 
-        em.persist(post); // cascade.all
+        em.persist(comment1);
+        em.persist(comment2);
+        em.persist(comment3);
+        em.persist(comment4);
+        em.persist(comment5);
 
         em.flush();
         em.clear();
 
         //when
-        Long totalComments = commentRepository.countCommentsByPostId(post.getId());
+        Long commentCount = commentRepository.countCommentsByPostId(post.getId());
 
         //then
-        assertThat(totalComments).isEqualTo(5);
+        assertThat(commentCount).isEqualTo(5);
     }
 
     @DisplayName("게시물을 올린 회원이 단 댓글 확인")
@@ -84,7 +90,12 @@ class CommentRepositoryTest {
         post.addComment(comment4);
         post.addComment(comment5);
 
-        em.persist(post); // cascade.all
+        em.persist(post);
+        em.persist(comment1);
+        em.persist(comment2);
+        em.persist(comment3);
+        em.persist(comment4);
+        em.persist(comment5);
 
         em.flush();
         em.clear();
