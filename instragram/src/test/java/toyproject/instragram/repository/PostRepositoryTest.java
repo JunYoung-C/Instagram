@@ -12,11 +12,9 @@ import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
 import toyproject.instragram.entity.Profile;
-import toyproject.instragram.repository.dto.PostDto;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,7 +63,6 @@ class PostRepositoryTest {
         assertThat(slice.hasNext()).isTrue();
         assertThat(posts.size()).isEqualTo(size);
         assertThat(posts).isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
-//        IntStream.range(0, size).forEach(i -> assertThat(posts.get(i).getCommentDtoList().size()).isEqualTo(commentCnt));
     }
 
     @DisplayName("먼저 생성된 날짜 순으로 10개씩 조회 - 조회 결과 없음")
