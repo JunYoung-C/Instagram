@@ -25,7 +25,7 @@ public class Post extends BaseEntity {
 
     private String photoPath;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE) // 게시물 제거시 관련 댓글도 모두 삭제
     private List<Comment> comments = new ArrayList<>();
 
     public Post(Member member, String photoPath) {

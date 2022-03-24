@@ -28,7 +28,7 @@ public class Comment extends BaseEntity {
     private Member member;
     private String text;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE) // 댓글 삭제시 관련 답글 모두 삭제
     List<Reply> replies = new ArrayList<>();
 
     public Comment(Post post, Member member, String text) {
