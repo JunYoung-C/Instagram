@@ -10,7 +10,6 @@ public class PostMemberDto {
     private String nickname;
     private String photoPath;
 
-    @QueryProjection
     public PostMemberDto(Long memberId, String nickname, String photoPath) {
         this.memberId = memberId;
         this.nickname = nickname;
