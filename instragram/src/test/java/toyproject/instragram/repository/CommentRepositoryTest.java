@@ -13,7 +13,9 @@ import toyproject.instragram.entity.*;
 
 import javax.persistence.EntityManager;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -110,5 +112,43 @@ class CommentRepositoryTest {
         assertThat(comments).hasSize(3);
         assertThat(comments).extracting("text").containsExactly("1", "3", "4");
 
+    }
+
+
+    @DisplayName("생성 날짜가 빠른 순으로 20개의 댓글 조회")
+    @Test
+    void getCommentsByPostIdOrderByCreatedDateDesc() {
+        //given
+        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
+        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        em.persist(member1);
+        em.persist(member2);
+
+        Post post = new Post(member1, null);
+        em.persist(post); // cascade.all
+
+        IntStream.range(0, 65)
+                .forEach(i -> {
+                    Comment comment = new Comment(post, i % 2 == 0 ? member1 : member2, String.valueOf(i));
+                    post.addComment(comment);
+                    em.persist(comment);
+                });
+
+
+        em.flush();
+        em.clear();
+        //when
+        Slice<Comment> commentFirstSlice = commentRepository
+                .getCommentsByPostIdOrderByCreatedDateDesc(post.getId(), PageRequest.of(0, 20));
+        Slice<Comment> commentLastSlice = commentRepository
+                .getCommentsByPostIdOrderByCreatedDateDesc(post.getId(), PageRequest.of(3, 20));
+
+        //then
+        List<Comment> findFirstComments = commentFirstSlice.getContent();
+        List<Comment> findLastComments = commentLastSlice.getContent();
+        assertThat(findFirstComments).hasSize(20);
+        assertThat(findLastComments).hasSize(5);
+        assertThat(findFirstComments)
+                .isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
     }
 }
