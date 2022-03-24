@@ -46,4 +46,9 @@ public class Comment extends BaseEntity {
         replies.add(reply);
         reply.changeComment(this);
     }
+
+    // 일반 메소드
+    public void changeText(String text) {
+        this.text = text;
+    }
 }
