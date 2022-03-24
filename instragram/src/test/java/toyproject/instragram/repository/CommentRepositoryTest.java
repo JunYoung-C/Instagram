@@ -54,7 +54,7 @@ class CommentRepositoryTest {
 
         em.flush();
         em.clear();
-        
+
         //when
         Long totalComments = commentRepository.countCommentsByPostId(post.getId());
 
