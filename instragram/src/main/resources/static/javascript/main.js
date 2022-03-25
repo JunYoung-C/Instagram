@@ -2,51 +2,61 @@ const imagePrevButton = document.querySelector(".image-prev-button");
 const imageNextButton = document.querySelector(".image-next-button");
 const postImagesCnt = document.querySelectorAll(".post-images__list").length;
 const postImages = document.querySelector(".post-images");
-const slideWitdh = 600;
-let index = 0;
+const slideWidth = 600;
 
-function slide (event, slideWitdh) {
-  const target = event.currentTarget;
-  const increment = (target === imagePrevButton) ? -1 : 1;
-
-  index += increment;
-  postImages.style.left = -(index * slideWitdh) + "px";
-
-  controlButtons(index, imagePrevButton, imageNextButton);
-}
-
-function controlButtons(index, imagePrevButton, imageNextButton) {
-  if (index <= 0) {
-    removeButton(imagePrevButton);
-  }
-  if (index >= postImagesCnt - 1) {
-    removeButton(imageNextButton);
+class SlideController {
+  constructor(slideWidth, imageCount, prevButton, nextButton, images) {
+    this.index = 0;
+    this.slideWidth = slideWidth;
+    this.imageCount = imageCount;
+    this.prevButton = prevButton;
+    this.nextButton = nextButton;
+    this.images = images;
   }
 
-  if (index < postImagesCnt - 1 && !isVisible(imageNextButton)) {
-    addButton(imageNextButton);
+  slide (selectedButton) {
+    const increment = (selectedButton === this.prevButton) ? -1 : 1;
+  
+    this.index += increment;
+    this.images.style.left = -(this.index * this.slideWidth) + "px";
+    this.controlButtons();
   }
-  if (0 < index && !isVisible(imagePrevButton)) {
-    addButton(imagePrevButton);
+  
+  controlButtons() {
+    if (this.index <= 0) {
+      this.removeButton(this.prevButton);
+    }
+    if (this.index >= this.imageCount - 1) {
+      this.removeButton(this.nextButton);
+    }
+  
+    if (this.index < this.imageCount - 1 && !this.isVisible(this.nextButton)) {
+      this.addButton(this.nextButton);
+    }
+    if (0 < this.index && !this.isVisible(this.prevButton)) {
+      this.addButton(this.prevButton);
+    }
+  }
+  
+  removeButton(imageButton) {
+    imageButton.classList.add("unvisible-button");
+  }
+  addButton(imageButton) {
+    imageButton.classList.remove("unvisible-button");
+  }
+  isVisible(imageButton) {
+    imageButton.classList.contains("unvisible-button");
   }
 }
 
-function removeButton(imageButton) {
-  imageButton.classList.add("unvisible-button");
-}
-function addButton(imageButton) {
-  imageButton.classList.remove("unvisible-button");
-}
-function isVisible(imageButton) {
-  imageButton.classList.contains("unvisible-button");
-}
+const postImageSlideController = new SlideController(slideWidth, postImagesCnt, imagePrevButton, imageNextButton, postImages);
 
 imagePrevButton.addEventListener("click", (event) => {
-  slide(event, slideWitdh);
+  postImageSlideController.slide(event.currentTarget);
 });
 
 imageNextButton.addEventListener("click", (event) => {
-  slide(event, slideWitdh);
+  postImageSlideController.slide(event.currentTarget);
 });
 
 window.onload = function() {
