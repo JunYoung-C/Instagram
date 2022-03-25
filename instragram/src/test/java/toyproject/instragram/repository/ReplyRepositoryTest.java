@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import toyproject.instragram.AppConfig;
 import toyproject.instragram.entity.*;
 
@@ -58,5 +60,51 @@ class ReplyRepositoryTest {
 
         //then
         assertThat(replyCount).isEqualTo(25);
+    }
+
+    @DisplayName("생성 날짜가 빠른 순으로 20개의 답글 조회")
+    @Test
+    void getRepliesByCommentIdOrderByCreatedDateDesc() {
+        //given
+        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
+        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        em.persist(member1);
+        em.persist(member2);
+
+        Post post = new Post(member1, null);
+        em.persist(post);
+
+        Comment comment = new Comment(post, member1, null);
+        em.persist(comment);
+
+        IntStream.range(0, 25)
+                .forEach((i) -> {
+                    Reply reply = new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i));
+                    comment.addReply(reply);
+                    em.persist(reply);
+                });
+        post.addComment(comment);
+
+        em.flush();
+        em.clear();
+
+        //when
+        Slice<Reply> firstReplySlice = replyRepository
+                .getRepliesByCommentIdOrderByCreatedDateDesc(comment.getId(), PageRequest.of(0, 20));
+        Slice<Reply> lastReplySlice = replyRepository
+                .getRepliesByCommentIdOrderByCreatedDateDesc(comment.getId(), PageRequest.of(1, 20));
+
+        //then
+        assertThat(firstReplySlice.isFirst()).isTrue();
+        assertThat(firstReplySlice.isLast()).isFalse();
+        assertThat(firstReplySlice.getContent()).hasSize(20);
+        assertThat(firstReplySlice.getContent())
+                .isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
+
+        assertThat(lastReplySlice.isFirst()).isFalse();
+        assertThat(lastReplySlice.isLast()).isTrue();
+        assertThat(lastReplySlice.getContent()).hasSize(5);
+        assertThat(lastReplySlice.getContent())
+                .isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
     }
 }
