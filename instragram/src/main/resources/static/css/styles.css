@@ -4,6 +4,8 @@
 
 /* components */
 @import "components/signin-signup.css";
+@import "components/modal.css";
+@import "components/slide-image.css";
 
 /* screens */
 @import "screens/main.css";

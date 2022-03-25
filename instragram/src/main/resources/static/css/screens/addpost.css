@@ -1,31 +1,9 @@
-#add-post {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  z-index: 99;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.add-post__cancel-wrap {
-  color: white;
-  position: absolute;
-  top: 18px;
-  right: 25px;
-  font-size: 30px;
-}
-
 .add-post__cancel-btn {
   cursor: pointer;
 }
 
 .add-post__form-wrap {
-  width: 100vw;
   min-width: 900px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .add-post__form {
@@ -161,7 +139,7 @@
 }
 
 .add-post__text {
-  width: 300px;
+  width: 350px;
   height: 290px;
   resize: none;
   font-size: 16px;
