@@ -17,7 +17,9 @@ const previewPrevButton = document.querySelector(".add-post__preview-prev-button
 const previewNextButton = document.querySelector(".add-post__preview-next-button");
 const previewListCount = document.querySelectorAll(".add-post__preview-list").length;
 
-const showComments = document.querySelector(".show-comments");
+const showComment = document.querySelector(".show-comment");
+const comment = document.querySelector("#comment");
+const commentCancel = document.querySelector(".comment-cancel");
 
 const POST_IMAGE_WIDTH = 600;
 const PREVIEW_IMAGE_WIDTH = 453.59;
@@ -144,7 +146,7 @@ addPostCancleButtons.forEach((addPostCancleBtn) => {
     mainBody.style.overflow = "auto";
     postFormClear();
     previewSlideController.clear(0);
-  })
+  });
 });
 
 showAddPostButton.addEventListener("click", () => {
@@ -164,7 +166,15 @@ addPostFileInput.addEventListener("change", showPreviewFiles);
 }
 
 function addCommentPageEvent() {
-  
+  showComment.addEventListener("click", () => {
+    comment.style.display = "block";
+    mainBody.style.overflow = "hidden";
+  });
+
+  commentCancel.addEventListener("click", () => {
+    comment.style.display = "none";
+    mainBody.style.overflow = "auto";
+  });
 }
 
 const postImageSlideController = new SlideController(POST_IMAGE_WIDTH, postImagesCount, postImagePrevButton, postImageNextButton, postImages);
