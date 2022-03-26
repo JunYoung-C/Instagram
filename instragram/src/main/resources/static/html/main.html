@@ -58,19 +58,19 @@
           </div>
           <div class="post-media-wrap">
             <div class="post-images-wrap">
-              <div class="image-control-buttons">
+              <div class="post-images_buttons">
                 <div
-                  class="image-control-button image-prev-button unvisible-button"
+                  class="post-images__prev-button slide-button unvisible-button"
                 >
                   <i class="fas fa-chevron-circle-left"></i>
                 </div>
 
-                <div class="image-control-button image-next-button">
+                <div class="post-images__next-button slide-button">
                   <i class="fas fa-chevron-circle-right"></i>
                 </div>
               </div>
 
-              <ul class="post-images">
+              <ul class="post-images slide-image">
                 <li class="post-images__list">
                   <img src="../images/01.png" class="post-image" />
                 </li>
@@ -132,11 +132,11 @@
       </section>
     </main>
 
-    <div id="add-post" style="display: none">
-      <div class="add-post__cancel-wrap add-post-cancel">
+    <div id="add-post" class="modal">
+      <div class="add-post-cancel modal-header">
         <i class="fas fa-times add-post__cancel-btn"></i>
       </div>
-      <div class="add-post__form-wrap">
+      <div class="add-post__form-wrap modal-body">
         <form action="" method="post" class="add-post__form">
           <header class="add-post__header">
             <div class="add-post__header-column">
@@ -156,20 +156,22 @@
 
           <div class="add-post__contents">
             <div class="add-post__file-contents">
-              <div>
-                <div class="add-post__control-buttons">
+              <div class="add-post__preview-wrap">
+                <div class="add-post__preview-control-buttons">
                   <div
-                    class="add-post__control-button image-prev-button unvisible-button"
+                    class="add-post__preview-prev-button slide-button unvisible-button"
                   >
-                    <i class="fas fa-chevron-circle-left"></i>
+                    <i class="fas fa-chevron-left"></i>
                   </div>
 
-                  <div class="add-post__control-button image-next-button">
-                    <i class="fas fa-chevron-circle-right"></i>
+                  <div
+                    class="add-post__preview-next-button slide-button image-next-button"
+                  >
+                    <i class="fas fa-chevron-right"></i>
                   </div>
                 </div>
 
-                <ul class="add-post__preview">
+                <ul class="add-post__preview slide-image">
                   <li class="add-post__preview-list">
                     <img
                       class="add-post__preview-image"
@@ -241,7 +243,7 @@
       src="https://kit.fontawesome.com/b17793764c.js"
       crossorigin="anonymous"
     ></script>
+    <!-- <script src="../javascript/SlideController.js"></script> -->
     <script src="../javascript/main.js"></script>
-    <script src="../javascript/addform.js"></script>
   </body>
 </html>
