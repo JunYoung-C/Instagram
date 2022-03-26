@@ -132,8 +132,8 @@
 
     <main class="main-content">
       <section>
-        <article class="post">
-          <div class="post-header">
+        <article class="post main-post">
+          <div class="post-header main-post-header">
             <header class="post-profile">
               <div class="post-profile__info">
                 <img src="../images/03.png" class="post-profile__image" />
@@ -144,8 +144,8 @@
               </div>
             </header>
           </div>
-          <div class="post-media-wrap">
-            <div class="post-images-wrap">
+          <div class="main-post-media-wrap">
+            <div class="post-images-wrap main-post-images-wrap">
               <div class="post-images_buttons">
                 <div class="post-images__prev-button slide-button">
                   <i class="fas fa-chevron-circle-left"></i>
@@ -158,19 +158,19 @@
 
               <ul class="post-images slide-image">
                 <li class="post-images__list">
-                  <img src="../images/01.png" class="post-image" />
+                  <img src="../images/01.png" class="main-post-image" />
                 </li>
                 <li class="post-images__list">
-                  <img src="../images/02.png" class="post-image" />
+                  <img src="../images/02.png" class="main-post-image" />
                 </li>
                 <li class="post-images__list">
-                  <img src="../images/03.png" class="post-image" />
+                  <img src="../images/03.png" class="main-post-image" />
                 </li>
               </ul>
             </div>
             <!-- <div class="post-video-wrap"></div> -->
           </div>
-          <div class="post-contents">
+          <div class="post-contents main-post-contents">
             <div class="post-options">
               <div class="post-options-column">
                 <i class="far fa-heart post-options__heart"></i>
@@ -184,14 +184,14 @@
             <div class="post-like-text">
               <span>좋아요 <span class="post-like-count">8000</span>개</span>
             </div>
-            <div class="post-explanation">
-              <a class="post-explanation__owner">meenoie</a>
-              <span class="post-explanation__text">
+            <div class="main-post-explanation">
+              <a class="main-post-explanation__owner">meenoie</a>
+              <span class="main-post-explanation__text">
                 요리조리 2가 끝났어요ㅜㅜ..</span
               >
             </div>
-            <div class="post-comments-count">
-              <a>댓글 660개 모두 보기</a>
+            <div class="post-comments-count main-post-comments-count">
+              <span class="show-comment">댓글 660개 모두 보기</span>
             </div>
             <div class="post-time-wrap">
               <a>4시간 전</a>
@@ -204,7 +204,7 @@
                 <input
                   type="text"
                   placeholder="댓글 달기..."
-                  class="post-comment__text"
+                  class="post-comment__text main-post-comment__text"
                 />
                 <input
                   type="submit"
@@ -323,12 +323,101 @@
       </div>
     </div>
 
-    <div id="full-post" class="modal">
-      <div class="full-post-cancel modal-header">
+    <div id="comment" class="modal">
+      <div class="comment-cancel modal-header">
         <i class="fas fa-times add-post__cancel-btn"></i>
       </div>
 
-      <div class="modal-body"></div>
+      <div class="modal-body">
+        <section>
+          <div class="main-post-media-wrap">
+            <div class="post-images-wrap main-post-images-wrap">
+              <div class="post-images_buttons">
+                <div class="post-images__prev-button slide-button">
+                  <i class="fas fa-chevron-circle-left"></i>
+                </div>
+
+                <div class="post-images__next-button slide-button">
+                  <i class="fas fa-chevron-circle-right"></i>
+                </div>
+              </div>
+
+              <ul class="post-images slide-image">
+                <li class="post-images__list">
+                  <img src="../images/01.png" class="main-post-image" />
+                </li>
+                <li class="post-images__list">
+                  <img src="../images/02.png" class="main-post-image" />
+                </li>
+                <li class="post-images__list">
+                  <img src="../images/03.png" class="main-post-image" />
+                </li>
+              </ul>
+            </div>
+            <!-- <div class="post-video-wrap"></div> -->
+          </div>
+        </section>
+        <section>
+          <article class="post main-post">
+            <div class="post-header main-post-header">
+              <header class="post-profile">
+                <div class="post-profile__info">
+                  <img src="../images/03.png" class="post-profile__image" />
+                  <span class="post-profile__name">meenoie</span>
+                </div>
+                <div class="post-profile__more">
+                  <i class="fas fa-ellipsis-h fa-lg"></i>
+                </div>
+              </header>
+            </div>
+
+            <div class="post-contents main-post-contents">
+              <div class="post-options">
+                <div class="post-options-column">
+                  <i class="far fa-heart post-options__heart"></i>
+                  <i class="far fa-comment post-options__comment"></i>
+                  <i class="far fa-paper-plane post-options__share"></i>
+                </div>
+                <div class="post-options-column">
+                  <i class="far fa-bookmark post-options__bookmark"></i>
+                </div>
+              </div>
+              <div class="post-like-text">
+                <span>좋아요 <span class="post-like-count">8000</span>개</span>
+              </div>
+              <div class="main-post-explanation">
+                <a class="main-post-explanation__owner">meenoie</a>
+                <span class="main-post-explanation__text">
+                  요리조리 2가 끝났어요ㅜㅜ..</span
+                >
+              </div>
+              <div class="post-comments-count main-post-comments-count">
+                <span class="show-comment">댓글 660개 모두 보기</span>
+              </div>
+              <div class="post-time-wrap">
+                <a>4시간 전</a>
+              </div>
+              <div class="post-comment">
+                <form action="" method="post" class="post-comment__form">
+                  <div class="post-comment__icons-wrap">
+                    <i class="far fa-smile"></i>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="댓글 달기..."
+                    class="post-comment__text main-post-comment__text"
+                  />
+                  <input
+                    type="submit"
+                    value="게시"
+                    class="post-comment__button"
+                  />
+                </form>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
     </div>
     <script
       src="https://kit.fontawesome.com/b17793764c.js"

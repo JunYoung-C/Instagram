@@ -6,12 +6,14 @@
 @import "components/signInSignUp.css";
 @import "components/modal.css";
 @import "components/slideImage.css";
+@import "components/post.css";
 
 /* screens */
 @import "screens/main.css";
 @import "screens/signIn.css";
 @import "screens/signUp.css";
 @import "screens/addPost.css";
+@import "screens/comment.css";
 
 body {
   font-family: var(--general-font);
