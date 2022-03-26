@@ -26,46 +26,61 @@ class SlideController {
     this.prevButton = prevButton;
     this.nextButton = nextButton;
     this.images = images;
+
+    this.controlButtons();
   }
 
   slide (selectedButton) {
     const increment = (selectedButton === this.prevButton) ? -1 : 1;
   
     this.index += increment;
-    console.log(this.index);
     this.images.style.left = -(this.index * this.slideWidth) + "px";
     this.controlButtons();
   }
   
   controlButtons() {
-    if (this.index <= 0) {
-      this.removeButton(this.prevButton);
+    if (this.isFirstPage()) {
+      this.hideprevButton();
+    } else {
+      this.showprevButton();
     }
-    if (this.index >= this.imageCount - 1) {
-      this.removeButton(this.nextButton);
-    }
-  
-    if (this.index < this.imageCount - 1 && !this.isVisible(this.nextButton)) {
-      this.addButton(this.nextButton);
-    }
-    if (0 < this.index && !this.isVisible(this.prevButton)) {
-      this.addButton(this.prevButton);
+
+    if (this.isLastPage()) {
+      this.hideNextButton();
+    } else {
+      this.showNextButton();
     }
   }
-  
-  removeButton(imageButton) {
-    imageButton.classList.add("unvisible-button");
+
+  isFirstPage() {
+    return this.index <= 0;
   }
-  addButton(imageButton) {
-    imageButton.classList.remove("unvisible-button");
+
+  isLastPage() {
+    return this.index >= this.imageCount - 1;
   }
-  isVisible(imageButton) {
-    imageButton.classList.contains("unvisible-button");
+
+  hideprevButton() {
+    this.prevButton.style.display = "none";
+  }
+
+  hideNextButton() {
+    this.nextButton.style.display = "none";
+  }
+
+  showprevButton() {
+    this.prevButton.style.display = "flex";
+  }
+
+  showNextButton() {
+    this.nextButton.style.display = "flex";
   }
 
   clear(imageCount) {
     this.index = 0;
     this.imageCount = imageCount;
+    this.images.style.left = "0px";
+    this.controlButtons();
   }
 }
 
@@ -110,11 +125,15 @@ postImageNextButton.addEventListener("click", (event) => {
   postImageSlideController.slide(event.currentTarget);
 });
 
+
+const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
+
 addPostCancleButtons.forEach((addPostCancleBtn) => {
   addPostCancleBtn.addEventListener("click", () => {
     addPostDiv.style.display = "none";
     mainBody.style.overflow = "auto";
     postFormClear();
+    previewSlideController.clear(0);
   })
 });
 
@@ -122,8 +141,6 @@ showAddPostButton.addEventListener("click", () => {
   addPostDiv.style.display = "block";
   mainBody.style.overflow = "hidden";
 });
-
-const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
 
 previewPrevButton.addEventListener("click", (event) => {
   previewSlideController.slide(event.currentTarget);
@@ -134,8 +151,4 @@ previewNextButton.addEventListener("click", (event) => {
 });
 
 addPostFileInput.addEventListener("change", showPreviewFiles);
-
-if (postImagesCount === 1) {
-  postImageNextButton.classList.add("unvisible-button");
-}
 
