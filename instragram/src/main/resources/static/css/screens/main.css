@@ -140,49 +140,12 @@
   height: 500px;
 }
 
-.unvisible-button {
-  display: none !important;
-}
-
-.image-control-button .fa-chevron-circle-left,
-.image-control-button .fa-chevron-circle-right {
-  font-size: 24px;
-  color: white;
-  opacity: 0.7;
-}
-
-.post-images {
-  display: flex;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transition: left 0.25s ease-out;
-}
-
 .post-image {
   width: 600px;
   /* 추후 조정 필요 */
   height: 500px;
 }
 
-.image-control-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.image-control-buttons .image-next-button {
-  right: 10px;
-}
-
-.image-control-buttons .image-prev-button {
-  left: 10px;
-}
 /* post-images 끝 */
 
 /* post-contents 시작 */

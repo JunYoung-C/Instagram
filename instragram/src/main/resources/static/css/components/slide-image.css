@@ -1,0 +1,37 @@
+.slide-image {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.25s ease-out;
+}
+
+.unvisible-button {
+  display: none !important;
+}
+
+.slide-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.slide-button:first-child {
+  left: 10px;
+}
+
+.slide-button:last-child {
+  right: 10px;
+}
+
+.slide-button .fa-chevron-circle-left,
+.slide-button .fa-chevron-circle-right {
+  opacity: 0.7;
+  color: white;
+  font-size: 24px;
+}
