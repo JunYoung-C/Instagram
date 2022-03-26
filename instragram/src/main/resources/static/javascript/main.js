@@ -17,6 +17,8 @@ const previewPrevButton = document.querySelector(".add-post__preview-prev-button
 const previewNextButton = document.querySelector(".add-post__preview-next-button");
 const previewListCount = document.querySelectorAll(".add-post__preview-list").length;
 
+const showComments = document.querySelector(".show-comments");
+
 const POST_IMAGE_WIDTH = 600;
 const PREVIEW_IMAGE_WIDTH = 453.59;
 
@@ -117,26 +119,25 @@ function postFormClear() {
   addPostText.value = "";
 }
 
-const postImageSlideController = new SlideController(POST_IMAGE_WIDTH, postImagesCount, postImagePrevButton, postImageNextButton, postImages);
+function addMainPageEvent() {
+  postImagePrevButton.addEventListener("click", (event) => {
+    postImageSlideController.slide(event.currentTarget);
+  });
+  
+  postImageNextButton.addEventListener("click", (event) => {
+    postImageSlideController.slide(event.currentTarget);
+  });
+  
+  headerSearchInput.addEventListener("focus", () => {
+    searchResultWrap.style.display = "block";
+  });
+  
+  headerSearchInput.addEventListener("blur", () => {
+    searchResultWrap.style.display = "none";
+  });
+}
 
-postImagePrevButton.addEventListener("click", (event) => {
-  postImageSlideController.slide(event.currentTarget);
-});
-
-postImageNextButton.addEventListener("click", (event) => {
-  postImageSlideController.slide(event.currentTarget);
-});
-
-headerSearchInput.addEventListener("focus", () => {
-  searchResultWrap.style.display = "block";
-});
-
-headerSearchInput.addEventListener("blur", () => {
-  searchResultWrap.style.display = "none";
-});
-
-const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
-
+function addNewPostPageEvent() {
 addPostCancleButtons.forEach((addPostCancleBtn) => {
   addPostCancleBtn.addEventListener("click", () => {
     addPostDiv.style.display = "none";
@@ -160,4 +161,16 @@ previewNextButton.addEventListener("click", (event) => {
 });
 
 addPostFileInput.addEventListener("change", showPreviewFiles);
+}
 
+function addCommentPageEvent() {
+  
+}
+
+const postImageSlideController = new SlideController(POST_IMAGE_WIDTH, postImagesCount, postImagePrevButton, postImageNextButton, postImages);
+
+const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
+
+addMainPageEvent();
+addNewPostPageEvent();
+addCommentPageEvent();
