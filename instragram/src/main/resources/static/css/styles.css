@@ -3,15 +3,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto&display=swap");
 
 /* components */
-@import "components/signin-signup.css";
+@import "components/signInSignUp.css";
 @import "components/modal.css";
-@import "components/slide-image.css";
+@import "components/slideImage.css";
 
 /* screens */
 @import "screens/main.css";
-@import "screens/signin.css";
-@import "screens/signup.css";
-@import "screens/addpost.css";
+@import "screens/signIn.css";
+@import "screens/signUp.css";
+@import "screens/addPost.css";
 
 body {
   font-family: var(--general-font);
