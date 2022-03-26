@@ -33,6 +33,9 @@
 .header-search {
   position: relative;
   color: #909090;
+}
+
+.header-search__input {
   opacity: 0.7;
 }
 
@@ -50,6 +53,68 @@
   outline: none;
 }
 
+.search-result-wrap {
+  position: absolute;
+  top: 50px;
+  left: -56.5px;
+  display: none;
+}
+
+.search-result__triangle {
+  transform: rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  position: absolute;
+  top: -9.5px;
+  left: 180px;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.search-result {
+  width: 380px;
+  height: 360px;
+  background-color: white;
+  position: absolute;
+  opacity: 1;
+  z-index: 2;
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top: none;
+  padding-top: 10px;
+  overflow-y: scroll;
+}
+
+.search-result__profile {
+  display: flex;
+  align-items: center;
+  height: 61px;
+  padding: 8px 17px;
+  cursor: pointer;
+}
+
+.search-result__profile:hover {
+  background-color: rgb(253, 250, 250);
+}
+
+.search-result__profile-photo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 14px;
+}
+
+.search-result__profile-names {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.search-result__profile-nickname {
+  margin-bottom: 8px;
+  color: black;
+}
 .header-search .fa-search {
   position: absolute;
   left: 15px;

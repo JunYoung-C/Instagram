@@ -1,9 +1,11 @@
+const mainBody = document.querySelector(".main-body");
+const headerSearchInput = document.querySelector(".header-search__input");
+const searchResultWrap = document.querySelector(".search-result-wrap");
 const postImagePrevButton = document.querySelector(".post-images__prev-button");
 const postImageNextButton = document.querySelector(".post-images__next-button");
 const postImagesCount = document.querySelectorAll(".post-images__list").length;
 const postImages = document.querySelector(".post-images");
 
-const mainBody = document.querySelector(".main-body");
 const showAddPostButton = document.querySelector(".show-add-post");
 const addPostDiv = document.querySelector("#add-post");
 const addPostCancleButtons = document.querySelectorAll(".add-post-cancel");
@@ -125,6 +127,13 @@ postImageNextButton.addEventListener("click", (event) => {
   postImageSlideController.slide(event.currentTarget);
 });
 
+headerSearchInput.addEventListener("focus", () => {
+  searchResultWrap.style.display = "block";
+});
+
+headerSearchInput.addEventListener("blur", () => {
+  searchResultWrap.style.display = "none";
+});
 
 const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
 
