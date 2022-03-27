@@ -134,12 +134,17 @@
       <section>
         <article class="post main-post">
           <div class="post-header main-post-header">
-            <header class="post-profile">
-              <div class="post-profile__info">
-                <img src="../images/03.png" class="post-profile__image" />
-                <span class="post-profile__name">meenoie</span>
+            <header class="post-profile main-post-profile">
+              <div class="post-profile__info main-post-profile__info">
+                <img
+                  src="../images/03.png"
+                  class="post-profile__image main-post-profile__image"
+                />
+                <span class="post-profile__name main-post-profile__name"
+                  >meenoie</span
+                >
               </div>
-              <div class="post-profile__more">
+              <div class="post-profile__more main-post-profile__more">
                 <i class="fas fa-ellipsis-h fa-lg"></i>
               </div>
             </header>
@@ -329,49 +334,247 @@
       </div>
 
       <div class="modal-body">
-        <section>
-          <div class="main-post-media-wrap">
-            <div class="post-images-wrap main-post-images-wrap">
-              <div class="post-images_buttons">
-                <div class="post-images__prev-button slide-button">
-                  <i class="fas fa-chevron-circle-left"></i>
+        <article class="post comment-post">
+          <section class="comment-left-section">
+            <div class="comment-post-media-wrap">
+              <div class="post-images-wrap comment-post-images-wrap">
+                <div class="comment-post-images__buttons">
+                  <div class="comment-post-images__prev-button slide-button">
+                    <i class="fas fa-chevron-circle-left"></i>
+                  </div>
+
+                  <div class="comment-post-images__next-button slide-button">
+                    <i class="fas fa-chevron-circle-right"></i>
+                  </div>
                 </div>
 
-                <div class="post-images__next-button slide-button">
-                  <i class="fas fa-chevron-circle-right"></i>
-                </div>
+                <ul class="post-images slide-image">
+                  <li class="post-images__list comment-post-images__list">
+                    <img src="../images/01.png" class="comment-post-image" />
+                  </li>
+                  <li class="post-images__list">
+                    <img src="../images/02.png" class="comment-post-image" />
+                  </li>
+                  <li class="post-images__list">
+                    <img src="../images/03.png" class="comment-post-image" />
+                  </li>
+                </ul>
               </div>
-
-              <ul class="post-images slide-image">
-                <li class="post-images__list">
-                  <img src="../images/01.png" class="main-post-image" />
-                </li>
-                <li class="post-images__list">
-                  <img src="../images/02.png" class="main-post-image" />
-                </li>
-                <li class="post-images__list">
-                  <img src="../images/03.png" class="main-post-image" />
-                </li>
-              </ul>
+              <!-- <div class="post-video-wrap"></div> -->
             </div>
-            <!-- <div class="post-video-wrap"></div> -->
-          </div>
-        </section>
-        <section>
-          <article class="post main-post">
-            <div class="post-header main-post-header">
-              <header class="post-profile">
-                <div class="post-profile__info">
-                  <img src="../images/03.png" class="post-profile__image" />
-                  <span class="post-profile__name">meenoie</span>
+          </section>
+
+          <section class="comment-right-section">
+            <div class="post-header comment-post-header">
+              <header class="post-profile comment-post-header-profile">
+                <div class="post-profile__info comment-post-header__info">
+                  <img
+                    src="../images/03.png"
+                    class="post-profile__image comment-post-header__image"
+                  />
+                  <span class="post-profile__name comment-post-header__name"
+                    >meenoie</span
+                  >
                 </div>
-                <div class="post-profile__more">
+
+                <div class="post-profile__more comment-post-header__more">
                   <i class="fas fa-ellipsis-h fa-lg"></i>
                 </div>
               </header>
             </div>
 
-            <div class="post-contents main-post-contents">
+            <div class="comments">
+              <div class="comment not-comment">
+                <div class="comment-owner">
+                  <div class="comment-owner__photo-wrap">
+                    <img src="../images/03.png" class="comment-owner__photo" />
+                  </div>
+                  <div class="comment-owner__text-wrap">
+                    <a class="comment-owner__name">meenoie</a>
+                    <span class="comment-owner__text">
+                      요리조리 2가 끝났어요ㅜㅜ..
+                    </span>
+                    <div class="comment-owner__options">
+                      <span class="comment-owner__created-time">5시간</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="comment">
+                <div class="comment-owner">
+                  <div class="comment-owner__photo-wrap">
+                    <img src="../images/03.png" class="comment-owner__photo" />
+                  </div>
+                  <div class="comment-owner__text-wrap">
+                    <a class="comment-owner__name">meenoie</a>
+                    <span class="comment-owner__text">
+                      요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                      끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                      끝났어요ㅜㅜ..
+                    </span>
+                    <div class="comment-owner__options">
+                      <span class="comment-owner__created-time">5시간</span>
+                      <span class="comment-owner__liker">좋아요 3개</span>
+                      <span class="comment_owner__reply">답글 달기</span>
+                    </div>
+                  </div>
+                  <div class="comment-owner__heart-wrap">
+                    <i class="far fa-heart comment-owner__heart"></i>
+                  </div>
+                </div>
+
+                <div class="comment-divider">
+                  <div class="comment-divider__line"></div>
+                  <div class="comment-divider__togggle-replies">
+                    답글 숨기기
+                  </div>
+                </div>
+
+                <div class="replies">
+                  <div class="reply comment-owner">
+                    <div class="comment-owner__photo-wrap">
+                      <img
+                        src="../images/03.png"
+                        class="comment-owner__photo"
+                      />
+                    </div>
+                    <div class="comment-owner__text-wrap">
+                      <a class="comment-owner__name">meenoie</a>
+                      <span class="comment-owner__text">
+                        요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..
+                      </span>
+                      <div class="comment-owner__options">
+                        <span class="comment-owner__created-time">5시간</span>
+                        <span class="comment-owner__liker">좋아요 3개</span>
+                        <span class="comment_owner__reply">답글 달기</span>
+                      </div>
+                    </div>
+                    <div class="comment-owner__heart-wrap">
+                      <i class="far fa-heart comment-owner__heart"></i>
+                    </div>
+                  </div>
+
+                  <div class="reply comment-owner">
+                    <div class="comment-owner__photo-wrap">
+                      <img
+                        src="../images/03.png"
+                        class="comment-owner__photo"
+                      />
+                    </div>
+                    <div class="comment-owner__text-wrap">
+                      <a class="comment-owner__name">meenoie</a>
+                      <span class="comment-owner__text">
+                        요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..
+                      </span>
+                      <div class="comment-owner__options">
+                        <span class="comment-owner__created-time">5시간</span>
+                        <span class="comment-owner__liker">좋아요 3개</span>
+                        <span class="comment_owner__reply">답글 달기</span>
+                      </div>
+                    </div>
+                    <div class="comment-owner__heart-wrap">
+                      <i class="far fa-heart comment-owner__heart"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="comment">
+                <div class="comment-owner">
+                  <div class="comment-owner__photo-wrap">
+                    <img src="../images/03.png" class="comment-owner__photo" />
+                  </div>
+                  <div class="comment-owner__text-wrap">
+                    <a class="comment-owner__name">meenoie</a>
+                    <span class="comment-owner__text">
+                      요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                      끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                      끝났어요ㅜㅜ..
+                    </span>
+                    <div class="comment-owner__options">
+                      <span class="comment-owner__created-time">5시간</span>
+                      <span class="comment-owner__liker">좋아요 3개</span>
+                      <span class="comment_owner__reply">답글 달기</span>
+                    </div>
+                  </div>
+                  <div class="comment-owner__heart-wrap">
+                    <i class="far fa-heart comment-owner__heart"></i>
+                  </div>
+                </div>
+
+                <div class="comment-divider">
+                  <div class="comment-divider__line"></div>
+                  <div class="comment-divider__togggle-replies">
+                    답글 숨기기
+                  </div>
+                </div>
+
+                <div class="replies">
+                  <div class="reply comment-owner">
+                    <div class="comment-owner__photo-wrap">
+                      <img
+                        src="../images/03.png"
+                        class="comment-owner__photo"
+                      />
+                    </div>
+                    <div class="comment-owner__text-wrap">
+                      <a class="comment-owner__name">meenoie</a>
+                      <span class="comment-owner__text">
+                        요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..
+                      </span>
+                      <div class="comment-owner__options">
+                        <span class="comment-owner__created-time">5시간</span>
+                        <span class="comment-owner__liker">좋아요 3개</span>
+                        <span class="comment_owner__reply">답글 달기</span>
+                      </div>
+                    </div>
+                    <div class="comment-owner__heart-wrap">
+                      <i class="far fa-heart comment-owner__heart"></i>
+                    </div>
+                  </div>
+
+                  <div class="reply comment-owner">
+                    <div class="comment-owner__photo-wrap">
+                      <img
+                        src="../images/03.png"
+                        class="comment-owner__photo"
+                      />
+                    </div>
+                    <div class="comment-owner__text-wrap">
+                      <a class="comment-owner__name">meenoie</a>
+                      <span class="comment-owner__text">
+                        요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가
+                        끝났어요ㅜㅜ..
+                      </span>
+                      <div class="comment-owner__options">
+                        <span class="comment-owner__created-time">5시간</span>
+                        <span class="comment-owner__liker">좋아요 3개</span>
+                        <span class="comment_owner__reply">답글 달기</span>
+                      </div>
+                    </div>
+                    <div class="comment-owner__heart-wrap">
+                      <i class="far fa-heart comment-owner__heart"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="more-comment">
+                <div class="more-comment__button">
+                  <span class="more-comment__plus">+</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="post-contents comment-post-contents">
               <div class="post-options">
                 <div class="post-options-column">
                   <i class="far fa-heart post-options__heart"></i>
@@ -384,15 +587,6 @@
               </div>
               <div class="post-like-text">
                 <span>좋아요 <span class="post-like-count">8000</span>개</span>
-              </div>
-              <div class="main-post-explanation">
-                <a class="main-post-explanation__owner">meenoie</a>
-                <span class="main-post-explanation__text">
-                  요리조리 2가 끝났어요ㅜㅜ..</span
-                >
-              </div>
-              <div class="post-comments-count main-post-comments-count">
-                <span class="show-comment">댓글 660개 모두 보기</span>
               </div>
               <div class="post-time-wrap">
                 <a>4시간 전</a>
@@ -415,8 +609,8 @@
                 </form>
               </div>
             </div>
-          </article>
-        </section>
+          </section>
+        </article>
       </div>
     </div>
     <script
