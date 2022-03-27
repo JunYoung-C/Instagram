@@ -1,0 +1,181 @@
+.comment-post {
+  width: 1055px;
+  height: 675px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+/* comment-left-section 시작 */
+.comment-post-media-wrap {
+  width: 555px;
+}
+
+.comment-post-images-wrap {
+  width: 555px;
+  height: 675px;
+}
+
+.comment-post-images__list {
+  width: 555px;
+  height: 675px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+}
+
+.comment-post-image {
+  width: 555px;
+  height: 500px;
+  max-height: 675px;
+}
+/* comment-left-section 끝 */
+/* comment-left-section 시작 */
+.comment-right-section {
+  position: relative;
+  width: 500px;
+  height: 675px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.comment-post-header,
+.comment-post-contents {
+  width: 500px;
+}
+
+/* comment-post-header 시작 */
+.comment-post-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+/* comment-post-header 끝 */
+/* comments 시작 */
+.comments {
+  height: 440px;
+  padding: 24px 16px 0px 16px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+.comments::-webkit-scrollbar {
+  display: none;
+}
+
+.comment-owner {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-right: 38px;
+}
+
+.comment-owner__photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: var(--main-border);
+  cursor: pointer;
+}
+
+.comment-owner__text-wrap {
+  line-height: 1.3;
+  margin-top: 3px;
+}
+.comment-owner__name {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.comment-owner__options {
+  font-size: 13px;
+  color: gray;
+  margin-top: 17px;
+  margin-bottom: 25px;
+}
+
+.comment-owner__liker,
+.comment_owner__reply {
+  font-weight: bold;
+  margin-left: 13px;
+}
+
+.comment-owner__created-time,
+.comment-owner__liker,
+.comment_owner__reply {
+  cursor: pointer;
+}
+
+.comment-owner__heart-wrap {
+  position: absolute;
+  right: 0;
+  top: 11px;
+}
+
+.comment-owner__heart {
+  cursor: pointer;
+}
+
+.comment-owner__heart:hover {
+  opacity: 0.5;
+}
+
+.comment-divider {
+  font-size: 12px;
+  color: gray;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.comment-divider__line {
+  background-color: gray;
+  margin-left: 63px;
+  margin-right: 20px;
+}
+
+.comment-divider__line {
+  width: 24px;
+  height: 0.5px;
+}
+
+.replies {
+  margin-left: 63px;
+}
+
+.more-comment {
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.more-comment__button {
+  width: 24px;
+  height: 24px;
+  border: 2.5px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+}
+/* comments 끝 */
+
+.comment-post-comments-count {
+  margin-bottom: 12px;
+}
+
+.comment-post-comment__text {
+  width: 485px;
+}
+
+.comment-post-contents {
+  height: 190px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+/* comment-right-section 끝 */
