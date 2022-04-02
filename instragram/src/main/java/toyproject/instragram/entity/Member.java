@@ -1,7 +1,6 @@
 package toyproject.instragram.entity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,14 +16,20 @@ public class Member extends BaseEntity {
     @Column(name = "member_id")
     private Long id;
 
+    @Column(unique = true)
+    private String nickname;
+    private String name;
+
     @Embedded
     private Privacy privacy;
 
-    @Embedded
-    private Profile profile;
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private MemberImage memberImage;
 
-    public Member(Privacy privacy, Profile profile) {
+    public Member(String nickname, String name, Privacy privacy, MemberImage memberImage) {
+        this.nickname = nickname;
+        this.name = name;
         this.privacy = privacy;
-        this.profile = profile;
+        this.memberImage = memberImage;
     }
 }

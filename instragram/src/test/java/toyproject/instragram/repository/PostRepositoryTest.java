@@ -11,7 +11,6 @@ import toyproject.instragram.AppConfig;
 import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
-import toyproject.instragram.entity.Profile;
 
 import javax.persistence.EntityManager;
 import java.util.List;

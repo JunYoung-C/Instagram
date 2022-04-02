@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
-import toyproject.instragram.entity.Profile;
 import toyproject.instragram.dto.PostDto;
 
 import javax.persistence.EntityManager;

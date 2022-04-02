@@ -1,7 +1,6 @@
 package toyproject.instragram.entity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,20 +21,15 @@ public class Post extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+    private String text;
 
-    private String photoPath;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostFile> postFiles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE) // 게시물 제거시 관련 댓글도 모두 삭제
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    public Post(Member member, String photoPath) {
-        this.member = member;
-        this.photoPath = photoPath;
-    }
-
-    //연관관계 편의 메소드
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.changePost(this);
+    public void changeText(String text) {
+        this.text = text;
     }
 }

@@ -1,7 +1,6 @@
 package toyproject.instragram.entity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,10 +29,6 @@ public class Reply extends BaseEntity {
         this.comment = comment;
         this.member = member;
         this.text = text;
-    }
-
-    public void changeComment(Comment comment) {
-        this.comment = comment;
     }
 
     public void changeText(String text) {

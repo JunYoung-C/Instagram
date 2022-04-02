@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Profile;
 import toyproject.instragram.repository.MemberRepository;
 
 import java.util.List;
