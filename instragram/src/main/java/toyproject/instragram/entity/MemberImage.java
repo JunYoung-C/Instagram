@@ -23,10 +23,13 @@ public class MemberImage {
     private String storeFileName;
     private String extension;
 
-    public MemberImage(Member member, String uploadFileName, String storeFileName, String extension) {
-        this.member = member;
+    public MemberImage(String uploadFileName, String storeFileName, String extension) {
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
         this.extension = extension;
+    }
+
+    protected void setMember(Member member) {
+        this.member = member;
     }
 }

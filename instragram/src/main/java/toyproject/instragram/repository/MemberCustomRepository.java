@@ -1,8 +1,10 @@
 package toyproject.instragram.repository;
 
+import toyproject.instragram.dto.MemberProfileDto;
+
 import java.util.List;
 
 public interface MemberCustomRepository {
 
-    public List<Profile> searchProfiles(String nickname);
+    List<MemberProfileDto> searchProfiles(String nickname);
 }
