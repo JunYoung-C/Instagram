@@ -3,6 +3,7 @@ package toyproject.instragram.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import toyproject.instragram.dto.MemberProfileDto;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.repository.MemberRepository;
 
@@ -23,12 +24,12 @@ public class MemberService {
         return member.getId();
     }
 
-    public List<Profile> searchProfiles(String nickname) {
+    public List<MemberProfileDto> searchProfiles(String nickname) {
         return memberRepository.searchProfiles(nickname);
     }
 
     private void validateDuplicateMember(Member member) {
-        Optional<Member> findMember = memberRepository.findByProfileNickname(member.getProfile().getNickname());
+        Optional<Member> findMember = memberRepository.findByNickname(member.getNickname());
         if (findMember.isPresent()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
