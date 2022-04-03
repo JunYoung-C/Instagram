@@ -12,6 +12,8 @@ import toyproject.instragram.repository.CommentRepository;
 
 import javax.persistence.EntityManager;
 
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -45,22 +47,18 @@ class CommentServiceTest {
         assertThat(findComment).isNotNull();
     }
 
-    @DisplayName("댓글 조회")
+    @DisplayName("댓글 최대 20건 조회")
     @Test
-    void getCommentDtoSlice() {
+    void getCommentSlice() {
         //given
-        Member member1 = new Member(null, "nickname1", "이름1");
-        Member member2 = new Member(null, "nickname2", "이름2");
-        em.persist(member1);
-        em.persist(member2);
+        Member member = new Member(null, "nickname", "이름");
+        em.persist(member);
 
-        Post post = new Post(member1, null);
+        Post post = new Post(member, null);
         em.persist(post);
 
-        Comment comment1 = new Comment(post, member1, null);
-        Comment comment2 = new Comment(post, member2, null);
-        em.persist(comment1);
-        em.persist(comment2);
+        IntStream.range(0, 21)
+                .forEach(i -> commentService.addComment(post.getId(), member.getId(), "안녕하세요" + i));
 
         em.flush();
         em.clear();
@@ -70,9 +68,7 @@ class CommentServiceTest {
         Slice<Comment> commentSlice = commentService.getCommentSlice(post.getId(), page);
 
         //then
-        assertThat(commentSlice.getContent()).hasSize(2);
-        assertThat(commentSlice.isFirst()).isTrue();
-        assertThat(commentSlice.isLast()).isTrue();
+        assertThat(commentSlice.getContent()).hasSize(20);
     }
 
     @DisplayName("댓글 내용 수정")

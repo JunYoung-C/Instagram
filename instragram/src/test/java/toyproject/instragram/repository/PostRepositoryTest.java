@@ -27,7 +27,7 @@ class PostRepositoryTest {
     @Autowired
     PostRepository postRepository;
 
-    @DisplayName("먼저 생성된 날짜 순으로 게시물 10개씩 조회")
+    @DisplayName("먼저 생성된 날짜 순으로 게시물 조회")
     @Test
     void getPostsByOrderByCreatedDateDesc() {
         //given

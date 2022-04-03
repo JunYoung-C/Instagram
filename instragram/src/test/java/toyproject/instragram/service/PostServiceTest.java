@@ -13,6 +13,7 @@ import toyproject.instragram.entity.Post;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,9 +47,9 @@ class PostServiceTest {
         assertThat(findPost).isNotNull();
     }
 
-    @DisplayName("게시물 조회")
+    @DisplayName("게시물 최대 10건 조회")
     @Test
-    void getPosts() {
+    void getPostSlice() {
         //given
         Member member = new Member(null, "junyoung", "이름");
 
@@ -56,7 +57,7 @@ class PostServiceTest {
 
         List<String> filePaths = new ArrayList<>();
         filePaths.add("test.png");
-        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+        IntStream.range(0, 11).forEach(i -> postService.addPost(member.getId(), filePaths, "안녕하세요" + i));
 
         em.flush();
         em.clear();
@@ -66,8 +67,7 @@ class PostServiceTest {
         List<Post> posts = slice.getContent();
 
         //then
-        assertThat(posts).hasSize(1);
-        assertThat(posts.get(0).getId()).isEqualTo(postId);
+        assertThat(posts).hasSize(10);
     }
 
     @DisplayName("게시물 글 수정")
