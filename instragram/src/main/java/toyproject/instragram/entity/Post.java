@@ -26,6 +26,9 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostFile> postFiles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     public Post(Member member, String text) {
         this.member = member;
         this.text = text;
