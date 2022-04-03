@@ -1,6 +1,5 @@
 package toyproject.instragram.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,15 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import toyproject.instragram.AppConfig;
-import toyproject.instragram.entity.*;
+import toyproject.instragram.entity.Comment;
+import toyproject.instragram.entity.Member;
+import toyproject.instragram.entity.Post;
+import toyproject.instragram.entity.Reply;
 
 import javax.persistence.EntityManager;
-
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Import(value = AppConfig.class)
 @DataJpaTest
@@ -32,8 +32,8 @@ class ReplyRepositoryTest {
     @Test
     void countRepliesByCommentId() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        Member member1 = new Member(null, "nickname1", "이름1");
+        Member member2 = new Member(null, "nickname2", "이름2");
         em.persist(member1);
         em.persist(member2);
 
@@ -44,13 +44,7 @@ class ReplyRepositoryTest {
         em.persist(comment);
 
         IntStream.range(0, 25)
-                .forEach((i) -> {
-                    Reply reply = new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i));
-                    comment.addReply(reply);
-                    em.persist(reply);
-                });
-        post.addComment(comment);
-
+                .forEach(i -> em.persist(new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i))));
 
         em.flush();
         em.clear();
@@ -62,12 +56,12 @@ class ReplyRepositoryTest {
         assertThat(replyCount).isEqualTo(25);
     }
 
-    @DisplayName("생성 날짜가 빠른 순으로 20개의 답글 조회")
+    @DisplayName("생성 날짜가 빠른 순으로 답글 조회")
     @Test
     void getRepliesByCommentIdOrderByCreatedDateDesc() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        Member member1 = new Member(null, "nickname1", "이름1");
+        Member member2 = new Member(null, "nickname2", "이름2");
         em.persist(member1);
         em.persist(member2);
 
@@ -78,12 +72,7 @@ class ReplyRepositoryTest {
         em.persist(comment);
 
         IntStream.range(0, 25)
-                .forEach((i) -> {
-                    Reply reply = new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i));
-                    comment.addReply(reply);
-                    em.persist(reply);
-                });
-        post.addComment(comment);
+                .forEach(i -> em.persist(new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i))));
 
         em.flush();
         em.clear();
