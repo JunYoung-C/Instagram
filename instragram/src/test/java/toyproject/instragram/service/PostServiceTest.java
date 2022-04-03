@@ -7,16 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.Comment;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
-import toyproject.instragram.dto.PostDto;
 
 import javax.persistence.EntityManager;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -32,80 +30,82 @@ class PostServiceTest {
     @Test
     void addPost() {
         //given
-        Profile profile = new Profile("nickname", "이름", null);
-        Member member = new Member(null, profile);
+        Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
 
-        Post post = new Post(member, null);
-
         //when
-        Long postId = postService.addPost(post);
+        List<String> filePaths = new ArrayList<>();
+        filePaths.add("test.png");
+        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+
+        em.flush();
+        em.clear();
 
         //then
         Post findPost = em.find(Post.class, postId);
-        assertThat(findPost).isEqualTo(post);
+        assertThat(findPost).isNotNull();
     }
 
     @DisplayName("게시물 조회")
     @Test
     void getPosts() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
-        em.persist(member1);
-        em.persist(member2);
+        Member member = new Member(null, "junyoung", "이름");
 
-        Post post = new Post(member1, null);
-        Comment comment1 = new Comment(post, member1, null);
-        Comment comment2 = new Comment(post, member2, null);
-        Comment comment3 = new Comment(post, member1, null);
-        Comment comment4 = new Comment(post, member1, null);
-        Comment comment5 = new Comment(post, member2, null);
-        Comment comment6 = new Comment(post, member1, null);
-        Comment comment7 = new Comment(post, member1, null);
+        em.persist(member);
 
-        post.addComment(comment1);
-        post.addComment(comment2);
-        post.addComment(comment3);
-        post.addComment(comment4);
-        post.addComment(comment5);
-        post.addComment(comment6);
-        post.addComment(comment7);
-
-        em.persist(post);
-        em.persist(comment1);
-        em.persist(comment2);
-        em.persist(comment3);
-        em.persist(comment4);
-        em.persist(comment5);
-        em.persist(comment6);
-        em.persist(comment7);
+        List<String> filePaths = new ArrayList<>();
+        filePaths.add("test.png");
+        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
 
         em.flush();
         em.clear();
 
         //when
-        Slice<PostDto> slice = postService.getPostDtoSlice(PageRequest.of(0, 10));
-        List<PostDto> postDtos = slice.getContent();
+        Slice<Post> slice = postService.getPostSlice(0);
+        List<Post> posts = slice.getContent();
 
         //then
-        assertThat(postDtos).hasSize(1);
-        assertThat(postDtos.get(0).getPostId()).isEqualTo(post.getId());
-        assertThat(postDtos.get(0).getCommentCount()).isEqualTo(7);
-        assertThat(postDtos.get(0).getMyCommentDtoList()).as("게시물 조회시 조회되는 게시자의 댓글은 최대 3개이다.")
-                .hasSize(3);
+        assertThat(posts).hasSize(1);
+        assertThat(posts.get(0).getId()).isEqualTo(postId);
+    }
+
+    @DisplayName("게시물 글 수정")
+    @Test
+    void modifyPostText() {
+        //given
+        Member member = new Member(null, "junyoung", "이름1");
+        em.persist(member);
+
+        List<String> filePaths = new ArrayList<>();
+        filePaths.add("test.png");
+        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+
+        em.flush();
+        em.clear();
+
+        //when
+        String modifiedText = "수정했어요";
+        postService.modifyPostText(postId, modifiedText);
+
+        //then
+        Post findPost = em.find(Post.class, postId);
+        assertThat(findPost.getText()).isEqualTo(modifiedText);
     }
 
     @DisplayName("게시물 삭제")
     @Test
     void deletePost() {
         //given
-        Profile profile = new Profile("nickname", "이름", null);
-        Member member = new Member(null, profile);
+        Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
 
-        Post post = new Post(member, null);
-        Long postId = postService.addPost(post);
+        List<String> filePaths = new ArrayList<>();
+        filePaths.add("test.png");
+        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+
+        em.flush();
+        em.clear();
 
         //when
         postService.deletePost(postId);
