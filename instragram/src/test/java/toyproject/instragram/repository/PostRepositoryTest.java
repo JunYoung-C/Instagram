@@ -8,11 +8,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import toyproject.instragram.AppConfig;
-import toyproject.instragram.entity.*;
+import toyproject.instragram.entity.Comment;
+import toyproject.instragram.entity.Member;
+import toyproject.instragram.entity.MemberImage;
+import toyproject.instragram.entity.Post;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +45,6 @@ class PostRepositoryTest {
         for (int i = 0; i < 25; i++) {
             Member member = i % 2 == 0 ? member1 : member2;
             Post post = new Post(member, null);
-            post.addPostFile(new PostFile(post, "postFile" + i, "encodedPostFile" + i, ".png"));
 
             for (int j = 0; j < commentCnt; j++) {
                 new Comment(post, member, "안녕하세요" + i + j);
@@ -66,9 +67,7 @@ class PostRepositoryTest {
         assertThat(slice.hasNext()).isTrue();
         assertThat(posts.size()).isEqualTo(size);
         assertThat(posts).isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
-        IntStream.range(0, size).forEach((i) -> {
-            assertThat(posts.get(i).getPostFiles()).hasSize(1);
-        });
+
     }
 
     @DisplayName("조회된 게시물이 없는 경우")

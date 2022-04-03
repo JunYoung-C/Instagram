@@ -1,6 +1,5 @@
 package toyproject.instragram.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +8,15 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import toyproject.instragram.AppConfig;
-import toyproject.instragram.entity.*;
+import toyproject.instragram.entity.Comment;
+import toyproject.instragram.entity.Member;
+import toyproject.instragram.entity.Post;
 
 import javax.persistence.EntityManager;
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Import(value = AppConfig.class)
 @DataJpaTest
@@ -34,31 +32,16 @@ class CommentRepositoryTest {
     @Test
     void countCommentsByPostId() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        Member member1 = new Member(null, "nickname1", "이름1");
+        Member member2 = new Member(null, "nickname2", "이름2");
         em.persist(member1);
         em.persist(member2);
 
         Post post = new Post(member1, null);
         em.persist(post);
 
-        Comment comment1 = new Comment(post, member1, null);
-        Comment comment2 = new Comment(post, member2, null);
-        Comment comment3 = new Comment(post, member1, null);
-        Comment comment4 = new Comment(post, member1, null);
-        Comment comment5 = new Comment(post, member2, null);
-
-        post.addComment(comment1);
-        post.addComment(comment2);
-        post.addComment(comment3);
-        post.addComment(comment4);
-        post.addComment(comment5);
-
-        em.persist(comment1);
-        em.persist(comment2);
-        em.persist(comment3);
-        em.persist(comment4);
-        em.persist(comment5);
+        IntStream.range(0, 5)
+                .forEach(i -> em.persist(new Comment(post, i % 2 == 0 ? member1 : member2, null)));
 
         em.flush();
         em.clear();
@@ -74,78 +57,60 @@ class CommentRepositoryTest {
     @Test
     void getCommentsByMemberIdAndPostId() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        Member member1 = new Member(null, "nickname1", "이름1");
+        Member member2 = new Member(null, "nickname2", "이름2");
         em.persist(member1);
         em.persist(member2);
 
         Post post = new Post(member1, null);
-        Comment comment1 = new Comment(post, member1, "1");
-        Comment comment2 = new Comment(post, member2, "2");
-        Comment comment3 = new Comment(post, member1, "3");
-        Comment comment4 = new Comment(post, member1, "4");
-        Comment comment5 = new Comment(post, member2, "5");
-
-        post.addComment(comment1);
-        post.addComment(comment2);
-        post.addComment(comment3);
-        post.addComment(comment4);
-        post.addComment(comment5);
-
         em.persist(post);
-        em.persist(comment1);
-        em.persist(comment2);
-        em.persist(comment3);
-        em.persist(comment4);
-        em.persist(comment5);
+
+        IntStream.range(0, 5)
+                .forEach(i -> em.persist(new Comment(post, i % 2 == 0 ? member1 : member2, String.valueOf(i))));
 
         em.flush();
         em.clear();
 
         //when
-
+        int size = 3;
         Slice<Comment> commentSlice = commentRepository
-                .getCommentsByMemberIdAndPostId(post.getMember().getId(), post.getId(), PageRequest.of(0, 3));
+                .getCommentsByMemberIdAndPostId(post.getMember().getId(), post.getId(), PageRequest.of(0, size));
 
         //then
         List<Comment> comments = commentSlice.getContent();
-        assertThat(comments).hasSize(3);
-        assertThat(comments).extracting("text").containsExactly("1", "3", "4");
+        assertThat(comments).hasSize(size);
+        assertThat(comments).extracting("text").containsExactly("0", "2", "4");
 
     }
 
 
-    @DisplayName("생성 날짜가 빠른 순으로 20개의 댓글 조회")
+    @DisplayName("생성 날짜가 빠른 순으로 댓글 조회")
     @Test
     void getCommentsByPostIdOrderByCreatedDateDesc() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        Member member1 = new Member(null, "nickname1", "이름1");
+        Member member2 = new Member(null, "nickname2", "이름2");
         em.persist(member1);
         em.persist(member2);
 
         Post post = new Post(member1, null);
-        em.persist(post); // cascade.all
+        em.persist(post);
 
         IntStream.range(0, 65)
-                .forEach(i -> {
-                    Comment comment = new Comment(post, i % 2 == 0 ? member1 : member2, String.valueOf(i));
-                    post.addComment(comment);
-                    em.persist(comment);
-                });
-
+                .forEach(i -> em.persist(new Comment(post, i % 2 == 0 ? member1 : member2, String.valueOf(i))));
 
         em.flush();
         em.clear();
+
         //when
-        Slice<Comment> commentFirstSlice = commentRepository
+        Slice<Comment> firstCommentSlice = commentRepository
                 .getCommentsByPostIdOrderByCreatedDateDesc(post.getId(), PageRequest.of(0, 20));
-        Slice<Comment> commentLastSlice = commentRepository
+        Slice<Comment> lastCommentSlice = commentRepository
                 .getCommentsByPostIdOrderByCreatedDateDesc(post.getId(), PageRequest.of(3, 20));
 
         //then
-        List<Comment> findFirstComments = commentFirstSlice.getContent();
-        List<Comment> findLastComments = commentLastSlice.getContent();
+        List<Comment> findFirstComments = firstCommentSlice.getContent();
+        List<Comment> findLastComments = lastCommentSlice.getContent();
         assertThat(findFirstComments).hasSize(20);
         assertThat(findLastComments).hasSize(5);
         assertThat(findFirstComments)
