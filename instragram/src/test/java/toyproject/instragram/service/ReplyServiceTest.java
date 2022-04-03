@@ -4,10 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.dto.ReplyDto;
 import toyproject.instragram.entity.*;
 import toyproject.instragram.repository.ReplyRepository;
 
@@ -34,7 +33,7 @@ class ReplyServiceTest {
     @Test
     void addReply() {
         //given
-        Member member = new Member(null, new Profile("myNickname1", "myName1", null));
+        Member member = new Member(null, "nickname", "이름");
         em.persist(member);
 
         Post post = new Post(member, null);
@@ -43,22 +42,23 @@ class ReplyServiceTest {
         Comment comment = new Comment(post, member, null);
         em.persist(comment);
 
-        Reply reply = new Reply(comment, member, "reply");
-
         //when
-        Long replyId = replyService.addReply(reply);
+        Long replyId = replyService.addReply(comment.getId(), member.getId(), "안녕하세요");
+
+        em.flush();
+        em.clear();
 
         //then
         Reply findReply = replyRepository.findById(replyId).orElse(null);
-        assertThat(findReply).isEqualTo(reply);
+        assertThat(findReply).isNotNull();
     }
 
-    @DisplayName("답글 조회")
+    @DisplayName("답글 최대 20건 조회")
     @Test
-    void getReplyDtoSlice() {
+    void getReplySlice() {
         //given
-        Member member1 = new Member(null, new Profile("myNickname1", "myName1", null));
-        Member member2 = new Member(null, new Profile("myNickname2", "myName2", null));
+        Member member1 = new Member(null, "nickname1", "이름1");
+        Member member2 = new Member(null, "nickname2", "이름2");
         em.persist(member1);
         em.persist(member2);
 
@@ -68,29 +68,28 @@ class ReplyServiceTest {
         Comment comment = new Comment(post, member1, null);
         em.persist(comment);
 
-        IntStream.range(0, 5)
-                .forEach((i) -> {
-                    Reply reply = new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i));
-                    em.persist(reply);
-                });
+        IntStream.range(0, 21)
+                .forEach(i -> em.persist(new Reply(comment, i % 2 == 0 ? member1 : member2, String.valueOf(i))));
 
         em.flush();
         em.clear();
 
         //when
-        Slice<ReplyDto> replyDtoSlice = replyService.getReplyDtoSlice(comment.getId(), PageRequest.of(0, 20));
+        int page = 0;
+        Slice<Reply> replySlice = replyService.getReplySlice(comment.getId(), page);
 
         //then
-        assertThat(replyDtoSlice.getContent()).hasSize(5);
-        assertThat(replyDtoSlice.isFirst()).isTrue();
-        assertThat(replyDtoSlice.isLast()).isTrue();
+        assertThat(replySlice.getContent()).hasSize(20);
+        assertThat(replySlice.isFirst()).isTrue();
+        assertThat(replySlice.isLast()).isFalse();
+        assertThat(replySlice.hasNext()).isTrue();
     }
 
     @DisplayName("답글 내용 수정")
     @Test
     void modifyReplyText() {
         //given
-        Member member = new Member(null, new Profile("myNickname1", "myName1", null));
+        Member member = new Member(null, "nickname", "이름");
         em.persist(member);
 
         Post post = new Post(member, null);
@@ -99,29 +98,28 @@ class ReplyServiceTest {
         Comment comment = new Comment(post, member, null);
         em.persist(comment);
 
-        Reply reply = new Reply(comment, member, "안녕하세요");
-        Long replyId = replyService.addReply(reply);
+        Long replyId = replyService.addReply(comment.getId(), member.getId(), "안녕하세요");
 
         em.flush();
         em.clear();
 
         //when
-        String text = "수정했어요";
-        replyService.modifyReplyText(replyId, text);
+        String modifiedText = "수정했어요";
+        replyService.modifyReplyText(replyId, modifiedText);
 
         em.flush();
         em.clear();
 
         //then
-        Reply findReply = em.find(Reply.class, replyId);
-        assertThat(findReply.getText()).isEqualTo(text);
+        Reply findReply = replyRepository.findById(replyId).orElse(null);
+        assertThat(findReply.getText()).isEqualTo(modifiedText);
     }
 
     @DisplayName("답글 삭제")
     @Test
     void deleteReply() {
         //given
-        Member member = new Member(null, new Profile("myNickname1", "myName1", null));
+        Member member = new Member(null, "nickname", "이름");
         em.persist(member);
 
         Post post = new Post(member, null);
@@ -130,8 +128,7 @@ class ReplyServiceTest {
         Comment comment = new Comment(post, member, null);
         em.persist(comment);
 
-        Reply reply = new Reply(comment, member, "안녕하세요");
-        Long replyId = replyService.addReply(reply);
+        Long replyId = replyService.addReply(comment.getId(), member.getId(), "안녕하세요");
 
         em.flush();
         em.clear();
@@ -140,7 +137,7 @@ class ReplyServiceTest {
         replyService.deleteReply(replyId);
 
         //then
-        Reply findReply = em.find(Reply.class, replyId);
+        Reply findReply = replyRepository.findById(replyId).orElse(null);
         assertThat(findReply).isNull();
     }
 }
