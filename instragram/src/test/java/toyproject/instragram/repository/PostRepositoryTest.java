@@ -8,12 +8,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import toyproject.instragram.AppConfig;
-import toyproject.instragram.entity.Comment;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Post;
+import toyproject.instragram.entity.*;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,25 +25,30 @@ class PostRepositoryTest {
     @Autowired
     PostRepository postRepository;
 
-    @DisplayName("먼저 생성된 날짜 순으로 10개씩 조회")
+    @DisplayName("먼저 생성된 날짜 순으로 게시물 10개씩 조회")
     @Test
     void getPostsByOrderByCreatedDateDesc() {
         //given
-        Profile profile1 = new Profile("nickname1", "이름1", null);
-        Member member1 = new Member(null, profile1);
+        MemberImage memberImage1 = new MemberImage("file1", "encodedFile1", "png");
+        Member member1 = new Member(null, "junyoung", "이름1");
+        member1.addProfileImage(memberImage1);
         em.persist(member1);
 
-        Profile profile2 = new Profile("nickname2", "이름2", null);
-        Member member2 = new Member(null, profile2);
+        MemberImage memberImage2 = new MemberImage("file2", "encodedFile2", "png");
+        Member member2 = new Member(null, "jun_young", "이름2");
+        member2.addProfileImage(memberImage2);
         em.persist(member2);
 
         int commentCnt = 3;
         for (int i = 0; i < 25; i++) {
             Member member = i % 2 == 0 ? member1 : member2;
             Post post = new Post(member, null);
+            post.addPostFile(new PostFile(post, "postFile" + i, "encodedPostFile" + i, ".png"));
+
             for (int j = 0; j < commentCnt; j++) {
-                post.addComment(new Comment(post, member, "안녕하세요" + i + j));
+                new Comment(post, member, "안녕하세요" + i + j);
             }
+
             postRepository.save(post);
         }
 
@@ -62,9 +66,12 @@ class PostRepositoryTest {
         assertThat(slice.hasNext()).isTrue();
         assertThat(posts.size()).isEqualTo(size);
         assertThat(posts).isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
+        IntStream.range(0, size).forEach((i) -> {
+            assertThat(posts.get(i).getPostFiles()).hasSize(1);
+        });
     }
 
-    @DisplayName("먼저 생성된 날짜 순으로 10개씩 조회 - 조회 결과 없음")
+    @DisplayName("조회된 게시물이 없는 경우")
     @Test
     public void getPostsByOrderByCreatedDateDesc_empty() {
         //given
@@ -77,5 +84,6 @@ class PostRepositoryTest {
         assertThat(slice.getContent()).hasSize(0);
         assertThat(slice.isFirst()).isTrue();
         assertThat(slice.isLast()).isTrue();
+        assertThat(slice.hasNext()).isFalse();
     }
 }
