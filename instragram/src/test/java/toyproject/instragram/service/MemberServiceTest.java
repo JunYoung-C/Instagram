@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import toyproject.instragram.dto.MemberProfileDto;
+import toyproject.instragram.repository.MemberProfileDto;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.MemberImage;
 import toyproject.instragram.repository.MemberRepository;

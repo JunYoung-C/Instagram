@@ -1,16 +1,11 @@
 package toyproject.instragram.repository;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.AppConfig;
-import toyproject.instragram.dto.MemberProfileDto;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.MemberImage;
 
