@@ -49,26 +49,29 @@ class MemberServiceTest {
     @Test
     public void signUp() {
         //given
-        Member member = new Member(null, "nickname", "이름");
+        MemberDto memberDto =
+                new MemberDto("email@naver.com", "name", "nickname", null);
+
         //when
-        Long memberId = memberService.signUp(member);
+        Long memberId = memberService.signUp(memberDto);
 
         //then
         Member findMember = memberRepository.findById(memberId).orElse(null);
-        assertThat(findMember).isEqualTo(member);
+        assertThat(findMember.getName()).isEqualTo("name");
     }
 
     @DisplayName("회원가입 - 중복으로 인한 실패")
     @Test
     public void signUp_fail() {
         //given
-        Member member = new Member(null, "junyoung", "이름1");
+        MemberDto memberDto =
+                new MemberDto("email@naver.com", "이름", "junyoung", null);
 
         //when
         //then
-        assertThatThrownBy(() -> memberService.signUp(member))
+        assertThatThrownBy(() -> memberService.signUp(memberDto))
                 .isInstanceOf(IllegalStateException.class)
-                .hasMessage("이미 존재하는 회원입니다.");
+                .hasMessage("이미 존재하는 별명입니다.");
     }
 
     @DisplayName("닉네임으로 프로필 검색")
