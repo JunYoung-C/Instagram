@@ -7,7 +7,6 @@ import toyproject.instragram.repository.MemberProfileDto;
 import java.util.List;
 
 @Getter
-@Setter
 public class MemberResponse {
 
     private List<MemberProfileDto> members;
