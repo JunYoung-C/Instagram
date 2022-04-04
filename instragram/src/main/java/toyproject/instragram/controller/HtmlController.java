@@ -11,11 +11,6 @@ public class HtmlController {
         return "signIn";
     }
 
-    @GetMapping("/sign-up")
-    public String signUpPage() {
-        return "signUp";
-    }
-
     @GetMapping("/main")
     public String mainPage() {
         return "main";

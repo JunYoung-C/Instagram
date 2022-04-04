@@ -3,6 +3,7 @@ package toyproject.instragram.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import toyproject.instragram.service.MemberDto;
 import toyproject.instragram.service.MemberService;
@@ -15,7 +16,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/members")
+    @PostMapping("/members/new")
     public String signUp(@Valid MemberSaveForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "signUp";
@@ -25,6 +26,9 @@ public class MemberController {
 
         return "redirect:/sign-in";
     }
-
-
+    
+    @GetMapping("/members/new")
+    public String signUpPage() {
+        return "signUp";
+    }
 }
