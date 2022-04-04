@@ -37,7 +37,7 @@ class PostServiceTest {
         //when
         List<String> filePaths = new ArrayList<>();
         filePaths.add("test.png");
-        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+        Long postId = postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -57,7 +57,8 @@ class PostServiceTest {
 
         List<String> filePaths = new ArrayList<>();
         filePaths.add("test.png");
-        IntStream.range(0, 11).forEach(i -> postService.addPost(member.getId(), filePaths, "안녕하세요" + i));
+        IntStream.range(0, 11)
+                .forEach(i -> postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요" + i)));
 
         em.flush();
         em.clear();
@@ -79,7 +80,7 @@ class PostServiceTest {
 
         List<String> filePaths = new ArrayList<>();
         filePaths.add("test.png");
-        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+        Long postId = postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -102,7 +103,7 @@ class PostServiceTest {
 
         List<String> filePaths = new ArrayList<>();
         filePaths.add("test.png");
-        Long postId = postService.addPost(member.getId(), filePaths, "안녕하세요~");
+        Long postId = postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요"));
 
         em.flush();
         em.clear();
