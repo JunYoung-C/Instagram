@@ -25,10 +25,10 @@ public class PostService {
     private final int MAX_POST_SIZE = 10;
 
     @Transactional
-    public Long addPost(Long memberId, List<String> filePaths, String text) {
-        Member member = memberRepository.findById(memberId).orElse(null);
-        Post post = new Post(member, text);
-        filePaths.stream().forEach(filePath -> {
+    public Long addPost(PostDto postDto) {
+        Member member = memberRepository.findById(postDto.getMemberId()).orElse(null);
+        Post post = new Post(member, postDto.getText());
+        postDto.getFilePaths().stream().forEach(filePath -> {
                     PostFile postFile = new PostFile(post,
                             fileManager.extractFileName(filePath),
                             fileManager.createStoreFileName(),
