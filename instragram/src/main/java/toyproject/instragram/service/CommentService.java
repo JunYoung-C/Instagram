@@ -10,6 +10,8 @@ import toyproject.instragram.repository.CommentRepository;
 import toyproject.instragram.repository.MemberRepository;
 import toyproject.instragram.repository.PostRepository;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -20,6 +22,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     private final int MAX_COMMENT_SIZE = 20;
+    private final int MAX_OWNER_COMMENT_SIZE = 3;
 
     @Transactional
     public Long addComment(Long postId, Long memberId, String text) {
@@ -49,5 +52,17 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    // TODO 테스트 코드 작성
+    public List<Comment> getOwnerComments(Long memberId, Long postId) {
+        return commentRepository
+                .getCommentsByMemberIdAndPostId(memberId, postId, PageRequest.of(0, MAX_OWNER_COMMENT_SIZE))
+                .getContent();
+    }
+
+    // TODO 테스트 코드 작성
+    public Long getCommentCount(Long postId) {
+        return commentRepository.countCommentsByPostId(postId);
     }
 }

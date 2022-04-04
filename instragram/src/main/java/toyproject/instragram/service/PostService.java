@@ -46,9 +46,7 @@ public class PostService {
         return postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(page, MAX_POST_SIZE));
     }
 
-//    private Long getCommentCount(Post post) {
-//        return commentRepository.countCommentsByPostId(post.getId());
-//    }
+
 
 //    private List<PostCommentDto> getCommentDtoLists(List<Comment> comments) {
 //        return comments
@@ -57,14 +55,7 @@ public class PostService {
 //                .collect(Collectors.toList());
 //    }
 
-//    private List<Comment> getComments(Post post) {
-//        return commentRepository
-//                .getCommentsByMemberIdAndPostId(
-//                        post.getMember().getId(),
-//                        post.getId(),
-//                        PageRequest.of(0, MAX_COMMENT_COUNT))
-//                .getContent();
-//    }
+
 
     @Transactional
     public void modifyPostText(Long postId, String modifiedText) {
