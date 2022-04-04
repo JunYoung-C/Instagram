@@ -3,7 +3,8 @@ package toyproject.instragram.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import toyproject.instragram.controller.dto.PostSaveForm;
 import toyproject.instragram.service.PostDto;
 import toyproject.instragram.service.PostService;
 
@@ -25,6 +26,12 @@ public class PostController {
 
         postService.addPost(new PostDto(form.getMemberId(), getFilePaths(form), form.getText()));
         return "redirect:/main";
+    }
+
+    @PostMapping("/posts/{postId}")
+    public void modifyPost(@PathVariable Long postId, @RequestParam String modifiedText) {
+        // TODO 수정, 삭제 등의 처리도 200 처리하는거 추후에 고려하기
+        postService.modifyPostText(postId, modifiedText);
     }
 
     private List<String> getFilePaths(PostSaveForm form) {
