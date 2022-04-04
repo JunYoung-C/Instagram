@@ -1,4 +1,4 @@
-package toyproject.instragram.controller;
+package toyproject.instragram.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;
