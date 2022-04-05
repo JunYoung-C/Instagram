@@ -22,11 +22,11 @@ public class ReplyService {
     private final int MAX_REPLY_SIZE = 20;
 
     @Transactional
-    public Long addReply(Long commentId, Long memberId, String text) {
+    public Long addReply(ReplyDto replyDto) {
         Reply reply = new Reply(
-                commentRepository.findById(commentId).orElse(null),
-                memberRepository.findById(memberId).orElse(null),
-                text);
+                commentRepository.findById(replyDto.getCommentId()).orElse(null),
+                memberRepository.findById(replyDto.getMemberId()).orElse(null),
+                replyDto.getText());
 
         replyRepository.save(reply);
         return reply.getId();
