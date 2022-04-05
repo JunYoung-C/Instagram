@@ -4,14 +4,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.*;
+import toyproject.instragram.entity.Comment;
+import toyproject.instragram.entity.Member;
+import toyproject.instragram.entity.Post;
+import toyproject.instragram.entity.Reply;
 import toyproject.instragram.repository.ReplyRepository;
 
 import javax.persistence.EntityManager;
-
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,7 +44,7 @@ class ReplyServiceTest {
         em.persist(comment);
 
         //when
-        Long replyId = replyService.addReply(comment.getId(), member.getId(), "안녕하세요");
+        Long replyId = replyService.addReply(new ReplyDto(comment.getId(), member.getId(), "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -98,7 +99,7 @@ class ReplyServiceTest {
         Comment comment = new Comment(post, member, null);
         em.persist(comment);
 
-        Long replyId = replyService.addReply(comment.getId(), member.getId(), "안녕하세요");
+        Long replyId = replyService.addReply(new ReplyDto(comment.getId(), member.getId(), "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -128,7 +129,7 @@ class ReplyServiceTest {
         Comment comment = new Comment(post, member, null);
         em.persist(comment);
 
-        Long replyId = replyService.addReply(comment.getId(), member.getId(), "안녕하세요");
+        Long replyId = replyService.addReply(new ReplyDto(comment.getId(), member.getId(), "안녕하세요"));
 
         em.flush();
         em.clear();
