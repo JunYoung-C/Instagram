@@ -23,12 +23,12 @@ public class PostApiController {
 
     @GetMapping("/posts")
     public CommonSliceResponse<PostResponse> getPosts(@RequestParam int page) {
-        Slice<Post> postSlice = postService.getPostSlice(page);
-
         List<PostResponse> postResponses = new ArrayList<>();
 
-        postSlice.getContent().stream().forEach(post ->
-                postResponses.add(PostResponse.from(
+        Slice<Post> postSlice = postService.getPostSlice(page);
+
+        postSlice.getContent().stream()
+                .forEach(post -> postResponses.add(PostResponse.from(
                         post,
                         getOwnerCommentTextList(post),
                         commentService.getCommentCount(post.getId()))));

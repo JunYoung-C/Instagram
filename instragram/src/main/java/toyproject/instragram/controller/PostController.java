@@ -18,6 +18,7 @@ public class PostController {
 
     private final PostService postService;
 
+    // TODO html 보완 후 테스트
     @PostMapping("/posts")
     public String addPost(@Valid PostSaveForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -28,10 +29,11 @@ public class PostController {
         return "redirect:/main";
     }
 
+    // TODO html 보완 후 테스트
     @PostMapping("/posts/{postId}")
-    public void modifyPost(@PathVariable Long postId, @RequestParam String modifiedText) {
-        // TODO 수정, 삭제 등의 처리도 200 처리하는거 추후에 고려하기
+    public String modifyPost(@PathVariable Long postId, @RequestParam String modifiedText) {
         postService.modifyPostText(postId, modifiedText);
+        return "redirect:/main";
     }
 
     private List<String> getFilePaths(PostSaveForm form) {
