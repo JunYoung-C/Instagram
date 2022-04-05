@@ -26,7 +26,7 @@ public class PostController {
         }
 
         postService.addPost(new PostDto(form.getMemberId(), getFilePaths(form), form.getText()));
-        return "redirect:/main";
+        return "redirect:/";
     }
 
     // TODO html 보완 후 테스트
