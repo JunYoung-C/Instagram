@@ -4,17 +4,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.*;
+import toyproject.instragram.entity.Comment;
+import toyproject.instragram.entity.Member;
+import toyproject.instragram.entity.Post;
 import toyproject.instragram.repository.CommentRepository;
 
 import javax.persistence.EntityManager;
-
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -40,7 +40,7 @@ class CommentServiceTest {
         em.persist(post);
 
         //when
-        Long commentId = commentService.addComment(post.getId(), member.getId(), "안녕하세요");
+        Long commentId = commentService.addComment(new CommentDto(post.getId(), member.getId(), "안녕하세요"));
 
         //then
         Comment findComment = commentRepository.findById(commentId).orElse(null);
@@ -58,7 +58,7 @@ class CommentServiceTest {
         em.persist(post);
 
         IntStream.range(0, 21)
-                .forEach(i -> commentService.addComment(post.getId(), member.getId(), "안녕하세요" + i));
+                .forEach(i -> commentService.addComment(new CommentDto(post.getId(), member.getId(), "안녕하세요" + i)));
 
         em.flush();
         em.clear();
@@ -81,7 +81,7 @@ class CommentServiceTest {
         Post post = new Post(member, null);
         em.persist(post);
 
-        Long commentId = commentService.addComment(post.getId(), member.getId(), "안녕하세요");
+        Long commentId = commentService.addComment(new CommentDto(post.getId(), member.getId(), "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -105,7 +105,7 @@ class CommentServiceTest {
         Post post = new Post(member, null);
         em.persist(post);
 
-        Long commentId = commentService.addComment(post.getId(), member.getId(), "안녕하세요");
+        Long commentId = commentService.addComment(new CommentDto(post.getId(), member.getId(), "안녕하세요"));
 
         em.flush();
         em.clear();
