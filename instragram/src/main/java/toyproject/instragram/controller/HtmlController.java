@@ -11,7 +11,7 @@ public class HtmlController {
         return "signIn";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String mainPage() {
         return "main";
     }
