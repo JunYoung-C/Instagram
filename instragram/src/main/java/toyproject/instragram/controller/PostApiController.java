@@ -33,7 +33,7 @@ public class PostApiController {
                         getOwnerCommentTextList(post),
                         commentService.getCommentCount(post.getId()))));
 
-        return new CommonSliceResponse(postResponses, new SliceInfo(postSlice.hasNext(), postSlice.getSize()));
+        return new CommonSliceResponse(postResponses, SliceInfo.from(postSlice));
     }
 
     private List<String> getOwnerCommentTextList(Post post) {
