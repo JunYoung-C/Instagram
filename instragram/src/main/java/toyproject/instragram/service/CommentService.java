@@ -25,11 +25,11 @@ public class CommentService {
     private final int MAX_OWNER_COMMENT_SIZE = 3;
 
     @Transactional
-    public Long addComment(Long postId, Long memberId, String text) {
+    public Long addComment(CommentDto commentDto) {
         Comment comment = new Comment(
-                postRepository.findById(postId).orElse(null),
-                memberRepository.findById(memberId).orElse(null),
-                text);
+                postRepository.findById(commentDto.getPostId()).orElse(null),
+                memberRepository.findById(commentDto.getMemberId()).orElse(null),
+                commentDto.getText());
         commentRepository.save(comment);
         return comment.getId();
     }
@@ -38,10 +38,6 @@ public class CommentService {
         return commentRepository
                 .getCommentsByPostIdOrderByCreatedDateDesc(postId, PageRequest.of(page, MAX_COMMENT_SIZE));
     }
-
-//    private Long getReplyCount(Comment comment) {
-//        return replyRepository.countRepliesByCommentId(comment.getId());
-//    }
 
     @Transactional
     public void modifyCommentText(Long commentId, String modifiedText) {
