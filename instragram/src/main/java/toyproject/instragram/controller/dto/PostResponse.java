@@ -1,8 +1,8 @@
 package toyproject.instragram.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import toyproject.instragram.entity.Post;
 
 import java.time.LocalDateTime;
@@ -17,6 +17,8 @@ public class PostResponse {
     private InnerMemberResponse member;
     private List<String> filePaths;
     private String text;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdDate;
     private List<String> ownerComments;
     private Long commentCount;
@@ -24,7 +26,7 @@ public class PostResponse {
     public static PostResponse from(Post post, List<String> ownerComments, Long commentCount) {
         return new PostResponse(
                 post.getId(),
-                new InnerMemberResponse(post.getMember()),
+                InnerMemberResponse.from(post.getMember()),
                 getFilePaths(post),
                 post.getText(),
                 post.getCreatedDate(),
