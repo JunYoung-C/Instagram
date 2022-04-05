@@ -2,11 +2,9 @@ package toyproject.instragram.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.dto.ReplyDto;
 import toyproject.instragram.entity.Reply;
 import toyproject.instragram.repository.CommentRepository;
 import toyproject.instragram.repository.MemberRepository;
@@ -49,5 +47,10 @@ public class ReplyService {
     @Transactional
     public void deleteReply(Long replyId) {
         replyRepository.deleteById(replyId);
+    }
+
+    // TODO 테스트코드 작성
+    public Long getReplyCount(Long commentId) {
+        return replyRepository.countRepliesByCommentId(commentId);
     }
 }
