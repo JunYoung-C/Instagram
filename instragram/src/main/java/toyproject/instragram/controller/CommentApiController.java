@@ -12,6 +12,7 @@ import toyproject.instragram.service.ReplyService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,15 +22,16 @@ public class CommentApiController {
     private final ReplyService replyService;
 
     @GetMapping("/comments")
-    public CommonSliceResponse getComments(@RequestParam Long postId, @RequestParam int page) {
+    public CommonSliceResponse<CommentResponse> getComments(@RequestParam Long postId, @RequestParam int page) {
         Slice<Comment> commentSlice = commentService.getCommentSlice(postId, page);
-        List<Comment> contents = commentSlice.getContent();
-        List<CommentResponse> commentResponses = new ArrayList<>();
 
-        contents.stream().forEach(comment -> commentResponses.add(
-                CommentResponse.from(comment, replyService.getReplyCount(comment.getId()))));
+        return new CommonSliceResponse(getCommentResponses(commentSlice.getContent()), SliceInfo.from(commentSlice));
+    }
 
-        return new CommonSliceResponse(commentResponses, SliceInfo.from(commentSlice));
+    private List<CommentResponse> getCommentResponses(List<Comment> contents) {
+        return contents.stream()
+                .map(comment -> CommentResponse.from(comment, replyService.getReplyCount(comment.getId())))
+                .collect(Collectors.toList());
     }
 
     @DeleteMapping("/comments/{commentId}")

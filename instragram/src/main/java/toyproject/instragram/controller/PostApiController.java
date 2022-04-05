@@ -23,17 +23,17 @@ public class PostApiController {
 
     @GetMapping("/posts")
     public CommonSliceResponse<PostResponse> getPosts(@RequestParam int page) {
-        List<PostResponse> postResponses = new ArrayList<>();
-
         Slice<Post> postSlice = postService.getPostSlice(page);
 
-        postSlice.getContent().stream()
-                .forEach(post -> postResponses.add(PostResponse.from(
-                        post,
-                        getOwnerCommentTextList(post),
-                        commentService.getCommentCount(post.getId()))));
+        return new CommonSliceResponse(getPostResponses(postSlice), SliceInfo.from(postSlice));
+    }
 
-        return new CommonSliceResponse(postResponses, SliceInfo.from(postSlice));
+    private List<PostResponse> getPostResponses(Slice<Post> postSlice) {
+        return postSlice.getContent().stream()
+                .map(post -> PostResponse.from(post,
+                        getOwnerCommentTextList(post),
+                        commentService.getCommentCount(post.getId())))
+                .collect(Collectors.toList());
     }
 
     private List<String> getOwnerCommentTextList(Post post) {
