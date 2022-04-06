@@ -22,3 +22,8 @@ logging.level:
 
 file:
   dir: C:/Users/chlwn/Desktop/myproject1/instragram/src/main/resources/static/files/
+
+server:
+  servlet:
+    session:
+      tracking-modes: COOKIE
