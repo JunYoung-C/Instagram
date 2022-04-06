@@ -1,5 +1,6 @@
 package toyproject.instragram.repository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Import;
 import toyproject.instragram.AppConfig;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.MemberImage;
+import toyproject.instragram.entity.Privacy;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -25,16 +27,25 @@ class MemberRepositoryTest {
     @Autowired
     EntityManager em;
 
+    @BeforeEach
+    void init() {
+        IntStream.range(0, 51).forEach(i -> {
+            Privacy privacy = null;
+            if (i > 20) {
+                privacy = Privacy.create("1234", String.valueOf(i));
+            } else {
+                privacy = Privacy.create("1234", i + "@naver.com");
+            }
+            Member member = new Member(privacy, "nickname" + i, "이름");
+            member.addProfileImage(new MemberImage("file" + i, "encodedFile" + i, "png"));
+            memberRepository.save(member);
+        });
+    }
+
     @DisplayName("닉네임으로 프로필 검색 - 최대 50건 검색 성공")
     @Test
     public void searchByNickname() {
         //given
-        IntStream.range(0, 51).forEach(i -> {
-            Member member = new Member(null, "nickname" + i, "이름");
-            member.addProfileImage(new MemberImage("file" + i, "encodedFile" + i, "png"));
-            memberRepository.save(member);
-        });
-
         //when
         List<MemberProfileDto> findProfiles = memberRepository.searchProfiles("ick");
 
@@ -51,19 +62,36 @@ class MemberRepositoryTest {
 
         //then
         assertThat(findProfiles.size()).isEqualTo(0);
-
     }
 
-    @DisplayName("닉네임과 정확히 일치하는 회원 조회")
+    @DisplayName("핸드폰 번호가 정확히 일치하는 회원 조회")
+    @Test
+    public void findByPrivacyPhoneNumber() {
+        //given
+        //when
+        String phoneNumber = "21";
+        Member findMember = memberRepository.findByPrivacyPhoneNumber(phoneNumber).orElse(null);
+
+        //then
+        assertThat(findMember.getPrivacy().getPhoneNumber()).isEqualTo(phoneNumber);
+    }
+
+    @DisplayName("이메일이 정확히 일치하는 회원 조회")
+    @Test
+    public void findByPrivacyEmail() {
+        //given
+        //when
+        String email = "0@naver.com";
+        Member findMember = memberRepository.findByPrivacyEmail(email).orElse(null);
+
+        //then
+        assertThat(findMember.getPrivacy().getEmail()).isEqualTo(email);
+    }
+
+    @DisplayName("닉네임이 정확히 일치하는 회원 조회")
     @Test
     public void findByNickname() {
         //given
-        IntStream.range(0, 3).forEach(i -> {
-            Member member = new Member(null, "nickname" + i, "이름");
-            member.addProfileImage(new MemberImage("file" + i, "encodedFile" + i, "png"));
-            memberRepository.save(member);
-        });
-
         //when
         String nickname = "nickname0";
         Member findMember = memberRepository.findByNickname(nickname).orElse(null);
