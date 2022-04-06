@@ -27,10 +27,18 @@ public class Privacy {
     }
 
     private void setPhoneNumberOrEmail(String phoneNumberOrEmail) {
-        if (phoneNumberOrEmail.contains("@")) {
+        if (Privacy.isEmail(phoneNumberOrEmail)) {
             email = phoneNumberOrEmail;
         } else {
             phoneNumber = phoneNumberOrEmail;
         }
+    }
+
+    public static boolean isPhoneNumber(String str) {
+        return str.chars().allMatch(Character::isDigit);
+    }
+
+    public static boolean isEmail(String str) {
+        return str.contains("@");
     }
 }
