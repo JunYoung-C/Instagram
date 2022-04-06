@@ -1,13 +1,16 @@
 package toyproject.instragram.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import toyproject.instragram.SessionConst;
 import toyproject.instragram.controller.dto.MemberSaveForm;
 import toyproject.instragram.controller.dto.SignInForm;
+import toyproject.instragram.entity.Member;
 import toyproject.instragram.service.MemberDto;
 import toyproject.instragram.service.MemberService;
 
@@ -18,6 +21,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/members")
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -49,8 +53,10 @@ public class MemberController {
             return "signIn";
         }
 
+        Member signInMember = memberService.signIn(form.getSignInId(), form.getPassword());
+
         HttpSession session = request.getSession();
-//        session.setAttribute("SignInMember", );
+        session.setAttribute(SessionConst.SIGN_IN_MEMBER, signInMember);
 
         return "redirect:/";
     }

@@ -3,9 +3,9 @@ package toyproject.instragram.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Privacy;
 import toyproject.instragram.repository.MemberProfileDto;
-import toyproject.instragram.entity.Member;
 import toyproject.instragram.repository.MemberRepository;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class MemberService {
         return member.getId();
     }
 
-    public Member signIn(String signId, String password) {
-        Member findMember = findBySignId(signId);
+    public Member signIn(String signInId, String password) {
+        Member findMember = findBySignId(signInId);
         validateAccount(password, findMember);
         return findMember;
     }
