@@ -32,7 +32,7 @@ public class InitData {
 
         public void init() {
             Member member1 = new Member(
-                    Privacy.create("1234", "010-1111-1111"),
+                    Privacy.create("1234", "01011111111"),
                     "doforme",
                     "최준영");
             Member member2 = new Member(
