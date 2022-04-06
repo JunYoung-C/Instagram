@@ -28,6 +28,36 @@ public class MemberService {
         return member.getId();
     }
 
+    public Member signIn(String signId, String password) {
+        Member findMember = findBySignId(signId);
+        validateAccount(password, findMember);
+        return findMember;
+    }
+
+    private void validateAccount(String password, Member findMember) {
+        // TODO 예외 클래스 만들면 수정하기
+        if (findMember == null) {
+            throw new IllegalStateException("입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 사용자 이름을 확인하고 다시 시도하세요.");
+        }
+
+        if (!findMember.isCorrectPassword(password)) {
+            throw new IllegalStateException("잘못된 비밀번호입니다. 다시 확인하세요.");
+        }
+    }
+
+    private Member findBySignId(String signId) {
+        if (Privacy.isEmail(signId)) {
+            return memberRepository.findByPrivacyEmail(signId).orElse(null);
+        }
+
+        Member member = null;
+        if (Privacy.isPhoneNumber(signId)) {
+            member = memberRepository.findByPrivacyPhoneNumber(signId).orElse(null);
+        }
+
+        return member != null ? member : memberRepository.findByNickname(signId).orElse(null);
+    }
+
     public List<MemberProfileDto> searchProfiles(String nickname) {
         return memberRepository.searchProfiles(nickname);
     }
