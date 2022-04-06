@@ -9,6 +9,10 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "MEMBER_UK_NICKNAME", columnNames = {"nickname"}),
+        @UniqueConstraint(name = "MEMBER_UK_PHONE_NUMBER", columnNames = {"phoneNumber"}),
+        @UniqueConstraint(name = "MEMBER_UK_EMAIL", columnNames = {"email"})})
 public class Member extends BaseEntity {
 
     @Id
@@ -18,8 +22,6 @@ public class Member extends BaseEntity {
 
     @Embedded
     private Privacy privacy;
-
-    @Column(unique = true)
     private String nickname;
     private String name;
 
