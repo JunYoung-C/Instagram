@@ -23,8 +23,8 @@ public class AppConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(new SignInInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/resources/**", "/error", "/",
-                        "/members/signin", "/members/signout", "/members/signup");
+                .excludePathPatterns("/css/**", "/javascript/**", "/images/**", "/error", "/",
+                        "/members/signin", "/members/signout", "/members/signup", "/*.ico");
     }
 
     @Override
