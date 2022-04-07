@@ -1,10 +1,10 @@
 const mainBody = document.querySelector(".main-body");
 const headerSearchInput = document.querySelector(".header-search__input");
 const searchResultWrap = document.querySelector(".search-result-wrap");
-const postImagePrevButton = document.querySelector(".post-images__prev-button");
-const postImageNextButton = document.querySelector(".post-images__next-button");
-const postImagesCount = document.querySelectorAll(".post-images__list").length;
-const postImages = document.querySelector(".post-images");
+const mainPostImagePrevButton = document.querySelector(".post-images__prev-button");
+const mainPostImageNextButton = document.querySelector(".post-images__next-button");
+const mainPostImagesCount = document.querySelectorAll(".main-post-image").length;
+const mainPostImages = document.querySelector(".main-post-images");
 
 const showAddPostButton = document.querySelector(".show-add-post");
 const addPostDiv = document.querySelector("#add-post");
@@ -20,9 +20,14 @@ const previewListCount = document.querySelectorAll(".add-post__preview-list").le
 const showComment = document.querySelector(".show-comment");
 const comment = document.querySelector("#comment");
 const commentCancel = document.querySelector(".comment-cancel");
+const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
+const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
+const commentPostImagesCount = document.querySelectorAll(".comment-post-image").length;
+const commentPostImages = document.querySelector(".comment-post-images");
 
-const POST_IMAGE_WIDTH = 600;
+const MAIN_POST_IMAGE_WIDTH = 600;
 const PREVIEW_IMAGE_WIDTH = 453.59;
+const COMMENT_POST_IMAGE_WIDTH = 555;
 
 class SlideController {
   constructor(slideWidth, imageCount, prevButton, nextButton, images) {
@@ -112,7 +117,6 @@ function showPreviewFiles(event) {
   });
 
   previewSlideController.clear(files.length);
-  console.log(files.length);
 }
 
 function postFormClear() {
@@ -122,12 +126,12 @@ function postFormClear() {
 }
 
 function addMainPageEvent() {
-  postImagePrevButton.addEventListener("click", (event) => {
-    postImageSlideController.slide(event.currentTarget);
+  mainPostImagePrevButton.addEventListener("click", (event) => {
+    mainPostImageSlideController.slide(event.currentTarget);
   });
   
-  postImageNextButton.addEventListener("click", (event) => {
-    postImageSlideController.slide(event.currentTarget);
+  mainPostImageNextButton.addEventListener("click", (event) => {
+    mainPostImageSlideController.slide(event.currentTarget);
   });
   
   headerSearchInput.addEventListener("focus", () => {
@@ -166,6 +170,14 @@ addPostFileInput.addEventListener("change", showPreviewFiles);
 }
 
 function addCommentPageEvent() {
+  commentPostImagePrevButton.addEventListener("click", (event) => {
+    commentPostSlideController.slide(event.currentTarget);
+  });
+  
+  commentPostImageNextButton.addEventListener("click", (event) => {
+    commentPostSlideController.slide(event.currentTarget);
+  });
+
   showComment.addEventListener("click", () => {
     comment.style.display = "block";
     mainBody.style.overflow = "hidden";
@@ -177,9 +189,11 @@ function addCommentPageEvent() {
   });
 }
 
-const postImageSlideController = new SlideController(POST_IMAGE_WIDTH, postImagesCount, postImagePrevButton, postImageNextButton, postImages);
+const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
 
 const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
+
+const commentPostSlideController = new SlideController(COMMENT_POST_IMAGE_WIDTH, commentPostImagesCount, commentPostImagePrevButton, commentPostImageNextButton, commentPostImages);
 
 addMainPageEvent();
 addNewPostPageEvent();
