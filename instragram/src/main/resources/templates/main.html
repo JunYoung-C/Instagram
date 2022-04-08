@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/styles.css"/>
     <meta charset="UTF-8"/>
@@ -202,7 +202,9 @@
                     <a>4시간 전</a>
                 </div>
                 <div class="post-comment">
-                    <form action="" method="post" class="post-comment__form">
+                    <form action="/comments" method="post" class="post-comment__form" th:object="${commentSaveForm}">
+                        <input type="hidden" id="postId" name="postId" value="">
+                        <input type="hidden" id="memberId" name="memberId" value="">
                         <div class="post-comment__icons-wrap">
                             <i class="far fa-smile"></i>
                         </div>
@@ -210,6 +212,7 @@
                                 type="text"
                                 placeholder="댓글 달기..."
                                 class="post-comment__text main-post-comment__text"
+                                th:field="*{text}"
                         />
                         <input
                                 type="submit"
@@ -228,7 +231,9 @@
         <i class="fas fa-times add-post__cancel-btn"></i>
     </div>
     <div class="add-post__form-wrap modal-body">
-        <form action="" method="post" class="add-post__form">
+        <form action="/posts" method="post" enctype="multipart/form-data" class="add-post__form"
+              th:object="${postSaveForm}">
+            <input type="hidden" id="memberId" name="memberId" th:value="${memberId}">
             <header class="add-post__header">
                 <div class="add-post__header-column">
                     <div class="add-post__return-wrap add-post-cancel">
@@ -261,21 +266,6 @@
                         </div>
 
                         <ul class="add-post__preview slide-image">
-                            <li class="add-post__preview-list">
-                                <img
-                                        class="add-post__preview-image"
-                                        src="images/01.png"
-                                        alt=""
-                                />
-                            </li>
-
-                            <li class="add-post__preview-list">
-                                <img
-                                        class="add-post__preview-image"
-                                        src="images/01.png"
-                                        alt=""
-                                />
-                            </li>
                         </ul>
                     </div>
 
@@ -288,15 +278,15 @@
                 >
                     </div>
                     <div class="add-post__file-input-wrap">
-                        <label for="add-post-file" class="add-post__file-label"
+                        <label for="files" class="add-post__file-label"
                         >컴퓨터에서 선택</label
                         >
                         <input
                                 type="file"
-                                name=""
-                                id="add-post-file"
+                                id="files"
                                 multiple
                                 class="add-post__file-input"
+                                th:field="*{files}"
                         />
                     </div>
                 </div>
@@ -309,10 +299,9 @@
 
                     <div class="add-post__text-wrap">
                 <textarea
-                        name=""
-                        id=""
                         placeholder="문구 입력..."
                         class="add-post__text"
+                        th:field="*{text}"
                 ></textarea>
                     </div>
 
@@ -580,14 +569,17 @@
                         <a>4시간 전</a>
                     </div>
                     <div class="post-comment">
-                        <form action="" method="post" class="post-comment__form">
+                        <form action="" method="post" class="post-comment__form" th:object="${commentSaveForm}">
                             <div class="post-comment__icons-wrap">
                                 <i class="far fa-smile"></i>
                             </div>
+                            <input type="hidden" id="postId" name="postId" value="">
+                            <input type="hidden" id="memberId" name="memberId" value="">
                             <input
                                     type="text"
                                     placeholder="댓글 달기..."
                                     class="post-comment__text main-post-comment__text"
+                                    th:field="*{text}"
                             />
                             <input
                                     type="submit"
