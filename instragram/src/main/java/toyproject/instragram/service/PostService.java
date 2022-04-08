@@ -18,7 +18,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-    private final FileManager fileManager;
 
     private final int MAX_POST_SIZE = 10;
 

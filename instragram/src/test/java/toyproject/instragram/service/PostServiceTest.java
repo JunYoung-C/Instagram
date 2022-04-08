@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
+import toyproject.instragram.FileDto;
 import toyproject.instragram.entity.Member;
 import toyproject.instragram.entity.Post;
 
@@ -35,9 +36,9 @@ class PostServiceTest {
         em.persist(member);
 
         //when
-        List<String> filePaths = new ArrayList<>();
-        filePaths.add("test.png");
-        Long postId = postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요"));
+        List<FileDto> fileDtos = List.of(
+                new FileDto("uploadFileName", "storeFileName", "png"));
+        Long postId = postService.addPost(new PostDto(member.getId(), fileDtos, "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -55,10 +56,10 @@ class PostServiceTest {
 
         em.persist(member);
 
-        List<String> filePaths = new ArrayList<>();
-        filePaths.add("test.png");
+        List<FileDto> fileDtos = List.of(
+                new FileDto("uploadFileName", "storeFileName", "png"));
         IntStream.range(0, 11)
-                .forEach(i -> postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요" + i)));
+                .forEach(i -> postService.addPost(new PostDto(member.getId(), fileDtos, "안녕하세요" + i)));
 
         em.flush();
         em.clear();
@@ -78,9 +79,9 @@ class PostServiceTest {
         Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
 
-        List<String> filePaths = new ArrayList<>();
-        filePaths.add("test.png");
-        Long postId = postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요"));
+        List<FileDto> fileDtos = List.of(
+                new FileDto("uploadFileName", "storeFileName", "png"));
+        Long postId = postService.addPost(new PostDto(member.getId(), fileDtos, "안녕하세요"));
 
         em.flush();
         em.clear();
@@ -101,9 +102,9 @@ class PostServiceTest {
         Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
 
-        List<String> filePaths = new ArrayList<>();
-        filePaths.add("test.png");
-        Long postId = postService.addPost(new PostDto(member.getId(), filePaths, "안녕하세요"));
+        List<FileDto> fileDtos = List.of(
+                new FileDto("uploadFileName", "storeFileName", "png"));
+        Long postId = postService.addPost(new PostDto(member.getId(), fileDtos, "안녕하세요"));
 
         em.flush();
         em.clear();
