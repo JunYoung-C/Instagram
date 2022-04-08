@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/styles.css"/>
     <meta charset="UTF-8"/>
@@ -17,16 +17,18 @@
                     <header class="signin-header">
                         <h1>Instagram</h1>
                     </header>
-                    <form action="/members/signin" method="post" class="signin-form">
+                    <form action="/members/signin" method="post" class="signin-form" th:object="${signInForm}">
                         <input
                                 class="signin-form__text"
                                 type="text"
                                 placeholder="전화번호, 사용자 이름 또는 이메일"
+                                th:field="*{signInId}"
                         />
                         <input
                                 class="signin-form__text"
                                 type="text"
                                 placeholder="비밀번호"
+                                th:field="*{password}"
                         />
                         <input
                                 class="signin-form__button"

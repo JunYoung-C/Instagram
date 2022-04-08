@@ -28,7 +28,7 @@ public class MemberController {
 
 
     @GetMapping("/signup")
-    public String signUpPage() {
+    public String signUpPage(MemberSaveForm form) {
         return "signUp";
     }
 
@@ -43,7 +43,7 @@ public class MemberController {
     }
 
     @GetMapping("/signin")
-    public String signInPage() {
+    public String signInPage(SignInForm form) {
         return "signIn";
     }
 
