@@ -7,34 +7,45 @@ import toyproject.instragram.FileDto;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class FileManager {
 
-//    @Value("${file.dir}")
+    //    @Value("${file.dir}")
     private String fileDir;
 
-    public FileManager(@Value("${file.dir}") String fileDir){
+    public FileManager(@Value("${file.dir}") String fileDir) {
         this.fileDir = fileDir;
     }
 
-    public FileDto storeFile(MultipartFile multipartFile) {
+    public List<FileDto> storeFiles(List<MultipartFile> multipartFiles) {
+        return multipartFiles.stream()
+                .map(multipartFile -> storeFile(multipartFile).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<FileDto> storeFile(MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
 
         String originalFilename = multipartFile.getOriginalFilename();
+        String storeFileName = UUID.randomUUID().toString();
+        String extension = extractExtension(originalFilename);
+
         try {
-            multipartFile.transferTo(new File(getFullPath(originalFilename)));
+            multipartFile.transferTo(new File(getFullPath(storeFileName + "." + extension)));
         } catch (IOException e) {
             // TODO 예외 클래스 만들면 수정하기
         }
 
-        return new FileDto(
+        return Optional.of(new FileDto(
                 extractFileName(originalFilename),
-                UUID.randomUUID().toString(),
-                extractExtension(originalFilename));
+                storeFileName,
+                extension));
     }
 
     private String getFullPath(String originalFilename) {
