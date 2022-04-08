@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Component
 public class FileManager {
 
-    //    @Value("${file.dir}")
     private String fileDir;
 
     public FileManager(@Value("${file.dir}") String fileDir) {
