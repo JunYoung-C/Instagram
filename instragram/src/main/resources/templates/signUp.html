@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/styles.css"/>
     <meta charset="UTF-8"/>
@@ -38,26 +38,30 @@
                         <span class="signup__division-text">또는</span>
                         <div class="signup__division-line"></div>
                     </div>
-                    <form action="" method="post" class="signup-form">
+                    <form action="/members/signup" method="post" class="signup-form" th:object="${memberSaveForm}">
                         <input
                                 class="signup-form__text"
                                 type="text"
                                 placeholder="휴대폰 번호 또는 이메일 주소"
+                                th:field="*{phoneNumberOrEmail}"
                         />
                         <input
                                 class="signup-form__text"
                                 type="text"
                                 placeholder="성명"
+                                th:field="*{name}"
                         />
                         <input
                                 class="signup-form__text"
                                 type="text"
                                 placeholder="사용자 이름"
+                                th:field="*{nickname}"
                         />
                         <input
                                 class="signup-form__text"
-                                type="text"
+                                type="password"
                                 placeholder="비밀번호"
+                                th:field="*{password}"
                         />
                         <input class="signup-form__button" type="submit" value="가입"/>
                     </form>
