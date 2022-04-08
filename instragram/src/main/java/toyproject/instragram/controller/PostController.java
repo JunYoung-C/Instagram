@@ -1,10 +1,13 @@
 package toyproject.instragram.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import toyproject.instragram.FileDto;
 import toyproject.instragram.controller.dto.PostSaveForm;
+import toyproject.instragram.service.FileManager;
 import toyproject.instragram.service.PostDto;
 import toyproject.instragram.service.PostService;
 
@@ -14,9 +17,11 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class PostController {
 
     private final PostService postService;
+    private final FileManager fileManager;
 
     // TODO html 보완 후 테스트
     @PostMapping("/posts")
@@ -25,7 +30,7 @@ public class PostController {
             return "main";
         }
 
-        postService.addPost(new PostDto(form.getMemberId(), getFilePaths(form), form.getText()));
+        postService.addPost(new PostDto(form.getMemberId(), fileManager.storeFiles(form.getFiles()), form.getText()));
         return "redirect:/";
     }
 
@@ -34,9 +39,5 @@ public class PostController {
     public String modifyPost(@PathVariable Long postId, @RequestParam String modifiedText) {
         postService.modifyPostText(postId, modifiedText);
         return "redirect:/main";
-    }
-
-    private List<String> getFilePaths(PostSaveForm form) {
-        return form.getFiles().stream().map(file -> file.getOriginalFilename()).collect(Collectors.toList());
     }
 }
