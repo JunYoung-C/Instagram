@@ -11,8 +11,6 @@ import toyproject.instragram.entity.PostFile;
 import toyproject.instragram.repository.MemberRepository;
 import toyproject.instragram.repository.PostRepository;
 
-import java.util.List;
-
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -20,7 +18,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-    private final FileStore fileManager;
+    private final FileManager fileManager;
 
     private final int MAX_POST_SIZE = 10;
 
@@ -28,15 +26,8 @@ public class PostService {
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElse(null);
         Post post = new Post(member, postDto.getText());
-        postDto.getFilePaths().stream().forEach(filePath -> {
-                    PostFile postFile = new PostFile(post,
-                            fileManager.extractFileName(filePath),
-                            fileManager.createStoreFileName(),
-                            fileManager.extractExtension(filePath));
-
-                    post.addPostFile(postFile);
-                }
-        );
+        postDto.getFileDtos().forEach(file -> post.addPostFile(
+                new PostFile(post, file.getUploadFileName(), file.getStoreFileName(), file.getExtension())));
 
         postRepository.save(post);
         return post.getId();
@@ -45,17 +36,6 @@ public class PostService {
     public Slice<Post> getPostSlice(int page) {
         return postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(page, MAX_POST_SIZE));
     }
-
-
-
-//    private List<PostCommentDto> getCommentDtoLists(List<Comment> comments) {
-//        return comments
-//                .stream()
-//                .map(comment -> new PostCommentDto(comment.getId(), comment.getText()))
-//                .collect(Collectors.toList());
-//    }
-
-
 
     @Transactional
     public void modifyPostText(Long postId, String modifiedText) {

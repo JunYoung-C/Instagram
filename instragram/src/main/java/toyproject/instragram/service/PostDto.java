@@ -3,6 +3,7 @@ package toyproject.instragram.service;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import toyproject.instragram.FileDto;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class PostDto {
     private Long memberId;
-    private List<String> filePaths;
+    private List<FileDto> fileDtos;
     private String text;
 }
