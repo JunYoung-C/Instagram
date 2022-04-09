@@ -223,9 +223,7 @@ function setMainPost(response) {
       .replace("{member.nickname}", posts[i].member.nickname)
       .replace("{member.imagePath}", posts[i].member.imagePath)
       .replace("{text}", posts[i].text)
-      .replace("{commentCount}", posts[i].commentCount)
-      .replace("{index}", sliceInfo.page * sliceInfo.maxSize + i)
-      .replace("{index}", sliceInfo.page * sliceInfo.maxSize + i);
+      .replace("{commentCount}", posts[i].commentCount);
 
       const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
       const ownerCommentsWrap = document.querySelector(`.main-post-${posts[i].postId} .post-comments__owner-comments-wrap`);
