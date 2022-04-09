@@ -9,7 +9,7 @@ import org.springframework.data.domain.Slice;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SliceInfo {
     private boolean hasNext;
-    private int currentSliceSize;
+    private int maxSize;
 
     public static <T> SliceInfo from (Slice<T> slice) {
         return new SliceInfo(slice.hasNext(), slice.getSize());
