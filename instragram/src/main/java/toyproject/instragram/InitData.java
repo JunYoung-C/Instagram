@@ -35,23 +35,33 @@ public class InitData {
                     Privacy.create("1234", "01011111111"),
                     "doforme",
                     "최준영");
+            member1.addProfileImage(new MemberImage("01", "test-image1", "png"));
+
             Member member2 = new Member(
                     Privacy.create("1234", "test@naver.com"),
                     "chlwnsdud",
                     "김영준");
+            member2.addProfileImage(new MemberImage("02", "test-image2", "png"));
 
             em.persist(member1);
             em.persist(member2);
 
+            for (int i = 0; i < 10; i++) {
+                Post post = new Post(member1 , "안녕하세요~");
+                post.addPostFile(new PostFile(post, "01", "test-image1", "png"));
+                post.addPostFile(new PostFile(post, "02", "test-image2", "png"));
+                post.addPostFile(new PostFile(post, "03", "test-image3", "png"));
+                em.persist(post);
+            }
 
             Post post1 = new Post(member1, "안녕하세요~");
-            post1.addPostFile(new PostFile(post1, "image", "test-image1", "png"));
-            post1.addPostFile(new PostFile(post1, "image", "test-image2", "png"));
-            post1.addPostFile(new PostFile(post1, "image", "test-image3", "png"));
+            post1.addPostFile(new PostFile(post1, "02", "test-image2", "png"));
+            post1.addPostFile(new PostFile(post1, "01", "test-image1", "png"));
+            post1.addPostFile(new PostFile(post1, "03", "test-image3", "png"));
             em.persist(post1);
 
             Post post2 = new Post(member2, "반갑습니다~");
-            post2.addPostFile(new PostFile(post2, "image", "test-image4", "png"));
+            post2.addPostFile(new PostFile(post2, "playstore", "test-image4", "png"));
             em.persist(post2);
 
             Comment comment1 = new Comment(post1, member1, "멋있어요!");
