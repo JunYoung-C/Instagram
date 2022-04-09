@@ -32,4 +32,8 @@ public class MemberImage {
     protected void setMember(Member member) {
         this.member = member;
     }
+
+    public String getOriginalStoreFileName() {
+        return storeFileName + "." + extension;
+    }
 }

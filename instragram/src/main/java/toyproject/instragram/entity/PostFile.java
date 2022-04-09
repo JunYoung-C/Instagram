@@ -29,4 +29,8 @@ public class PostFile {
         this.storeFileName = storeFileName;
         this.extension = extension;
     }
+
+    public String getOriginalStoreFileName() {
+        return storeFileName + "." + extension;
+    }
 }
