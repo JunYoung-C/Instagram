@@ -520,16 +520,16 @@
       crossorigin="anonymous"
     ></script>
 
-    <script type="text/template" id="template-main-post">
-      <article class="post main-post">
+    <script type="text/template" id="template__main-post">
+      <article class="post main-post main-post-{postId}">
         <div class="post-header main-post-header">
           <header class="post-profile main-post-profile">
             <div class="post-profile__info main-post-profile__info">
               <img
-                src="images/03.png"
+                src="/files/{member.imagePath}"
                 class="post-profile__image main-post-profile__image"
               />
-              <span class="post-profile__name main-post-profile__name">meenoie</span>
+              <span class="post-profile__name main-post-profile__name">{member.nickname}</span>
             </div>
             <div class="post-profile__more main-post-profile__more">
               <i class="fas fa-ellipsis-h fa-lg"></i>
@@ -548,16 +548,16 @@
               </div>
             </div>
 
-            <ul class="post-images slide-image main-post-images">
-              <li class="post-images__list">
-                <img src="images/01.png" class="main-post-image" />
-              </li>
-              <li class="post-images__list">
+            <ul class="post-images slide-image main-post-images main-post-images-{post-index}">
+              <!-- <li class="post-images__list">
+                <img src="/files/{filePath}" class="main-post-image" />
+              </li> -->
+              <!-- <li class="post-images__list">
                 <img src="images/02.png" class="main-post-image" />
               </li>
               <li class="post-images__list">
                 <img src="images/03.png" class="main-post-image" />
-              </li>
+              </li> -->
             </ul>
           </div>
           <!-- <div class="post-video-wrap"></div> -->
@@ -577,21 +577,24 @@
             <span>좋아요 <span class="post-like-count">8000</span>개</span>
           </div>
           <div class="main-post-explanation">
-            <a class="main-post-explanation__owner">meenoie</a>
-            <span class="main-post-explanation__text">
-              요리조리 2가 끝났어요ㅜㅜ..</span
+            <a class="main-post-explanation__owner">{member.nickname}</a>
+            <span class="main-post-explanation__text">{text}
+              </span
             >
           </div>
           <div class="post-comments-count main-post-comments-count">
-            <span class="show-comment">댓글 660개 모두 보기</span>
+            <span class="show-comment">댓글 <span>{commentCount}</span>개 모두 보기</span>
           </div>
           <div class="post-time-wrap">
-            <a>4시간 전</a>
+            <a text="{createdDate}"></a>
           </div>
+          <div class="post-comments__owner-comments-wrap">
+          </div>
+
           <div class="post-comment">
             <form action="/comments" method="post" class="post-comment__form">
-              <input type="hidden" id="postId" name="postId" value="" />
-              <input type="hidden" id="memberId" name="memberId" value="" />
+              <input type="hidden" id="postId" name="postId" value="{postId}" />
+              <input type="hidden" id="memberId" name="memberId" value="{member.memberId}" />
               <div class="post-comment__icons-wrap">
                 <i class="far fa-smile"></i>
               </div>
@@ -608,6 +611,18 @@
           </div>
         </div>
       </article>
+    </script>
+
+    <script type="text/template" id="template__main-post-images">
+      <li class='post-images__list'>
+        <img src='/files/{filePath}' class='main-post-image' />
+      </li>
+    </script>
+
+    <script type="text/template" id="template__main-post-comments">
+      <div>
+        <span>{ownerComment}</span>
+      </div>
     </script>
     <script src="/javascript/mainAjax.js"></script>
     <script src="/javascript/main.js"></script>
