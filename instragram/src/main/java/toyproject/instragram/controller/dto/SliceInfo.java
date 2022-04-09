@@ -10,8 +10,9 @@ import org.springframework.data.domain.Slice;
 public class SliceInfo {
     private boolean hasNext;
     private int maxSize;
+    private int page;
 
     public static <T> SliceInfo from (Slice<T> slice) {
-        return new SliceInfo(slice.hasNext(), slice.getSize());
+        return new SliceInfo(slice.hasNext(), slice.getSize(), slice.getNumber());
     }
 }
