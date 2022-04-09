@@ -18,7 +18,7 @@ public class InnerMemberResponse {
     }
 
     private static String getImagePath(Member member) {
-        return existMemberImage(member) ? member.getMemberImage().getStoreFileName() : "";
+        return existMemberImage(member) ? member.getMemberImage().getOriginalStoreFileName() : "";
     }
 
     private static boolean existMemberImage(Member member) {

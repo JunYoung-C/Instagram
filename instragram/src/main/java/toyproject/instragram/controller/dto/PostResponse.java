@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import toyproject.instragram.entity.Post;
+import toyproject.instragram.entity.PostFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,6 +36,8 @@ public class PostResponse {
     }
 
     private static List<String> getFilePaths(Post post) {
-        return post.getPostFiles().stream().map(postFile -> postFile.getStoreFileName()).collect(Collectors.toList());
+        return post.getPostFiles().stream()
+                .map(PostFile::getOriginalStoreFileName)
+                .collect(Collectors.toList());
     }
 }
