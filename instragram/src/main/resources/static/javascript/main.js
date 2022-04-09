@@ -1,10 +1,7 @@
 const mainBody = document.querySelector(".main-body");
 const headerSearchInput = document.querySelector(".header-search__input");
 const searchResultWrap = document.querySelector(".search-result-wrap");
-const mainPostImagePrevButton = document.querySelector(".post-images__prev-button");
-const mainPostImageNextButton = document.querySelector(".post-images__next-button");
-const mainPostImagesCount = document.querySelectorAll(".main-post-image").length;
-const mainPostImages = document.querySelector(".main-post-images");
+
 
 const showAddPostButton = document.querySelector(".show-add-post");
 const addPostDiv = document.querySelector("#add-post");
@@ -24,6 +21,11 @@ const commentPostImagePrevButton = document.querySelector(".comment-post-images_
 const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
 const commentPostImagesCount = document.querySelectorAll(".comment-post-image").length;
 const commentPostImages = document.querySelector(".comment-post-images");
+
+const mainPostWrap = document.querySelector(".main-post-wrap");
+const mainPostTemplateHtml = document.querySelector("#template__main-post").innerHTML;
+const mainPostImagesTemplateHtml = document.querySelector("#template__main-post-images").innerHTML;
+const mainPostCommentsTemplateHtml = document.querySelector("#template__main-post-comments").innerHTML;
 
 const MAIN_POST_IMAGE_WIDTH = 600;
 const PREVIEW_IMAGE_WIDTH = 453.59;
@@ -189,12 +191,69 @@ function addCommentPageEvent() {
     });
 }
 
+function getPostsAjax() {
+  const request = new XMLHttpRequest();
+
+  if (!request) {
+    alert("XMLHTTP 인스턴스 생성 불가");
+    return false;
+  }
+
+  request.onreadystatechange = function() {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      if (request.status === 200) {
+        console.log(request.response);
+        setMainPost(request.response);
+
+      } else {
+        alert("request에 문제가 있습니다.")
+      }
+    }
+  }
+
+  request.open("get", "/posts?page=" + 0);
+  request.responseType = "json";
+  request.send();
+}
+
+function setMainPost(response) {
+  const posts = response.data;
+
+  for (let i = 0; i < posts.length; i++) {
+    mainPostWrap.innerHTML += mainPostTemplateHtml
+      .replace("{postId}", posts[i].postId)
+      .replace("{postId}", posts[i].postId)
+      .replace("{member.memberId}", posts[i].member.memberId)
+      .replace("{member.nickname}", posts[i].member.nickname)
+      .replace("{member.nickname}", posts[i].member.nickname)
+      .replace("{member.imagePath}", posts[i].member.imagePath)
+      .replace("{text}", posts[i].text)
+      .replace("{commentCount}", posts[i].commentCount);
+
+      const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
+      const ownerCommentsWrap = document.querySelector(`.main-post-${posts[i].postId} .post-comments__owner-comments-wrap`);
+      for (let j = 0; j < posts[i].filePaths.length; j++) {
+        mainPostImages.innerHTML += mainPostImagesTemplateHtml.replace("{filePath}", posts[i].filePaths[j]);
+      }
+    
+      for (let j = 0; j < posts[i].ownerComments.length; j++) {
+        ownerCommentsWrap.innerHTML += mainPostCommentsTemplateHtml.replace("{ownerComment}", posts[i].ownerComments[j]);
+      }
+
+      const mainPostImagePrevButton = document.querySelector(".post-images__prev-button");
+      const mainPostImageNextButton = document.querySelector(".post-images__next-button");
+      const mainPostImagesCount = document.querySelectorAll(".main-post-image").length;
+      const mainPostImages = document.querySelector(".main-post-images"); 
+  }
+}
+
 const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
 
 const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
 
 const commentPostSlideController = new SlideController(COMMENT_POST_IMAGE_WIDTH, commentPostImagesCount, commentPostImagePrevButton, commentPostImageNextButton, commentPostImages);
 
+getPostsAjax();
 addMainPageEvent();
 addNewPostPageEvent();
 addCommentPageEvent();
