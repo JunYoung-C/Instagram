@@ -128,13 +128,7 @@ function postFormClear() {
 }
 
 function addMainPageEvent() {
-    mainPostImagePrevButton.addEventListener("click", (event) => {
-        mainPostImageSlideController.slide(event.currentTarget);
-    });
-
-    mainPostImageNextButton.addEventListener("click", (event) => {
-        mainPostImageSlideController.slide(event.currentTarget);
-    });
+    
 
     headerSearchInput.addEventListener("focus", () => {
         searchResultWrap.style.display = "block";
@@ -218,6 +212,7 @@ function getPostsAjax() {
 
 function setMainPost(response) {
   const posts = response.data;
+  const sliceInfo = response.sliceInfo;
 
   for (let i = 0; i < posts.length; i++) {
     mainPostWrap.innerHTML += mainPostTemplateHtml
@@ -228,10 +223,13 @@ function setMainPost(response) {
       .replace("{member.nickname}", posts[i].member.nickname)
       .replace("{member.imagePath}", posts[i].member.imagePath)
       .replace("{text}", posts[i].text)
-      .replace("{commentCount}", posts[i].commentCount);
+      .replace("{commentCount}", posts[i].commentCount)
+      .replace("{index}", sliceInfo.page * sliceInfo.maxSize + i)
+      .replace("{index}", sliceInfo.page * sliceInfo.maxSize + i);
 
       const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
       const ownerCommentsWrap = document.querySelector(`.main-post-${posts[i].postId} .post-comments__owner-comments-wrap`);
+
       for (let j = 0; j < posts[i].filePaths.length; j++) {
         mainPostImages.innerHTML += mainPostImagesTemplateHtml.replace("{filePath}", posts[i].filePaths[j]);
       }
@@ -239,15 +237,24 @@ function setMainPost(response) {
       for (let j = 0; j < posts[i].ownerComments.length; j++) {
         ownerCommentsWrap.innerHTML += mainPostCommentsTemplateHtml.replace("{ownerComment}", posts[i].ownerComments[j]);
       }
+  }
+  
+  for (let i = 0; i < posts.length; i++) {
+    const mainPostImagesCount = posts[i].filePaths.length;
+    const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
+    const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
+    const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
+    const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
 
-      const mainPostImagePrevButton = document.querySelector(".post-images__prev-button");
-      const mainPostImageNextButton = document.querySelector(".post-images__next-button");
-      const mainPostImagesCount = document.querySelectorAll(".main-post-image").length;
-      const mainPostImages = document.querySelector(".main-post-images"); 
+    mainPostImagePrevButton.addEventListener("click", (event) => {
+      mainPostImageSlideController.slide(event.currentTarget);
+    });
+
+    mainPostImageNextButton.addEventListener("click", (event) => {
+      mainPostImageSlideController.slide(event.currentTarget);
+    });
   }
 }
-
-const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
 
 const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
 
@@ -255,5 +262,6 @@ const commentPostSlideController = new SlideController(COMMENT_POST_IMAGE_WIDTH,
 
 getPostsAjax();
 addMainPageEvent();
-addNewPostPageEvent();
-addCommentPageEvent();
+
+// addNewPostPageEvent();
+// addCommentPageEvent();
