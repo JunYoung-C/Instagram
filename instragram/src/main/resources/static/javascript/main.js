@@ -1,8 +1,6 @@
 const headerSearchInput = document.querySelector(".header-search__input");
 const searchResultWrap = document.querySelector(".search-result-wrap");
 const mainPostWrap = document.querySelector(".main-post-wrap");
-const mainPostTemplateHtml = document.querySelector("#template__main-post").innerHTML;
-const mainPostImagesTemplateHtml = document.querySelector("#template__main-post-images").innerHTML;
 const mainPostMore = document.querySelector(".main-post-more");
 
 const MAIN_POST_IMAGE_WIDTH = 600;
@@ -87,7 +85,7 @@ function getPostsAjax() {
             if (request.status === 200) {
                 console.log(request.response);
                 setMainPost(request.response);
-                nextPage = getNextPage(sliceInfo.page);
+                nextPage = getNextPage(request.response.sliceInfo.page);
             } else {
                 alert("request에 문제가 있습니다.")
             }
@@ -108,31 +106,41 @@ function setMainPost(response) {
     const sliceInfo = response.sliceInfo;
 
     for (let i = 0; i < posts.length; i++) {
-        let mainPostHtml = mainPostTemplateHtml
-            .replace("{postId}", posts[i].postId)
-            .replace("{postId}", posts[i].postId)
-            .replace("{member.memberId}", posts[i].member.memberId)
-            .replace("{member.nickname}", posts[i].member.nickname)
-            .replace("{member.nickname}", posts[i].member.nickname)
-            .replace("{member.imagePath}", posts[i].member.imagePath)
-            .replace("{text}", posts[i].text)
-            .replace("{commentCount}", posts[i].commentCount)
-            .replace("{createdDate}", posts[i].createdDate);
-        mainPostWrap.insertAdjacentHTML("beforeend", mainPostHtml);
+        mainPostWrap.insertAdjacentHTML("beforeend", getReplacedMainPostTemplate(posts, i));
         
-        const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
         for (let j = 0; j < posts[i].filePaths.length; j++) {
-            mainPostImages.insertAdjacentHTML("beforeend", mainPostImagesTemplateHtml.replace("{filePath}", posts[i].filePaths[j]));
+          document.querySelector(`.main-post-${posts[i].postId} .main-post-images`)
+            .insertAdjacentHTML("beforeend", getMainPostImagesTemplate(posts, i, j));
         }
-
         addMainPostEvent(posts, i);
         
-        
         if (!sliceInfo.hasNext) {
-          mainPostMore.style.display = "none";
-          mainPostMore.removeEventListener("click", getPostsAjax);
+          removeMoreButton();
         }
     }
+}
+
+function getReplacedMainPostTemplate(posts, i) {
+  return document.querySelector("#template__main-post").innerHTML
+    .replace("{postId}", posts[i].postId)
+    .replace("{postId}", posts[i].postId)
+    .replace("{member.memberId}", posts[i].member.memberId)
+    .replace("{member.nickname}", posts[i].member.nickname)
+    .replace("{member.nickname}", posts[i].member.nickname)
+    .replace("{member.imagePath}", posts[i].member.imagePath)
+    .replace("{text}", posts[i].text)
+    .replace("{commentCount}", posts[i].commentCount)
+    .replace("{createdDate}", posts[i].createdDate);
+}
+
+function getMainPostImagesTemplate(posts, i, j) {
+  return document.querySelector("#template__main-post-images").innerHTML
+  .replace("{filePath}", posts[i].filePaths[j]);
+}
+
+function removeMoreButton() {
+  mainPostMore.style.display = "none";
+  mainPostMore.removeEventListener("click", getPostsAjax);
 }
 
 function addMainPostEvent(posts, i) {
@@ -168,7 +176,6 @@ function addMainPageEvent() {
         searchResultWrap.style.display = "none";
     });
 }
-
 
 getPostsAjax();
 addMainPageEvent();
