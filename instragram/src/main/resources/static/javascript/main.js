@@ -114,10 +114,18 @@ function setMainPost(response) {
         }
         addMainPostEvent(posts, i);
         
+        if (posts[i].commentCount === 0) {
+          removeMainPostComments(posts, i);
+        }
+
         if (!sliceInfo.hasNext) {
           removeMoreButton();
         }
     }
+}
+
+function removeMainPostComments(posts, i) {
+  document.querySelector(`.main-post-${posts[i].postId} .main-post-comments-count`).style.display = "none";
 }
 
 function getReplacedMainPostTemplate(posts, i) {
