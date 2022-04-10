@@ -12,10 +12,11 @@ import toyproject.instragram.service.MemberService;
 public class MemberApiController {
 
     private final MemberService memberService;
-
+    
     @GetMapping("/members")
     public MemberResponse searchMembers(@RequestParam String nickname) {
         return new MemberResponse(memberService.searchProfiles(nickname));
     }
 
+    // TODO 이미지 Resource 추가
 }
