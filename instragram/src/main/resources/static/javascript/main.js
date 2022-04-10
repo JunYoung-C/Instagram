@@ -113,8 +113,6 @@ function getReplacedSearchResultTemplate(members, i) {
         .replace("{nickname}", members[i].nickname);
 }
 
-// 파라미터로 page를 받도록 변경
-//replaceAll 가능?
 function getPostsAjax() {
     const request = new XMLHttpRequest();
 
@@ -173,11 +171,9 @@ function removeMainPostComments(posts, i) {
 
 function getReplacedMainPostTemplate(posts, i) {
     return document.querySelector("#template__main-post").innerHTML
-        .replace("{postId}", posts[i].postId)
-        .replace("{postId}", posts[i].postId)
+        .replaceAll("{postId}", posts[i].postId)
         .replace("{member.memberId}", posts[i].member.memberId)
-        .replace("{member.nickname}", posts[i].member.nickname)
-        .replace("{member.nickname}", posts[i].member.nickname)
+        .replaceAll("{member.nickname}", posts[i].member.nickname)
         .replace("{member.imagePath}", posts[i].member.imagePath)
         .replace("{text}", posts[i].text)
         .replace("{commentCount}", posts[i].commentCount)
