@@ -20,12 +20,12 @@ public class CommentController {
 
     // TODO html 보완 후 테스트
     @PostMapping("/comments")
-    public String addComment(@Valid PostSaveForm form, BindingResult bindingResult) {
+    public String addComment(@Valid CommentDto form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "main";
         }
 
-        commentService.addComment(new CommentDto(form.getMemberId(), form.getMemberId(), form.getText()));
+        commentService.addComment(new CommentDto(form.getPostId(), form.getMemberId(), form.getText()));
         return "redirect:/";
     }
 
