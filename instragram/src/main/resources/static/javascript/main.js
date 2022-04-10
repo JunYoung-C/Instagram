@@ -87,6 +87,7 @@ function getPostsAjax() {
             if (request.status === 200) {
                 console.log(request.response);
                 setMainPost(request.response);
+                nextPage = getNextPage(sliceInfo.page);
             } else {
                 alert("request에 문제가 있습니다.")
             }
@@ -98,12 +99,16 @@ function getPostsAjax() {
     request.send();
 }
 
+function getNextPage(currentPage) {
+  return currentPage + 1;
+}
+
 function setMainPost(response) {
     const posts = response.data;
     const sliceInfo = response.sliceInfo;
 
     for (let i = 0; i < posts.length; i++) {
-        mainPostWrap.innerHTML += mainPostTemplateHtml
+        let mainPostHtml = mainPostTemplateHtml
             .replace("{postId}", posts[i].postId)
             .replace("{postId}", posts[i].postId)
             .replace("{member.memberId}", posts[i].member.memberId)
@@ -113,43 +118,43 @@ function setMainPost(response) {
             .replace("{text}", posts[i].text)
             .replace("{commentCount}", posts[i].commentCount)
             .replace("{createdDate}", posts[i].createdDate);
-
-        const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
-        const ownerCommentsWrap = document.querySelector(`.main-post-${posts[i].postId} .post-comments__owner-comments-wrap`);
-        for (let j = 0; j < posts[i].filePaths.length; j++) {
-            mainPostImages.innerHTML += mainPostImagesTemplateHtml.replace("{filePath}", posts[i].filePaths[j]);
-        }
+        mainPostWrap.insertAdjacentHTML("beforeend", mainPostHtml);
         
-        nextPage = sliceInfo.page + 1;
+        const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
+        for (let j = 0; j < posts[i].filePaths.length; j++) {
+            mainPostImages.insertAdjacentHTML("beforeend", mainPostImagesTemplateHtml.replace("{filePath}", posts[i].filePaths[j]));
+        }
+
+        addMainPostEvent(posts, i);
+        
+        
         if (!sliceInfo.hasNext) {
           mainPostMore.style.display = "none";
           mainPostMore.removeEventListener("click", getPostsAjax);
         }
-
     }
+}
 
-    for (let i = 0; i < posts.length; i++) {
-        const mainPostImagesCount = posts[i].filePaths.length;
-        const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
-        const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
-        const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
-        const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
-        const showComment = document.querySelector(".show-comment"); // ajax로 가져와서 모달창 띄우도록 변경
+function addMainPostEvent(posts, i) {
+  const mainPostImagesCount = posts[i].filePaths.length;
+  const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
+  const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
+  const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
+  const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
+  const showComment = document.querySelector(".show-comment"); // ajax로 가져와서 모달창 띄우도록 변경
 
-        mainPostImagePrevButton.addEventListener("click", (event) => {
-            mainPostImageSlideController.slide(event.currentTarget);
-        });
+  mainPostImagePrevButton.addEventListener("click", (event) => {
+    mainPostImageSlideController.slide(event.currentTarget);
+  });
 
-        mainPostImageNextButton.addEventListener("click", (event) => {
-          console.log(1);
-            mainPostImageSlideController.slide(event.currentTarget);
-        });
+  mainPostImageNextButton.addEventListener("click", (event) => {
+    mainPostImageSlideController.slide(event.currentTarget);
+  });
 
-        showComment.addEventListener("click", () => {
-            comment.style.display = "block";
-            mainBody.style.overflow = "hidden";
-        });
-    }
+  showComment.addEventListener("click", () => {
+    comment.style.display = "block";
+    mainBody.style.overflow = "hidden";
+  });
 }
 
 function addMainPageEvent() {
