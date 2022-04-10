@@ -14,8 +14,6 @@ const previewListCount = document.querySelectorAll(".add-post__preview-list").le
 const comment = document.querySelector("#comment");
 const commentCancel = document.querySelector(".comment-cancel");
 
-
-
 const PREVIEW_IMAGE_WIDTH = 453.59;
 
 function showPreviewFiles(event) {

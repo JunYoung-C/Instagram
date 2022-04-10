@@ -218,6 +218,39 @@ function addMainPostEvent(posts, i) {
     });
 }
 
+function setCommentPage(post) {
+    commentPostSlideController.clear(post.filePaths.length);
+    commentPostImages.innerHTML = getReplacedCommentPostImageTemplate(post.filePaths);
+    document.querySelector(".comment-post-header__info").innerHTML =
+        getReplacedCommentPostProfileTemplate(post);
+    document.querySelector(".not-comment").innerHTML =
+        getReplacedCommentPostTextTemplate(post);
+    document.querySelector(".comment-post-time-wrap").innerHTML =
+        getReplacedCommentPostTimeTemplate(post);
+    document.querySelector(".post-comment__hidden-inputs").innerHTML =
+        document.querySelector("#template__comment-post__hidden-inputs").innerHTML
+            .replace("{postId}", post.postId)
+            .replace("{memberId}", post.member.memberId);
+}
+
+function getReplacedCommentPostProfileTemplate(post) {
+    return document.querySelector("#template__comment-post-profile").innerHTML
+        .replace("{imagePath}", post.member.imagePath)
+        .replace("{nickname}", post.member.nickname);
+}
+
+function getReplacedCommentPostTextTemplate(post) {
+    return document.querySelector("#template__comment-post-text").innerHTML
+        .replace("{imagePath}", post.member.imagePath)
+        .replace("{nickname}", post.member.nickname)
+        .replace("{text}", post.text);
+}
+
+function getReplacedCommentPostTimeTemplate(post) {
+    return document.querySelector("#template__comment-post-createdDate").innerHTML
+        .replace("{createdDate}", post.createdDate);
+}
+
 function getCommentsAjaxWithPost(postId, page) {
     const request = new XMLHttpRequest();
 
@@ -240,13 +273,6 @@ function getCommentsAjaxWithPost(postId, page) {
     request.open("get", `/comments?postId=${postId}&page=${page}`);
     request.responseType = "json";
     request.send();
-}
-
-function setCommentPage(post) {
-    console.log(post);
-    commentPostImages.innerHTML = getReplacedCommentPostImageTemplate(post.filePaths);
-    commentPostSlideController.clear(post.filePaths.length);
-
 }
 
 function getReplacedCommentPostImageTemplate(filePaths) {

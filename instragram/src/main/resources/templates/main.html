@@ -174,13 +174,6 @@
                 </div>
 
                 <ul class="post-images slide-image comment-post-images">
-
-<!--                  <li class="post-images__list comment-post-images__list">-->
-<!--                    <img src="images/02.png" class="comment-post-image" />-->
-<!--                  </li>-->
-<!--                  <li class="post-images__list comment-post-images__list">-->
-<!--                    <img src="images/03.png" class="comment-post-image" />-->
-<!--                  </li>-->
                 </ul>
               </div>
               <!-- <div class="post-video-wrap"></div> -->
@@ -191,13 +184,7 @@
             <div class="post-header comment-post-header">
               <header class="post-profile comment-post-header-profile">
                 <div class="post-profile__info comment-post-header__info">
-                  <img
-                    src="images/03.png"
-                    class="post-profile__image comment-post-header__image"
-                  />
-                  <span class="post-profile__name comment-post-header__name"
-                    >meenoie</span
-                  >
+
                 </div>
 
                 <div class="post-profile__more comment-post-header__more">
@@ -208,20 +195,6 @@
 
             <div class="comments">
               <div class="comment not-comment">
-                <div class="comment-owner">
-                  <div class="comment-owner__photo-wrap">
-                    <img src="images/03.png" class="comment-owner__photo" />
-                  </div>
-                  <div class="comment-owner__text-wrap">
-                    <a class="comment-owner__name">meenoie</a>
-                    <span class="comment-owner__text">
-                      요리조리 2가 끝났어요ㅜㅜ..
-                    </span>
-                    <div class="comment-owner__options">
-                      <span class="comment-owner__created-time">5시간</span>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div class="comment">
@@ -399,12 +372,11 @@
               <div class="post-like-text">
                 <span>좋아요 <span class="post-like-count">8000</span>개</span>
               </div>
-              <div class="post-time-wrap">
-                <a>4시간 전</a>
+              <div class="post-time-wrap comment-post-time-wrap">
               </div>
               <div class="post-comment">
                 <form
-                  action=""
+                  action="/comments"
                   method="post"
                   class="post-comment__form"
                   th:object="${commentSaveForm}"
@@ -412,8 +384,8 @@
                   <div class="post-comment__icons-wrap">
                     <i class="far fa-smile"></i>
                   </div>
-                  <input type="hidden" id="postId" name="postId" value="" />
-                  <input type="hidden" id="memberId" name="memberId" value="" />
+                  <div class="post-comment__hidden-inputs">
+                  </div>
                   <input
                     type="text"
                     placeholder="댓글 달기..."
@@ -548,6 +520,38 @@
       <li class="post-images__list comment-post-images__list">
         <img src="files/{filePath}" class="comment-post-image" />
       </li>
+    </script>
+    <script type="text/template" id="template__comment-post-profile">
+      <img
+              src="files/{imagePath}"
+              class="post-profile__image comment-post-header__image"
+      />
+      <span class="post-profile__name comment-post-header__name">
+        {nickname}
+      </span>
+    </script>
+    <script type="text/template" id="template__comment-post-text">
+      <div class="comment-owner">
+        <div class="comment-owner__photo-wrap">
+          <img src="files/{imagePath}" class="comment-owner__photo" />
+        </div>
+        <div class="comment-owner__text-wrap">
+          <a class="comment-owner__name">{nickname}</a>
+          <span class="comment-owner__text">
+            {text}
+          </span>
+          <div class="comment-owner__options">
+            <span class="comment-owner__created-time">5시간</span>
+          </div>
+        </div>
+      </div>
+    </script>
+    <script type="text/template" id="template__comment-post-createdDate">
+      <a>{createdDate}</a>
+    </script>
+    <script type="text/template" id="template__comment-post__hidden-inputs">
+      <input type="hidden" id="postId" name="postId" value="{postId}" />
+      <input type="hidden" id="memberId" name="memberId" value="{memberId}" />
     </script>
     <script src="/javascript/main.js"></script>
     <script src="/javascript/modal.js"></script>
