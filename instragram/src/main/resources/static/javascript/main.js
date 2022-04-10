@@ -3,9 +3,12 @@ const searchResultWrap = document.querySelector(".search-result-wrap");
 const mainPostWrap = document.querySelector(".main-post-wrap");
 const mainPostMore = document.querySelector(".main-post-more");
 const searchResult = document.querySelector(".search-result");
-
+const commentPostImages = document.querySelector(".comment-post-images");
+const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
+const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
 
 const MAIN_POST_IMAGE_WIDTH = 600;
+const COMMENT_POST_IMAGE_WIDTH = 555;
 let nextPage = 0;
 
 class SlideController {
@@ -30,9 +33,9 @@ class SlideController {
 
     controlButtons() {
         if (this.isFirstPage()) {
-            this.hideprevButton();
+            this.hidePrevButton();
         } else {
-            this.showprevButton();
+            this.showPrevButton();
         }
 
         if (this.isLastPage()) {
@@ -50,7 +53,7 @@ class SlideController {
         return this.index >= this.imageCount - 1;
     }
 
-    hideprevButton() {
+    hidePrevButton() {
         this.prevButton.style.display = "none";
     }
 
@@ -58,7 +61,7 @@ class SlideController {
         this.nextButton.style.display = "none";
     }
 
-    showprevButton() {
+    showPrevButton() {
         this.prevButton.style.display = "flex";
     }
 
@@ -211,11 +214,11 @@ function addMainPostEvent(posts, i) {
         mainBody.style.overflow = "hidden";
 
         setCommentPage(posts[i]);
-        getCommentsAjaxWithPost(0);
+        getCommentsAjaxWithPost(posts[i].postId, 0);
     });
 }
 
-function getCommentsAjaxWithPost(page) {
+function getCommentsAjaxWithPost(postId, page) {
     const request = new XMLHttpRequest();
 
     if (!request) {
@@ -234,29 +237,16 @@ function getCommentsAjaxWithPost(page) {
         }
     }
 
-    request.open("get", `/comments?postId=${post.postId}&page=${page}`);
+    request.open("get", `/comments?postId=${postId}&page=${page}`);
     request.responseType = "json";
     request.send();
 }
 
 function setCommentPage(post) {
-    const commentPostImages = document.querySelector(".comment-post-images");
     console.log(post);
     commentPostImages.innerHTML = getReplacedCommentPostImageTemplate(post.filePaths);
+    commentPostSlideController.clear(post.filePaths.length);
 
-    const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
-    const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
-    const commentPostImagesCount = post.filePaths.length;
-    const commentPostSlideController =
-        new SlideController(COMMENT_POST_IMAGE_WIDTH, commentPostImagesCount, commentPostImagePrevButton, commentPostImageNextButton, commentPostImages);
-
-    commentPostImagePrevButton.addEventListener("click", (event) => {
-        commentPostSlideController.slide(event.currentTarget);
-    });
-
-    commentPostImageNextButton.addEventListener("click", (event) => {
-        commentPostSlideController.slide(event.currentTarget);
-    });
 }
 
 function getReplacedCommentPostImageTemplate(filePaths) {
@@ -290,18 +280,27 @@ function addMainPageEvent() {
 }
 
 function addCommentPageEvent() {
+    commentPostImagePrevButton.addEventListener("click", (event) => {
+        commentPostSlideController.slide(event.currentTarget);
+    });
 
-
+    commentPostImageNextButton.addEventListener("click", (event) => {
+        commentPostSlideController.slide(event.currentTarget);
+    });
 
     commentCancel.addEventListener("click", () => {
         comment.style.display = "none";
         mainBody.style.overflow = "auto";
+        commentPostImages.style.left = "0px";
     });
 }
 
 function isBlank(nickname) {
     return !nickname.trim();
 }
+
+const commentPostSlideController =
+    new SlideController(COMMENT_POST_IMAGE_WIDTH, 0, commentPostImagePrevButton, commentPostImageNextButton, commentPostImages);
 
 getPostsAjax();
 addMainPageEvent();

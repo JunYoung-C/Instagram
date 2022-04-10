@@ -17,7 +17,6 @@ const commentCancel = document.querySelector(".comment-cancel");
 
 
 const PREVIEW_IMAGE_WIDTH = 453.59;
-const COMMENT_POST_IMAGE_WIDTH = 555;
 
 function showPreviewFiles(event) {
     const files = event.target.files;
