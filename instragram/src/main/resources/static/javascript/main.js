@@ -4,6 +4,7 @@ const mainPostWrap = document.querySelector(".main-post-wrap");
 const mainPostMore = document.querySelector(".main-post-more");
 const searchResult = document.querySelector(".search-result");
 
+
 const MAIN_POST_IMAGE_WIDTH = 600;
 let nextPage = 0;
 
@@ -84,7 +85,6 @@ function getMembersAjax(nickname) {
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
-                console.log(request.response);
                 setSearchResult(request.response);
             } else {
                 alert("request에 문제가 있습니다.")
@@ -124,7 +124,6 @@ function getPostsAjax() {
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
-                console.log(request.response);
                 setMainPost(request.response);
                 nextPage = getNextPage(request.response.sliceInfo.page);
             } else {
@@ -195,8 +194,9 @@ function addMainPostEvent(posts, i) {
     const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
     const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
     const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
-    const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
-    const showComment = document.querySelector(".show-comment"); // ajax로 가져와서 모달창 띄우도록 변경
+    const mainPostImageSlideController =
+        new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
+    const showComment = document.querySelector(`.main-post-${posts[i].postId} .show-comment`);
 
     mainPostImagePrevButton.addEventListener("click", (event) => {
         mainPostImageSlideController.slide(event.currentTarget);
@@ -209,7 +209,63 @@ function addMainPostEvent(posts, i) {
     showComment.addEventListener("click", () => {
         comment.style.display = "block";
         mainBody.style.overflow = "hidden";
+
+        setCommentPage(posts[i]);
+        getCommentsAjaxWithPost(0);
     });
+}
+
+function getCommentsAjaxWithPost(page) {
+    const request = new XMLHttpRequest();
+
+    if (!request) {
+        alert("XMLHTTP 인스턴스 생성 불가");
+        return false;
+    }
+
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                console.log(request.response);
+                // setCommentPage(request.response, post);
+            } else {
+                alert("request에 문제가 있습니다.")
+            }
+        }
+    }
+
+    request.open("get", `/comments?postId=${post.postId}&page=${page}`);
+    request.responseType = "json";
+    request.send();
+}
+
+function setCommentPage(post) {
+    const commentPostImages = document.querySelector(".comment-post-images");
+    console.log(post);
+    commentPostImages.innerHTML = getReplacedCommentPostImageTemplate(post.filePaths);
+
+    const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
+    const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
+    const commentPostImagesCount = post.filePaths.length;
+    const commentPostSlideController =
+        new SlideController(COMMENT_POST_IMAGE_WIDTH, commentPostImagesCount, commentPostImagePrevButton, commentPostImageNextButton, commentPostImages);
+
+    commentPostImagePrevButton.addEventListener("click", (event) => {
+        commentPostSlideController.slide(event.currentTarget);
+    });
+
+    commentPostImageNextButton.addEventListener("click", (event) => {
+        commentPostSlideController.slide(event.currentTarget);
+    });
+}
+
+function getReplacedCommentPostImageTemplate(filePaths) {
+    let html = "";
+    for (let i = 0; i < filePaths.length; i++) {
+        html += document.querySelector("#template__comment-post-image").innerHTML
+            .replace("{filePath}", filePaths[i]);
+    }
+    return html;
 }
 
 function addMainPageEvent() {
@@ -230,7 +286,17 @@ function addMainPageEvent() {
             return;
         }
         getMembersAjax(nickname);
-    })
+    });
+}
+
+function addCommentPageEvent() {
+
+
+
+    commentCancel.addEventListener("click", () => {
+        comment.style.display = "none";
+        mainBody.style.overflow = "auto";
+    });
 }
 
 function isBlank(nickname) {

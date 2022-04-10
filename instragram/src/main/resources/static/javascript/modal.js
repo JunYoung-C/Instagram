@@ -2,7 +2,7 @@ const mainBody = document.querySelector(".main-body");
 
 const showAddPostButton = document.querySelector(".show-add-post");
 const addPostDiv = document.querySelector("#add-post");
-const addPostCancleButtons = document.querySelectorAll(".add-post-cancel");
+const addPostCancelButtons = document.querySelectorAll(".add-post-cancel");
 const addPostFileInput = document.querySelector(".add-post__file-input");
 const addPostPreview = document.querySelector(".add-post__preview");
 const addPostText = document.querySelector(".add-post__text");
@@ -13,10 +13,7 @@ const previewListCount = document.querySelectorAll(".add-post__preview-list").le
 
 const comment = document.querySelector("#comment");
 const commentCancel = document.querySelector(".comment-cancel");
-const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
-const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
-const commentPostImagesCount = document.querySelectorAll(".comment-post-image").length;
-const commentPostImages = document.querySelector(".comment-post-images");
+
 
 
 const PREVIEW_IMAGE_WIDTH = 453.59;
@@ -53,8 +50,8 @@ function postFormClear() {
 }
 
 function addNewPostPageEvent() {
-    addPostCancleButtons.forEach((addPostCancleBtn) => {
-        addPostCancleBtn.addEventListener("click", () => {
+    addPostCancelButtons.forEach((addPostCancelBtn) => {
+        addPostCancelBtn.addEventListener("click", () => {
             addPostDiv.style.display = "none";
             mainBody.style.overflow = "auto";
             postFormClear();
@@ -78,27 +75,12 @@ function addNewPostPageEvent() {
     addPostFileInput.addEventListener("change", showPreviewFiles);
 }
 
-function addCommentPageEvent() {
-    commentPostImagePrevButton.addEventListener("click", (event) => {
-        commentPostSlideController.slide(event.currentTarget);
-    });
 
-    commentPostImageNextButton.addEventListener("click", (event) => {
-        commentPostSlideController.slide(event.currentTarget);
-    });
-
-
-    commentCancel.addEventListener("click", () => {
-        comment.style.display = "none";
-        mainBody.style.overflow = "auto";
-    });
-}
 
 
 
 const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
 
-const commentPostSlideController = new SlideController(COMMENT_POST_IMAGE_WIDTH, commentPostImagesCount, commentPostImagePrevButton, commentPostImageNextButton, commentPostImages);
 
 
 

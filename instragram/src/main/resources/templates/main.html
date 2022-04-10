@@ -174,15 +174,13 @@
                 </div>
 
                 <ul class="post-images slide-image comment-post-images">
-                  <li class="post-images__list comment-post-images__list">
-                    <img src="images/01.png" class="comment-post-image" />
-                  </li>
-                  <li class="post-images__list comment-post-images__list">
-                    <img src="images/02.png" class="comment-post-image" />
-                  </li>
-                  <li class="post-images__list comment-post-images__list">
-                    <img src="images/03.png" class="comment-post-image" />
-                  </li>
+
+<!--                  <li class="post-images__list comment-post-images__list">-->
+<!--                    <img src="images/02.png" class="comment-post-image" />-->
+<!--                  </li>-->
+<!--                  <li class="post-images__list comment-post-images__list">-->
+<!--                    <img src="images/03.png" class="comment-post-image" />-->
+<!--                  </li>-->
                 </ul>
               </div>
               <!-- <div class="post-video-wrap"></div> -->
@@ -546,7 +544,11 @@
         <span>{ownerComment}</span>
       </div>
     </script>
-    <script type="text/template" id="template__main-post-more"></script>
+    <script type="text/template" id="template__comment-post-image">
+      <li class="post-images__list comment-post-images__list">
+        <img src="files/{filePath}" class="comment-post-image" />
+      </li>
+    </script>
     <script src="/javascript/main.js"></script>
     <script src="/javascript/modal.js"></script>
   </body>
