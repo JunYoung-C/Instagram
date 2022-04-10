@@ -9,7 +9,9 @@ const commentPostImageNextButton = document.querySelector(".comment-post-images_
 
 const MAIN_POST_IMAGE_WIDTH = 600;
 const COMMENT_POST_IMAGE_WIDTH = 555;
-let nextPage = 0;
+let nextPostPage = 0;
+let selectedPostId;
+let nextCommentPage = 0;
 
 class SlideController {
     constructor(slideWidth, imageCount, prevButton, nextButton, images) {
@@ -128,14 +130,14 @@ function getPostsAjax() {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 setMainPost(request.response);
-                nextPage = getNextPage(request.response.sliceInfo.page);
+                nextPostPage = getNextPage(request.response.sliceInfo.page);
             } else {
                 alert("request에 문제가 있습니다.")
             }
         }
     }
 
-    request.open("get", "/posts?page=" + nextPage);
+    request.open("get", "/posts?page=" + nextPostPage);
     request.responseType = "json";
     request.send();
 }
@@ -160,10 +162,10 @@ function setMainPost(response) {
         if (posts[i].commentCount === 0) {
             removeMainPostComments(posts, i);
         }
+    }
 
-        if (!sliceInfo.hasNext) {
-            removeMoreButton();
-        }
+    if (!sliceInfo.hasNext) {
+        removePostMoreButton();
     }
 }
 
@@ -187,7 +189,7 @@ function getMainPostImagesTemplate(posts, i, j) {
         .replace("{filePath}", posts[i].filePaths[j]);
 }
 
-function removeMoreButton() {
+function removePostMoreButton() {
     mainPostMore.style.display = "none";
     mainPostMore.removeEventListener("click", getPostsAjax);
 }
@@ -214,12 +216,17 @@ function addMainPostEvent(posts, i) {
         mainBody.style.overflow = "hidden";
 
         setCommentPage(posts[i]);
-        getCommentsAjaxWithPost(posts[i].postId, 0);
     });
 }
 
 function setCommentPage(post) {
     commentPostSlideController.clear(post.filePaths.length);
+    setCommentPageWithOutComments(post);
+    getCommentsAjax(post.postId, 0);
+}
+
+function setCommentPageWithOutComments(post) {
+    selectedPostId = post.postId;
     commentPostImages.innerHTML = getReplacedCommentPostImageTemplate(post.filePaths);
     document.querySelector(".comment-post-header__info").innerHTML =
         getReplacedCommentPostProfileTemplate(post);
@@ -231,6 +238,15 @@ function setCommentPage(post) {
         document.querySelector("#template__comment-post__hidden-inputs").innerHTML
             .replace("{postId}", post.postId)
             .replace("{memberId}", post.member.memberId);
+}
+
+function getReplacedCommentPostImageTemplate(filePaths) {
+    let html = "";
+    for (let i = 0; i < filePaths.length; i++) {
+        html += document.querySelector("#template__comment-post-image").innerHTML
+            .replace("{filePath}", filePaths[i]);
+    }
+    return html;
 }
 
 function getReplacedCommentPostProfileTemplate(post) {
@@ -251,7 +267,7 @@ function getReplacedCommentPostTimeTemplate(post) {
         .replace("{createdDate}", post.createdDate);
 }
 
-function getCommentsAjaxWithPost(postId, page) {
+function getCommentsAjax(postId, page) {
     const request = new XMLHttpRequest();
 
     if (!request) {
@@ -263,7 +279,7 @@ function getCommentsAjaxWithPost(postId, page) {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 console.log(request.response);
-                // setCommentPage(request.response, post);
+                setComments(request.response);
             } else {
                 alert("request에 문제가 있습니다.")
             }
@@ -275,13 +291,44 @@ function getCommentsAjaxWithPost(postId, page) {
     request.send();
 }
 
-function getReplacedCommentPostImageTemplate(filePaths) {
-    let html = "";
-    for (let i = 0; i < filePaths.length; i++) {
-        html += document.querySelector("#template__comment-post-image").innerHTML
-            .replace("{filePath}", filePaths[i]);
+function setComments(response) {
+    const comments = response.data;
+    const sliceInfo = response.sliceInfo;
+
+    if (sliceInfo.page === 0) {
+        document.querySelector(".comment-wrap").innerHTML = "";
     }
-    return html;
+    for (let i = 0; i < comments.length; i++) {
+        document.querySelector(".comment-wrap")
+            .insertAdjacentHTML("beforeend", getReplacedCommentTemplate(comments, i));
+
+        if (comments[i].replyCount === 0) {
+            removeCommentDivider(comments, i);
+        }
+    }
+
+    if (!sliceInfo.hasNext) {
+        document.querySelector(".more-comment").style.display = "none";
+    } else {
+        document.querySelector(".more-comment").style.display = "flex";
+        nextCommentPage = sliceInfo.page + 1;
+    }
+    // 버튼 누르면 추가 댓글 가져오기
+    // 답글 보기 누르면 답글 가져오기
+}
+
+function getReplacedCommentTemplate(comments, i) {
+    return document.querySelector("#template__comment").innerHTML
+        .replace("{commentId}", comments[i].commentId)
+        .replace("{member.imagePath}", comments[i].member.imagePath)
+        .replace("{member.nickname}", comments[i].member.nickname)
+        .replace("{text}", comments[i].text)
+        .replace("{createdDate}", comments[i].createdDate)
+        .replace("{replyCount}", comments[i].replyCount);
+}
+
+function removeCommentDivider(comments, i) {
+    document.querySelector(`.comment-${comments[i].commentId} .comment-divider`).style.display = "none";
 }
 
 function addMainPageEvent() {
@@ -319,6 +366,10 @@ function addCommentPageEvent() {
         mainBody.style.overflow = "auto";
         commentPostImages.style.left = "0px";
     });
+
+    document.querySelector(".more-comment__button").addEventListener("click", () => {
+        getCommentsAjax(selectedPostId, nextCommentPage);
+    })
 }
 
 function isBlank(nickname) {
