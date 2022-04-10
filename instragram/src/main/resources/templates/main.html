@@ -132,6 +132,9 @@
 
     <main class="main-content">
       <section class="main-post-wrap"></section>
+      <section class="main-post-more-wrap">
+        <button type="button" class="main-post-more">더보기</button>
+      </section>
     </main>
 
     <div id="add-post" class="modal">
@@ -536,6 +539,7 @@
             </div>
           </header>
         </div>
+
         <div class="main-post-media-wrap">
           <div class="post-images-wrap main-post-images-wrap">
             <div class="post-images_buttons">
@@ -549,19 +553,11 @@
             </div>
 
             <ul class="post-images slide-image main-post-images main-post-images-{post-index}">
-              <!-- <li class="post-images__list">
-                <img src="/files/{filePath}" class="main-post-image" />
-              </li> -->
-              <!-- <li class="post-images__list">
-                <img src="images/02.png" class="main-post-image" />
-              </li>
-              <li class="post-images__list">
-                <img src="images/03.png" class="main-post-image" />
-              </li> -->
             </ul>
           </div>
           <!-- <div class="post-video-wrap"></div> -->
         </div>
+
         <div class="post-contents main-post-contents">
           <div class="post-options">
             <div class="post-options-column">
@@ -586,7 +582,7 @@
             <span class="show-comment">댓글 <span>{commentCount}</span>개 모두 보기</span>
           </div>
           <div class="post-time-wrap">
-            <a text="{createdDate}"></a>
+            <a>{createdDate}</a>
           </div>
           <div class="post-comments__owner-comments-wrap">
           </div>
@@ -624,6 +620,9 @@
         <span>{ownerComment}</span>
       </div>
     </script>
+
+    <script type="text/template" id="template__main-post-more"></script>
     <script src="/javascript/main.js"></script>
+    <script src="/javascript/modal.js"></script>
   </body>
 </html>

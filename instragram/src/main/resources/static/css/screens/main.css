@@ -180,6 +180,7 @@
 
 .main-post-contents {
   height: 216px;
+  padding-bottom: 54px;
 }
 
 .main-post-explanation {
@@ -190,7 +191,8 @@
   font-weight: bold;
 }
 
-.main-post-comments-count {
+.main-post-comments-count,
+.post-time-wrap{
   margin-bottom: 12px;
 }
 
@@ -198,3 +200,21 @@
   width: 485px;
 }
 /* main content 영역 끝 */
+
+.main-post-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 27px;
+}
+
+.main-post-more {
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  border: var(--main-border);
+  border-radius: 5px;
+}
+
+.main-post-more:active {
+  opacity: 0.7;
+}
