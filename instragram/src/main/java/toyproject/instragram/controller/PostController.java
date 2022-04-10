@@ -40,4 +40,6 @@ public class PostController {
         postService.modifyPostText(postId, modifiedText);
         return "redirect:/main";
     }
+
+    // TODO 이미지 Resource 반환 메소드 구현
 }

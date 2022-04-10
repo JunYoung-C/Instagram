@@ -22,8 +22,6 @@ const commentPostImages = document.querySelector(".comment-post-images");
 const PREVIEW_IMAGE_WIDTH = 453.59;
 const COMMENT_POST_IMAGE_WIDTH = 555;
 
-
-
 function showPreviewFiles(event) {
     const files = event.target.files;
 
@@ -53,7 +51,6 @@ function postFormClear() {
     addPostFileInput.value = "";
     addPostText.value = "";
 }
-
 
 function addNewPostPageEvent() {
     addPostCancleButtons.forEach((addPostCancleBtn) => {
