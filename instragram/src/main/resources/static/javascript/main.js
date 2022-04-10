@@ -2,6 +2,7 @@ const headerSearchInput = document.querySelector(".header-search__input");
 const searchResultWrap = document.querySelector(".search-result-wrap");
 const mainPostWrap = document.querySelector(".main-post-wrap");
 const mainPostMore = document.querySelector(".main-post-more");
+const searchResult = document.querySelector(".search-result");
 
 const MAIN_POST_IMAGE_WIDTH = 600;
 let nextPage = 0;
@@ -84,15 +85,10 @@ function getMembersAjax(nickname) {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 console.log(request.response);
-                setSearchResult();
+                setSearchResult(request.response);
             } else {
                 alert("request에 문제가 있습니다.")
             }
-        }
-
-        function setSearchResult() {
-            const searchResultTemplate = document.querySelector("#template__search-result").innerHTML;
-            searchResultWrap.insertAdjacentHTML("beforeend", searchResultTemplate);
         }
     }
 
@@ -101,8 +97,24 @@ function getMembersAjax(nickname) {
     request.send();
 }
 
+function setSearchResult(response) {
+    const members = response.members;
+
+    let searchResultHtml = "";
+    for (let i = 0; i < members.length; i++) {
+        searchResultHtml += getReplacedSearchResultTemplate(members, i);
+    }
+    searchResult.innerHTML = searchResultHtml;
+}
+
+function getReplacedSearchResultTemplate(members, i) {
+    return document.querySelector("#template__search-result").innerHTML
+        .replace("{imagePath}", members[i].imagePath)
+        .replace("{nickname}", members[i].nickname);
+}
+
 // 파라미터로 page를 받도록 변경
-// 함수 내장으로 변경
+//replaceAll 가능?
 function getPostsAjax() {
     const request = new XMLHttpRequest();
 
@@ -214,9 +226,20 @@ function addMainPageEvent() {
     headerSearchInput.addEventListener("blur", () => {
         searchResultWrap.style.display = "none";
     });
+
+    headerSearchInput.addEventListener("input", () => {
+        const nickname = document.querySelector(".header-search__input").value;
+        if (isBlank(nickname)) {
+            searchResult.innerHTML = "";
+            return;
+        }
+        getMembersAjax(nickname);
+    })
 }
 
-const nickname = document.querySelector(".header-search__input").value;
-getMembersAjax(nickname);
+function isBlank(nickname) {
+    return !nickname.trim();
+}
+
 getPostsAjax();
 addMainPageEvent();

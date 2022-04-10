@@ -19,91 +19,7 @@
           <input class="header-search__input" type="text" placeholder="검색" />
           <div class="search-result-wrap">
             <div class="search-result__triangle"></div>
-            <div class="search-result">
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">sooyaa</span>
-                  <span class="search-result__profile-name">JiSOO</span>
-                </div>
-              </div>
-
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">216jung</span>
-                  <span class="search-result__profile-name">MJ</span>
-                </div>
-              </div>
-
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">216jung</span>
-                  <span class="search-result__profile-name">MJ</span>
-                </div>
-              </div>
-
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">216jung</span>
-                  <span class="search-result__profile-name">MJ</span>
-                </div>
-              </div>
-
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">216jung</span>
-                  <span class="search-result__profile-name">MJ</span>
-                </div>
-              </div>
-
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">216jung</span>
-                  <span class="search-result__profile-name">MJ</span>
-                </div>
-              </div>
-
-              <div class="search-result__profile">
-                <img
-                  src="images/01.png"
-                  alt=""
-                  class="search-result__profile-photo"
-                />
-                <div class="search-result__profile-names">
-                  <span class="search-result__profile-nickname">216jung</span>
-                  <span class="search-result__profile-name">MJ</span>
-                </div>
-              </div>
-            </div>
+            <div class="search-result"></div>
           </div>
         </div>
 
@@ -518,11 +434,23 @@
         </article>
       </div>
     </div>
+
     <script
       src="https://kit.fontawesome.com/b17793764c.js"
       crossorigin="anonymous"
     ></script>
-
+    <script type="text/template" id="template__search-result">
+        <a class="search-result__profile">
+            <img
+                    src="files/{imagePath}"
+                    alt=""
+                    class="search-result__profile-photo"
+            />
+            <div class="search-result__profile-names">
+                <span class="search-result__profile-nickname">{nickname}</span>
+            </div>
+        </a>
+    </script>
     <script type="text/template" id="template__main-post">
       <article class="post main-post main-post-{postId}">
         <div class="post-header main-post-header">
@@ -608,19 +536,16 @@
         </div>
       </article>
     </script>
-
     <script type="text/template" id="template__main-post-images">
       <li class='post-images__list'>
         <img src='/files/{filePath}' class='main-post-image' />
       </li>
     </script>
-
     <script type="text/template" id="template__main-post-comments">
       <div>
         <span>{ownerComment}</span>
       </div>
     </script>
-
     <script type="text/template" id="template__main-post-more"></script>
     <script src="/javascript/main.js"></script>
     <script src="/javascript/modal.js"></script>
