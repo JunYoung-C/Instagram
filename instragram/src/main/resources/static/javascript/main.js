@@ -72,6 +72,37 @@ class SlideController {
     }
 }
 
+function getMembersAjax(nickname) {
+    const request = new XMLHttpRequest();
+
+    if (!request) {
+        alert("XMLHTTP 인스턴스 생성 불가");
+        return false;
+    }
+
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                console.log(request.response);
+                setSearchResult();
+            } else {
+                alert("request에 문제가 있습니다.")
+            }
+        }
+
+        function setSearchResult() {
+            const searchResultTemplate = document.querySelector("#template__search-result").innerHTML;
+            searchResultWrap.insertAdjacentHTML("beforeend", searchResultTemplate);
+        }
+    }
+
+    request.open("get", "/members?nickname=" + nickname);
+    request.responseType = "json";
+    request.send();
+}
+
+// 파라미터로 page를 받도록 변경
+// 함수 내장으로 변경
 function getPostsAjax() {
     const request = new XMLHttpRequest();
 
@@ -98,7 +129,7 @@ function getPostsAjax() {
 }
 
 function getNextPage(currentPage) {
-  return currentPage + 1;
+    return currentPage + 1;
 }
 
 function setMainPost(response) {
@@ -107,70 +138,70 @@ function setMainPost(response) {
 
     for (let i = 0; i < posts.length; i++) {
         mainPostWrap.insertAdjacentHTML("beforeend", getReplacedMainPostTemplate(posts, i));
-        
+
         for (let j = 0; j < posts[i].filePaths.length; j++) {
-          document.querySelector(`.main-post-${posts[i].postId} .main-post-images`)
-            .insertAdjacentHTML("beforeend", getMainPostImagesTemplate(posts, i, j));
+            document.querySelector(`.main-post-${posts[i].postId} .main-post-images`)
+                .insertAdjacentHTML("beforeend", getMainPostImagesTemplate(posts, i, j));
         }
         addMainPostEvent(posts, i);
-        
+
         if (posts[i].commentCount === 0) {
-          removeMainPostComments(posts, i);
+            removeMainPostComments(posts, i);
         }
 
         if (!sliceInfo.hasNext) {
-          removeMoreButton();
+            removeMoreButton();
         }
     }
 }
 
 function removeMainPostComments(posts, i) {
-  document.querySelector(`.main-post-${posts[i].postId} .main-post-comments-count`).style.display = "none";
+    document.querySelector(`.main-post-${posts[i].postId} .main-post-comments-count`).style.display = "none";
 }
 
 function getReplacedMainPostTemplate(posts, i) {
-  return document.querySelector("#template__main-post").innerHTML
-    .replace("{postId}", posts[i].postId)
-    .replace("{postId}", posts[i].postId)
-    .replace("{member.memberId}", posts[i].member.memberId)
-    .replace("{member.nickname}", posts[i].member.nickname)
-    .replace("{member.nickname}", posts[i].member.nickname)
-    .replace("{member.imagePath}", posts[i].member.imagePath)
-    .replace("{text}", posts[i].text)
-    .replace("{commentCount}", posts[i].commentCount)
-    .replace("{createdDate}", posts[i].createdDate);
+    return document.querySelector("#template__main-post").innerHTML
+        .replace("{postId}", posts[i].postId)
+        .replace("{postId}", posts[i].postId)
+        .replace("{member.memberId}", posts[i].member.memberId)
+        .replace("{member.nickname}", posts[i].member.nickname)
+        .replace("{member.nickname}", posts[i].member.nickname)
+        .replace("{member.imagePath}", posts[i].member.imagePath)
+        .replace("{text}", posts[i].text)
+        .replace("{commentCount}", posts[i].commentCount)
+        .replace("{createdDate}", posts[i].createdDate);
 }
 
 function getMainPostImagesTemplate(posts, i, j) {
-  return document.querySelector("#template__main-post-images").innerHTML
-  .replace("{filePath}", posts[i].filePaths[j]);
+    return document.querySelector("#template__main-post-images").innerHTML
+        .replace("{filePath}", posts[i].filePaths[j]);
 }
 
 function removeMoreButton() {
-  mainPostMore.style.display = "none";
-  mainPostMore.removeEventListener("click", getPostsAjax);
+    mainPostMore.style.display = "none";
+    mainPostMore.removeEventListener("click", getPostsAjax);
 }
 
 function addMainPostEvent(posts, i) {
-  const mainPostImagesCount = posts[i].filePaths.length;
-  const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
-  const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
-  const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
-  const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
-  const showComment = document.querySelector(".show-comment"); // ajax로 가져와서 모달창 띄우도록 변경
+    const mainPostImagesCount = posts[i].filePaths.length;
+    const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
+    const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
+    const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
+    const mainPostImageSlideController = new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
+    const showComment = document.querySelector(".show-comment"); // ajax로 가져와서 모달창 띄우도록 변경
 
-  mainPostImagePrevButton.addEventListener("click", (event) => {
-    mainPostImageSlideController.slide(event.currentTarget);
-  });
+    mainPostImagePrevButton.addEventListener("click", (event) => {
+        mainPostImageSlideController.slide(event.currentTarget);
+    });
 
-  mainPostImageNextButton.addEventListener("click", (event) => {
-    mainPostImageSlideController.slide(event.currentTarget);
-  });
+    mainPostImageNextButton.addEventListener("click", (event) => {
+        mainPostImageSlideController.slide(event.currentTarget);
+    });
 
-  showComment.addEventListener("click", () => {
-    comment.style.display = "block";
-    mainBody.style.overflow = "hidden";
-  });
+    showComment.addEventListener("click", () => {
+        comment.style.display = "block";
+        mainBody.style.overflow = "hidden";
+    });
 }
 
 function addMainPageEvent() {
@@ -185,5 +216,7 @@ function addMainPageEvent() {
     });
 }
 
+const nickname = document.querySelector(".header-search__input").value;
+getMembersAjax(nickname);
 getPostsAjax();
 addMainPageEvent();
