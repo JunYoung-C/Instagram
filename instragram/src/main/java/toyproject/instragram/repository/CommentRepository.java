@@ -11,8 +11,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     Long countCommentsByPostId(Long postId);
 
     @EntityGraph(attributePaths = {"member"})
-    Slice<Comment> getCommentsByMemberIdAndPostId(Long memberId, Long postId, Pageable pageable);
-
-    @EntityGraph(attributePaths = {"member"})
     Slice<Comment> getCommentsByPostIdOrderByCreatedDateDesc(Long postId, Pageable pageable);
 }

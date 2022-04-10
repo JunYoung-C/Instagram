@@ -51,13 +51,6 @@ public class CommentService {
     }
 
     // TODO 테스트 코드 작성
-    public List<Comment> getOwnerComments(Long memberId, Long postId) {
-        return commentRepository
-                .getCommentsByMemberIdAndPostId(memberId, postId, PageRequest.of(0, MAX_OWNER_COMMENT_SIZE))
-                .getContent();
-    }
-
-    // TODO 테스트 코드 작성
     public Long getCommentCount(Long postId) {
         return commentRepository.countCommentsByPostId(postId);
     }

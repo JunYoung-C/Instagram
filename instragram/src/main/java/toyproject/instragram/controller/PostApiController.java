@@ -22,7 +22,7 @@ public class PostApiController {
     private final CommentService commentService;
 
     @GetMapping("/posts")
-    public CommonSliceResponse<PostResponse> getPosts(@RequestParam int page) {
+    public CommonSliceResponse<List<PostResponse>> getPosts(@RequestParam int page) {
         Slice<Post> postSlice = postService.getPostSlice(page);
 
         return new CommonSliceResponse(getPostResponses(postSlice), SliceInfo.from(postSlice));
@@ -30,16 +30,14 @@ public class PostApiController {
 
     private List<PostResponse> getPostResponses(Slice<Post> postSlice) {
         return postSlice.getContent().stream()
-                .map(post -> PostResponse.from(post,
-                        getOwnerCommentTextList(post),
-                        commentService.getCommentCount(post.getId())))
+                .map(post -> PostResponse.from(post, commentService.getCommentCount(post.getId())))
                 .collect(Collectors.toList());
     }
 
-    private List<String> getOwnerCommentTextList(Post post) {
-        return commentService.getOwnerComments(post.getMember().getId(), post.getId())
-                .stream().map(comment -> comment.getText()).collect(Collectors.toList());
-    }
+//    private List<String> getOwnerCommentTextList(Post post) {
+//        return commentService.getOwnerComments(post.getMember().getId(), post.getId())
+//                .stream().map(comment -> comment.getText()).collect(Collectors.toList());
+//    }
 
     @DeleteMapping("/posts/{postId}")
     public void deletePost(@PathVariable Long postId) {

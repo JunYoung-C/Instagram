@@ -21,17 +21,15 @@ public class PostResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdDate;
-    private List<String> ownerComments;
     private Long commentCount;
 
-    public static PostResponse from(Post post, List<String> ownerComments, Long commentCount) {
+    public static PostResponse from(Post post, Long commentCount) {
         return new PostResponse(
                 post.getId(),
                 InnerMemberResponse.from(post.getMember()),
                 getFilePaths(post),
                 post.getText(),
                 post.getCreatedDate(),
-                ownerComments,
                 commentCount);
     }
 
