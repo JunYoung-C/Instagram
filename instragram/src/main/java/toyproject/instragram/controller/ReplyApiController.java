@@ -21,7 +21,7 @@ public class ReplyApiController {
     private final ReplyService replyService;
 
     @GetMapping("/replies")
-    public CommonSliceResponse<CommentResponse> getReplies(@RequestParam Long commentId, @RequestParam int page) {
+    public CommonSliceResponse<ReplyResponse> getReplies(@RequestParam Long commentId, @RequestParam int page) {
         Slice<Reply> replySlice = replyService.getReplySlice(commentId, page);
 
         return new CommonSliceResponse(
