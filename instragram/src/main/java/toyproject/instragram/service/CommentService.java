@@ -40,12 +40,6 @@ public class CommentService {
     }
 
     @Transactional
-    public void modifyCommentText(Long commentId, String modifiedText) {
-        Comment findComment = commentRepository.getById(commentId);
-        findComment.changeText(modifiedText);
-    }
-
-    @Transactional
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
     }

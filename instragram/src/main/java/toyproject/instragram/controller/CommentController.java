@@ -28,11 +28,4 @@ public class CommentController {
         commentService.addComment(new CommentDto(form.getPostId(), form.getMemberId(), form.getText()));
         return "redirect:/";
     }
-
-    // TODO html 보완 후 테스트
-    @PostMapping("/comments/{commentId}")
-    public String modifyComment(@PathVariable Long commentId, @RequestParam String modifiedText) {
-        commentService.modifyCommentText(commentId, modifiedText);
-        return "redirect:/";
-    }
 }

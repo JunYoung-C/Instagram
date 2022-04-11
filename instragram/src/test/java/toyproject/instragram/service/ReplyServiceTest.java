@@ -86,36 +86,6 @@ class ReplyServiceTest {
         assertThat(replySlice.hasNext()).isTrue();
     }
 
-    @DisplayName("답글 내용 수정")
-    @Test
-    void modifyReplyText() {
-        //given
-        Member member = new Member(null, "nickname", "이름");
-        em.persist(member);
-
-        Post post = new Post(member, null);
-        em.persist(post);
-
-        Comment comment = new Comment(post, member, null);
-        em.persist(comment);
-
-        Long replyId = replyService.addReply(new ReplyDto(comment.getId(), member.getId(), "안녕하세요"));
-
-        em.flush();
-        em.clear();
-
-        //when
-        String modifiedText = "수정했어요";
-        replyService.modifyReplyText(replyId, modifiedText);
-
-        em.flush();
-        em.clear();
-
-        //then
-        Reply findReply = replyRepository.findById(replyId).orElse(null);
-        assertThat(findReply.getText()).isEqualTo(modifiedText);
-    }
-
     @DisplayName("답글 삭제")
     @Test
     void deleteReply() {

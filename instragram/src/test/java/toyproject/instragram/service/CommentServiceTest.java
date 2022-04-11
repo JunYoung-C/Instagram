@@ -71,30 +71,6 @@ class CommentServiceTest {
         assertThat(commentSlice.getContent()).hasSize(20);
     }
 
-    @DisplayName("댓글 내용 수정")
-    @Test
-    void modifyCommentText() {
-        //given
-        Member member =  new Member(null, "nickname", "이름");
-        em.persist(member);
-
-        Post post = new Post(member, null);
-        em.persist(post);
-
-        Long commentId = commentService.addComment(new CommentDto(post.getId(), member.getId(), "안녕하세요"));
-
-        em.flush();
-        em.clear();
-
-        //when
-        String modifiedText = "수정했어요";
-        commentService.modifyCommentText(commentId, modifiedText);
-
-        //then
-        Comment findComment = em.find(Comment.class, commentId);
-        assertThat(findComment.getText()).isEqualTo(modifiedText);
-    }
-
     @DisplayName("댓글 삭제")
     @Test
     void deleteComment() {

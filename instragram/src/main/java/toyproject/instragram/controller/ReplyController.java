@@ -29,12 +29,4 @@ public class ReplyController {
 
         return "redirect:/";
     }
-
-    // TODO html 보완 후 테스트
-    @PostMapping("/replies/{replyId}")
-    public String modifyReply(@PathVariable Long replyId, @RequestParam String modifiedText) {
-        replyService.modifyReplyText(replyId, modifiedText);
-
-        return "redirect:/";
-    }
 }

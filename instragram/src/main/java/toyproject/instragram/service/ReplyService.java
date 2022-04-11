@@ -37,13 +37,6 @@ public class ReplyService {
                 .getRepliesByCommentIdOrderByCreatedDateDesc(commentId, PageRequest.of(page, MAX_REPLY_SIZE));
     }
 
-
-    @Transactional
-    public void modifyReplyText(Long replyId, String modifiedText) {
-        Reply findReply = replyRepository.getById(replyId);
-        findReply.changeText(modifiedText);
-    }
-
     @Transactional
     public void deleteReply(Long replyId) {
         replyRepository.deleteById(replyId);
