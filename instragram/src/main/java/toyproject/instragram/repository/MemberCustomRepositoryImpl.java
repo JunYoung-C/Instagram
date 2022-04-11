@@ -2,7 +2,6 @@ package toyproject.instragram.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import toyproject.instragram.dto.QMemberProfileDto;
 
 import java.util.List;
 
