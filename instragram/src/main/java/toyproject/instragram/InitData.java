@@ -64,16 +64,33 @@ public class InitData {
             post2.addPostFile(new PostFile(post2, "playstore", "test-image4", "png"));
             em.persist(post2);
 
-            Comment comment1 = new Comment(post1, member1, "멋있어요!");
+            Comment comment1 = new Comment(post1, member1, "정말 멋있어요!");
             Comment comment2 = new Comment(post1, member2, "여기 어디에요?");
             Comment comment3 = new Comment(post1, member2, "저도 갈래요!");
+            Comment comment4 = new Comment(post2, member2, "안녕하세요!");
+            Comment comment5 = new Comment(post2, member2, "반가워요!");
+            Comment comment6 = new Comment(post2, member2, "좋은 하루에요~");
+
+            for (int i = 0; i < 20; i++) {
+                em.persist(new Comment(post2, member2, "테스트 댓글" + i));
+            }
+
             em.persist(comment1);
             em.persist(comment2);
             em.persist(comment3);
+            em.persist(comment4);
+            em.persist(comment5);
+            em.persist(comment6);
 
+            for (int i = 0; i < 20; i++) {
+                em.persist(new Reply(comment2, member2, "테스트 답글" + i));
+            }
+            for (int i = 0; i < 4; i++) {
+                em.persist(new Reply(comment1, member1, "테스트 답글" + i));
+            }
             Reply reply1 = new Reply(comment2, member1, "여기는 북극입니다!!");
             Reply reply2 = new Reply(comment2, member2, "저런 곳 가보는게 제 버킷리스트에요. 부러워요ㅠㅠ");
-            Reply reply3 = new Reply(comment2, member1, "다음에 갈 떄 같이 가요!!");
+            Reply reply3 = new Reply(comment2, member1, "다음에 갈 때 같이 가요!!");
             Reply reply4 = new Reply(comment2, member2, "좋아요!");
             em.persist(reply1);
             em.persist(reply2);
