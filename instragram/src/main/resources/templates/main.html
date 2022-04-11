@@ -233,6 +233,7 @@
                   <div class="post-comment__icons-wrap">
                     <i class="far fa-smile"></i>
                   </div>
+                  <input type="hidden" th:field="*{memberId}" />
                   <div class="post-comment__hidden-inputs">
                   </div>
                   <input
@@ -337,7 +338,7 @@
           <div class="post-comment">
             <form action="/comments" method="post" class="post-comment__form">
               <input type="hidden" id="postId" name="postId" value="{postId}" />
-              <input type="hidden" id="memberId" name="memberId" value="{member.memberId}" />`
+              <input type="hidden" id="memberId" name="memberId" th:value="${commentSaveForm.memberId}" />`
               <div class="post-comment__icons-wrap">
                 <i class="far fa-smile"></i>
               </div>
@@ -400,7 +401,6 @@
     </script>
     <script type="text/template" id="template__comment-post__hidden-inputs">
       <input type="hidden" id="postId" name="postId" value="{postId}" />
-      <input type="hidden" id="memberId" name="memberId" value="{memberId}" />
       <input type="hidden" id="commentId" name="commentId" value="" class="post-comment__comment-id-input"/>
     </script>
     <script type="text/template" id="template__comment">

@@ -176,7 +176,6 @@ function removeMainPostComments(posts, i) {
 function getReplacedMainPostTemplate(posts, i) {
     return document.querySelector("#template__main-post").innerHTML
         .replaceAll("{postId}", posts[i].postId)
-        .replace("{member.memberId}", posts[i].member.memberId)
         .replaceAll("{member.nickname}", posts[i].member.nickname)
         .replace("{member.imagePath}", posts[i].member.imagePath)
         .replace("{text}", posts[i].text)
@@ -236,8 +235,7 @@ function setCommentPageWithOutComments(post) {
         getReplacedCommentPostTimeTemplate(post);
     document.querySelector(".post-comment__hidden-inputs").innerHTML =
         document.querySelector("#template__comment-post__hidden-inputs").innerHTML
-            .replace("{postId}", post.postId)
-            .replace("{memberId}", post.member.memberId);
+            .replace("{postId}", post.postId);
 }
 
 function getReplacedCommentPostImageTemplate(filePaths) {
