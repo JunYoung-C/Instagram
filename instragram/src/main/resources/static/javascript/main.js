@@ -312,7 +312,7 @@ function setComments(response) {
 
 function getReplacedCommentTemplate(comment) {
     return document.querySelector("#template__comment").innerHTML
-        .replace("{commentId}", comment.commentId)
+        .replaceAll("{commentId}", comment.commentId)
         .replace("{member.imagePath}", comment.member.imagePath)
         .replace("{member.nickname}", comment.member.nickname)
         .replace("{text}", comment.text)
@@ -441,7 +441,7 @@ function addMainPageEvent() {
 function addCommentPageEvent() {
     const commentCancel = document.querySelector(".comment-cancel");
     const moreCommentButton = document.querySelector(".more-comment__button");
-    const commentPostAddCommentButton = document.querySelector(".comment-post__add-comment-button");
+    const commentPostCommentText = document.querySelector(".comment-post__comment-text");
 
     commentPostImagePrevButton.addEventListener("click", (event) => {
         commentPostSlideController.slide(event.currentTarget);
@@ -461,14 +461,25 @@ function addCommentPageEvent() {
         getCommentsAjax(selectedPostId, nextCommentPage);
     });
 
-    commentPostAddCommentButton.addEventListener("click", () => {
-        const inputText = document.querySelector(".comment-post__comment-text").value;
-        if (input.startsWith("@")) { // @로 시작하면 답글
-            // 답글 등록
-        } else {
-            // 댓글 등록
+    document.querySelector(".comments").addEventListener("click", (event) => {
+        if (event.target.classList.contains("comment_owner__reply")) {
+            commentPostCommentText.placeholder = "답글 달기...";
+            // form action 답글로 변경
+            document.querySelector(".comment-post__comment-form")
+                .setAttribute("action", "/replies");
+
+            document.querySelector(".post-comment__comment-id-input").value = 
+                event.target.getAttribute("replyId")
         }
-    })
+    });
+
+    document.querySelector(".comment-post__add-comment-button").addEventListener("submit", () => {
+        commentPostCommentText.placeholder = "댓글 달기...";
+        // form action 댓글로 변경
+        document.querySelector(".comment-post__comment-form")
+            .setAttribute("action", "/comments")
+    });
+
 }
 
 function isBlank(nickname) {

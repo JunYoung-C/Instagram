@@ -196,33 +196,8 @@
             <div class="comments">
               <div class="comment not-comment">
               </div>
+
               <div class="comment-wrap">
-
-<!--                  <div class="replies">-->
-
-<!--                    <div class="reply comment-owner">-->
-<!--                      <div class="comment-owner__photo-wrap">-->
-<!--                        <img src="images/03.png" class="comment-owner__photo" />-->
-<!--                      </div>-->
-<!--                      <div class="comment-owner__text-wrap">-->
-<!--                        <a class="comment-owner__name">meenoie</a>-->
-<!--                        <span class="comment-owner__text">-->
-<!--                        요리조리 2가 끝났어요ㅜㅜ..요리조리 2가-->
-<!--                        끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가-->
-<!--                        끝났어요ㅜㅜ..-->
-<!--                      </span>-->
-<!--                        <div class="comment-owner__options">-->
-<!--                          <span class="comment-owner__created-time">5시간</span>-->
-<!--                          <span class="comment-owner__liker">좋아요 3개</span>-->
-<!--                          <span class="comment_owner__reply">답글 달기</span>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="comment-owner__heart-wrap">-->
-<!--                        <i class="far fa-heart comment-owner__heart"></i>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
               </div>
 
               <div class="more-comment">
@@ -252,7 +227,7 @@
                 <form
                   action="/comments"
                   method="post"
-                  class="post-comment__form"
+                  class="post-comment__form comment-post__comment-form"
                   th:object="${commentSaveForm}"
                 >
                   <div class="post-comment__icons-wrap">
@@ -267,7 +242,7 @@
                     th:field="*{text}"
                   />
                   <input
-                    type="button"
+                    type="submit"
                     value="게시"
                     class="post-comment__button comment-post__add-comment-button"
                   />
@@ -362,7 +337,7 @@
           <div class="post-comment">
             <form action="/comments" method="post" class="post-comment__form">
               <input type="hidden" id="postId" name="postId" value="{postId}" />
-              <input type="hidden" id="memberId" name="memberId" value="{member.memberId}" />
+              <input type="hidden" id="memberId" name="memberId" value="{member.memberId}" />`
               <div class="post-comment__icons-wrap">
                 <i class="far fa-smile"></i>
               </div>
@@ -426,6 +401,7 @@
     <script type="text/template" id="template__comment-post__hidden-inputs">
       <input type="hidden" id="postId" name="postId" value="{postId}" />
       <input type="hidden" id="memberId" name="memberId" value="{memberId}" />
+      <input type="hidden" id="commentId" name="commentId" value="" class="post-comment__comment-id-input"/>
     </script>
     <script type="text/template" id="template__comment">
       <div class="comment comment-{commentId}">
@@ -441,7 +417,7 @@
             <div class="comment-owner__options">
               <span class="comment-owner__created-time">{createdDate}</span>
               <span class="comment-owner__liker">좋아요 3개</span>
-              <span class="comment_owner__reply">답글 달기</span>
+              <span class="comment_owner__reply" replyId="{commentId}">답글 달기</span>
             </div>
           </div>
           <div class="comment-owner__heart-wrap">
