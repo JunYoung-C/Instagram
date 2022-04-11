@@ -280,7 +280,6 @@ function getCommentsAjax(postId, page) {
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
-                console.log(request.response);
                 setComments(request.response);
             } else {
                 alert("request에 문제가 있습니다.")
@@ -300,59 +299,68 @@ function setComments(response) {
     if (sliceInfo.page === 0) {
         document.querySelector(".comment-wrap").innerHTML = "";
     }
+
     for (let i = 0; i < comments.length; i++) {
         document.querySelector(".comment-wrap")
-            .insertAdjacentHTML("beforeend", getReplacedCommentTemplate(comments, i));
+            .insertAdjacentHTML("beforeend", getReplacedCommentTemplate(comments[i]));
 
-        const CommentDivider = document.querySelector(`.comment-${comments[i].commentId} .comment-divider`);
-        if (comments[i].replyCount === 0) {
-            CommentDivider.style.display = "none";
-        } else {
-            CommentDivider.addEventListener("click", () => {
-                const hideReplies =
-                    document.querySelector(`.comment-${comments[i].commentId} .comment-divider__hide-replies`);
-                const showReplies =
-                    document.querySelector(`.comment-${comments[i].commentId} .comment-divider__show-replies`);
-                const replies = document.querySelector(`.comment-${comments[i].commentId} .replies`);
-
-                if (showReplies.style.display !== "none") { // 답글 보기로 되어 있는 경우
-                    // if (replies..childElementCount !== 0 && 다음 페이지가 없는 경우)  단순 출력
-                    // else(그 외의 경우) getRepliesAjax
-                    const nextPage = showReplies.getAttribute("nextPage");
-                    if (replies.childElementCount !== 0 && showReplies.getAttribute("hasNext") === "false") {
-                        showReplies.style.display = "none";
-                        hideReplies.style.display = "";
-                        replies.style.display = "block";
-
-                    } else {
-                        getRepliesAjax(comments[i].commentId, nextPage ? nextPage : 0);
-
-                    }
-                } else { // 답긇 숨기기로 되어 있는 경우
-                    showReplies.style.display = "";
-                    hideReplies.style.display = "none";
-                    replies.style.display = "none";
-                }
-            })
-        }
+        toggleCommentDivider(comments[i]);
     }
 
+    toggleMoreCommentButton(sliceInfo);
+}
+
+function getReplacedCommentTemplate(comment) {
+    return document.querySelector("#template__comment").innerHTML
+        .replace("{commentId}", comment.commentId)
+        .replace("{member.imagePath}", comment.member.imagePath)
+        .replace("{member.nickname}", comment.member.nickname)
+        .replace("{text}", comment.text)
+        .replace("{createdDate}", comment.createdDate)
+        .replace("{replyCount}", comment.replyCount);
+}
+
+function toggleCommentDivider(comment) {
+    const CommentDivider = document.querySelector(`.comment-${comment.commentId} .comment-divider`);
+    if (comment.replyCount === 0) {
+        CommentDivider.style.display = "none";
+    } else {
+        addClickEvent(CommentDivider, comment);
+    }
+}
+
+function addClickEvent(CommentDivider, comment) {
+    CommentDivider.addEventListener("click", () => {
+        const hideReplies =
+            document.querySelector(`.comment-${comment.commentId} .comment-divider__hide-replies`);
+        const showReplies =
+            document.querySelector(`.comment-${comment.commentId} .comment-divider__show-replies`);
+        const replies = document.querySelector(`.comment-${comment.commentId} .replies`);
+
+        if (showReplies.style.display !== "none") {
+            const nextPage = showReplies.getAttribute("nextPage");
+            if (replies.childElementCount !== 0 && showReplies.getAttribute("hasNext") === "false") {
+                showReplies.style.display = "none";
+                hideReplies.style.display = "";
+                replies.style.display = "block";
+            } else {
+                getRepliesAjax(comment.commentId, nextPage ? nextPage : 0);
+            }
+        } else { // 답긇 숨기기로 되어 있는 경우
+            showReplies.style.display = "";
+            hideReplies.style.display = "none";
+            replies.style.display = "none";
+        }
+    })
+}
+
+function toggleMoreCommentButton(sliceInfo) {
     if (sliceInfo.hasNext) {
         document.querySelector(".more-comment").style.display = "flex";
         nextCommentPage = sliceInfo.page + 1;
     } else {
         document.querySelector(".more-comment").style.display = "none";
     }
-}
-
-function getReplacedCommentTemplate(comments, i) {
-    return document.querySelector("#template__comment").innerHTML
-        .replace("{commentId}", comments[i].commentId)
-        .replace("{member.imagePath}", comments[i].member.imagePath)
-        .replace("{member.nickname}", comments[i].member.nickname)
-        .replace("{text}", comments[i].text)
-        .replace("{createdDate}", comments[i].createdDate)
-        .replace("{replyCount}", comments[i].replyCount);
 }
 
 function getRepliesAjax(commentId, page) {
@@ -366,7 +374,6 @@ function getRepliesAjax(commentId, page) {
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
-                console.log(request.response);
                 setReplies(request.response, commentId);
             } else {
                 alert("request에 문제가 있습니다.")
