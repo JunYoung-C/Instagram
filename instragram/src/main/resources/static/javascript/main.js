@@ -309,7 +309,30 @@ function setComments(response) {
             CommentDivider.style.display = "none";
         } else {
             CommentDivider.addEventListener("click", () => {
-                toggleReplies(comments[i]);
+                const hideReplies =
+                    document.querySelector(`.comment-${comments[i].commentId} .comment-divider__hide-replies`);
+                const showReplies =
+                    document.querySelector(`.comment-${comments[i].commentId} .comment-divider__show-replies`);
+                const replies = document.querySelector(`.comment-${comments[i].commentId} .replies`);
+
+                if (showReplies.style.display !== "none") { // 답글 보기로 되어 있는 경우
+                    // if (replies..childElementCount !== 0 && 다음 페이지가 없는 경우)  단순 출력
+                    // else(그 외의 경우) getRepliesAjax
+                    const nextPage = showReplies.getAttribute("nextPage");
+                    if (replies.childElementCount !== 0 && showReplies.getAttribute("hasNext") === "false") {
+                        showReplies.style.display = "none";
+                        hideReplies.style.display = "";
+                        replies.style.display = "block";
+
+                    } else {
+                        getRepliesAjax(comments[i].commentId, nextPage ? nextPage : 0);
+
+                    }
+                } else { // 답긇 숨기기로 되어 있는 경우
+                    showReplies.style.display = "";
+                    hideReplies.style.display = "none";
+                    replies.style.display = "none";
+                }
             })
         }
     }
@@ -319,22 +342,6 @@ function setComments(response) {
         nextCommentPage = sliceInfo.page + 1;
     } else {
         document.querySelector(".more-comment").style.display = "none";
-    }
-    // 답글 보기 누르면 답글 가져오기
-}
-
-function toggleReplies(comment) {
-    const hideReplies =
-        document.querySelector(`.comment-${comment.commentId} .comment-divider__hide-replies`);
-    const showReplies =
-        document.querySelector(`.comment-${comment.commentId} .comment-divider__show-replies`);
-    if (showReplies.style.display === "none") {
-        showReplies.style.display = "";
-        hideReplies.style.display = "none";
-    } else {
-        showReplies.style.display = "none";
-        hideReplies.style.display = "";
-        // 답글 ajax
     }
 }
 
@@ -346,6 +353,61 @@ function getReplacedCommentTemplate(comments, i) {
         .replace("{text}", comments[i].text)
         .replace("{createdDate}", comments[i].createdDate)
         .replace("{replyCount}", comments[i].replyCount);
+}
+
+function getRepliesAjax(commentId, page) {
+    const request = new XMLHttpRequest();
+
+    if (!request) {
+        alert("XMLHTTP 인스턴스 생성 불가");
+        return false;
+    }
+
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                console.log(request.response);
+                setReplies(request.response, commentId);
+            } else {
+                alert("request에 문제가 있습니다.")
+            }
+        }
+    }
+
+    request.open("get", `/replies?commentId=${commentId}&page=${page}`);
+    request.responseType = "json";
+    request.send();
+}
+
+function setReplies(response, commentId) {
+    const replies = response.data;
+    const sliceInfo = response.sliceInfo;
+
+    for (let i = 0; i < replies.length; i++) {
+        document.querySelector(`.comment-${commentId} .replies`)
+            .insertAdjacentHTML("beforeend", getReplacedReplyTemplate(replies, i));
+    }
+
+    const hideReplies = document.querySelector(`.comment-${commentId} .comment-divider__hide-replies`);
+    const showReplies = document.querySelector(`.comment-${commentId} .comment-divider__show-replies`);
+
+    if (sliceInfo.hasNext) {
+        showReplies.setAttribute("hasNext", "true");
+        showReplies.setAttribute("nextPage", sliceInfo.page + 1);
+        document.querySelector(`.comment-${commentId} .comment-divider__reply-count`).innerText -= replies.length;
+    } else {
+        showReplies.style.display = "none";
+        hideReplies.style.display = "";
+        showReplies.setAttribute("hasNext", "false");
+    }
+}
+
+function getReplacedReplyTemplate(replies, i) {
+    return document.querySelector("#template__reply").innerHTML
+        .replace("{member.imagePath}", replies[i].member.imagePath)
+        .replace("{member.nickname}", replies[i].member.nickname)
+        .replace("{text}", replies[i].text)
+        .replace("{createdDate}", replies[i].createdDate);
 }
 
 function addMainPageEvent() {

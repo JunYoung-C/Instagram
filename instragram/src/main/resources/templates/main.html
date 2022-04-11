@@ -198,58 +198,7 @@
               </div>
               <div class="comment-wrap">
 
-<!--                <div class="comment">-->
-<!--                  <div class="comment-owner">-->
-<!--                    <div class="comment-owner__photo-wrap">-->
-<!--                      <img src="images/03.png" class="comment-owner__photo" />-->
-<!--                    </div>-->
-<!--                    <div class="comment-owner__text-wrap">-->
-<!--                      <a class="comment-owner__name">meenoie</a>-->
-<!--                      <span class="comment-owner__text">-->
-<!--                      요리조리 2가 끝났어요ㅜㅜ..요리조리 2가-->
-<!--                      끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가-->
-<!--                      끝났어요ㅜㅜ..-->
-<!--                    </span>-->
-<!--                      <div class="comment-owner__options">-->
-<!--                        <span class="comment-owner__created-time">5시간</span>-->
-<!--                        <span class="comment-owner__liker">좋아요 3개</span>-->
-<!--                        <span class="comment_owner__reply">답글 달기</span>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="comment-owner__heart-wrap">-->
-<!--                      <i class="far fa-heart comment-owner__heart"></i>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  <div class="comment-divider">-->
-<!--                    <div class="comment-divider__line"></div>-->
-<!--                    <div class="comment-divider__togggle-replies">-->
-<!--                      답글 숨기기-->
-<!--                    </div>-->
-<!--                  </div>-->
-
 <!--                  <div class="replies">-->
-<!--                    <div class="reply comment-owner">-->
-<!--                      <div class="comment-owner__photo-wrap">-->
-<!--                        <img src="images/03.png" class="comment-owner__photo" />-->
-<!--                      </div>-->
-<!--                      <div class="comment-owner__text-wrap">-->
-<!--                        <a class="comment-owner__name">meenoie</a>-->
-<!--                        <span class="comment-owner__text">-->
-<!--                        요리조리 2가 끝났어요ㅜㅜ..요리조리 2가-->
-<!--                        끝났어요ㅜㅜ..요리조리 2가 끝났어요ㅜㅜ..요리조리 2가-->
-<!--                        끝났어요ㅜㅜ..-->
-<!--                      </span>-->
-<!--                        <div class="comment-owner__options">-->
-<!--                          <span class="comment-owner__created-time">5시간</span>-->
-<!--                          <span class="comment-owner__liker">좋아요 3개</span>-->
-<!--                          <span class="comment_owner__reply">답글 달기</span>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="comment-owner__heart-wrap">-->
-<!--                        <i class="far fa-heart comment-owner__heart"></i>-->
-<!--                      </div>-->
-<!--                    </div>-->
 
 <!--                    <div class="reply comment-owner">-->
 <!--                      <div class="comment-owner__photo-wrap">-->
@@ -314,13 +263,13 @@
                   <input
                     type="text"
                     placeholder="댓글 달기..."
-                    class="post-comment__text main-post-comment__text"
+                    class="post-comment__text comment-post__comment-text"
                     th:field="*{text}"
                   />
                   <input
-                    type="submit"
+                    type="button"
                     value="게시"
-                    class="post-comment__button"
+                    class="post-comment__button comment-post__add-comment-button"
                   />
                 </form>
               </div>
@@ -503,7 +452,7 @@
         <div class="comment-divider">
           <div class="comment-divider__line"></div>
           <div class="comment-divider__toggle-replies">
-            <span class="comment-divider__show-replies">답글 보기({replyCount}개)</span>
+            <span class="comment-divider__show-replies">답글 보기(<span class="comment-divider__reply-count">{replyCount}</span>개)</span>
             <span style="display: none" class="comment-divider__hide-replies">답글 숨기기</span>
           </div>
         </div>
@@ -512,8 +461,26 @@
         </div>
       </div>
     </script>
-    <script type="text/template" id="template__comment-post-createdDate">
-      <a>{createdDate}</a>
+    <script type="text/template" id="template__reply">
+      <div class="reply comment-owner">
+        <div class="comment-owner__photo-wrap">
+          <img src="files/{member.imagePath}" class="comment-owner__photo" />
+        </div>
+        <div class="comment-owner__text-wrap">
+          <a class="comment-owner__name">{member.nickname}</a>
+          <span class="comment-owner__text">
+            {text}
+          </span>
+          <div class="comment-owner__options">
+            <span class="comment-owner__created-time">{createdDate}</span>
+            <span class="comment-owner__liker">좋아요 3개</span>
+            <span class="comment_owner__reply">답글 달기</span>
+          </div>
+        </div>
+        <div class="comment-owner__heart-wrap">
+          <i class="far fa-heart comment-owner__heart"></i>
+        </div>
+      </div>
     </script>
     <script src="/javascript/main.js"></script>
     <script src="/javascript/modal.js"></script>
