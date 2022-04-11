@@ -39,7 +39,7 @@ public class MemberController {
         }
         memberService.signUp(new MemberDto(form.getPhoneNumberOrEmail(), form.getName(), form.getNickname(), form.getPassword()));
 
-        return "redirect:/sign-in";
+        return "redirect:/members/signin";
     }
 
     @GetMapping("/signin")
