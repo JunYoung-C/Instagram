@@ -259,7 +259,9 @@ function getReplacedCommentPostTextTemplate(post) {
     return document.querySelector("#template__comment-post-text").innerHTML
         .replace("{imagePath}", post.member.imagePath)
         .replace("{nickname}", post.member.nickname)
-        .replace("{text}", post.text);
+        .replace("{text}", post.text)
+        .replace("{createdDate}", post.createdDate);
+
 }
 
 function getReplacedCommentPostTimeTemplate(post) {
@@ -307,13 +309,12 @@ function setComments(response) {
         }
     }
 
-    if (!sliceInfo.hasNext) {
-        document.querySelector(".more-comment").style.display = "none";
-    } else {
+    if (sliceInfo.hasNext) {
         document.querySelector(".more-comment").style.display = "flex";
         nextCommentPage = sliceInfo.page + 1;
+    } else {
+        document.querySelector(".more-comment").style.display = "none";
     }
-    // 버튼 누르면 추가 댓글 가져오기
     // 답글 보기 누르면 답글 가져오기
 }
 
