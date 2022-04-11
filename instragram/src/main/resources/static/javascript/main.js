@@ -465,9 +465,9 @@ function addCommentPageEvent() {
             // form action 답글로 변경
             document.querySelector(".comment-post__comment-form")
                 .setAttribute("action", "/replies");
-
-            document.querySelector(".post-comment__comment-id-input").value = 
-                event.target.getAttribute("replyId")
+            document.querySelector(".post-comment__comment-id-input").value =
+                event.target.getAttribute("replyId");
+            document.querySelector(".comment-post__comment-text").focus();
         }
     });
 
