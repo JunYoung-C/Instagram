@@ -304,8 +304,13 @@ function setComments(response) {
         document.querySelector(".comment-wrap")
             .insertAdjacentHTML("beforeend", getReplacedCommentTemplate(comments, i));
 
+        const CommentDivider = document.querySelector(`.comment-${comments[i].commentId} .comment-divider`);
         if (comments[i].replyCount === 0) {
-            removeCommentDivider(comments, i);
+            CommentDivider.style.display = "none";
+        } else {
+            CommentDivider.addEventListener("click", () => {
+                toggleReplies(comments[i]);
+            })
         }
     }
 
@@ -318,6 +323,21 @@ function setComments(response) {
     // 답글 보기 누르면 답글 가져오기
 }
 
+function toggleReplies(comment) {
+    const hideReplies =
+        document.querySelector(`.comment-${comment.commentId} .comment-divider__hide-replies`);
+    const showReplies =
+        document.querySelector(`.comment-${comment.commentId} .comment-divider__show-replies`);
+    if (showReplies.style.display === "none") {
+        showReplies.style.display = "";
+        hideReplies.style.display = "none";
+    } else {
+        showReplies.style.display = "none";
+        hideReplies.style.display = "";
+        // 답글 ajax
+    }
+}
+
 function getReplacedCommentTemplate(comments, i) {
     return document.querySelector("#template__comment").innerHTML
         .replace("{commentId}", comments[i].commentId)
@@ -326,10 +346,6 @@ function getReplacedCommentTemplate(comments, i) {
         .replace("{text}", comments[i].text)
         .replace("{createdDate}", comments[i].createdDate)
         .replace("{replyCount}", comments[i].replyCount);
-}
-
-function removeCommentDivider(comments, i) {
-    document.querySelector(`.comment-${comments[i].commentId} .comment-divider`).style.display = "none";
 }
 
 function addMainPageEvent() {
@@ -354,6 +370,10 @@ function addMainPageEvent() {
 }
 
 function addCommentPageEvent() {
+    const commentCancel = document.querySelector(".comment-cancel");
+    const moreCommentButton = document.querySelector(".more-comment__button");
+    const commentPostAddCommentButton = document.querySelector(".comment-post__add-comment-button");
+
     commentPostImagePrevButton.addEventListener("click", (event) => {
         commentPostSlideController.slide(event.currentTarget);
     });
@@ -368,8 +388,17 @@ function addCommentPageEvent() {
         commentPostImages.style.left = "0px";
     });
 
-    document.querySelector(".more-comment__button").addEventListener("click", () => {
+    moreCommentButton.addEventListener("click", () => {
         getCommentsAjax(selectedPostId, nextCommentPage);
+    });
+
+    commentPostAddCommentButton.addEventListener("click", () => {
+        const inputText = document.querySelector(".comment-post__comment-text").value;
+        if (input.startsWith("@")) { // @로 시작하면 답글
+            // 답글 등록
+        } else {
+            // 댓글 등록
+        }
     })
 }
 

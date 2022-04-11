@@ -12,7 +12,6 @@ const previewNextButton = document.querySelector(".add-post__preview-next-button
 const previewListCount = document.querySelectorAll(".add-post__preview-list").length;
 
 const comment = document.querySelector("#comment");
-const commentCancel = document.querySelector(".comment-cancel");
 
 const PREVIEW_IMAGE_WIDTH = 453.59;
 

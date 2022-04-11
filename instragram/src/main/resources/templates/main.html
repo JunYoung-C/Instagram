@@ -503,13 +503,17 @@
         <div class="comment-divider">
           <div class="comment-divider__line"></div>
           <div class="comment-divider__toggle-replies">
-            답글 보기({replyCount}개)
+            <span class="comment-divider__show-replies">답글 보기({replyCount}개)</span>
+            <span style="display: none" class="comment-divider__hide-replies">답글 숨기기</span>
           </div>
         </div>
 
         <div class="replies">
         </div>
       </div>
+    </script>
+    <script type="text/template" id="template__comment-post-createdDate">
+      <a>{createdDate}</a>
     </script>
     <script src="/javascript/main.js"></script>
     <script src="/javascript/modal.js"></script>
