@@ -173,8 +173,7 @@
                   </div>
                 </div>
 
-                <ul class="post-images slide-image comment-post-images">
-                </ul>
+                <ul class="post-images slide-image comment-post-images"></ul>
               </div>
               <!-- <div class="post-video-wrap"></div> -->
             </div>
@@ -183,9 +182,7 @@
           <section class="comment-right-section">
             <div class="post-header comment-post-header">
               <header class="post-profile comment-post-header-profile">
-                <div class="post-profile__info comment-post-header__info">
-
-                </div>
+                <div class="post-profile__info comment-post-header__info"></div>
 
                 <div class="post-profile__more comment-post-header__more">
                   <i class="fas fa-ellipsis-h fa-lg"></i>
@@ -194,11 +191,9 @@
             </div>
 
             <div class="comments">
-              <div class="comment not-comment">
-              </div>
+              <div class="comment not-comment"></div>
 
-              <div class="comment-wrap">
-              </div>
+              <div class="comment-wrap"></div>
 
               <div class="more-comment">
                 <div class="more-comment__button">
@@ -221,8 +216,7 @@
               <div class="post-like-text">
                 <span>좋아요 <span class="post-like-count">8000</span>개</span>
               </div>
-              <div class="post-time-wrap comment-post-time-wrap">
-              </div>
+              <div class="post-time-wrap comment-post-time-wrap"></div>
               <div class="post-comment">
                 <form
                   action="/comments"
@@ -234,8 +228,7 @@
                     <i class="far fa-smile"></i>
                   </div>
                   <input type="hidden" th:field="*{memberId}" />
-                  <div class="post-comment__hidden-inputs">
-                  </div>
+                  <div class="post-comment__hidden-inputs"></div>
                   <input
                     type="text"
                     placeholder="댓글 달기..."
@@ -255,21 +248,39 @@
       </div>
     </div>
 
+    <div class="modal option-box">
+      <div class="add-post__form-wrap modal-body">
+        <div class="option-box-body__buttons">
+          <div class="option-box-body__delete">
+            <span>삭제</span>
+          </div>
+
+          <div class="option-box-body__modify">
+            <span>수정</span>
+          </div>
+
+          <div class="option-box-body__cancel">
+            <span>취소</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script
       src="https://kit.fontawesome.com/b17793764c.js"
       crossorigin="anonymous"
     ></script>
     <script type="text/template" id="template__search-result">
-        <a class="search-result__profile">
-            <img
-                    src="files/{imagePath}"
-                    alt=""
-                    class="search-result__profile-photo"
-            />
-            <div class="search-result__profile-names">
-                <span class="search-result__profile-nickname">{nickname}</span>
-            </div>
-        </a>
+      <a class="search-result__profile">
+          <img
+                  src="files/{imagePath}"
+                  alt=""
+                  class="search-result__profile-photo"
+          />
+          <div class="search-result__profile-names">
+              <span class="search-result__profile-nickname">{nickname}</span>
+          </div>
+      </a>
     </script>
     <script type="text/template" id="template__main-post">
       <article class="post main-post main-post-{postId}">
@@ -418,6 +429,9 @@
               <span class="comment-owner__created-time">{createdDate}</span>
               <span class="comment-owner__liker">좋아요 3개</span>
               <span class="comment_owner__reply" replyId="{commentId}">답글 달기</span>
+              <span class="comment_owner__option">
+                <i class="fas fa-ellipsis-h fa-lg"></i>
+              </span>
             </div>
           </div>
           <div class="comment-owner__heart-wrap">

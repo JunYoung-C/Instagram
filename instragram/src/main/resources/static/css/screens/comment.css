@@ -96,16 +96,23 @@
 }
 
 .comment-owner__liker,
+.comment_owner__reply,
+.comment_owner__option {
+  margin-left: 13px;
+}
+
+.comment-owner__liker,
 .comment_owner__reply {
   font-weight: bold;
-  margin-left: 13px;
 }
 
 .comment-owner__created-time,
 .comment-owner__liker,
-.comment_owner__reply {
+.comment_owner__reply,
+.comment_owner__option {
   cursor: pointer;
 }
+
 
 .comment-owner__heart-wrap {
   position: absolute;
