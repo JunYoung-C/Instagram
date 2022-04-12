@@ -71,9 +71,9 @@ class PostServiceTest {
         assertThat(posts).hasSize(10);
     }
 
-    @DisplayName("게시물 한건 조회")
+    @DisplayName("본인이 올린 게시물 한건 조회")
     @Test
-    void getPost() {
+    void getOwnerPost() {
         //given
         Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
@@ -86,18 +86,29 @@ class PostServiceTest {
         em.clear();
 
         //when
-        Post findPost = postService.getPost(postId).orElse(null);
+        Post findPost = postService.getOwnerPost(postId, member.getId()).orElse(null);
 
         //then
         assertThat(findPost.getId()).isEqualTo(postId);
+        assertThat(findPost.getMember().getId()).isEqualTo(member.getId());
     }
 
-    @DisplayName("게시물 한건 조회 - 실패")
+    @DisplayName("본인이 게시물 한건 조회 - 실패")
     @Test
     void getPost_fail() {
         //given
+        Member member = new Member(null, "junyoung", "이름1");
+        em.persist(member);
+
+        List<FileDto> fileDtos = List.of(
+                new FileDto("uploadFileName", "storeFileName", "png"));
+        Long postId = postService.addPost(new PostDto(member.getId(), fileDtos, "안녕하세요"));
+
+        em.flush();
+        em.clear();
         //when
-        Optional<Post> findPost = postService.getPost(0L);
+        Optional<Post> findPost = postService.getOwnerPost(postId, member.getId() + 1);
+
 
         //then
         assertThat(findPost).isEmpty();
