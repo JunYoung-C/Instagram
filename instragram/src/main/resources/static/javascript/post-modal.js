@@ -4,6 +4,7 @@ const addPostPreview = document.querySelector(".add-post__preview");
 const previewPrevButton = document.querySelector(".add-post__preview-prev-button");
 const previewNextButton = document.querySelector(".add-post__preview-next-button");
 const previewListCount = document.querySelectorAll(".add-post__preview-list").length;
+const updatePost = document.querySelector("#update-post");
 
 const PREVIEW_IMAGE_WIDTH = 453.59;
 
@@ -67,23 +68,15 @@ function addNewPostPageEvent() {
 }
 
 function addUpdatePostPageEvent() {
-    const updatePostCancelButton = document.querySelectorAll(".update-post-cance");
+    const updatePostCancelButtons = document.querySelectorAll(".update-post-cancel");
 
-    mainBody.addEventListener("click", (event) => {
-        const target = event.target;
-
-        if (target.classList.contains("option-box-body__modify")) {
-            console.log(target);
-            document.querySelector("#update-post").style.display = "block";
-            optionBox.style.display = "none";
-            // 해당 게시물을 조회해서 수정 폼에 넣어야함
-        }
+    updatePostCancelButtons.forEach((updatePostCancelBtn) => {
+        updatePostCancelBtn.addEventListener("click", () => {
+            updatePost.style.display = "none";
+            mainBody.style.overflow = "auto";
+            // previewSlideController.clear(0);
+        });
     });
-
-    // updatePostCancelButton.addEventListener("click", () => {
-    //     addPostDiv.style.display = "none";
-    //     mainBody.style.overflow = "auto";
-    // });
 }
 
 const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);

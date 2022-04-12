@@ -472,10 +472,43 @@ function addMainPageEvent() {
         optionBox.style.display = "none";
     });
 
+    document.querySelector(".option-box-body__modify").addEventListener("click", () => {
+        // 해당 게시물을 조회해서 수정 폼에 넣어야함
+        getPostAjax(optionBoxBodyButtons.getAttribute("num"));
+    });
+
     document.querySelector(".option-box-body__delete").addEventListener("click", () => {
         deleteCommentAjax(optionBoxBodyButtons.getAttribute("num"),
             optionBoxBodyButtons.getAttribute("kinds"));
-    })
+    });
+}
+
+function getPostAjax(postId) {
+    const request = new XMLHttpRequest();
+
+    if (!request) {
+        alert("XMLHTTP 인스턴스 생성 불가");
+        return false;
+    }
+
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                console.log(request.response);
+                optionBox.style.display = "none";
+                updatePost.style.display = "block";
+                // updatePost 값 세팅
+            } else if (request.status === 403){
+                alert("권한이 없습니다.");
+            } else {
+                alert("request에 문제가 있습니다.")
+            }
+        }
+    }
+
+    request.open("get", `/posts/${postId}`);
+    request.responseType = "json";
+    request.send();
 }
 
 function deleteCommentAjax(id, kinds) {
