@@ -46,8 +46,8 @@ public class InitData {
             em.persist(member1);
             em.persist(member2);
 
-            for (int i = 0; i < 10; i++) {
-                Post post = new Post(member1 , "안녕하세요~");
+            for (int i = 0; i < 20; i++) {
+                Post post = new Post(member1 , "테스트 게시물" + i);
                 post.addPostFile(new PostFile(post, "01", "test-image1", "png"));
                 post.addPostFile(new PostFile(post, "02", "test-image2", "png"));
                 post.addPostFile(new PostFile(post, "03", "test-image3", "png"));
@@ -71,7 +71,7 @@ public class InitData {
             Comment comment5 = new Comment(post2, member2, "반가워요!");
             Comment comment6 = new Comment(post2, member2, "좋은 하루에요~");
 
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 40; i++) {
                 em.persist(new Comment(post2, member2, "테스트 댓글" + i));
             }
 
@@ -82,7 +82,7 @@ public class InitData {
             em.persist(comment5);
             em.persist(comment6);
 
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 40; i++) {
                 em.persist(new Reply(comment2, member2, "테스트 답글" + i));
             }
             for (int i = 0; i < 4; i++) {
