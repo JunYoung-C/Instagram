@@ -53,6 +53,101 @@
       </section>
     </main>
 
+    <div id="comment" class="modal">
+      <div class="comment-cancel modal-header">
+        <i class="fas fa-times comment-post__cancel-btn"></i>
+      </div>
+
+      <div class="modal-body">
+        <article class="post comment-post">
+          <section class="comment-left-section">
+            <div class="comment-post-media-wrap">
+              <div class="post-images-wrap comment-post-images-wrap">
+                <div class="comment-post-images__buttons">
+                  <div class="comment-post-images__prev-button slide-button">
+                    <i class="fas fa-chevron-circle-left"></i>
+                  </div>
+
+                  <div class="comment-post-images__next-button slide-button">
+                    <i class="fas fa-chevron-circle-right"></i>
+                  </div>
+                </div>
+
+                <ul class="post-images slide-image comment-post-images"></ul>
+              </div>
+              <!-- <div class="post-video-wrap"></div> -->
+            </div>
+          </section>
+
+          <section class="comment-right-section">
+            <div class="post-header comment-post-header">
+              <header class="post-profile comment-post-header-profile">
+                <div class="post-profile__info comment-post-header__info"></div>
+
+                <div class="post-profile__more comment-post-header__more">
+                  <i class="fas fa-ellipsis-h fa-lg show-option-box__post"></i>
+                </div>
+              </header>
+            </div>
+
+            <div class="comments">
+              <div class="comment not-comment"></div>
+
+              <div class="comment-wrap"></div>
+
+              <div class="more-comment">
+                <div class="more-comment__button">
+                  <span class="more-comment__plus">+</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="post-contents comment-post-contents">
+              <div class="post-options">
+                <div class="post-options-column">
+                  <i class="far fa-heart post-options__heart"></i>
+                  <i class="far fa-comment post-options__comment"></i>
+                  <i class="far fa-paper-plane post-options__share"></i>
+                </div>
+                <div class="post-options-column">
+                  <i class="far fa-bookmark post-options__bookmark"></i>
+                </div>
+              </div>
+              <div class="post-like-text">
+                <span>좋아요 <span class="post-like-count">8000</span>개</span>
+              </div>
+              <div class="post-time-wrap comment-post-time-wrap"></div>
+              <div class="post-comment">
+                <form
+                        action="/comments"
+                        method="post"
+                        class="post-comment__form comment-post__comment-form"
+                        th:object="${commentSaveForm}"
+                >
+                  <div class="post-comment__icons-wrap">
+                    <i class="far fa-smile"></i>
+                  </div>
+                  <input type="hidden" th:field="*{memberId}" />
+                  <div class="post-comment__hidden-inputs"></div>
+                  <input
+                          type="text"
+                          placeholder="댓글 달기..."
+                          class="post-comment__text comment-post__comment-text"
+                          th:field="*{text}"
+                  />
+                  <input
+                          type="submit"
+                          value="게시"
+                          class="post-comment__button comment-post__add-comment-button"
+                  />
+                </form>
+              </div>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+
     <div id="add-post" class="modal">
       <div class="add-post-cancel modal-header">
         <i class="fas fa-times add-post__cancel-btn post-modal__cancel-btn"></i>
@@ -252,101 +347,6 @@
             </div>
           </div>
         </form>
-      </div>
-    </div>
-
-    <div id="comment" class="modal">
-      <div class="comment-cancel modal-header">
-        <i class="fas fa-times add-post__cancel-btn"></i>
-      </div>
-
-      <div class="modal-body">
-        <article class="post comment-post">
-          <section class="comment-left-section">
-            <div class="comment-post-media-wrap">
-              <div class="post-images-wrap comment-post-images-wrap">
-                <div class="comment-post-images__buttons">
-                  <div class="comment-post-images__prev-button slide-button">
-                    <i class="fas fa-chevron-circle-left"></i>
-                  </div>
-
-                  <div class="comment-post-images__next-button slide-button">
-                    <i class="fas fa-chevron-circle-right"></i>
-                  </div>
-                </div>
-
-                <ul class="post-images slide-image comment-post-images"></ul>
-              </div>
-              <!-- <div class="post-video-wrap"></div> -->
-            </div>
-          </section>
-
-          <section class="comment-right-section">
-            <div class="post-header comment-post-header">
-              <header class="post-profile comment-post-header-profile">
-                <div class="post-profile__info comment-post-header__info"></div>
-
-                <div class="post-profile__more comment-post-header__more">
-                  <i class="fas fa-ellipsis-h fa-lg show-option-box__post"></i>
-                </div>
-              </header>
-            </div>
-
-            <div class="comments">
-              <div class="comment not-comment"></div>
-
-              <div class="comment-wrap"></div>
-
-              <div class="more-comment">
-                <div class="more-comment__button">
-                  <span class="more-comment__plus">+</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="post-contents comment-post-contents">
-              <div class="post-options">
-                <div class="post-options-column">
-                  <i class="far fa-heart post-options__heart"></i>
-                  <i class="far fa-comment post-options__comment"></i>
-                  <i class="far fa-paper-plane post-options__share"></i>
-                </div>
-                <div class="post-options-column">
-                  <i class="far fa-bookmark post-options__bookmark"></i>
-                </div>
-              </div>
-              <div class="post-like-text">
-                <span>좋아요 <span class="post-like-count">8000</span>개</span>
-              </div>
-              <div class="post-time-wrap comment-post-time-wrap"></div>
-              <div class="post-comment">
-                <form
-                  action="/comments"
-                  method="post"
-                  class="post-comment__form comment-post__comment-form"
-                  th:object="${commentSaveForm}"
-                >
-                  <div class="post-comment__icons-wrap">
-                    <i class="far fa-smile"></i>
-                  </div>
-                  <input type="hidden" th:field="*{memberId}" />
-                  <div class="post-comment__hidden-inputs"></div>
-                  <input
-                    type="text"
-                    placeholder="댓글 달기..."
-                    class="post-comment__text comment-post__comment-text"
-                    th:field="*{text}"
-                  />
-                  <input
-                    type="submit"
-                    value="게시"
-                    class="post-comment__button comment-post__add-comment-button"
-                  />
-                </form>
-              </div>
-            </div>
-          </section>
-        </article>
       </div>
     </div>
 

@@ -7,6 +7,10 @@
   border-radius: 5px;
 }
 
+.comment-post__cancel-btn {
+  cursor: pointer;
+}
+
 /* comment-left-section 시작 */
 .comment-post-media-wrap {
   width: 555px;
