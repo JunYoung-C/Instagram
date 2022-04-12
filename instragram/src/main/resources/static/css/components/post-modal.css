@@ -64,6 +64,52 @@
     overflow: hidden;
 }
 
+.post-modal__files-wrap {
+    width: 453.6px;
+}
+
+.post-modal__preview-next-button,
+.post-modal__preview-prev-button {
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    opacity: 0.7;
+    font-size: 16px;
+}
+
+.post-modal__preview-next-button .fa-chevron-right {
+    margin-left: 2px;
+}
+
+.post-modal__preview-prev-button .fa-chevron-left {
+    margin-right: 2px;
+}
+
+.post-modal__files {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 453.6px;
+    transition: left 0.25s ease-out;
+}
+
+.post-modal__file {
+    background-color: black;
+    width: 453.6px;
+    height: 402px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.post-modal__image-file {
+    width: 453.6px;
+    max-height: 402px;
+}
+
 .post-modal__text-contents {
     width: 46%;
     height: 402px;

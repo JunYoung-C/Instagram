@@ -16,10 +16,10 @@ function showPreviewFiles(event) {
         reader.addEventListener("load", function (event) {
             const img = document.createElement("img");
             img.src = event.target.result;
-            img.classList.add("add-post__preview-image");
+            img.classList.add("post-modal__image-file");
 
             const li = document.createElement("li");
-            li.classList.add("add-post__preview-list");
+            li.classList.add("post-modal__file");
 
             li.appendChild(img);
             addPostPreview.appendChild(li);
