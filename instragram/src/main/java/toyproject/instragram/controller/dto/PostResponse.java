@@ -33,6 +33,10 @@ public class PostResponse {
                 commentCount);
     }
 
+    public static PostResponse from(Post post) {
+        return PostResponse.from(post, null);
+    }
+
     private static List<String> getFilePaths(Post post) {
         return post.getPostFiles().stream()
                 .map(PostFile::getOriginalStoreFileName)
