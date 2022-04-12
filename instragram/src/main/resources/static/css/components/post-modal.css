@@ -1,0 +1,131 @@
+.post-modal-body {
+    min-width: 900px;
+}
+
+.post-modal__cancel-btn {
+    cursor: pointer;
+}
+
+.post-modal__form {
+    background: white;
+    width: 840px;
+    height: 445px;
+    border-radius: 10px;
+}
+
+.post-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 43px;
+    border-bottom: var(--main-border);
+    padding: 17px;
+}
+
+.post-modal__header-column:first-child,
+.post-modal__header-column:last-child {
+    width: 60px;
+}
+
+.post-modal__return {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.post-modal__header-title {
+    font-weight: bold;
+}
+
+.post-modal__submit {
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    color: var(--blue);
+    background: white;
+    cursor: pointer;
+}
+
+.post-modal__contents {
+    display: flex;
+    height: 100%;
+}
+
+.post-modal__file-contents {
+    width: 54%;
+    height: 402px;
+    border-right: var(--main-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-modal__text-contents {
+    width: 46%;
+    height: 402px;
+    position: relative;
+}
+
+.post-modal__profile {
+    height: 65px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.post-modal__text-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.post-modal__text-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    padding: 0 18px;
+}
+
+.post-modal__profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.post-modal__profile-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.post-modal__text {
+    width: 350px;
+    height: 290px;
+    resize: none;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+.post-modal__text:focus {
+    outline: none;
+}
+
+.post-modal__text-icons {
+    font-size: 20px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.post-modal__text-info {
+    font-size: 12px;
+    opacity: 0.3;
+    cursor: pointer;
+}
