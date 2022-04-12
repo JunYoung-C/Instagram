@@ -52,38 +52,7 @@ class CommentRepositoryTest {
         //then
         assertThat(commentCount).isEqualTo(5);
     }
-
-    @DisplayName("게시물을 올린 회원이 단 댓글 확인")
-    @Test
-    void getCommentsByMemberIdAndPostId() {
-        //given
-        Member member1 = new Member(null, "nickname1", "이름1");
-        Member member2 = new Member(null, "nickname2", "이름2");
-        em.persist(member1);
-        em.persist(member2);
-
-        Post post = new Post(member1, null);
-        em.persist(post);
-
-        IntStream.range(0, 5)
-                .forEach(i -> em.persist(new Comment(post, i % 2 == 0 ? member1 : member2, String.valueOf(i))));
-
-        em.flush();
-        em.clear();
-
-        //when
-        int size = 3;
-        Slice<Comment> commentSlice = commentRepository
-                .getCommentsByMemberIdAndPostId(post.getMember().getId(), post.getId(), PageRequest.of(0, size));
-
-        //then
-        List<Comment> comments = commentSlice.getContent();
-        assertThat(comments).hasSize(size);
-        assertThat(comments).extracting("text").containsExactly("0", "2", "4");
-
-    }
-
-
+    
     @DisplayName("생성 날짜가 빠른 순으로 댓글 조회")
     @Test
     void getCommentsByPostIdOrderByCreatedDateDesc() {
