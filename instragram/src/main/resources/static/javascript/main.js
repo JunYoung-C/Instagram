@@ -417,7 +417,7 @@ function setReplies(response, commentId) {
 
 function getReplacedReplyTemplate(reply) {
     return document.querySelector("#template__reply").innerHTML
-        .replace("{replyId}", reply.replyId)
+        .replaceAll("{replyId}", reply.replyId)
         .replace("{member.imagePath}", reply.member.imagePath)
         .replace("{member.nickname}", reply.member.nickname)
         .replace("{text}", reply.text)
@@ -425,6 +425,8 @@ function getReplacedReplyTemplate(reply) {
 }
 
 function addMainPageEvent() {
+    const optionBoxBodyButtons = document.querySelector(".option-box-body__buttons");
+
     mainPostMore.addEventListener("click", getPostsAjax);
 
     headerSearchInput.addEventListener("focus", () => {
@@ -445,25 +447,70 @@ function addMainPageEvent() {
     });
 
     mainBody.addEventListener("click", (event) => {
-        console.log(event.target);
-        if (event.target.classList.contains("show-option-box__post")) {
+        const target = event.target;
+
+        if (target.classList.contains("show-option-box__post")) {
             optionBox.style.display = "block";
             document.querySelector(".option-box-body__modify").style.display = "";
-            console.log(event.target.getAttribute("postId"));
-        } else if (event.target.classList.contains("show-option-box__comment")) {
+            optionBoxBodyButtons.setAttribute("num", target.getAttribute("postId"));
+            optionBoxBodyButtons.setAttribute("kinds", "posts");
+        } else if (target.classList.contains("show-option-box__comment")) {
             optionBox.style.display = "block";
             document.querySelector(".option-box-body__modify").style.display = "none";
-            console.log(event.target.getAttribute("commentId"));
-        }else if (event.target.classList.contains("show-option-box__reply")) {
+            optionBoxBodyButtons.setAttribute("num", target.getAttribute("commentId"));
+            optionBoxBodyButtons.setAttribute("kinds", "comments");
+        } else if (target.classList.contains("show-option-box__reply")) {
             optionBox.style.display = "block";
             document.querySelector(".option-box-body__modify").style.display = "none";
-            console.log(event.target.getAttribute("replyId"));
+            optionBoxBodyButtons.setAttribute("num", target.getAttribute("replyId"));
+            optionBoxBodyButtons.setAttribute("kinds", "replies");
         }
-    })
+    });
 
     document.querySelector(".option-box-body__cancel").addEventListener("click", () => {
         optionBox.style.display = "none";
+    });
+
+    document.querySelector(".option-box-body__delete").addEventListener("click", () => {
+        deleteCommentAjax(optionBoxBodyButtons.getAttribute("num"),
+            optionBoxBodyButtons.getAttribute("kinds"));
     })
+}
+
+function deleteCommentAjax(id, kinds) {
+    const request = new XMLHttpRequest();
+
+    if (!request) {
+        alert("XMLHTTP 인스턴스 생성 불가");
+        return false;
+    }
+
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                optionBox.style.display = "";
+                switch (kinds) {
+                    case "posts":
+                        document.querySelector(`.main-post-${id}`).remove();
+                        comment.style.display = "none";
+                        mainBody.style.overflow = "auto";
+                        break;
+                    case "comments":
+                        document.querySelector(`.comment-${id}`).remove();
+                        break;
+                    case "replies":
+                        document.querySelector(`.reply-${id}`).remove();
+                }
+            } else {
+                alert("request에 문제가 있습니다.")
+            }
+            // 성공적으로 ajax하면 댓글 초기화
+            // 권한 없는 상태 코드인 경우 알리기
+        }
+    }
+
+    request.open("delete", `/${kinds}/${id}`);
+    request.send();
 }
 
 function addCommentPageEvent() {
