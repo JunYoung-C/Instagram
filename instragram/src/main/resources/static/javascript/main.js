@@ -8,6 +8,7 @@ const commentPostImages = document.querySelector(".comment-post-images");
 const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
 const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
 const optionBox = document.querySelector(".option-box");
+const comment = document.querySelector("#comment");
 
 const MAIN_POST_IMAGE_WIDTH = 600;
 const COMMENT_POST_IMAGE_WIDTH = 555;
@@ -489,18 +490,7 @@ function deleteCommentAjax(id, kinds) {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 optionBox.style.display = "";
-                switch (kinds) {
-                    case "posts":
-                        document.querySelector(`.main-post-${id}`).remove();
-                        comment.style.display = "none";
-                        mainBody.style.overflow = "auto";
-                        break;
-                    case "comments":
-                        document.querySelector(`.comment-${id}`).remove();
-                        break;
-                    case "replies":
-                        document.querySelector(`.reply-${id}`).remove();
-                }
+                removeDeletedNode(kinds, id);
             } else {
                 alert("request에 문제가 있습니다.")
             }
@@ -511,6 +501,21 @@ function deleteCommentAjax(id, kinds) {
 
     request.open("delete", `/${kinds}/${id}`);
     request.send();
+}
+
+function removeDeletedNode(kinds, id) {
+    switch (kinds) {
+        case "posts":
+            document.querySelector(`.main-post-${id}`).remove();
+            comment.style.display = "none";
+            mainBody.style.overflow = "auto";
+            break;
+        case "comments":
+            document.querySelector(`.comment-${id}`).remove();
+            break;
+        case "replies":
+            document.querySelector(`.reply-${id}`).remove();
+    }
 }
 
 function addCommentPageEvent() {
@@ -566,3 +571,4 @@ const commentPostSlideController =
 
 getPostsAjax();
 addMainPageEvent();
+addCommentPageEvent();

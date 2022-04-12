@@ -55,14 +55,14 @@
 
     <div id="add-post" class="modal">
       <div class="add-post-cancel modal-header">
-        <i class="fas fa-times add-post__cancel-btn"></i>
+        <i class="fas fa-times add-post__cancel-btn post-modal__cancel-btn"></i>
       </div>
-      <div class="add-post__form-wrap modal-body">
+      <div class="add-post__form-wrap post-modal-body modal-body">
         <form
           action="/posts"
           method="post"
           enctype="multipart/form-data"
-          class="add-post__form"
+          class="add-post__form post-modal__form"
           th:object="${postSaveForm}"
         >
           <input
@@ -71,24 +71,24 @@
             name="memberId"
             th:value="${signInMember.id}"
           />
-          <header class="add-post__header">
-            <div class="add-post__header-column">
+          <header class="add-post__header post-modal__header">
+            <div class="add-post__header-column post-modal__header-column">
               <div class="add-post__return-wrap add-post-cancel">
-                <i class="fas fa-arrow-left add-post__return"></i>
+                <i class="fas fa-arrow-left add-post__return post-modal__return"></i>
               </div>
             </div>
 
-            <div class="add-post__header-column">
-              <span class="add-post__header-title">새 게시물 만들기</span>
+            <div class="add-post__header-column post-modal__header-column">
+              <span class="add-post__header-title post-modal__header-title">새 게시물 만들기</span>
             </div>
 
-            <div class="add-post__header-column">
-              <input type="submit" value="공유하기" class="add-post__submit" />
+            <div class="add-post__header-column post-modal__header-column">
+              <input type="submit" value="공유하기" class="add-post__submit post-modal__submit" />
             </div>
           </header>
 
-          <div class="add-post__contents">
-            <div class="add-post__file-contents">
+          <div class="add-post__contents post-modal__contents">
+            <div class="add-post__file-contents post-modal__file-contents">
               <div class="add-post__preview-wrap">
                 <div class="add-post__preview-control-buttons">
                   <div class="add-post__preview-prev-button slide-button">
@@ -127,25 +127,105 @@
               </div>
             </div>
 
-            <div class="add-post__text-contents">
-              <div class="add-post__profile">
-                <img th:src="|/files/${signInMember.memberImage.getOriginalStoreFileName()}|"
-                     src="images/03.png" class="add-post__profile-image" />
-                <span class="add-post__profile-name" th:text="${signInMember.nickname}">최준영</span>
+            <div class="add-post__text-contents post-modal__text-contents">
+              <div class="add-post__profile post-modal__profile">
+                <img
+                  th:src="|/files/${signInMember.memberImage.getOriginalStoreFileName()}|"
+                  src="images/03.png"
+                  class="add-post__profile-image post-modal__profile-image"
+                />
+                <span
+                  class="add-post__profile-name post-modal__profile-name"
+                  th:text="${signInMember.nickname}"
+                  >최준영</span
+                >
               </div>
 
-              <div class="add-post__text-wrap">
+              <div class="add-post__text-wrap post-modal__text-wrap">
                 <textarea
                   placeholder="문구 입력..."
-                  class="add-post__text"
+                  class="add-post__text post-modal__text"
                   th:field="*{text}"
                 ></textarea>
               </div>
 
-              <div class="add-post__text-options">
-                <i class="far fa-smile add-post__text-icons"></i>
-                <span class="add-post__text-info"
+              <div class="add-post__text-options post-modal__text-options">
+                <i class="far fa-smile add-post__text-icons post-modal__text-icons"></i>
+                <span class="add-post__text-info post-modal__text-info"
                   ><span class="add-post__text-count">0</span>/2,200</span
+                >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="update-post" class="modal">
+      <div class="update-post-cancel modal-header">
+        <i class="fas fa-times update-post__cancel-btn post-modal__cancel-btn"></i>
+      </div>
+      <div class="update-post__form-wrap post-modal-body modal-body">
+        <form
+          action="/posts"
+          method="post"
+          enctype="multipart/form-data"
+          class="update-post__form post-modal__form"
+          th:object="${postSaveForm}"
+        >
+<!--          <input-->
+<!--            type="hidden"-->
+<!--            id="memberId"-->
+<!--            name="memberId"-->
+<!--            th:value="${signInMember.id}"-->
+<!--          />-->
+          <header class="update-post__header post-modal__header">
+            <div class="update-post__header-column post-modal__header-column">
+              <div class="update-post__return-wrap update-post-cancel">
+                <i class="fas fa-arrow-left update-post__return post-modal__return"></i>
+              </div>
+            </div>
+
+            <div class="update-post__header-column post-modal__header-column">
+              <span class="update-post__header-title post-modal__header-title">정보 수정</span>
+            </div>
+
+            <div class="update-post__header-column post-modal__header-column">
+              <input type="submit" value="공유하기" class="update-post__submit post-modal__submit" />
+            </div>
+          </header>
+
+          <div class="update-post__contents post-modal__contents">
+            <div class="update-post__file-contents post-modal__file-contents">
+
+            </div>
+
+            <div class="update-post__text-contents post-modal__text-contents">
+              <div class="update-post__profile post-modal__profile">
+                <img
+                  th:src="|/files/${signInMember.memberImage.getOriginalStoreFileName()}|"
+                  src="images/03.png"
+                  class="update-post__profile-image post-modal__profile-image"
+                />
+                <span
+                  class="update-post__profile-name post-modal__profile-name"
+                  th:text="${signInMember.nickname}"
+                  >최준영</span
+                >
+              </div>
+
+              <div class="update-post__text-wrap post-modal__text-wrap">
+                <textarea
+                  placeholder="문구 입력..."
+                  class="update-post__text post-modal__text"
+                  th:field="*{text}"
+                ></textarea>
+              </div>
+
+              <div class="update-post__text-options post-modal__text-options">
+                <i class="far fa-smile update-post__text-icons post-modal__text-icons"></i>
+                <span class="update-post__text-info post-modal__text-info"
+                  ><span class="update-post__text-count">0</span>/2,200</span
                 >
               </div>
             </div>
@@ -477,6 +557,6 @@
       </div>
     </script>
     <script src="/javascript/main.js"></script>
-    <script src="/javascript/modal.js"></script>
+    <script src="/javascript/post-modal.js"></script>
   </body>
 </html>
