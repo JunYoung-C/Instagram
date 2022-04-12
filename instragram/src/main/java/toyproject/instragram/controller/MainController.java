@@ -26,7 +26,7 @@ public class MainController {
 
         model.addAttribute("postSaveForm", new PostSaveForm());
         model.addAttribute("commentSaveForm", commentSaveForm);
-        model.addAttribute("memberId", signInMember.getId());
+        model.addAttribute("signInMember", signInMember);
         return "main";
     }
 }

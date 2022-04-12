@@ -69,7 +69,7 @@
             type="hidden"
             id="memberId"
             name="memberId"
-            th:value="${memberId}"
+            th:value="${signInMember.id}"
           />
           <header class="add-post__header">
             <div class="add-post__header-column">
@@ -129,8 +129,9 @@
 
             <div class="add-post__text-contents">
               <div class="add-post__profile">
-                <img src="images/03.png" class="add-post__profile-image" />
-                <span class="add-post__profile-name">최준영</span>
+                <img th:src="|/files/${signInMember.memberImage.getOriginalStoreFileName()}|"
+                     src="images/03.png" class="add-post__profile-image" />
+                <span class="add-post__profile-name" th:text="${signInMember.nickname}">최준영</span>
               </div>
 
               <div class="add-post__text-wrap">
