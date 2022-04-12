@@ -1,4 +1,4 @@
-const mainBody = document.querySelector(".main-body");
+
 
 const showAddPostButton = document.querySelector(".show-add-post");
 const addPostDiv = document.querySelector("#add-post");

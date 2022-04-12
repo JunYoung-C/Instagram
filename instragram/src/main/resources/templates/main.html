@@ -185,7 +185,7 @@
                 <div class="post-profile__info comment-post-header__info"></div>
 
                 <div class="post-profile__more comment-post-header__more">
-                  <i class="fas fa-ellipsis-h fa-lg"></i>
+                  <i class="fas fa-ellipsis-h fa-lg show-option-box__post"></i>
                 </div>
               </header>
             </div>
@@ -294,7 +294,7 @@
               <span class="post-profile__name main-post-profile__name">{member.nickname}</span>
             </div>
             <div class="post-profile__more main-post-profile__more">
-              <i class="fas fa-ellipsis-h fa-lg"></i>
+              <i class="fas fa-ellipsis-h fa-lg show-option-box__post" postId="{postId}"></i>
             </div>
           </header>
         </div>
@@ -428,9 +428,9 @@
             <div class="comment-owner__options">
               <span class="comment-owner__created-time">{createdDate}</span>
               <span class="comment-owner__liker">좋아요 3개</span>
-              <span class="comment_owner__reply" replyId="{commentId}">답글 달기</span>
+              <span class="comment_owner__reply" commentId="{commentId}">답글 달기</span>
               <span class="comment_owner__option">
-                <i class="fas fa-ellipsis-h fa-lg"></i>
+                <i class="fas fa-ellipsis-h fa-lg show-option-box__comment" commentId="{commentId}"></i>
               </span>
             </div>
           </div>
@@ -465,6 +465,9 @@
             <span class="comment-owner__created-time">{createdDate}</span>
             <span class="comment-owner__liker">좋아요 3개</span>
             <span class="comment_owner__reply">답글 달기</span>
+            <span class="comment_owner__option">
+                <i class="fas fa-ellipsis-h fa-lg show-option-box__reply" replyId="{replyId}"></i>
+              </span>
           </div>
         </div>
         <div class="comment-owner__heart-wrap">

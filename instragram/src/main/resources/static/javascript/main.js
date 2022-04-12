@@ -1,3 +1,4 @@
+const mainBody = document.querySelector(".main-body");
 const headerSearchInput = document.querySelector(".header-search__input");
 const searchResultWrap = document.querySelector(".search-result-wrap");
 const mainPostWrap = document.querySelector(".main-post-wrap");
@@ -6,6 +7,7 @@ const searchResult = document.querySelector(".search-result");
 const commentPostImages = document.querySelector(".comment-post-images");
 const commentPostImagePrevButton = document.querySelector(".comment-post-images__prev-button");
 const commentPostImageNextButton = document.querySelector(".comment-post-images__next-button");
+const optionBox = document.querySelector(".option-box");
 
 const MAIN_POST_IMAGE_WIDTH = 600;
 const COMMENT_POST_IMAGE_WIDTH = 555;
@@ -151,16 +153,16 @@ function setMainPost(response) {
     const sliceInfo = response.sliceInfo;
 
     for (let i = 0; i < posts.length; i++) {
-        mainPostWrap.insertAdjacentHTML("beforeend", getReplacedMainPostTemplate(posts, i));
+        mainPostWrap.insertAdjacentHTML("beforeend", getReplacedMainPostTemplate(posts[i]));
 
         for (let j = 0; j < posts[i].filePaths.length; j++) {
             document.querySelector(`.main-post-${posts[i].postId} .main-post-images`)
-                .insertAdjacentHTML("beforeend", getMainPostImagesTemplate(posts, i, j));
+                .insertAdjacentHTML("beforeend", getMainPostImagesTemplate(posts[i].filePaths[j]));
         }
-        addMainPostEvent(posts, i);
+        addMainPostEvent(posts[i]);
 
         if (posts[i].commentCount === 0) {
-            removeMainPostComments(posts, i);
+            removeMainPostComments(posts[i]);
         }
     }
 
@@ -169,23 +171,23 @@ function setMainPost(response) {
     }
 }
 
-function removeMainPostComments(posts, i) {
-    document.querySelector(`.main-post-${posts[i].postId} .main-post-comments-count`).style.display = "none";
+function removeMainPostComments(post) {
+    document.querySelector(`.main-post-${post.postId} .main-post-comments-count`).style.display = "none";
 }
 
-function getReplacedMainPostTemplate(posts, i) {
+function getReplacedMainPostTemplate(post) {
     return document.querySelector("#template__main-post").innerHTML
-        .replaceAll("{postId}", posts[i].postId)
-        .replaceAll("{member.nickname}", posts[i].member.nickname)
-        .replace("{member.imagePath}", posts[i].member.imagePath)
-        .replace("{text}", posts[i].text)
-        .replace("{commentCount}", posts[i].commentCount)
-        .replace("{createdDate}", posts[i].createdDate);
+        .replaceAll("{postId}", post.postId)
+        .replaceAll("{member.nickname}", post.member.nickname)
+        .replace("{member.imagePath}", post.member.imagePath)
+        .replace("{text}", post.text)
+        .replace("{commentCount}", post.commentCount)
+        .replace("{createdDate}", post.createdDate);
 }
 
-function getMainPostImagesTemplate(posts, i, j) {
+function getMainPostImagesTemplate(filePath) {
     return document.querySelector("#template__main-post-images").innerHTML
-        .replace("{filePath}", posts[i].filePaths[j]);
+        .replace("{filePath}", filePath);
 }
 
 function removePostMoreButton() {
@@ -193,14 +195,15 @@ function removePostMoreButton() {
     mainPostMore.removeEventListener("click", getPostsAjax);
 }
 
-function addMainPostEvent(posts, i) {
-    const mainPostImagesCount = posts[i].filePaths.length;
-    const mainPostImagePrevButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__prev-button`);
-    const mainPostImageNextButton = document.querySelector(`.main-post-${posts[i].postId} .post-images__next-button`);
-    const mainPostImages = document.querySelector(`.main-post-${posts[i].postId} .main-post-images`);
+function addMainPostEvent(post) {
+    const mainPostImagesCount = post.filePaths.length;
+    const mainPostImagePrevButton = document.querySelector(`.main-post-${post.postId} .post-images__prev-button`);
+    const mainPostImageNextButton = document.querySelector(`.main-post-${post.postId} .post-images__next-button`);
+    const mainPostImages = document.querySelector(`.main-post-${post.postId} .main-post-images`);
     const mainPostImageSlideController =
         new SlideController(MAIN_POST_IMAGE_WIDTH, mainPostImagesCount, mainPostImagePrevButton, mainPostImageNextButton, mainPostImages);
-    const showComment = document.querySelector(`.main-post-${posts[i].postId} .show-comment`);
+    const showComment = document.querySelector(`.main-post-${post.postId} .show-comment`);
+    const mainPostProfileMore = document.querySelector(`.main-post-${post.postId} .main-post-profile__more`);
 
     mainPostImagePrevButton.addEventListener("click", (event) => {
         mainPostImageSlideController.slide(event.currentTarget);
@@ -213,9 +216,14 @@ function addMainPostEvent(posts, i) {
     showComment.addEventListener("click", () => {
         comment.style.display = "block";
         mainBody.style.overflow = "hidden";
-
-        setCommentPage(posts[i]);
+        document.querySelector(".comment-post-header__more .show-option-box__post")
+            .setAttribute("postId", post.postId);
+        setCommentPage(post);
     });
+
+    mainPostProfileMore.addEventListener("click", () => {
+
+    })
 }
 
 function setCommentPage(post) {
@@ -390,7 +398,7 @@ function setReplies(response, commentId) {
 
     for (let i = 0; i < replies.length; i++) {
         document.querySelector(`.comment-${commentId} .replies`)
-            .insertAdjacentHTML("beforeend", getReplacedReplyTemplate(replies, i));
+            .insertAdjacentHTML("beforeend", getReplacedReplyTemplate(replies[i]));
     }
 
     const hideReplies = document.querySelector(`.comment-${commentId} .comment-divider__hide-replies`);
@@ -407,12 +415,13 @@ function setReplies(response, commentId) {
     }
 }
 
-function getReplacedReplyTemplate(replies, i) {
+function getReplacedReplyTemplate(reply) {
     return document.querySelector("#template__reply").innerHTML
-        .replace("{member.imagePath}", replies[i].member.imagePath)
-        .replace("{member.nickname}", replies[i].member.nickname)
-        .replace("{text}", replies[i].text)
-        .replace("{createdDate}", replies[i].createdDate);
+        .replace("{replyId}", reply.replyId)
+        .replace("{member.imagePath}", reply.member.imagePath)
+        .replace("{member.nickname}", reply.member.nickname)
+        .replace("{text}", reply.text)
+        .replace("{createdDate}", reply.createdDate);
 }
 
 function addMainPageEvent() {
@@ -434,6 +443,27 @@ function addMainPageEvent() {
         }
         getMembersAjax(nickname);
     });
+
+    mainBody.addEventListener("click", (event) => {
+        console.log(event.target);
+        if (event.target.classList.contains("show-option-box__post")) {
+            optionBox.style.display = "block";
+            document.querySelector(".option-box-body__modify").style.display = "";
+            console.log(event.target.getAttribute("postId"));
+        } else if (event.target.classList.contains("show-option-box__comment")) {
+            optionBox.style.display = "block";
+            document.querySelector(".option-box-body__modify").style.display = "none";
+            console.log(event.target.getAttribute("commentId"));
+        }else if (event.target.classList.contains("show-option-box__reply")) {
+            optionBox.style.display = "block";
+            document.querySelector(".option-box-body__modify").style.display = "none";
+            console.log(event.target.getAttribute("replyId"));
+        }
+    })
+
+    document.querySelector(".option-box-body__cancel").addEventListener("click", () => {
+        optionBox.style.display = "none";
+    })
 }
 
 function addCommentPageEvent() {
@@ -466,7 +496,7 @@ function addCommentPageEvent() {
             document.querySelector(".comment-post__comment-form")
                 .setAttribute("action", "/replies");
             document.querySelector(".post-comment__comment-id-input").value =
-                event.target.getAttribute("replyId");
+                event.target.getAttribute("commentId");
             document.querySelector(".comment-post__comment-text").focus();
         }
     });
