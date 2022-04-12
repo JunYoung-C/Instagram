@@ -38,13 +38,18 @@ public class PostService {
         return postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(page, MAX_POST_SIZE));
     }
 
-    public Optional<Post> getPost(Long postId) {
-        return postRepository.findById(postId);
+    public Optional<Post> getOwnerPost(Long postId, Long memberId) {
+        Optional<Post> findPost = postRepository.findById(postId);
+        if (findPost.isEmpty() || findPost.get().getMember().getId() != memberId) {
+            return Optional.empty();
+        }
+        return findPost;
     }
 
     @Transactional
     public void modifyPostText(Long postId, String modifiedText) {
         Post post = postRepository.findById(postId).orElse(null);
+        //TODO 예외처리
         post.changeText(modifiedText);
     }
 
