@@ -11,6 +11,8 @@ import toyproject.instragram.entity.PostFile;
 import toyproject.instragram.repository.MemberRepository;
 import toyproject.instragram.repository.PostRepository;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -34,6 +36,10 @@ public class PostService {
 
     public Slice<Post> getPostSlice(int page) {
         return postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(page, MAX_POST_SIZE));
+    }
+
+    public Optional<Post> getPost(Long postId) {
+        return postRepository.findById(postId);
     }
 
     @Transactional
