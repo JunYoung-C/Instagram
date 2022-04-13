@@ -4,9 +4,14 @@ const addPostPreview = document.querySelector(".add-post__preview");
 const previewPrevButton = document.querySelector(".add-post__preview-prev-button");
 const previewNextButton = document.querySelector(".add-post__preview-next-button");
 const previewListCount = document.querySelectorAll(".add-post__preview-list").length;
+
 const updatePost = document.querySelector("#update-post");
+const updatePostPreview = document.querySelector(".update-post__preview");
+const updatePostImagePrevButton = document.querySelector(`.update-post__preview-prev-button`);
+const updatePostImageNextButton = document.querySelector(`.update-post__preview-next-button`);
 
 const PREVIEW_IMAGE_WIDTH = 453.59;
+const UPDATE_POST_IMAGE_WIDTH = 453.59;
 
 function showPreviewFiles(event) {
     const files = event.target.files;
@@ -77,9 +82,49 @@ function addUpdatePostPageEvent() {
             // previewSlideController.clear(0);
         });
     });
+
+    updatePostImagePrevButton.addEventListener("click", (event) => {
+        UpdatePostSlideController.slide(event.currentTarget);
+    });
+
+    updatePostImageNextButton.addEventListener("click", (event) => {
+        UpdatePostSlideController.slide(event.currentTarget);
+    });
 }
 
-const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
+function setUpdatePost(post, postId) {
+    const filesCount = post.filePaths.length;
+
+    document.querySelector(".update-post__form").setAttribute("action", `/posts/${postId}`);
+
+    setUpdatePostFiles(filesCount, post);
+    UpdatePostSlideController.clear(filesCount);
+
+    document.querySelector(".update-post__profile-image")
+        .setAttribute("src", `/files/${post.member.imagePath}`);
+
+    document.querySelector(".update-post__profile-name").textContent = post.member.nickname;
+}
+
+function setUpdatePostFiles(filesCount, post) {
+    updatePostPreview.innerHTML = "";
+    for (let i = 0; i < filesCount; i++) {
+        const img = document.createElement("img");
+        img.src = `/files/${post.filePaths[i]}`;
+        img.classList.add("post-modal__image-file");
+
+        const li = document.createElement("li");
+        li.classList.add("post-modal__file");
+
+        li.appendChild(img);
+        updatePostPreview.appendChild(li);
+    }
+}
+
+const previewSlideController =
+    new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
+const UpdatePostSlideController =
+    new SlideController(UPDATE_POST_IMAGE_WIDTH,  null, updatePostImagePrevButton, updatePostImageNextButton, updatePostPreview);
 
 addNewPostPageEvent();
 addUpdatePostPageEvent();

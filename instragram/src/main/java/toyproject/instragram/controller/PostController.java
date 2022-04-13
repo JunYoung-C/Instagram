@@ -38,7 +38,7 @@ public class PostController {
     @PostMapping("/posts/{postId}")
     public String modifyPost(@PathVariable Long postId, @RequestParam String modifiedText) {
         postService.modifyPostText(postId, modifiedText);
-        return "redirect:/main";
+        return "redirect:/";
     }
 
     // TODO 이미지 Resource 반환 메소드 구현

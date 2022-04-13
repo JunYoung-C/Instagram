@@ -496,10 +496,10 @@ function getPostAjax(postId) {
             if (request.status === 200) {
                 console.log(request.response);
                 optionBox.style.display = "none";
+                setUpdatePost(request.response, postId);
                 updatePost.style.display = "block";
-                // updatePost 값 세팅
             } else if (request.status === 403){
-                alert("권한이 없습니다.");
+                alert("해당 게시물에 대한 권한이 없습니다.");
             } else {
                 alert("request에 문제가 있습니다.")
             }
