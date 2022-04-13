@@ -79,7 +79,6 @@ function addUpdatePostPageEvent() {
         updatePostCancelBtn.addEventListener("click", () => {
             updatePost.style.display = "none";
             mainBody.style.overflow = "auto";
-            // previewSlideController.clear(0);
         });
     });
 

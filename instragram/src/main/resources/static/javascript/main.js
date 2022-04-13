@@ -473,7 +473,6 @@ function addMainPageEvent() {
     });
 
     document.querySelector(".option-box-body__modify").addEventListener("click", () => {
-        // 해당 게시물을 조회해서 수정 폼에 넣어야함
         getPostAjax(optionBoxBodyButtons.getAttribute("num"));
     });
 
