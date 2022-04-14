@@ -40,14 +40,15 @@ public class PostService {
 
     public Optional<Post> getOwnerPost(Long postId, Long memberId) {
         Optional<Post> findPost = postRepository.findById(postId);
-        if (findPost.isEmpty() || isNotMyPost(memberId, findPost)) {
+
+        if (findPost.isEmpty() || !isMyPost(memberId, findPost)) {
             return Optional.empty();
         }
         return findPost;
     }
 
-    private boolean isNotMyPost(Long memberId, Optional<Post> findPost) {
-        return findPost.get().getMember().getId() != memberId;
+    private boolean isMyPost(Long memberId, Optional<Post> findPost) {
+        return findPost.get().getMember().getId().equals(memberId);
     }
 
     @Transactional
