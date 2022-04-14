@@ -1,4 +1,4 @@
-package toyproject.instragram.service;
+package toyproject.instragram;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,6 +17,10 @@ public class FileManager {
 
     public FileManager(@Value("${file.dir}") String fileDir) {
         this.fileDir = fileDir;
+    }
+
+    public String getFullPath(String originalFilename) {
+        return fileDir + originalFilename;
     }
 
     public List<FileDto> storeFiles(List<MultipartFile> multipartFiles) {
@@ -45,10 +49,6 @@ public class FileManager {
                 extractFileName(originalFilename),
                 storeFileName,
                 extension));
-    }
-
-    private String getFullPath(String originalFilename) {
-        return fileDir + originalFilename;
     }
 
     private String extractFileName(String filePath) {
