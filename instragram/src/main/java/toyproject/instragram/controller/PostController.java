@@ -5,15 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import toyproject.instragram.FileDto;
 import toyproject.instragram.controller.dto.PostSaveForm;
-import toyproject.instragram.service.FileManager;
+import toyproject.instragram.FileManager;
 import toyproject.instragram.service.PostDto;
 import toyproject.instragram.service.PostService;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
