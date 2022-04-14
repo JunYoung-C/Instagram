@@ -2,12 +2,11 @@ package toyproject.instragram.member.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import toyproject.instragram.repository.QMemberProfileDto;
 
 import java.util.List;
 
-import static toyproject.instragram.entity.QMember.member;
-import static toyproject.instragram.entity.QMemberImage.memberImage;
+import static toyproject.instragram.member.entity.QMember.member;
+import static toyproject.instragram.member.entity.QMemberImage.memberImage;
 
 @RequiredArgsConstructor
 public class MemberCustomRepositoryImpl implements MemberCustomRepository {
@@ -20,6 +19,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
         return queryFactory
                 .select(new QMemberProfileDto(
                         member.id,
+                        member.name,
                         member.nickname,
                         memberImage.storeFileName.concat(".").concat(memberImage.extension)
                 ))
