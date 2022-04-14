@@ -18,7 +18,6 @@ public class ReplyController {
 
     private final ReplyService replyService;
 
-    // TODO html 보완 후 테스트
     @PostMapping("/replies")
     public String addReply(@Valid ReplySaveForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

@@ -18,7 +18,6 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    // TODO html 보완 후 테스트
     @PostMapping("/comments")
     public String addComment(@Valid CommentDto form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
