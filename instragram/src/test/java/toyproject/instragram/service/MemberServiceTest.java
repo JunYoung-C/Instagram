@@ -40,8 +40,6 @@ class MemberServiceTest {
                     Privacy.create("1234", phoneNumberOfEmails[i]),
                     nicknames[i],
                     "이름" + i);
-            member.addProfileImage(
-                    new MemberImage("file" + i, "encodedFile" + i, "png"));
             memberRepository.save(member);
         }
     }
@@ -59,6 +57,7 @@ class MemberServiceTest {
         //then
         Member findMember = memberRepository.findById(memberId).orElse(null);
         assertThat(findMember.getName()).isEqualTo("name");
+        assertThat(findMember.getMemberImage().getOriginalStoreFileName()).isEqualTo("basic-profile-image.png");
     }
 
     @DisplayName("회원가입 - 별명 중복으로 인한 실패")
