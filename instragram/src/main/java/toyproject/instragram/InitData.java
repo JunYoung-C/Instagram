@@ -35,33 +35,33 @@ public class InitData {
                     Privacy.create("1234", "01011111111"),
                     "doforme",
                     "최준영");
-            member1.addProfileImage(new MemberImage("01", "test-image1", "png"));
+            member1.addProfileImage(new MemberImage("01", "01", "png"));
 
             Member member2 = new Member(
                     Privacy.create("1234", "test@naver.com"),
                     "chlwnsdud",
                     "김영준");
-            member2.addProfileImage(new MemberImage("02", "test-image2", "png"));
+            member2.addProfileImage(new MemberImage("02", "02", "png"));
 
             em.persist(member1);
             em.persist(member2);
 
             for (int i = 0; i < 20; i++) {
                 Post post = new Post(member1 , "테스트 게시물" + i);
-                post.addPostFile(new PostFile(post, "01", "test-image1", "png"));
-                post.addPostFile(new PostFile(post, "02", "test-image2", "png"));
-                post.addPostFile(new PostFile(post, "03", "test-image3", "png"));
+                post.addPostFile(new PostFile(post, "01", "01", "png"));
+                post.addPostFile(new PostFile(post, "02", "02", "png"));
+                post.addPostFile(new PostFile(post, "03", "03", "png"));
                 em.persist(post);
             }
 
             Post post1 = new Post(member1, "안녕하세요~");
-            post1.addPostFile(new PostFile(post1, "02", "test-image2", "png"));
-            post1.addPostFile(new PostFile(post1, "01", "test-image1", "png"));
-            post1.addPostFile(new PostFile(post1, "03", "test-image3", "png"));
+            post1.addPostFile(new PostFile(post1, "02", "01", "png"));
+            post1.addPostFile(new PostFile(post1, "01", "02", "png"));
+            post1.addPostFile(new PostFile(post1, "03", "03", "png"));
             em.persist(post1);
 
             Post post2 = new Post(member2, "반갑습니다~");
-            post2.addPostFile(new PostFile(post2, "playstore", "test-image4", "png"));
+            post2.addPostFile(new PostFile(post2, "playstore", "playstore", "png"));
             em.persist(post2);
 
             Comment comment1 = new Comment(post1, member1, "정말 멋있어요!");
