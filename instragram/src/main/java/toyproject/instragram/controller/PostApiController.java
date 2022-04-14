@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import toyproject.instragram.SignIn;
+import toyproject.instragram.SignInMember;
 import toyproject.instragram.controller.dto.CommonSliceResponse;
 import toyproject.instragram.controller.dto.PostResponse;
 import toyproject.instragram.controller.dto.SliceInfo;
@@ -39,8 +40,8 @@ public class PostApiController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> getPost(@SignIn Member signInMember, @PathVariable Long postId) {
-        Post post = postService.getOwnerPost(postId, signInMember.getId()).orElse(null);
+    public ResponseEntity<PostResponse> getPost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
+        Post post = postService.getOwnerPost(postId, signInMember.getMemberId()).orElse(null);
 
         if (post == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

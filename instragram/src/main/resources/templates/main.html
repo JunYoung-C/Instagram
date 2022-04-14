@@ -164,7 +164,7 @@
             type="hidden"
             id="memberId"
             name="memberId"
-            th:value="${signInMember.id}"
+            th:value="${signInMember.memberId}"
           />
           <header class="add-post__header post-modal__header">
             <div class="add-post__header-column post-modal__header-column">
@@ -225,7 +225,7 @@
             <div class="add-post__text-contents post-modal__text-contents">
               <div class="add-post__profile post-modal__profile">
                 <img
-                  th:src="|/images/${signInMember.memberImage.getOriginalStoreFileName()}|"
+                  th:src="|/images/${signInMember.originalStoreFileName}|"
                   src="images/03.png"
                   class="add-post__profile-image post-modal__profile-image"
                 />

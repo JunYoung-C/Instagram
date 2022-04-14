@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import toyproject.instragram.SessionConst;
+import toyproject.instragram.SignInMember;
 import toyproject.instragram.controller.dto.MemberSaveForm;
 import toyproject.instragram.controller.dto.SignInForm;
 import toyproject.instragram.entity.Member;
@@ -53,10 +54,10 @@ public class MemberController {
             return "signIn";
         }
 
-        Member signInMember = memberService.signIn(form.getSignInId(), form.getPassword());
+        Member findMember = memberService.signIn(form.getSignInId(), form.getPassword());
 
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.SIGN_IN_MEMBER, signInMember);
+        session.setAttribute(SessionConst.SIGN_IN_MEMBER, SignInMember.from(findMember));
 
         return "redirect:/";
     }

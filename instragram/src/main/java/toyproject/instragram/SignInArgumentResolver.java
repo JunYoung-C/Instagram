@@ -14,7 +14,7 @@ public class SignInArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         boolean hasSignInAnnotation = parameter.hasParameterAnnotation(SignIn.class);
-        boolean hasMemberType = Member.class.isAssignableFrom(parameter.getParameterType());
+        boolean hasMemberType = SignInMember.class.isAssignableFrom(parameter.getParameterType());
 
         return hasSignInAnnotation && hasMemberType;
     }
