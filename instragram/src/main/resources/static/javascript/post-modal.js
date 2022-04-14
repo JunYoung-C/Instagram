@@ -100,8 +100,8 @@ function setUpdatePost(post, postId) {
     UpdatePostSlideController.clear(filesCount);
 
     document.querySelector(".update-post__profile-image")
-        .setAttribute("src", `/files/${post.member.imagePath}`);
-
+        .setAttribute("src", `/images/${post.member.imagePath}`);
+    document.querySelector(".update-post__text").value = post.text;
     document.querySelector(".update-post__profile-name").textContent = post.member.nickname;
 }
 
@@ -123,7 +123,7 @@ function setUpdatePostFiles(filesCount, post) {
 const previewSlideController =
     new SlideController(PREVIEW_IMAGE_WIDTH, previewListCount, previewPrevButton, previewNextButton, addPostPreview);
 const UpdatePostSlideController =
-    new SlideController(UPDATE_POST_IMAGE_WIDTH,  null, updatePostImagePrevButton, updatePostImageNextButton, updatePostPreview);
+    new SlideController(UPDATE_POST_IMAGE_WIDTH, null, updatePostImagePrevButton, updatePostImageNextButton, updatePostPreview);
 
 addNewPostPageEvent();
 addUpdatePostPageEvent();
