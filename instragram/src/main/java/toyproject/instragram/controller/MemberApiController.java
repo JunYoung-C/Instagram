@@ -18,5 +18,4 @@ public class MemberApiController {
         return new MemberResponse(memberService.searchProfiles(nickname));
     }
 
-    // TODO 이미지 Resource 추가
 }

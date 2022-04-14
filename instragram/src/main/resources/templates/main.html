@@ -225,7 +225,7 @@
             <div class="add-post__text-contents post-modal__text-contents">
               <div class="add-post__profile post-modal__profile">
                 <img
-                  th:src="|/files/${signInMember.memberImage.getOriginalStoreFileName()}|"
+                  th:src="|/images/${signInMember.memberImage.getOriginalStoreFileName()}|"
                   src="images/03.png"
                   class="add-post__profile-image post-modal__profile-image"
                 />
@@ -367,6 +367,7 @@
           />
           <div class="search-result__profile-names">
               <span class="search-result__profile-nickname">{nickname}</span>
+              <span class="search-result__profile-name">{name}</span>
           </div>
       </a>
     </script>
@@ -376,7 +377,7 @@
           <header class="post-profile main-post-profile">
             <div class="post-profile__info main-post-profile__info">
               <img
-                src="/files/{member.imagePath}"
+                src="/images/{member.imagePath}"
                 class="post-profile__image main-post-profile__image"
               />
               <span class="post-profile__name main-post-profile__name">{member.nickname}</span>
@@ -457,7 +458,7 @@
     </script>
     <script type="text/template" id="template__main-post-images">
       <li class='post-images__list'>
-        <img src='/files/{filePath}' class='main-post-image' />
+        <img src='/images/{filePath}' class='main-post-image' />
       </li>
     </script>
     <script type="text/template" id="template__main-post-comments">
