@@ -3,7 +3,7 @@ package toyproject.instragram.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
-import toyproject.instragram.FileManager;
+import toyproject.instragram.common.file.FileManager;
 
 import java.io.File;
 import java.io.FileInputStream;

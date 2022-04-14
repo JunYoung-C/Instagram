@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.FileDto;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Post;
+import toyproject.instragram.common.file.FileDto;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.post.entity.Post;
+import toyproject.instragram.post.service.PostDto;
+import toyproject.instragram.post.service.PostService;
 
 import javax.persistence.EntityManager;
 import java.util.List;

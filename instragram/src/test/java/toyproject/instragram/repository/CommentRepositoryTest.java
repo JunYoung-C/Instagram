@@ -7,10 +7,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
-import toyproject.instragram.AppConfig;
-import toyproject.instragram.entity.Comment;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Post;
+import toyproject.instragram.comment.repository.CommentRepository;
+import toyproject.instragram.common.AppConfig;
+import toyproject.instragram.comment.entity.Comment;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.post.entity.Post;
 
 import javax.persistence.EntityManager;
 import java.util.List;

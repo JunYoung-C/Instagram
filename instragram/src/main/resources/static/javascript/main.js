@@ -118,7 +118,8 @@ function setSearchResult(response) {
 function getReplacedSearchResultTemplate(members, i) {
     return document.querySelector("#template__search-result").innerHTML
         .replace("{imagePath}", members[i].imagePath)
-        .replace("{nickname}", members[i].nickname);
+        .replace("{nickname}", members[i].nickname)
+        .replace("{name}", members[i].name);
 }
 
 function getPostsAjax() {
