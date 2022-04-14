@@ -1,4 +1,4 @@
-package toyproject.instragram.repository;
+package toyproject.instragram.member.repository;
 
 import java.util.List;
 

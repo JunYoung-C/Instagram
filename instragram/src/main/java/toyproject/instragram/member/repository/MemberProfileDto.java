@@ -1,4 +1,4 @@
-package toyproject.instragram.repository;
+package toyproject.instragram.member.repository;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

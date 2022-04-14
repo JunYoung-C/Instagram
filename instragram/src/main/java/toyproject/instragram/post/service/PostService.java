@@ -1,15 +1,15 @@
-package toyproject.instragram.service;
+package toyproject.instragram.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Post;
-import toyproject.instragram.entity.PostFile;
-import toyproject.instragram.repository.MemberRepository;
-import toyproject.instragram.repository.PostRepository;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.post.entity.Post;
+import toyproject.instragram.post.entity.PostFile;
+import toyproject.instragram.member.repository.MemberRepository;
+import toyproject.instragram.post.repository.PostRepository;
 
 import java.util.Optional;
 

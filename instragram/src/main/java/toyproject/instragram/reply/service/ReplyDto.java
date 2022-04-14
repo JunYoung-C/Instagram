@@ -1,4 +1,4 @@
-package toyproject.instragram.service;
+package toyproject.instragram.reply.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package toyproject.instragram.entity;
+package toyproject.instragram.common.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

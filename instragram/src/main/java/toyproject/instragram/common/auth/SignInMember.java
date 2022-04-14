@@ -1,9 +1,9 @@
-package toyproject.instragram.common;
+package toyproject.instragram.common.auth;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import toyproject.instragram.entity.Member;
+import toyproject.instragram.member.entity.Member;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

@@ -1,14 +1,14 @@
-package toyproject.instragram.service;
+package toyproject.instragram.reply.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.Reply;
-import toyproject.instragram.repository.CommentRepository;
-import toyproject.instragram.repository.MemberRepository;
-import toyproject.instragram.repository.ReplyRepository;
+import toyproject.instragram.reply.entity.Reply;
+import toyproject.instragram.comment.repository.CommentRepository;
+import toyproject.instragram.member.repository.MemberRepository;
+import toyproject.instragram.reply.repository.ReplyRepository;
 
 @Service
 @Transactional(readOnly = true)

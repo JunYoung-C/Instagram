@@ -1,4 +1,4 @@
-package toyproject.instragram.common;
+package toyproject.instragram.common.auth;
 
 public class SessionConst {
 

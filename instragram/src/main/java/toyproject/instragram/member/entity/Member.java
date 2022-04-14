@@ -1,8 +1,9 @@
-package toyproject.instragram.entity;
+package toyproject.instragram.member.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import toyproject.instragram.common.entity.BaseEntity;
 
 import javax.persistence.*;
 

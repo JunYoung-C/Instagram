@@ -7,11 +7,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import toyproject.instragram.entity.Privacy;
-import toyproject.instragram.repository.MemberProfileDto;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.MemberImage;
-import toyproject.instragram.repository.MemberRepository;
+import toyproject.instragram.member.entity.Privacy;
+import toyproject.instragram.member.service.MemberDto;
+import toyproject.instragram.member.service.MemberService;
+import toyproject.instragram.member.repository.MemberProfileDto;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.member.repository.MemberRepository;
 
 import javax.transaction.Transactional;
 

@@ -1,4 +1,4 @@
-package toyproject.instragram.common;
+package toyproject.instragram.common.auth;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

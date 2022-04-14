@@ -1,13 +1,13 @@
-package toyproject.instragram.service;
+package toyproject.instragram.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.MemberImage;
-import toyproject.instragram.entity.Privacy;
-import toyproject.instragram.repository.MemberProfileDto;
-import toyproject.instragram.repository.MemberRepository;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.member.entity.MemberImage;
+import toyproject.instragram.member.entity.Privacy;
+import toyproject.instragram.member.repository.MemberProfileDto;
+import toyproject.instragram.member.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;

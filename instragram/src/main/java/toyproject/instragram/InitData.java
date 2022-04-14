@@ -4,12 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.*;
+import toyproject.instragram.comment.entity.Comment;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.member.entity.MemberImage;
+import toyproject.instragram.member.entity.Privacy;
+import toyproject.instragram.post.entity.Post;
+import toyproject.instragram.post.entity.PostFile;
+import toyproject.instragram.reply.entity.Reply;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.stream.IntStream;
 
 @Profile("local")
 @Component

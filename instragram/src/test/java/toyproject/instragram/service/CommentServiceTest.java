@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.instragram.entity.Comment;
-import toyproject.instragram.entity.Member;
-import toyproject.instragram.entity.Post;
-import toyproject.instragram.repository.CommentRepository;
+import toyproject.instragram.comment.service.CommentDto;
+import toyproject.instragram.comment.service.CommentService;
+import toyproject.instragram.comment.entity.Comment;
+import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.post.entity.Post;
+import toyproject.instragram.comment.repository.CommentRepository;
 
 import javax.persistence.EntityManager;
 import java.util.stream.IntStream;

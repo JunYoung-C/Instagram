@@ -1,4 +1,4 @@
-package toyproject.instragram.entity;
+package toyproject.instragram.member.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
