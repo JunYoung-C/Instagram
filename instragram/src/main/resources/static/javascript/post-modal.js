@@ -109,7 +109,7 @@ function setUpdatePostFiles(filesCount, post) {
     updatePostPreview.innerHTML = "";
     for (let i = 0; i < filesCount; i++) {
         const img = document.createElement("img");
-        img.src = `/files/${post.filePaths[i]}`;
+        img.src = `/images/${post.filePaths[i]}`;
         img.classList.add("post-modal__image-file");
 
         const li = document.createElement("li");
