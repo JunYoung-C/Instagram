@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.entity.Member;
+import toyproject.instragram.entity.MemberImage;
 import toyproject.instragram.entity.Privacy;
 import toyproject.instragram.repository.MemberProfileDto;
 import toyproject.instragram.repository.MemberRepository;
@@ -23,9 +24,14 @@ public class MemberService {
         validateDuplicateNickname(memberDto.getNickname());
         Privacy privacy = Privacy.create(memberDto.getPassword(), memberDto.getPhoneNumberOrEmail());
         Member member = new Member(privacy, memberDto.getNickname(), memberDto.getName());
+        member.addProfileImage(createBasicProfileImage());
 
         memberRepository.save(member);
         return member.getId();
+    }
+
+    private MemberImage createBasicProfileImage() {
+        return new MemberImage("basic-profile-image", "basic-profile-image", "png");
     }
 
     public Member signIn(String signInId, String password) {
