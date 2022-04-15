@@ -7,10 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import toyproject.instragram.common.exception.ExceptionType;
-import toyproject.instragram.common.exception.inheritance.IncorrectPasswordException;
-import toyproject.instragram.common.exception.inheritance.notfoundaccount.NotFoundAccountByNicknameException;
-import toyproject.instragram.common.exception.inheritance.notfoundaccount.NotFoundAccountException;
+import toyproject.instragram.common.exception.signin.IncorrectPasswordException;
+import toyproject.instragram.common.exception.signin.NotFoundAccountException;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.service.MemberDto;
 import toyproject.instragram.member.service.MemberService;
@@ -116,7 +114,7 @@ class MemberServiceTest {
         assertThatThrownBy(() -> memberService.signIn(signInId, password))
                 .isInstanceOf(NotFoundAccountException.class);
     }
-    
+
     @DisplayName("로그인 - 잘못된 비밀번호로 인한 실패")
     @ParameterizedTest
     @ValueSource(strings = {"01011111111", "test@naver.com", "junyoung", "a1234"})

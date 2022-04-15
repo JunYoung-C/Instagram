@@ -1,4 +1,4 @@
-package toyproject.instragram.common.exception.inheritance.notfoundaccount;
+package toyproject.instragram.common.exception.signin;
 
 public class NotFoundAccountByPhoneNumberException extends NotFoundAccountException {
     public NotFoundAccountByPhoneNumberException(String message) {

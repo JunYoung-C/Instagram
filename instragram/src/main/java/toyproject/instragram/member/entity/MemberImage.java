@@ -29,6 +29,9 @@ public class MemberImage {
         this.extension = extension;
     }
 
+    public static MemberImage createBasicImage() {
+        return new MemberImage("basic-profile-image", "basic-profile-image", "png");
+    }
     protected void setMember(Member member) {
         this.member = member;
     }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import toyproject.instragram.common.auth.SessionConst;
 import toyproject.instragram.common.auth.SignInMember;
-import toyproject.instragram.common.exception.inheritance.IncorrectPasswordException;
-import toyproject.instragram.common.exception.inheritance.notfoundaccount.NotFoundAccountException;
-import toyproject.instragram.common.exception.inheritance.notfoundaccount.UnknownException;
+import toyproject.instragram.common.exception.signin.IncorrectPasswordException;
+import toyproject.instragram.common.exception.signin.NotFoundAccountException;
+import toyproject.instragram.common.exception.UnknownException;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.controller.dto.MemberSaveForm;
 import toyproject.instragram.member.controller.dto.SignInForm;
@@ -41,7 +41,8 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "signUp";
         }
-        memberService.signUp(new MemberDto(form.getPhoneNumberOrEmail(), form.getName(), form.getNickname(), form.getPassword()));
+        memberService.signUp(
+                new MemberDto(form.getPhoneNumberOrEmail(), form.getName(), form.getNickname(), form.getPassword()));
 
         return "redirect:/members/signin";
     }
@@ -66,7 +67,6 @@ public class MemberController {
         }
 
         if (bindingResult.hasErrors()) {
-            System.out.println("bindingResult = " + bindingResult);
             return "signIn";
         }
 

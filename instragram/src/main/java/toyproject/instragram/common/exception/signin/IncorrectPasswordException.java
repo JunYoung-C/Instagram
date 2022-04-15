@@ -1,4 +1,4 @@
-package toyproject.instragram.common.exception.inheritance;
+package toyproject.instragram.common.exception.signin;
 
 import toyproject.instragram.common.exception.CustomException;
 

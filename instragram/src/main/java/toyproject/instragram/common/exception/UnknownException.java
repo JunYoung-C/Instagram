@@ -1,4 +1,4 @@
-package toyproject.instragram.common.exception.inheritance.notfoundaccount;
+package toyproject.instragram.common.exception;
 
 import toyproject.instragram.common.exception.CustomException;
 
