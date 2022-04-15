@@ -2,8 +2,8 @@ package toyproject.instragram.common.exception.inheritance;
 
 import toyproject.instragram.common.exception.CustomException;
 
-public class NotFoundAccountException extends CustomException {
-    public NotFoundAccountException(String message) {
+public class IncorrectPasswordException extends CustomException {
+    public IncorrectPasswordException(String message) {
         super(message);
     }
 }
