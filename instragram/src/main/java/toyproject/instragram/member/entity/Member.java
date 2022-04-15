@@ -23,7 +23,7 @@ public class Member extends BaseEntity {
 
     @Embedded
     private Privacy privacy;
-    private String nickname; //TODO 회원 별명은 문자, 숫자, 밑줄 및 마침표만 사용 가능. 검증 필요
+    private String nickname; //TODO 회원 별명은 문자, 숫자, 밑줄 및 마침표만 사용 가능. 또한, 사용자 이름은 숫자만 포함될 수 없다.
     private String name;
 
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
