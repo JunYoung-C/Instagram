@@ -7,6 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import toyproject.instragram.common.exception.ExceptionType;
+import toyproject.instragram.common.exception.inheritance.IncorrectPasswordException;
+import toyproject.instragram.common.exception.inheritance.notfoundaccount.NotFoundAccountByNicknameException;
+import toyproject.instragram.common.exception.inheritance.notfoundaccount.NotFoundAccountException;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.service.MemberDto;
 import toyproject.instragram.member.service.MemberService;
@@ -20,6 +24,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static toyproject.instragram.common.exception.ExceptionType.*;
 
 @SpringBootTest
 @Transactional
@@ -34,7 +39,7 @@ class MemberServiceTest {
     @BeforeEach
     void init() {
         String[] phoneNumberOfEmails = {"01011111111", "01022222222", "test@naver.com", "hello@naver.com"};
-        String[] nicknames = {"junyoung", "jun_young", "chanyoung", "1234"};
+        String[] nicknames = {"junyoung", "jun_young", "chanyoung", "a1234"};
 
         for (int i = 0; i < 4; i++) {
             Member member = new Member(
@@ -82,7 +87,7 @@ class MemberServiceTest {
         String phoneNumber = "01011111111";
         String email = "test@naver.com";
         String nickname1 = "junyoung";
-        String nickname2 = "1234"; // 숫자로 된 닉네임
+        String nickname2 = "a1234"; // 숫자로 된 닉네임
 
         String password = "1234";
 
@@ -101,30 +106,29 @@ class MemberServiceTest {
 
     @DisplayName("로그인 - 잘못된 아이디로 인한 실패")
     @ParameterizedTest
-    @ValueSource(strings = {"01011111111", "test@naver.com", "junyoung", "1234"})
-    public void signIn_failById(String signInId) {
-        //given
-        //when
-        String wrongPassword = "1111";
-
-        //then
-        assertThatThrownBy(() -> memberService.signIn(signInId, wrongPassword))
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessageContaining("잘못된 비밀번호입니다. 다시 확인하세요.");
-    }
-
-    @DisplayName("로그인 - 잘못된 비밀번호로 인한 실패")
-    @ParameterizedTest
     @ValueSource(strings = {"1111", "1@naver.com", " "})
-    public void signIn_failByPassword(String signInId) {
+    public void signIn_failById(String signInId) {
         //given
         String password = "1234";
 
         //when
         //then
         assertThatThrownBy(() -> memberService.signIn(signInId, password))
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessageContaining("입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 사용자 이름을 확인하고 다시 시도하세요.");
+                .isInstanceOf(NotFoundAccountException.class);
+    }
+    
+    @DisplayName("로그인 - 잘못된 비밀번호로 인한 실패")
+    @ParameterizedTest
+    @ValueSource(strings = {"01011111111", "test@naver.com", "junyoung", "a1234"})
+    public void signIn_failByPassword(String signInId) {
+        //given
+        //when
+        String wrongPassword = "1111";
+
+        //then
+        assertThatThrownBy(() -> memberService.signIn(signInId, wrongPassword))
+                .isInstanceOf(IncorrectPasswordException.class)
+                .hasMessage(INCORRECT_PASSWORD.getException().getMessage());
     }
 
     @DisplayName("닉네임으로 프로필 검색")
