@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import toyproject.instragram.common.auth.SessionConst;
 import toyproject.instragram.common.auth.SignInMember;
+import toyproject.instragram.common.exception.inheritance.IncorrectPasswordException;
+import toyproject.instragram.common.exception.inheritance.notfoundaccount.NotFoundAccountException;
+import toyproject.instragram.common.exception.inheritance.notfoundaccount.UnknownException;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.controller.dto.MemberSaveForm;
 import toyproject.instragram.member.controller.dto.SignInForm;
@@ -50,11 +53,22 @@ public class MemberController {
 
     @PostMapping("/signin")
     public String signIn(@Valid SignInForm form, BindingResult bindingResult, HttpServletRequest request) {
-        if (bindingResult.hasErrors()) {
-            return "signIn";
+
+        Member findMember = null;
+        try {
+            findMember = memberService.signIn(form.getSignInId(), form.getPassword());
+        } catch (NotFoundAccountException e) {
+            bindingResult.rejectValue("signInId", "incorrect", e.getMessage());
+        } catch (IncorrectPasswordException e) {
+            bindingResult.rejectValue("password", "incorrect", e.getMessage());
+        } catch (UnknownException e) {
+            bindingResult.reject("unknown", e.getMessage());
         }
 
-        Member findMember = memberService.signIn(form.getSignInId(), form.getPassword());
+        if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult);
+            return "signIn";
+        }
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.SIGN_IN_MEMBER, SignInMember.from(findMember));
