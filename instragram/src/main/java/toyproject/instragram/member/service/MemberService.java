@@ -3,6 +3,7 @@ package toyproject.instragram.member.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import toyproject.instragram.common.exception.ExceptionType;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.MemberImage;
 import toyproject.instragram.member.entity.Privacy;
@@ -11,6 +12,8 @@ import toyproject.instragram.member.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
+
+import static toyproject.instragram.common.exception.ExceptionType.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,32 +39,24 @@ public class MemberService {
 
     public Member signIn(String signInId, String password) {
         Member findMember = findBySignId(signInId);
-        validateAccount(password, findMember);
-        return findMember;
-    }
-
-    private void validateAccount(String password, Member findMember) {
-        // TODO 예외 클래스 만들면 수정하기
-        if (findMember == null) {
-            throw new IllegalStateException("입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 사용자 이름을 확인하고 다시 시도하세요.");
-        }
 
         if (!findMember.isCorrectPassword(password)) {
-            throw new IllegalStateException("잘못된 비밀번호입니다. 다시 확인하세요.");
+            throw INCORRECT_PASSWORD.getException();
         }
+        return findMember;
     }
 
     private Member findBySignId(String signId) {
         if (Privacy.isEmail(signId)) {
-            return memberRepository.findByPrivacyEmail(signId).orElse(null);
+            return memberRepository.findByPrivacyEmail(signId)
+                    .orElseThrow(NOT_FOUND_ACCOUNT_BY_Email::getException);
+        } else if (Privacy.isPhoneNumber(signId)) {
+            return memberRepository.findByPrivacyPhoneNumber(signId)
+                    .orElseThrow(NOT_FOUND_ACCOUNT_BY_Phone_Number::getException);
+        } else {
+            return memberRepository.findByNickname(signId)
+                    .orElseThrow(NOT_FOUND_ACCOUNT_BY_NICKNAME::getException);
         }
-
-        Member member = null;
-        if (Privacy.isPhoneNumber(signId)) {
-            member = memberRepository.findByPrivacyPhoneNumber(signId).orElse(null);
-        }
-
-        return member != null ? member : memberRepository.findByNickname(signId).orElse(null);
     }
 
     public List<MemberProfileDto> searchProfiles(String nickname) {
