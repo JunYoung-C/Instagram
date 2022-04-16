@@ -1,6 +1,7 @@
 package toyproject.instragram.reply.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 import toyproject.instragram.common.response.CommonSliceResponse;
@@ -18,8 +19,8 @@ public class ReplyApiController {
     private final ReplyService replyService;
 
     @GetMapping("/replies")
-    public CommonSliceResponse<ReplyResponse> getReplies(@RequestParam Long commentId, @RequestParam int page) {
-        Slice<Reply> replySlice = replyService.getReplySlice(commentId, page);
+    public CommonSliceResponse<ReplyResponse> getReplies(@RequestParam Long commentId, Pageable pageable) {
+        Slice<Reply> replySlice = replyService.getReplySlice(commentId, pageable);
 
         return new CommonSliceResponse(
                 replySlice.getContent().stream().map(ReplyResponse::from).collect(Collectors.toList()),

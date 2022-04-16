@@ -385,7 +385,7 @@ function getRepliesAjax(commentId, page) {
         }
     }
 
-    request.open("get", `/replies?commentId=${commentId}&page=${page}`);
+    request.open("get", `/replies?commentId=${commentId}&page=${page}&size=20`);
     request.responseType = "json";
     request.send();
 }

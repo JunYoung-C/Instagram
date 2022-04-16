@@ -2,6 +2,7 @@ package toyproject.instragram.reply.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +20,6 @@ public class ReplyService {
     private final CommentRepository commentRepository;
     private final ReplyRepository replyRepository;
 
-    private final int MAX_REPLY_SIZE = 20;
-
     @Transactional
     public Long addReply(ReplyDto replyDto) {
         Reply reply = new Reply(
@@ -32,9 +31,9 @@ public class ReplyService {
         return reply.getId();
     }
 
-    public Slice<Reply> getReplySlice(Long commentId, int page) {
+    public Slice<Reply> getReplySlice(Long commentId,  Pageable pageable) {
         return replyRepository
-                .getRepliesByCommentIdOrderByCreatedDateDesc(commentId, PageRequest.of(page, MAX_REPLY_SIZE));
+                .getRepliesByCommentIdOrderByCreatedDateDesc(commentId, pageable);
     }
 
     @Transactional
