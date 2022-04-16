@@ -40,13 +40,13 @@ public class InitData {
                     Privacy.create("1234", "01011111111"),
                     "doforme",
                     "최준영");
-            member1.addProfileImage(new MemberImage("01", "01", "png"));
+            member1.changeProfileImage(new MemberImage("01", "01", "png"));
 
             Member member2 = new Member(
                     Privacy.create("1234", "test@naver.com"),
                     "chlwnsdud",
                     "김영준");
-            member2.addProfileImage(new MemberImage("02", "02", "png"));
+            member2.changeProfileImage(new MemberImage("02", "02", "png"));
 
             em.persist(member1);
             em.persist(member2);

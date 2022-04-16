@@ -39,7 +39,7 @@ class MemberRepositoryTest {
                 privacy = Privacy.create("1234", i + "@naver.com");
             }
             Member member = new Member(privacy, "nickname" + i, "이름");
-            member.addProfileImage(new MemberImage("file" + i, "encodedFile" + i, "png"));
+            member.changeProfileImage(new MemberImage("file" + i, "encodedFile" + i, "png"));
             memberRepository.save(member);
         });
     }

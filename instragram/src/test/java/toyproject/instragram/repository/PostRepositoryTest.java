@@ -34,12 +34,12 @@ class PostRepositoryTest {
         //given
         MemberImage memberImage1 = new MemberImage("file1", "encodedFile1", "png");
         Member member1 = new Member(null, "junyoung", "이름1");
-        member1.addProfileImage(memberImage1);
+        member1.changeProfileImage(memberImage1);
         em.persist(member1);
 
         MemberImage memberImage2 = new MemberImage("file2", "encodedFile2", "png");
         Member member2 = new Member(null, "jun_young", "이름2");
-        member2.addProfileImage(memberImage2);
+        member2.changeProfileImage(memberImage2);
         em.persist(member2);
 
         int commentCnt = 3;
