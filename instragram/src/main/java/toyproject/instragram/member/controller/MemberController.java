@@ -1,7 +1,6 @@
 package toyproject.instragram.member.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import toyproject.instragram.common.auth.SessionConst;
 import toyproject.instragram.common.auth.SignInMember;
-import toyproject.instragram.common.exception.CustomFormException;
-import toyproject.instragram.common.exception.signin.IncorrectPasswordException;
-import toyproject.instragram.common.exception.signin.NotFoundAccountByEmailException;
-import toyproject.instragram.common.exception.signin.NotFoundAccountByNicknameException;
-import toyproject.instragram.common.exception.signin.NotFoundAccountByPhoneNumberException;
-import toyproject.instragram.common.exception.signup.*;
+import toyproject.instragram.common.exception.form.CustomFormException;
 import toyproject.instragram.member.controller.dto.MemberSaveForm;
 import toyproject.instragram.member.controller.dto.SignInForm;
 import toyproject.instragram.member.entity.Member;

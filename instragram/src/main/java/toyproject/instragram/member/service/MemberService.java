@@ -10,7 +10,7 @@ import toyproject.instragram.member.repository.MemberRepository;
 
 import java.util.List;
 
-import static toyproject.instragram.common.exception.ExceptionType.*;
+import static toyproject.instragram.common.exception.form.FormExceptionType.*;
 
 @Service
 @Transactional(readOnly = true)

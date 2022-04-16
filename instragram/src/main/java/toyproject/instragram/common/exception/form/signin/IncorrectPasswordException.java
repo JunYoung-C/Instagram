@@ -1,6 +1,6 @@
-package toyproject.instragram.common.exception.signin;
+package toyproject.instragram.common.exception.form.signin;
 
-import toyproject.instragram.common.exception.CustomFormException;
+import toyproject.instragram.common.exception.form.CustomFormException;
 
 public class IncorrectPasswordException extends CustomFormException {
     public IncorrectPasswordException(String message) {

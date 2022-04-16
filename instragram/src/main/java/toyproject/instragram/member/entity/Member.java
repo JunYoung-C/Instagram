@@ -7,7 +7,7 @@ import toyproject.instragram.common.entity.BaseEntity;
 
 import javax.persistence.*;
 
-import static toyproject.instragram.common.exception.ExceptionType.*;
+import static toyproject.instragram.common.exception.form.FormExceptionType.*;
 
 @Entity
 @Getter

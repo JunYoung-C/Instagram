@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.Embeddable;
 
-import static toyproject.instragram.common.exception.ExceptionType.*;
+import static toyproject.instragram.common.exception.form.FormExceptionType.*;
 
 @Embeddable
 @Getter

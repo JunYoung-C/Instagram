@@ -1,6 +1,7 @@
-package toyproject.instragram.common.exception;
+package toyproject.instragram.common.exception.form;
 
 import lombok.Getter;
+import toyproject.instragram.common.exception.CustomException;
 
 @Getter
 public class CustomFormException extends CustomException {

@@ -1,6 +1,6 @@
-package toyproject.instragram.common.exception.signup;
+package toyproject.instragram.common.exception.form.signup;
 
-import toyproject.instragram.common.exception.CustomFormException;
+import toyproject.instragram.common.exception.form.CustomFormException;
 
 public class DuplicatePhoneNumberException extends CustomFormException {
     public DuplicatePhoneNumberException(String message) {

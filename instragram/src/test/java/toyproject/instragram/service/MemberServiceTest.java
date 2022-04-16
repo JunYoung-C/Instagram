@@ -7,8 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import toyproject.instragram.common.exception.signin.IncorrectPasswordException;
-import toyproject.instragram.common.exception.signin.NotFoundAccountException;
+import toyproject.instragram.common.exception.form.signin.IncorrectPasswordException;
+import toyproject.instragram.common.exception.form.signin.NotFoundAccountException;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.service.MemberDto;
 import toyproject.instragram.member.service.MemberService;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static toyproject.instragram.common.exception.ExceptionType.*;
+import static toyproject.instragram.common.exception.form.FormExceptionType.*;
 
 @SpringBootTest
 @Transactional
