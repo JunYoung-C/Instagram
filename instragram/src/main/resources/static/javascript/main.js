@@ -100,7 +100,7 @@ function getMembersAjax(nickname) {
         }
     }
 
-    request.open("get", "/members?nickname=" + nickname);
+    request.open("get", `/members?nickname=${nickname}&page=0&size=50`);
     request.responseType = "json";
     request.send();
 }
