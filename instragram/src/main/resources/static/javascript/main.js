@@ -134,20 +134,16 @@ function getPostsAjax() {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 setMainPost(request.response);
-                nextPostPage = getNextPage(request.response.sliceInfo.page);
+                nextPostPage = request.response.sliceInfo.page + 1;
             } else {
                 alert("request에 문제가 있습니다.")
             }
         }
     }
 
-    request.open("get", "/posts?page=" + nextPostPage);
+    request.open("get", `/posts?page=${nextPostPage}&size=10`);
     request.responseType = "json";
     request.send();
-}
-
-function getNextPage(currentPage) {
-    return currentPage + 1;
 }
 
 function setMainPost(response) {

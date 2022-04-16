@@ -2,6 +2,7 @@ package toyproject.instragram.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
-    private final int MAX_POST_SIZE = 10;
-
     @Transactional
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElse(null);
@@ -34,8 +33,8 @@ public class PostService {
         return post.getId();
     }
 
-    public Slice<Post> getPostSlice(int page) {
-        return postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(page, MAX_POST_SIZE));
+    public Slice<Post> getPostSlice(Pageable pageable) {
+        return postRepository.getPostsByOrderByCreatedDateDesc(pageable);
     }
 
     public Optional<Post> getOwnerPost(Long postId, Long memberId) {
