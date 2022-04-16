@@ -4,20 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
 public class MemberSaveForm {
 
-    @NotBlank
+    @NotBlank(message = "휴대폰 번호나 이메일을 입력해주세요")
     private String phoneNumberOrEmail;
 
-    @NotBlank
+    @NotBlank(message = "성명 입력해주세요")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "사용자 이름을 입력해주세요")
     private String nickname;
 
-    @NotBlank
+    @NotBlank(message = "비밀번호를 입력해주세요")
+    @Size(min = 4, message = "비밀번호는 4글자 이상 입력해주세요.")
     private String password;
 }

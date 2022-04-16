@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.Embeddable;
 
+import static toyproject.instragram.common.exception.ExceptionType.*;
+
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,18 +29,36 @@ public class Privacy {
     }
 
     private void setPhoneNumberOrEmail(String phoneNumberOrEmail) {
-        if (Privacy.isEmail(phoneNumberOrEmail)) {
-            email = phoneNumberOrEmail;
-        } else {
+        if (isNumber(phoneNumberOrEmail)) {
+            validatePhoneNumber(phoneNumberOrEmail);
             phoneNumber = phoneNumberOrEmail;
+        } else {
+            validateEmail(phoneNumberOrEmail);
+            email = phoneNumberOrEmail;
+        }
+    }
+
+    private boolean isNumber(String str) {
+        return str.chars().allMatch(Character::isDigit);
+    }
+
+    private void validatePhoneNumber(String phoneNumber) {
+        if (!isPhoneNumber(phoneNumber)) {
+            throw INVALID_PHONE_NUMBER.getException();
         }
     }
 
     public static boolean isPhoneNumber(String str) {
-        return str.chars().allMatch(Character::isDigit);
+        return str.matches("\\d{9,11}");
+    }
+
+    private void validateEmail(String email) {
+        if (!isEmail(email)) {
+            throw INVALID_EMAIL.getException();
+        }
     }
 
     public static boolean isEmail(String str) {
-        return str.contains("@");
+        return str.matches("^[A-Za-z\\d+_.-]+@(.+)$");
     }
 }

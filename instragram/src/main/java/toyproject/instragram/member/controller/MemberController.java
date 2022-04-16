@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import toyproject.instragram.common.auth.SessionConst;
 import toyproject.instragram.common.auth.SignInMember;
 import toyproject.instragram.common.exception.signin.IncorrectPasswordException;
-import toyproject.instragram.common.exception.signin.NotFoundAccountException;
-import toyproject.instragram.common.exception.UnknownException;
-import toyproject.instragram.member.entity.Member;
+import toyproject.instragram.common.exception.signin.NotFoundAccountByEmailException;
+import toyproject.instragram.common.exception.signin.NotFoundAccountByNicknameException;
+import toyproject.instragram.common.exception.signin.NotFoundAccountByPhoneNumberException;
+import toyproject.instragram.common.exception.signup.*;
 import toyproject.instragram.member.controller.dto.MemberSaveForm;
 import toyproject.instragram.member.controller.dto.SignInForm;
+import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.service.MemberDto;
 import toyproject.instragram.member.service.MemberService;
 
@@ -38,11 +40,27 @@ public class MemberController {
 
     @PostMapping("/signup")
     public String signUp(@Valid MemberSaveForm form, BindingResult bindingResult) {
+        try {
+            if (!bindingResult.hasFieldErrors()) {
+                memberService.signUp(new MemberDto(
+                        form.getPhoneNumberOrEmail(),
+                        form.getName(),
+                        form.getNickname(),
+                        form.getPassword()));
+            }
+        } catch (DuplicateNicknameException e) {
+            bindingResult.rejectValue("nickname", "duplicate", e.getMessage());
+        } catch (DuplicateEmailException | DuplicatePhoneNumberException e) {
+            bindingResult.rejectValue("phoneNumberOrEmail", "duplicate", e.getMessage());
+        } catch (InvalidNicknameByNumberException | InvalidNicknameByStringException e) {
+            bindingResult.rejectValue("nickname", "invalid", e.getMessage());
+        } catch (InvalidEmailException | InvalidPhoneNumberException e) {
+            bindingResult.rejectValue("phoneNumberOrEmail", "invalid", e.getMessage());
+        }
         if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult);
             return "signUp";
         }
-        memberService.signUp(
-                new MemberDto(form.getPhoneNumberOrEmail(), form.getName(), form.getNickname(), form.getPassword()));
 
         return "redirect:/members/signin";
     }
@@ -58,12 +76,11 @@ public class MemberController {
         Member findMember = null;
         try {
             findMember = memberService.signIn(form.getSignInId(), form.getPassword());
-        } catch (NotFoundAccountException e) {
+        } catch (NotFoundAccountByEmailException | NotFoundAccountByNicknameException |
+                 NotFoundAccountByPhoneNumberException e) {
             bindingResult.rejectValue("signInId", "incorrect", e.getMessage());
         } catch (IncorrectPasswordException e) {
             bindingResult.rejectValue("password", "incorrect", e.getMessage());
-        } catch (UnknownException e) {
-            bindingResult.reject("unknown", e.getMessage());
         }
 
         if (bindingResult.hasErrors()) {

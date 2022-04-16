@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.member.entity.Member;
-import toyproject.instragram.member.entity.MemberImage;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.repository.MemberProfileDto;
 import toyproject.instragram.member.repository.MemberRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import static toyproject.instragram.common.exception.ExceptionType.*;
 
@@ -23,20 +21,28 @@ public class MemberService {
 
     @Transactional
     public Long signUp(MemberDto memberDto) {
-        validateDuplicateNickname(memberDto.getNickname());
-        Privacy privacy = Privacy.create(memberDto.getPassword(), memberDto.getPhoneNumberOrEmail());
-        Member member = new Member(privacy, memberDto.getNickname(), memberDto.getName());
-        member.addProfileImage(MemberImage.createBasicImage());
+        validateDuplication(memberDto.getNickname(), memberDto.getPhoneNumberOrEmail());
+
+        Member member = new Member(
+                Privacy.create(memberDto.getPassword(), memberDto.getPhoneNumberOrEmail()),
+                memberDto.getNickname(),
+                memberDto.getName());
 
         memberRepository.save(member);
         return member.getId();
     }
 
-    private void validateDuplicateNickname(String nickname) {
-        Optional<Member> findMember = memberRepository.findByNickname(nickname);
-        if (findMember.isPresent()) {
-            // TODO 예외 클래스 만들면 수정하기
-            throw new IllegalStateException("이미 존재하는 별명입니다.");
+    private void validateDuplication(String nickname, String phoneNumberOrEmail) {
+        memberRepository.findByNickname(nickname).ifPresent(member1 -> {
+            throw DUPLICATE_NICKNAME.getException();
+        });
+
+        if (Privacy.isEmail(phoneNumberOrEmail) &&
+                memberRepository.findByPrivacyEmail(phoneNumberOrEmail).isPresent()) {
+            throw DUPLICATE_EMAIL.getException();
+        } else if (Privacy.isPhoneNumber(phoneNumberOrEmail) &&
+                memberRepository.findByPrivacyPhoneNumber(phoneNumberOrEmail).isPresent()) {
+            throw DUPLICATE_PHONE_NUMBER.getException();
         }
     }
 
@@ -45,12 +51,6 @@ public class MemberService {
         validatePassword(password, findMember);
 
         return findMember;
-    }
-
-    private void validatePassword(String password, Member findMember) {
-        if (!findMember.isCorrectPassword(password)) {
-            throw INCORRECT_PASSWORD.getException();
-        }
     }
 
     private Member findBySignIdOrThrow(String signId) {
@@ -63,6 +63,12 @@ public class MemberService {
         } else {
             return memberRepository.findByNickname(signId)
                     .orElseThrow(NOT_FOUND_ACCOUNT_BY_NICKNAME::getException);
+        }
+    }
+
+    private void validatePassword(String password, Member findMember) {
+        if (!findMember.isCorrectPassword(password)) {
+            throw INCORRECT_PASSWORD.getException();
         }
     }
 

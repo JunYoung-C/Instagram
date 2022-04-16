@@ -7,6 +7,8 @@ import toyproject.instragram.common.entity.BaseEntity;
 
 import javax.persistence.*;
 
+import static toyproject.instragram.common.exception.ExceptionType.*;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,19 +25,37 @@ public class Member extends BaseEntity {
 
     @Embedded
     private Privacy privacy;
-    private String nickname; //TODO 회원 별명은 문자, 숫자, 밑줄 및 마침표만 사용 가능. 또한, 사용자 이름은 숫자만 포함될 수 없다.
+    private String nickname;
     private String name;
 
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberImage memberImage;
 
     public Member(Privacy privacy, String nickname, String name) {
+        validateNickname(nickname);
         this.privacy = privacy;
         this.nickname = nickname;
         this.name = name;
+        this.memberImage = MemberImage.createBasicImage();
     }
 
-    public void addProfileImage(MemberImage memberImage) {
+    private void validateNickname(String nickname) {
+        if (isNumber(nickname)) {
+            throw INVALID_NICKNAME_BY_NUMBER.getException();
+        } else if (!isValidFormat(nickname)) {
+            throw INVALID_NICKNAME_BY_STRING.getException();
+        }
+    }
+
+    private boolean isNumber(String str) {
+        return str.chars().allMatch(Character::isDigit);
+    }
+
+    private boolean isValidFormat(String nickname) {
+        return nickname.matches("^[a-zA-Z가-힣\\d._]+$");
+    }
+
+    public void changeProfileImage(MemberImage memberImage) {
         this.memberImage = memberImage;
         memberImage.setMember(this);
     }
