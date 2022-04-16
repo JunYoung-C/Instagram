@@ -2,6 +2,7 @@ package toyproject.instragram.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     private final int MAX_COMMENT_SIZE = 20;
-    private final int MAX_OWNER_COMMENT_SIZE = 3;
 
     @Transactional
     public Long addComment(CommentDto commentDto) {
@@ -32,9 +32,9 @@ public class CommentService {
         return comment.getId();
     }
 
-    public Slice<Comment> getCommentSlice(Long postId, int page) {
+    public Slice<Comment> getCommentSlice(Long postId, Pageable pageable) {
         return commentRepository
-                .getCommentsByPostIdOrderByCreatedDateDesc(postId, PageRequest.of(page, MAX_COMMENT_SIZE));
+                .getCommentsByPostIdOrderByCreatedDateDesc(postId, pageable);
     }
 
     @Transactional

@@ -291,7 +291,7 @@ function getCommentsAjax(postId, page) {
         }
     }
 
-    request.open("get", `/comments?postId=${postId}&page=${page}`);
+    request.open("get", `/comments?postId=${postId}&page=${page}&size=20`);
     request.responseType = "json";
     request.send();
 }

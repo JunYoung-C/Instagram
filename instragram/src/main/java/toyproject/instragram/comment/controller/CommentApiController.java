@@ -1,6 +1,7 @@
 package toyproject.instragram.comment.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 import toyproject.instragram.comment.controller.dto.CommentResponse;
@@ -21,8 +22,8 @@ public class CommentApiController {
     private final ReplyService replyService;
 
     @GetMapping("/comments")
-    public CommonSliceResponse<CommentResponse> getComments(@RequestParam Long postId, @RequestParam int page) {
-        Slice<Comment> commentSlice = commentService.getCommentSlice(postId, page);
+    public CommonSliceResponse<CommentResponse> getComments(@RequestParam Long postId, Pageable pageable) {
+        Slice<Comment> commentSlice = commentService.getCommentSlice(postId, pageable);
 
         return new CommonSliceResponse(getCommentResponses(commentSlice.getContent()), SliceInfo.from(commentSlice));
     }
