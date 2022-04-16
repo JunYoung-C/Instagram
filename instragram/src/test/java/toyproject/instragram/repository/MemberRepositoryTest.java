@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.PageRequest;
 import toyproject.instragram.common.AppConfig;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.MemberImage;
@@ -34,25 +35,26 @@ class MemberRepositoryTest {
         IntStream.range(0, 51).forEach(i -> {
             Privacy privacy = null;
             if (i > 20) {
-                privacy = Privacy.create("1234", String.valueOf(i));
+                privacy = Privacy.create("1234", "010123456" + i);
             } else {
                 privacy = Privacy.create("1234", i + "@naver.com");
             }
             Member member = new Member(privacy, "nickname" + i, "이름");
-            member.changeProfileImage(new MemberImage("file" + i, "encodedFile" + i, "png"));
             memberRepository.save(member);
         });
     }
 
-    @DisplayName("닉네임으로 프로필 검색 - 최대 50건 검색 성공")
+    @DisplayName("닉네임으로 프로필 검색")
     @Test
     public void searchByNickname() {
         //given
         //when
-        List<MemberProfileDto> findProfiles = memberRepository.searchProfiles("ick");
+        int pageSize = 50;
+        List<MemberProfileDto> findProfiles =
+                memberRepository.searchProfiles("ick", PageRequest.of(0, pageSize));
 
         //then
-        assertThat(findProfiles).hasSize(50);
+        assertThat(findProfiles).hasSize(pageSize);
     }
 
     @DisplayName("닉네임으로 프로필 검색 - 결과 없음")
@@ -60,7 +62,9 @@ class MemberRepositoryTest {
     public void searchByNickname_fail() {
         //given
         //when
-        List<MemberProfileDto> findProfiles = memberRepository.searchProfiles(" ");
+        int pageSize = 50;
+        List<MemberProfileDto> findProfiles =
+                memberRepository.searchProfiles(" ", PageRequest.of(0, pageSize));
 
         //then
         assertThat(findProfiles.size()).isEqualTo(0);
@@ -71,7 +75,7 @@ class MemberRepositoryTest {
     public void findByPrivacyPhoneNumber() {
         //given
         //when
-        String phoneNumber = "21";
+        String phoneNumber = "01012345621";
         Member findMember = memberRepository.findByPrivacyPhoneNumber(phoneNumber).orElse(null);
 
         //then

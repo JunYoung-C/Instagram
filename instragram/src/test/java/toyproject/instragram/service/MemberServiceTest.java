@@ -7,22 +7,22 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import toyproject.instragram.common.exception.form.CustomFormException;
 import toyproject.instragram.common.exception.form.signin.IncorrectPasswordException;
-import toyproject.instragram.common.exception.form.signin.NotFoundAccountException;
+import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.Privacy;
+import toyproject.instragram.member.repository.MemberProfileDto;
+import toyproject.instragram.member.repository.MemberRepository;
 import toyproject.instragram.member.service.MemberDto;
 import toyproject.instragram.member.service.MemberService;
-import toyproject.instragram.member.repository.MemberProfileDto;
-import toyproject.instragram.member.entity.Member;
-import toyproject.instragram.member.repository.MemberRepository;
 
 import javax.transaction.Transactional;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static toyproject.instragram.common.exception.form.FormExceptionType.*;
+import static toyproject.instragram.common.exception.form.FormExceptionType.INCORRECT_PASSWORD;
 
 @SpringBootTest
 @Transactional
@@ -74,8 +74,7 @@ class MemberServiceTest {
         //when
         //then
         assertThatThrownBy(() -> memberService.signUp(memberDto))
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessage("이미 존재하는 별명입니다.");
+                .isInstanceOf(CustomFormException.class);
     }
 
     @DisplayName("로그인 - 성공")
@@ -112,7 +111,7 @@ class MemberServiceTest {
         //when
         //then
         assertThatThrownBy(() -> memberService.signIn(signInId, password))
-                .isInstanceOf(NotFoundAccountException.class);
+                .isInstanceOf(CustomFormException.class);
     }
 
     @DisplayName("로그인 - 잘못된 비밀번호로 인한 실패")
@@ -134,7 +133,8 @@ class MemberServiceTest {
     public void searchProfiles() {
         //given
         //when
-        List<MemberProfileDto> findProfiles = memberService.searchProfiles("you");
+        List<MemberProfileDto> findProfiles =
+                memberService.searchProfiles("you", PageRequest.of(0, 50));
 
         //then
         assertThat(findProfiles)
