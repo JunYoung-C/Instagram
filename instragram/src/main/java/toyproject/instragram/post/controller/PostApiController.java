@@ -3,6 +3,7 @@ package toyproject.instragram.post.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class PostApiController {
     private final CommentService commentService;
 
     @GetMapping
-    public CommonSliceResponse<List<PostResponse>> getPosts(Pageable pageable) {
+    public CommonSliceResponse<List<PostResponse>> getPosts(@PageableDefault Pageable pageable) {
         Slice<Post> postSlice = postService.getPostSlice(pageable);
 
         return new CommonSliceResponse<>(getPostResponses(postSlice), SliceInfo.from(postSlice));

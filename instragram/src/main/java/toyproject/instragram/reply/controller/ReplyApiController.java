@@ -3,6 +3,7 @@ package toyproject.instragram.reply.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import toyproject.instragram.common.response.CommonSliceResponse;
 import toyproject.instragram.common.response.SliceInfo;
@@ -19,7 +20,8 @@ public class ReplyApiController {
     private final ReplyService replyService;
 
     @GetMapping("/replies")
-    public CommonSliceResponse<ReplyResponse> getReplies(@RequestParam Long commentId, Pageable pageable) {
+    public CommonSliceResponse<ReplyResponse> getReplies(
+            @RequestParam Long commentId, @PageableDefault(size = 20) Pageable pageable) {
         Slice<Reply> replySlice = replyService.getReplySlice(commentId, pageable);
 
         return new CommonSliceResponse(
