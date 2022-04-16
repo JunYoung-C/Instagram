@@ -15,6 +15,7 @@
 @import "screens/signUp.css";
 @import "screens/addPost.css";
 @import "screens/comment.css";
+@import "screens/error.css";
 
 body {
   font-family: var(--general-font);
