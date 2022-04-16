@@ -36,19 +36,21 @@ public class PostController {
     public String addPost(@SignIn SignInMember signInMember, @Valid PostSaveForm form,
                           BindingResult bindingResult, Model model) throws IOException {
         try {
-            List<FileDto> fileDtos = fileManager.storeFiles(form.getFiles());
-            postService.addPost(new PostDto(signInMember.getMemberId(), fileDtos, form.getText()));
+            if (!bindingResult.hasFieldErrors()) {
+                List<FileDto> fileDtos = fileManager.storeFiles(form.getFiles());
+                postService.addPost(new PostDto(signInMember.getMemberId(), fileDtos, form.getText()));
+            }
         } catch (CustomFormException e) {
-            System.out.println("e.getField() = " + e.getField());
             bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
         }
 
         if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult);
             model.addAttribute("commentSaveForm", new CommentSaveForm());
             model.addAttribute("signInMember", signInMember);
             return "main";
         }
-
+        //TODO 파일 크기 예외 잡기
         return "redirect:/";
     }
 
