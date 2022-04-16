@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.comment.service.CommentDto;
@@ -49,7 +50,7 @@ class CommentServiceTest {
         assertThat(findComment).isNotNull();
     }
 
-    @DisplayName("댓글 최대 20건 조회")
+    @DisplayName("댓글 목록 조회")
     @Test
     void getCommentSlice() {
         //given
@@ -66,11 +67,11 @@ class CommentServiceTest {
         em.clear();
 
         //when
-        int page = 0;
-        Slice<Comment> commentSlice = commentService.getCommentSlice(post.getId(), page);
+        int size = 20;
+        Slice<Comment> commentSlice = commentService.getCommentSlice(post.getId(), PageRequest.of(0, size));
 
         //then
-        assertThat(commentSlice.getContent()).hasSize(20);
+        assertThat(commentSlice.getContent()).hasSize(size);
     }
 
     @DisplayName("댓글 삭제")

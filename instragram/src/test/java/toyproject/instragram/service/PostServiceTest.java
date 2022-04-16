@@ -50,7 +50,7 @@ class PostServiceTest {
         assertThat(findPost).isNotNull();
     }
 
-    @DisplayName("게시물 조회")
+    @DisplayName("게시물 목록 조회")
     @Test
     void getPostSlice() {
         //given
