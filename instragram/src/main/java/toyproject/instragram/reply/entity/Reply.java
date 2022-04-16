@@ -26,6 +26,8 @@ public class Reply extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Lob
     private String text;
 
     public Reply(Comment comment, Member member, String text) {
