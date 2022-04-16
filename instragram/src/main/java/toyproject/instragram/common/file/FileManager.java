@@ -3,11 +3,14 @@ package toyproject.instragram.common.file;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import toyproject.instragram.common.exception.form.FormExceptionType;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static toyproject.instragram.common.exception.form.FormExceptionType.*;
 
 @Component
 public class FileManager {
@@ -22,32 +25,26 @@ public class FileManager {
         return fileDir + originalFilename;
     }
 
-    public List<FileDto> storeFiles(List<MultipartFile> multipartFiles) {
-        return multipartFiles.stream()
-                .map(multipartFile -> storeFile(multipartFile).orElse(null))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+    public List<FileDto> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
+        List<FileDto> fileDtos = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            fileDtos.add(storeFile(multipartFile));
+        }
+        return fileDtos;
     }
 
-    public Optional<FileDto> storeFile(MultipartFile multipartFile) {
+    public FileDto storeFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
-            return Optional.empty();
+            throw EMPTY_FILE.getException();
         }
 
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFileName = UUID.randomUUID().toString();
         String extension = extractExtension(originalFilename);
 
-        try {
-            multipartFile.transferTo(new File(getFullPath(storeFileName + "." + extension)));
-        } catch (IOException e) {
-            // TODO 예외 클래스 만들면 수정하기
-        }
+        multipartFile.transferTo(new File(getFullPath(storeFileName + "." + extension)));
 
-        return Optional.of(new FileDto(
-                extractFileName(originalFilename),
-                storeFileName,
-                extension));
+        return new FileDto(extractFileName(originalFilename), storeFileName, extension);
     }
 
     private String extractFileName(String filePath) {
