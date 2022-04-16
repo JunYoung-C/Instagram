@@ -69,7 +69,9 @@ public class MemberController {
 
         Member findMember = null;
         try {
-            findMember = memberService.signIn(form.getSignInId(), form.getPassword());
+            if (!bindingResult.hasFieldErrors()) {
+                findMember = memberService.signIn(form.getSignInId(), form.getPassword());
+            }
         } catch (CustomFormException e) {
             bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
         }
