@@ -1,6 +1,7 @@
 package toyproject.instragram.member.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ public class MemberApiController {
     private final MemberService memberService;
     
     @GetMapping("/members")
-    public MemberResponse searchMembers(@RequestParam String nickname) {
-        return new MemberResponse(memberService.searchProfiles(nickname));
+    public MemberResponse searchMembers(@RequestParam String nickname, Pageable pageable) {
+        return new MemberResponse(memberService.searchProfiles(nickname, pageable));
     }
 }

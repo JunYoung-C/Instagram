@@ -1,6 +1,7 @@
 package toyproject.instragram.member.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.member.entity.Member;
@@ -72,7 +73,7 @@ public class MemberService {
         }
     }
 
-    public List<MemberProfileDto> searchProfiles(String nickname) {
-        return memberRepository.searchProfiles(nickname);
+    public List<MemberProfileDto> searchProfiles(String nickname, Pageable pageable) {
+        return memberRepository.searchProfiles(nickname, pageable);
     }
 }
