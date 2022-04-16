@@ -14,7 +14,7 @@ public class CommentSaveForm {
     @NotNull
     private Long postId;
 
-    @NotBlank
+    @NotBlank(message = "댓글을 입력해주세요.")
     @Size(max = 2200, message = "글자 길이는 2200자를 넘을 수 없습니다.")
     private String text;
 }

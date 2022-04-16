@@ -26,7 +26,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-
     @GetMapping("/signup")
     public String signUpPage(MemberSaveForm form) {
         return "signUp";
