@@ -14,9 +14,11 @@ public class MemberSaveForm {
     private String phoneNumberOrEmail;
 
     @NotBlank(message = "성명 입력해주세요")
+    @Size(max = 29, message = "성명을 30자 미만으로 입력하세요.")
     private String name;
 
     @NotBlank(message = "사용자 이름을 입력해주세요")
+    @Size(max = 29, message = "사용자 이름을 30자 미만으로 입력하세요.")
     private String nickname;
 
     @NotBlank(message = "비밀번호를 입력해주세요")

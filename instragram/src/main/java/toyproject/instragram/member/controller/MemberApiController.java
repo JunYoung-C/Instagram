@@ -17,5 +17,4 @@ public class MemberApiController {
     public MemberResponse searchMembers(@RequestParam String nickname) {
         return new MemberResponse(memberService.searchProfiles(nickname));
     }
-
 }
