@@ -17,6 +17,7 @@ import toyproject.instragram.common.file.FileDto;
 import toyproject.instragram.common.file.FileManager;
 import toyproject.instragram.member.controller.dto.SignInForm;
 import toyproject.instragram.post.controller.dto.PostSaveForm;
+import toyproject.instragram.post.controller.dto.PostUpdateForm;
 import toyproject.instragram.post.service.PostDto;
 import toyproject.instragram.post.service.PostService;
 
@@ -45,7 +46,6 @@ public class PostController {
         }
 
         if (bindingResult.hasErrors()) {
-            System.out.println("bindingResult = " + bindingResult);
             model.addAttribute("commentSaveForm", new CommentSaveForm());
             model.addAttribute("signInMember", signInMember);
             return "main";
@@ -55,8 +55,16 @@ public class PostController {
     }
 
     @PostMapping("/posts/{postId}")
-    public String modifyPost(@PathVariable Long postId, @RequestParam String modifiedText) {
-        postService.modifyPostText(postId, modifiedText);
+    public String modifyPost(@SignIn SignInMember signInMember, @PathVariable Long postId,
+                             @Valid PostUpdateForm form, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("postSaveForm", new PostSaveForm());
+            model.addAttribute("commentSaveForm", new CommentSaveForm());
+            model.addAttribute("signInMember", signInMember);
+            return "main";
+        }
+
+        postService.modifyPostText(postId, form.getModifiedText());
         return "redirect:/";
     }
 
