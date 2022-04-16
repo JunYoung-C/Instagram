@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import toyproject.instragram.common.auth.SessionConst;
 import toyproject.instragram.common.auth.SignInMember;
+import toyproject.instragram.common.exception.CustomFormException;
 import toyproject.instragram.common.exception.signin.IncorrectPasswordException;
 import toyproject.instragram.common.exception.signin.NotFoundAccountByEmailException;
 import toyproject.instragram.common.exception.signin.NotFoundAccountByNicknameException;
@@ -27,7 +28,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/members")
 @RequiredArgsConstructor
-@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -48,17 +48,11 @@ public class MemberController {
                         form.getNickname(),
                         form.getPassword()));
             }
-        } catch (DuplicateNicknameException e) {
-            bindingResult.rejectValue("nickname", "duplicate", e.getMessage());
-        } catch (DuplicateEmailException | DuplicatePhoneNumberException e) {
-            bindingResult.rejectValue("phoneNumberOrEmail", "duplicate", e.getMessage());
-        } catch (InvalidNicknameByNumberException | InvalidNicknameByStringException e) {
-            bindingResult.rejectValue("nickname", "invalid", e.getMessage());
-        } catch (InvalidEmailException | InvalidPhoneNumberException e) {
-            bindingResult.rejectValue("phoneNumberOrEmail", "invalid", e.getMessage());
+        } catch (CustomFormException e) {
+            bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
         }
+
         if (bindingResult.hasErrors()) {
-            System.out.println("bindingResult = " + bindingResult);
             return "signUp";
         }
 
@@ -76,11 +70,8 @@ public class MemberController {
         Member findMember = null;
         try {
             findMember = memberService.signIn(form.getSignInId(), form.getPassword());
-        } catch (NotFoundAccountByEmailException | NotFoundAccountByNicknameException |
-                 NotFoundAccountByPhoneNumberException e) {
-            bindingResult.rejectValue("signInId", "incorrect", e.getMessage());
-        } catch (IncorrectPasswordException e) {
-            bindingResult.rejectValue("password", "incorrect", e.getMessage());
+        } catch (CustomFormException e) {
+            bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
         }
 
         if (bindingResult.hasErrors()) {
