@@ -127,7 +127,6 @@
                   <div class="post-comment__icons-wrap">
                     <i class="far fa-smile"></i>
                   </div>
-                  <input type="hidden" th:field="*{memberId}" />
                   <div class="post-comment__hidden-inputs"></div>
                   <input
                           type="text"
@@ -160,12 +159,6 @@
           class="add-post__form post-modal__form"
           th:object="${postSaveForm}"
         >
-          <input
-            type="hidden"
-            id="memberId"
-            name="memberId"
-            th:value="${signInMember.memberId}"
-          />
           <header class="add-post__header post-modal__header">
             <div class="add-post__header-column post-modal__header-column">
               <div class="add-post__return-wrap add-post-cancel">
@@ -361,7 +354,7 @@
     <script type="text/template" id="template__search-result">
       <a class="search-result__profile">
           <img
-                  src="files/{imagePath}"
+                  src="/images/{imagePath}"
                   alt=""
                   class="search-result__profile-photo"
           />
@@ -438,7 +431,6 @@
           <div class="post-comment">
             <form action="/comments" method="post" class="post-comment__form">
               <input type="hidden" id="postId" name="postId" value="{postId}" />
-              <input type="hidden" id="memberId" name="memberId" th:value="${commentSaveForm.memberId}" />`
               <div class="post-comment__icons-wrap">
                 <i class="far fa-smile"></i>
               </div>
@@ -468,12 +460,12 @@
     </script>
     <script type="text/template" id="template__comment-post-image">
       <li class="post-images__list comment-post-images__list">
-        <img src="files/{filePath}" class="comment-post-image" />
+        <img src="/images/{filePath}" class="comment-post-image" />
       </li>
     </script>
     <script type="text/template" id="template__comment-post-profile">
       <img
-              src="files/{imagePath}"
+              src="/images/{imagePath}"
               class="post-profile__image comment-post-header__image"
       />
       <span class="post-profile__name comment-post-header__name">
@@ -483,7 +475,7 @@
     <script type="text/template" id="template__comment-post-text">
       <div class="comment-owner">
         <div class="comment-owner__photo-wrap">
-          <img src="files/{imagePath}" class="comment-owner__photo" />
+          <img src="/images/{imagePath}" class="comment-owner__photo" />
         </div>
         <div class="comment-owner__text-wrap">
           <a class="comment-owner__name">{nickname}</a>
@@ -507,7 +499,7 @@
       <div class="comment comment-{commentId}">
         <div class="comment-owner">
           <div class="comment-owner__photo-wrap">
-            <img src="files/{member.imagePath}" class="comment-owner__photo" />
+            <img src="/images/{member.imagePath}" class="comment-owner__photo" />
           </div>
           <div class="comment-owner__text-wrap">
             <a class="comment-owner__name">{member.nickname}</a>
@@ -543,7 +535,7 @@
     <script type="text/template" id="template__reply">
       <div class="reply-{replyId} reply comment-owner">
         <div class="comment-owner__photo-wrap">
-          <img src="files/{member.imagePath}" class="comment-owner__photo" />
+          <img src="/images/{member.imagePath}" class="comment-owner__photo" />
         </div>
         <div class="comment-owner__text-wrap">
           <a class="comment-owner__name">{member.nickname}</a>

@@ -7,11 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import toyproject.instragram.comment.controller.dto.CommentSaveForm;
+import toyproject.instragram.common.auth.SignIn;
+import toyproject.instragram.common.auth.SignInMember;
 import toyproject.instragram.common.exception.form.CustomFormException;
 import toyproject.instragram.common.exception.form.EmptyFileException;
 import toyproject.instragram.common.exception.form.FormExceptionType;
 import toyproject.instragram.common.file.FileDto;
 import toyproject.instragram.common.file.FileManager;
+import toyproject.instragram.member.controller.dto.SignInForm;
 import toyproject.instragram.post.controller.dto.PostSaveForm;
 import toyproject.instragram.post.service.PostDto;
 import toyproject.instragram.post.service.PostService;
@@ -29,20 +33,21 @@ public class PostController {
     private final FileManager fileManager;
 
     @PostMapping("/posts")
-    public String addPost(@Valid PostSaveForm form, BindingResult bindingResult, Model model) throws IOException {
-
+    public String addPost(@SignIn SignInMember signInMember, @Valid PostSaveForm form,
+                          BindingResult bindingResult, Model model) throws IOException {
         try {
             List<FileDto> fileDtos = fileManager.storeFiles(form.getFiles());
-            postService.addPost(new PostDto(form.getMemberId(), fileDtos, form.getText()));
+            postService.addPost(new PostDto(signInMember.getMemberId(), fileDtos, form.getText()));
         } catch (CustomFormException e) {
             System.out.println("e.getField() = " + e.getField());
             bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
         }
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("commentSaveForm", new CommentSaveForm());
+            model.addAttribute("signInMember", signInMember);
             return "main";
         }
-
 
         return "redirect:/";
     }

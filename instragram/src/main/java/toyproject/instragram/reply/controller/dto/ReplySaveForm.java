@@ -13,9 +13,6 @@ public class ReplySaveForm {
     @NotNull
     private Long commentId;
 
-    @NotNull
-    private Long memberId;
-
     @NotBlank
     private String text;
 }

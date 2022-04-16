@@ -20,11 +20,8 @@ public class MainController {
             return "signIn";
         }
 
-        CommentSaveForm commentSaveForm = new CommentSaveForm();
-        commentSaveForm.setMemberId(signInMember.getMemberId());
-
         model.addAttribute("postSaveForm", new PostSaveForm());
-        model.addAttribute("commentSaveForm", commentSaveForm);
+        model.addAttribute("commentSaveForm", new CommentSaveForm());
         model.addAttribute("signInMember", signInMember);
         return "main";
     }

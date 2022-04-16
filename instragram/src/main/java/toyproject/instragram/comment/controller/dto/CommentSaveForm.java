@@ -13,9 +13,6 @@ public class CommentSaveForm {
     @NotNull
     private Long postId;
 
-    @NotNull
-    private Long memberId;
-
     @NotBlank
     private String text;
 }
