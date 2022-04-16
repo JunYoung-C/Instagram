@@ -21,8 +21,8 @@ public class FileManager {
         this.fileDir = fileDir;
     }
 
-    public String getFullPath(String originalFilename) {
-        return fileDir + originalFilename;
+    public String getFullPath(String originalFileName) {
+        return fileDir + originalFileName;
     }
 
     public List<FileDto> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
@@ -38,21 +38,28 @@ public class FileManager {
             throw EMPTY_FILE.getException();
         }
 
-        String originalFilename = multipartFile.getOriginalFilename();
+        String originalFileName = multipartFile.getOriginalFilename();
         String storeFileName = UUID.randomUUID().toString();
-        String extension = extractExtension(originalFilename);
+        String extension = extractExtension(originalFileName);
 
         multipartFile.transferTo(new File(getFullPath(storeFileName + "." + extension)));
 
-        return new FileDto(extractFileName(originalFilename), storeFileName, extension);
-    }
-
-    private String extractFileName(String filePath) {
-        return filePath.substring(0, filePath.lastIndexOf("."));
+        return new FileDto(extractFileName(originalFileName), storeFileName, extension);
     }
 
     private String extractExtension(String filePath) {
         return filePath.substring(filePath.lastIndexOf(".") + 1);
     }
 
+    private String extractFileName(String filePath) {
+        return filePath.substring(0, filePath.lastIndexOf("."));
+    }
+
+    public void deleteFile(String storeFileName, String extension) {
+        File storedFile = new File(getFullPath(storeFileName + "." + extension));
+
+        if (storedFile.exists()) {
+            storedFile.delete();
+        }
+    }
 }
