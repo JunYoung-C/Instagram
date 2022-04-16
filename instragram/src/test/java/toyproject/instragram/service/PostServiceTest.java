@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.common.file.FileDto;
@@ -49,7 +50,7 @@ class PostServiceTest {
         assertThat(findPost).isNotNull();
     }
 
-    @DisplayName("게시물 최대 10건 조회")
+    @DisplayName("게시물 조회")
     @Test
     void getPostSlice() {
         //given
@@ -66,11 +67,12 @@ class PostServiceTest {
         em.clear();
 
         //when
-        Slice<Post> slice = postService.getPostSlice(0);
+        int size = 10;
+        Slice<Post> slice = postService.getPostSlice(PageRequest.of(0, size));
         List<Post> posts = slice.getContent();
 
         //then
-        assertThat(posts).hasSize(10);
+        assertThat(posts).hasSize(size);
     }
 
     @DisplayName("본인이 올린 게시물 한건 조회")
