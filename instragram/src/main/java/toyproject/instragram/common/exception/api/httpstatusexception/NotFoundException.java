@@ -5,10 +5,6 @@ import toyproject.instragram.common.exception.api.CustomApiException;
 
 public class NotFoundException extends CustomApiException {
     public NotFoundException(String message) {
-        super(message);
-    }
-
-    public NotFoundException(String message, HttpStatus status) {
-        super(message, status);
+        super(message, HttpStatus.NOT_FOUND);
     }
 }

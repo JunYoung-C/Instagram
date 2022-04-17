@@ -8,10 +8,6 @@ import toyproject.instragram.common.exception.CustomException;
 public class CustomApiException extends CustomException {
     private HttpStatus status;
 
-    public CustomApiException(String message) {
-        super(message);
-    }
-
     public CustomApiException(String message, HttpStatus status) {
         super(message);
         this.status = status;
