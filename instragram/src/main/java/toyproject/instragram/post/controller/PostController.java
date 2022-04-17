@@ -2,20 +2,17 @@ package toyproject.instragram.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import toyproject.instragram.comment.controller.dto.CommentSaveForm;
 import toyproject.instragram.common.auth.SignIn;
 import toyproject.instragram.common.auth.SignInMember;
 import toyproject.instragram.common.exception.form.CustomFormException;
-import toyproject.instragram.common.exception.form.EmptyFileException;
-import toyproject.instragram.common.exception.form.FormExceptionType;
 import toyproject.instragram.common.file.FileDto;
 import toyproject.instragram.common.file.FileManager;
-import toyproject.instragram.member.controller.dto.SignInForm;
 import toyproject.instragram.post.controller.dto.PostSaveForm;
 import toyproject.instragram.post.controller.dto.PostUpdateForm;
 import toyproject.instragram.post.service.PostDto;
@@ -50,7 +47,7 @@ public class PostController {
             model.addAttribute("signInMember", signInMember);
             return "main";
         }
-        //TODO 파일 크기 예외 잡기
+
         return "redirect:/";
     }
 

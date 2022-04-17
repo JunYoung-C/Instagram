@@ -12,7 +12,7 @@ import toyproject.instragram.post.entity.Post;
 import toyproject.instragram.post.entity.PostFile;
 import toyproject.instragram.post.repository.PostRepository;
 
-import java.util.Optional;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -38,17 +38,16 @@ public class PostService {
         return postRepository.getPostsByOrderByCreatedDateDesc(pageable);
     }
 
-    public Optional<Post> getOwnerPost(Long postId, Long memberId) {
-        Optional<Post> findPost = postRepository.findById(postId);
-
-        if (findPost.isEmpty() || !isMyPost(memberId, findPost)) {
-            return Optional.empty();
-        }
+    public Post getOwnerPostByPostId(Long postId, Long signInMemberId) {
+        Post findPost = postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
+        validateAccess(signInMemberId, findPost.getMember().getId());
         return findPost;
     }
 
-    private boolean isMyPost(Long memberId, Optional<Post> findPost) {
-        return findPost.get().getMember().getId().equals(memberId);
+    private void validateAccess(Long signInMemberId, Long PostOwnerId) {
+        if (!signInMemberId.equals(PostOwnerId)) {
+            throw FORBIDDEN_POST.getException();
+        }
     }
 
     @Transactional

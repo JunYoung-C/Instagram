@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import toyproject.instragram.common.auth.SignIn;
@@ -42,13 +41,8 @@ public class PostApiController {
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> getPost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
-        Post post = postService.getOwnerPost(postId, signInMember.getMemberId()).orElse(null);
-
-        if (post == null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        return ResponseEntity.ok().body(PostResponse.from(post));
+        return ResponseEntity.ok()
+                .body(PostResponse.from(postService.getOwnerPostByPostId(postId, signInMember.getMemberId())));
     }
 
     @DeleteMapping("/{postId}")
