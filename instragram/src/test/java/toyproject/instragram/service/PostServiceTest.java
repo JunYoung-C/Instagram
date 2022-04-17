@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
+import toyproject.instragram.common.exception.api.httpstatusexception.ForbiddenException;
+import toyproject.instragram.common.exception.api.httpstatusexception.NotFoundException;
 import toyproject.instragram.common.file.FileDto;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.post.entity.Post;
@@ -15,10 +17,10 @@ import toyproject.instragram.post.service.PostService;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
@@ -75,9 +77,9 @@ class PostServiceTest {
         assertThat(posts).hasSize(size);
     }
 
-    @DisplayName("본인이 올린 게시물 한건 조회")
+    @DisplayName("본인이 올린 게시물 한건 조회 성공")
     @Test
-    void getOwnerPost() {
+    void getOwnerPostByPostId() {
         //given
         Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
@@ -90,16 +92,16 @@ class PostServiceTest {
         em.clear();
 
         //when
-        Post findPost = postService.getOwnerPost(postId, member.getId()).orElse(null);
+        Post findPost = postService.getOwnerPostByPostId(postId, member.getId());
 
         //then
         assertThat(findPost.getId()).isEqualTo(postId);
         assertThat(findPost.getMember().getId()).isEqualTo(member.getId());
     }
 
-    @DisplayName("본인이 게시물 한건 조회 - 실패")
+    @DisplayName("본인이 올린 게시물 한건 조회 싱패 - 권한 부족")
     @Test
-    void getPost_fail() {
+    void getOwnerPostByPostId_failByForbidden() {
         //given
         Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
@@ -111,11 +113,19 @@ class PostServiceTest {
         em.flush();
         em.clear();
         //when
-        Optional<Post> findPost = postService.getOwnerPost(postId, member.getId() + 1);
-
-
         //then
-        assertThat(findPost).isEmpty();
+        assertThatThrownBy(() -> postService.getOwnerPostByPostId(postId, member.getId() + 1))
+                .isExactlyInstanceOf(ForbiddenException.class);
+    }
+
+    @DisplayName("본인이 올린 게시물 한건 조회 싱패 - 존재하지 않음")
+    @Test
+    void getOwnerPostByPostId_failByNotFound() {
+        //given
+        //when
+        //then
+        assertThatThrownBy(() -> postService.getOwnerPostByPostId(0l, 0l))
+                .isExactlyInstanceOf(NotFoundException.class);
     }
 
     @DisplayName("게시물 글 수정")
