@@ -57,7 +57,12 @@ public class PostApiController {
     }
 
     @DeleteMapping("/{postId}")
-    public void deletePost(@PathVariable Long postId) {
+    public void deletePost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
+        validateAccess(signInMember.getMemberId(), getPostOwnerId(postId));
         postService.deletePost(postId);
+    }
+
+    private Long getPostOwnerId(Long postId) {
+        return postService.getPost(postId).getMember().getId();
     }
 }

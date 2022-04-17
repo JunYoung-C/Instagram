@@ -25,7 +25,8 @@ public class PostService {
 
     @Transactional
     public Long addPost(PostDto postDto) {
-        Member member = memberRepository.findById(postDto.getMemberId()).orElse(null);
+        Member member = memberRepository.findById(postDto.getMemberId())
+                .orElseThrow(NOT_FOUND_MEMBER::getException);
         Post post = new Post(member, postDto.getText());
         postDto.getFileDtos().forEach(file -> post.addPostFile(
                 new PostFile(post, file.getUploadFileName(), file.getStoreFileName(), file.getExtension())));
@@ -39,8 +40,7 @@ public class PostService {
     }
 
     public Post getPost(Long postId) {
-        Post findPost = postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
-        return findPost;
+        return postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
     }
 
     @Transactional
