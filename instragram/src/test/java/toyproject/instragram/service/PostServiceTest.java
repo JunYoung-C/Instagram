@@ -92,7 +92,7 @@ class PostServiceTest {
         em.clear();
 
         //when
-        Post findPost = postService.getPost(postId, member.getId());
+        Post findPost = postService.getPost(postId);
 
         //then
         assertThat(findPost.getId()).isEqualTo(postId);
@@ -105,7 +105,7 @@ class PostServiceTest {
         //given
         //when
         //then
-        assertThatThrownBy(() -> postService.getPost(0l, 0l))
+        assertThatThrownBy(() -> postService.getPost(0l))
                 .isExactlyInstanceOf(NotFoundException.class);
     }
 

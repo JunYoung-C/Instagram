@@ -43,7 +43,7 @@ public class PostApiController {
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> getPost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
-        Post findPost = postService.getPost(postId, signInMember.getMemberId());
+        Post findPost = postService.getPost(postId);
         validateAccess(signInMember.getMemberId(), findPost.getMember().getId());
 
         return ResponseEntity.ok()

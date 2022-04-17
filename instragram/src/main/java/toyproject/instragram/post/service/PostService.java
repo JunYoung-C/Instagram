@@ -38,7 +38,7 @@ public class PostService {
         return postRepository.getPostsByOrderByCreatedDateDesc(pageable);
     }
 
-    public Post getPost(Long postId, Long signInMemberId) {
+    public Post getPost(Long postId) {
         Post findPost = postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
         return findPost;
     }
