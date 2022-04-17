@@ -38,22 +38,14 @@ public class PostService {
         return postRepository.getPostsByOrderByCreatedDateDesc(pageable);
     }
 
-    public Post getOwnerPostByPostId(Long postId, Long signInMemberId) {
+    public Post getPost(Long postId, Long signInMemberId) {
         Post findPost = postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
-        validateAccess(signInMemberId, findPost.getMember().getId());
         return findPost;
-    }
-
-    private void validateAccess(Long signInMemberId, Long PostOwnerId) {
-        if (!signInMemberId.equals(PostOwnerId)) {
-            throw FORBIDDEN_POST.getException();
-        }
     }
 
     @Transactional
     public void modifyPostText(Long postId, String modifiedText) {
-        Post post = postRepository.findById(postId).orElse(null);
-        //TODO 예외처리
+        Post post = postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
         post.changeText(modifiedText);
     }
 

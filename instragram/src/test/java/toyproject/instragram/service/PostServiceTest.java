@@ -77,9 +77,9 @@ class PostServiceTest {
         assertThat(posts).hasSize(size);
     }
 
-    @DisplayName("본인이 올린 게시물 한건 조회 성공")
+    @DisplayName("게시물 한건 조회 - 성공")
     @Test
-    void getOwnerPostByPostId() {
+    void getPost() {
         //given
         Member member = new Member(null, "junyoung", "이름1");
         em.persist(member);
@@ -92,39 +92,20 @@ class PostServiceTest {
         em.clear();
 
         //when
-        Post findPost = postService.getOwnerPostByPostId(postId, member.getId());
+        Post findPost = postService.getPost(postId, member.getId());
 
         //then
         assertThat(findPost.getId()).isEqualTo(postId);
         assertThat(findPost.getMember().getId()).isEqualTo(member.getId());
     }
 
-    @DisplayName("본인이 올린 게시물 한건 조회 싱패 - 권한 부족")
+    @DisplayName("게시물 한건 조회 - 실패")
     @Test
-    void getOwnerPostByPostId_failByForbidden() {
-        //given
-        Member member = new Member(null, "junyoung", "이름1");
-        em.persist(member);
-
-        List<FileDto> fileDtos = List.of(
-                new FileDto("uploadFileName", "storeFileName", "png"));
-        Long postId = postService.addPost(new PostDto(member.getId(), fileDtos, "안녕하세요"));
-
-        em.flush();
-        em.clear();
-        //when
-        //then
-        assertThatThrownBy(() -> postService.getOwnerPostByPostId(postId, member.getId() + 1))
-                .isExactlyInstanceOf(ForbiddenException.class);
-    }
-
-    @DisplayName("본인이 올린 게시물 한건 조회 싱패 - 존재하지 않음")
-    @Test
-    void getOwnerPostByPostId_failByNotFound() {
+    void getPost_failByNotFound() {
         //given
         //when
         //then
-        assertThatThrownBy(() -> postService.getOwnerPostByPostId(0l, 0l))
+        assertThatThrownBy(() -> postService.getPost(0l, 0l))
                 .isExactlyInstanceOf(NotFoundException.class);
     }
 

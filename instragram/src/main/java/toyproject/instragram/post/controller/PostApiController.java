@@ -18,6 +18,8 @@ import toyproject.instragram.post.service.PostService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static toyproject.instragram.common.exception.api.ApiExceptionType.FORBIDDEN_POST;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts")
@@ -41,8 +43,17 @@ public class PostApiController {
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> getPost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
+        Post findPost = postService.getPost(postId, signInMember.getMemberId());
+        validateAccess(signInMember.getMemberId(), findPost.getMember().getId());
+
         return ResponseEntity.ok()
-                .body(PostResponse.from(postService.getOwnerPostByPostId(postId, signInMember.getMemberId())));
+                .body(PostResponse.from(findPost));
+    }
+
+    private void validateAccess(Long signInMemberId, Long PostOwnerId) {
+        if (!signInMemberId.equals(PostOwnerId)) {
+            throw FORBIDDEN_POST.getException();
+        }
     }
 
     @DeleteMapping("/{postId}")
