@@ -3,6 +3,7 @@ package toyproject.instragram.common.exception.form;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import toyproject.instragram.common.exception.CustomException;
+import toyproject.instragram.common.exception.form.addpost.EmptyFileException;
 import toyproject.instragram.common.exception.form.signin.IncorrectPasswordException;
 import toyproject.instragram.common.exception.form.signin.NotFoundAccountByEmailException;
 import toyproject.instragram.common.exception.form.signin.NotFoundAccountByNicknameException;

@@ -1,6 +1,8 @@
-package toyproject.instragram.common.exception.form;
+package toyproject.instragram.common.exception.form.addpost;
 
-public class EmptyFileException extends CustomFormException{
+import toyproject.instragram.common.exception.form.CustomFormException;
+
+public class EmptyFileException extends CustomFormException {
     public EmptyFileException(String message) {
         super(message);
     }
