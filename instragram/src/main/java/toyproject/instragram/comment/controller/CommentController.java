@@ -11,6 +11,7 @@ import toyproject.instragram.comment.service.CommentService;
 import toyproject.instragram.common.auth.SignIn;
 import toyproject.instragram.common.auth.SignInMember;
 import toyproject.instragram.post.controller.dto.PostSaveForm;
+import toyproject.instragram.post.controller.dto.PostUpdateForm;
 
 import javax.validation.Valid;
 
@@ -25,6 +26,7 @@ public class CommentController {
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("postSaveForm", new PostSaveForm());
+            model.addAttribute("postUpdateForm", new PostUpdateForm());
             model.addAttribute("signInMember", signInMember);
             return "main";
         }

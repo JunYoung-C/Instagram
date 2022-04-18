@@ -3,11 +3,12 @@ package toyproject.instragram.common;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import toyproject.instragram.comment.controller.dto.CommentSaveForm;
 import toyproject.instragram.common.auth.SignIn;
 import toyproject.instragram.common.auth.SignInMember;
-import toyproject.instragram.comment.controller.dto.CommentSaveForm;
-import toyproject.instragram.post.controller.dto.PostSaveForm;
 import toyproject.instragram.member.controller.dto.SignInForm;
+import toyproject.instragram.post.controller.dto.PostSaveForm;
+import toyproject.instragram.post.controller.dto.PostUpdateForm;
 
 @Controller
 public class MainController {
@@ -21,6 +22,7 @@ public class MainController {
         }
 
         model.addAttribute("postSaveForm", new PostSaveForm());
+        model.addAttribute("postUpdateForm", new PostUpdateForm());
         model.addAttribute("commentSaveForm", new CommentSaveForm());
         model.addAttribute("signInMember", signInMember);
         return "main";

@@ -43,6 +43,7 @@ public class PostController {
         }
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("postUpdateForm", new PostUpdateForm());
             model.addAttribute("commentSaveForm", new CommentSaveForm());
             model.addAttribute("signInMember", signInMember);
             return "main";

@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <link rel="stylesheet" href="/css/styles.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Instagram</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      .error-box {
+        position: fixed;
+        bottom: -55px;
+        left: 0;
+        width: 100%;
+        height: 55px;
+        background-color: black;
+        color: white;
+        font-size: 19px;
+        animation-name: hide-error-box;
+        animation-delay: 0.5s;
+        animation-duration: 4s;
+      }
+
+      @keyframes hide-error-box {
+        0% {
+          bottom: -55px;
+        }
+        25%,
+        75% {
+          bottom: 0;
+        }
+        100% {
+          bottom: -55px;
+        }
+      }
+
+      .error {
+        margin: 19px;
+      }
+    </style>
   </head>
   <body class="main-body">
     <header class="main-header">
@@ -117,6 +149,7 @@
                 <span>좋아요 <span class="post-like-count">8000</span>개</span>
               </div>
               <div class="post-time-wrap comment-post-time-wrap"></div>
+
               <div class="post-comment">
                 <form
                         action="/comments"
@@ -239,6 +272,12 @@
 
               <div class="add-post__text-options post-modal__text-options">
                 <i class="far fa-smile add-post__text-icons post-modal__text-icons"></i>
+
+                <div class="form-errors--add-form" th:if="${#fields.hasAnyErrors()}">
+                  <p class="form-error--add-form" th:each="err : ${#fields.allErrors()}"
+                     th:text="${err}">에러 메세지</p>
+                </div>
+
                 <span class="add-post__text-info post-modal__text-info"
                   ><span class="add-post__text-count">0</span>/2,200</span
                 >
@@ -259,6 +298,7 @@
           method="post"
           enctype="multipart/form-data"
           class="update-post__form post-modal__form"
+          th:object="${postUpdateForm}"
         >
           <header class="update-post__header post-modal__header">
             <div class="update-post__header-column post-modal__header-column">
@@ -345,6 +385,16 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="error-box" th:if="${#fields.hasErrors('${postSaveForm.*}')} or
+    ${#fields.hasErrors('${commentSaveForm.*}')} or ${#fields.hasErrors('${postUpdateForm.*}')}">
+      <p class="error" th:each="err : ${#fields.errors('${postSaveForm.*}')}"
+         th:text="${err}">에러 메세지</p>
+      <p class="error" th:each="err : ${#fields.errors('${commentSaveForm.*}')}"
+         th:text="${err}">에러 메세지</p>
+      <p class="error" th:each="err : ${#fields.errors('${postUpdateForm.*}')}"
+         th:text="${err}">에러 메세지</p>
     </div>
 
     <script
