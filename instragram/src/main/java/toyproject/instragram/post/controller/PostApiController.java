@@ -44,22 +44,22 @@ public class PostApiController {
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> getPost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
         Post findPost = postService.getPost(postId);
-        validateAccess(signInMember.getMemberId(), findPost.getMember().getId());
+        validatePostAccess(signInMember.getMemberId(), findPost.getMember().getId());
 
         return ResponseEntity.ok()
                 .body(PostResponse.from(findPost));
     }
 
-    private void validateAccess(Long signInMemberId, Long PostOwnerId) {
+    @DeleteMapping("/{postId}")
+    public void deletePost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
+        validatePostAccess(signInMember.getMemberId(), getPostOwnerId(postId));
+        postService.deletePost(postId);
+    }
+
+    private void validatePostAccess(Long signInMemberId, Long PostOwnerId) {
         if (!signInMemberId.equals(PostOwnerId)) {
             throw FORBIDDEN_POST.getException();
         }
-    }
-
-    @DeleteMapping("/{postId}")
-    public void deletePost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
-        validateAccess(signInMember.getMemberId(), getPostOwnerId(postId));
-        postService.deletePost(postId);
     }
 
     private Long getPostOwnerId(Long postId) {
