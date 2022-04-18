@@ -86,30 +86,4 @@ class CommentRepositoryTest {
         assertThat(findFirstComments)
                 .isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
     }
-
-    @DisplayName("해당 댓글이 존재하는지 확인")
-    @Test
-    void existsById() {
-        //given
-        Member member1 = new Member(null, "nickname1", "이름1");
-        em.persist(member1);
-
-        Post post = new Post(member1, null);
-        em.persist(post);
-
-        Comment comment = new Comment(post, member1, null);
-        em.persist(comment);
-
-        em.flush();
-        em.clear();
-
-        //when
-        boolean isExist1 = commentRepository.existsById(comment.getId());
-        boolean isExist2 = commentRepository.existsById(-1L);
-
-        //then
-        assertThat(isExist1).isTrue();
-        assertThat(isExist2).isFalse();
-    }
-
 }
