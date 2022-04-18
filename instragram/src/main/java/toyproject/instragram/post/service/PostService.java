@@ -25,14 +25,17 @@ public class PostService {
 
     @Transactional
     public Long addPost(PostDto postDto) {
-        Member member = memberRepository.findById(postDto.getMemberId())
-                .orElseThrow(NOT_FOUND_MEMBER::getException);
-        Post post = new Post(member, postDto.getText());
+        Post post = new Post(getValidatedMember(postDto.getMemberId()), postDto.getText());
         postDto.getFileDtos().forEach(file -> post.addPostFile(
                 new PostFile(post, file.getUploadFileName(), file.getStoreFileName(), file.getExtension())));
 
         postRepository.save(post);
         return post.getId();
+    }
+
+    private Member getValidatedMember(Long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(NOT_FOUND_MEMBER::getException);
     }
 
     public Slice<Post> getPostSlice(Pageable pageable) {
@@ -51,7 +54,8 @@ public class PostService {
 
     @Transactional
     public void deletePost(Long postId) {
-        postRepository.findById(postId).ifPresent(this::deletePostFiles);
+        Post findPost = postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
+        deletePostFiles(findPost);
         postRepository.deleteById(postId);
     }
 
