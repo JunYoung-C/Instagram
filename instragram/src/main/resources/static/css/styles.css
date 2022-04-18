@@ -7,7 +7,7 @@
 @import "components/modal.css";
 @import "components/slideImage.css";
 @import "components/post.css";
-@import "components/post-modal.css";
+@import "components/postModal.css";
 
 /* screens */
 @import "screens/main.css";

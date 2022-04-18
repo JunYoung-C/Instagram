@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/css/styles.css"/>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>로그인</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <style>
+        .form-errors {
+            margin-bottom: 20px;
+        }
+
+        .form-error {
+            color: #ED4956;
+            margin-bottom: 6px;
+        }
+    </style>
 </head>
 <body>
 <nav></nav>
@@ -49,6 +59,12 @@
                             <span>Facebook으로 로그인</span>
                         </a>
                     </div>
+
+                    <div class="form-errors" th:if="${#fields.hasErrors('${signInForm.*}')}">
+                        <p class="form-error" th:each="err : ${#fields.errors('${signInForm.*}')}"
+                           th:text="${err}">에러 메세지</p>
+                    </div>
+
                     <div class="singin-forget-password">
                         <a href="">비밀번호를 잊으셨나요?</a>
                     </div>
