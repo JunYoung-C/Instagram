@@ -9,6 +9,7 @@ import toyproject.instragram.common.auth.SignInMember;
 import toyproject.instragram.member.controller.dto.SignInForm;
 import toyproject.instragram.post.controller.dto.PostSaveForm;
 import toyproject.instragram.post.controller.dto.PostUpdateForm;
+import toyproject.instragram.reply.controller.dto.ReplySaveForm;
 
 @Controller
 public class MainController {
@@ -24,6 +25,7 @@ public class MainController {
         model.addAttribute("postSaveForm", new PostSaveForm());
         model.addAttribute("postUpdateForm", new PostUpdateForm());
         model.addAttribute("commentSaveForm", new CommentSaveForm());
+        model.addAttribute("replySaveForm", new ReplySaveForm());
         model.addAttribute("signInMember", signInMember);
         return "main";
     }

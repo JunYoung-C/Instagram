@@ -17,6 +17,7 @@ import toyproject.instragram.post.controller.dto.PostSaveForm;
 import toyproject.instragram.post.controller.dto.PostUpdateForm;
 import toyproject.instragram.post.service.PostDto;
 import toyproject.instragram.post.service.PostService;
+import toyproject.instragram.reply.controller.dto.ReplySaveForm;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class PostController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("postUpdateForm", new PostUpdateForm());
             model.addAttribute("commentSaveForm", new CommentSaveForm());
+            model.addAttribute("replySaveForm", new ReplySaveForm());
             model.addAttribute("signInMember", signInMember);
             return "main";
         }
@@ -58,6 +60,7 @@ public class PostController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("postSaveForm", new PostSaveForm());
             model.addAttribute("commentSaveForm", new CommentSaveForm());
+            model.addAttribute("replySaveForm", new ReplySaveForm());
             model.addAttribute("signInMember", signInMember);
             return "main";
         }
