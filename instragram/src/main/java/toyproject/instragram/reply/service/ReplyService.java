@@ -7,13 +7,13 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.comment.entity.Comment;
+import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.reply.entity.Reply;
 import toyproject.instragram.comment.repository.CommentRepository;
 import toyproject.instragram.member.repository.MemberRepository;
 import toyproject.instragram.reply.repository.ReplyRepository;
 
-import static toyproject.instragram.common.exception.api.ApiExceptionType.NOT_FOUND_COMMENT;
-import static toyproject.instragram.common.exception.api.ApiExceptionType.NOT_FOUND_REPLY;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,13 +26,17 @@ public class ReplyService {
 
     @Transactional
     public Long addReply(ReplyDto replyDto) {
-        Reply reply = new Reply(
-                commentRepository.findById(replyDto.getCommentId()).orElse(null),
-                memberRepository.findById(replyDto.getMemberId()).orElse(null),
-                replyDto.getText());
-
+        Reply reply = new Reply(getValidatedComment(replyDto), getValidatedMember(replyDto), replyDto.getText());
         replyRepository.save(reply);
         return reply.getId();
+    }
+
+    private Member getValidatedMember(ReplyDto replyDto) {
+        return memberRepository.findById(replyDto.getMemberId()).orElseThrow(EXPIRED_SESSION::getException);
+    }
+
+    private Comment getValidatedComment(ReplyDto replyDto) {
+        return commentRepository.findById(replyDto.getCommentId()).orElseThrow(NOT_FOUND_COMMENT::getException);
     }
 
     public Slice<Reply> getReplySlice(Long commentId, Pageable pageable) {
