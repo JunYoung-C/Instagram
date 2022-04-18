@@ -11,6 +11,7 @@ import toyproject.instragram.reply.entity.Reply;
 import toyproject.instragram.reply.controller.dto.ReplyResponse;
 import toyproject.instragram.reply.service.ReplyService;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -20,13 +21,15 @@ public class ReplyApiController {
     private final ReplyService replyService;
 
     @GetMapping("/replies")
-    public CommonSliceResponse<ReplyResponse> getReplies(
+    public CommonSliceResponse<List<ReplyResponse>> getReplies(
             @RequestParam Long commentId, @PageableDefault(size = 20) Pageable pageable) {
         Slice<Reply> replySlice = replyService.getReplySlice(commentId, pageable);
 
-        return new CommonSliceResponse(
-                replySlice.getContent().stream().map(ReplyResponse::from).collect(Collectors.toList()),
-                SliceInfo.from(replySlice));
+        return new CommonSliceResponse<>(getReplyResponsesForm(replySlice.getContent()), SliceInfo.from(replySlice));
+    }
+
+    private List<ReplyResponse> getReplyResponsesForm(List<Reply> content) {
+        return content.stream().map(ReplyResponse::from).collect(Collectors.toList());
     }
 
     @DeleteMapping("/replies/{replyId}")

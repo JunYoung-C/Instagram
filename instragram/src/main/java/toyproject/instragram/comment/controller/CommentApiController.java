@@ -31,10 +31,10 @@ public class CommentApiController {
             @RequestParam Long postId, @PageableDefault(size = 20) Pageable pageable) {
         Slice<Comment> commentSlice = commentService.getCommentSlice(postId, pageable);
 
-        return new CommonSliceResponse<>(getCommentResponses(commentSlice.getContent()), SliceInfo.from(commentSlice));
+        return new CommonSliceResponse<>(getCommentResponsesFrom(commentSlice.getContent()), SliceInfo.from(commentSlice));
     }
 
-    private List<CommentResponse> getCommentResponses(List<Comment> contents) {
+    private List<CommentResponse> getCommentResponsesFrom(List<Comment> contents) {
         return contents.stream()
                 .map(comment -> CommentResponse.from(comment, replyService.getReplyCount(comment.getId())))
                 .collect(Collectors.toList());
