@@ -14,10 +14,10 @@ import toyproject.instragram.reply.controller.dto.ReplyResponse;
 import toyproject.instragram.reply.service.ReplyService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static toyproject.instragram.common.exception.api.ApiExceptionType.FORBIDDEN_COMMENT;
-import static toyproject.instragram.common.exception.api.ApiExceptionType.FORBIDDEN_REPLY;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +27,11 @@ public class ReplyApiController {
 
     @GetMapping("/replies")
     public CommonSliceResponse<List<ReplyResponse>> getReplies(
-            @RequestParam Long commentId, @PageableDefault(size = 20) Pageable pageable) {
+            @RequestParam(required = false) Long commentId, @PageableDefault(size = 20) Pageable pageable) {
+        if (Objects.isNull(commentId)) {
+            throw REQUIRED_COMMENT_ID.getException();
+        }
+
         Slice<Reply> replySlice = replyService.getReplySlice(commentId, pageable);
 
         return new CommonSliceResponse<>(getReplyResponsesFrom(replySlice.getContent()), SliceInfo.from(replySlice));
@@ -38,7 +42,11 @@ public class ReplyApiController {
     }
 
     @DeleteMapping("/replies/{replyId}")
-    public void deleteReply(@SignIn SignInMember signInMember, @PathVariable Long replyId) {
+    public void deleteReply(@SignIn SignInMember signInMember, @PathVariable(required = false) Long replyId) {
+        if (Objects.isNull(replyId)) {
+            throw REQUIRED_REPLY_ID.getException();
+        }
+
         validateReplyAccess(signInMember.getMemberId(), getReplyOwnerId(replyId));
         replyService.deleteReply(replyId);
     }

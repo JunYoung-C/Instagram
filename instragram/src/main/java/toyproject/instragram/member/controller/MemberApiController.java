@@ -17,7 +17,7 @@ public class MemberApiController {
     
     @GetMapping("/members")
     public MemberResponse searchMembers(
-            @RequestParam String nickname, @PageableDefault(size = 50) Pageable pageable) {
+            @RequestParam(defaultValue = "") String nickname, @PageableDefault(size = 50) Pageable pageable) {
         return new MemberResponse(memberService.searchProfiles(nickname, pageable));
     }
 }

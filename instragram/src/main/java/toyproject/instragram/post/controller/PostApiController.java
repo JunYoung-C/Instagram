@@ -16,9 +16,11 @@ import toyproject.instragram.comment.service.CommentService;
 import toyproject.instragram.post.service.PostService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static toyproject.instragram.common.exception.api.ApiExceptionType.FORBIDDEN_POST;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.REQUIRED_POST_ID;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,16 +44,24 @@ public class PostApiController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> getPost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
+    public ResponseEntity<PostResponse> getPost(
+            @SignIn SignInMember signInMember, @PathVariable(required = false) Long postId) {
+        if (Objects.isNull(postId)) {
+            throw REQUIRED_POST_ID.getException();
+        }
+
         Post findPost = postService.getPost(postId);
         validatePostAccess(signInMember.getMemberId(), findPost.getMember().getId());
-
         return ResponseEntity.ok()
                 .body(PostResponse.from(findPost));
     }
 
     @DeleteMapping("/{postId}")
-    public void deletePost(@SignIn SignInMember signInMember, @PathVariable Long postId) {
+    public void deletePost(@SignIn SignInMember signInMember, @PathVariable(required = false) Long postId) {
+        if (Objects.isNull(postId)) {
+            throw REQUIRED_POST_ID.getException();
+        }
+
         validatePostAccess(signInMember.getMemberId(), getPostOwnerId(postId));
         postService.deletePost(postId);
     }

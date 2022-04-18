@@ -15,9 +15,10 @@ import toyproject.instragram.comment.service.CommentService;
 import toyproject.instragram.reply.service.ReplyService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static toyproject.instragram.common.exception.api.ApiExceptionType.FORBIDDEN_COMMENT;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,9 +29,12 @@ public class CommentApiController {
 
     @GetMapping("/comments")
     public CommonSliceResponse<List<CommentResponse>> getComments(
-            @RequestParam Long postId, @PageableDefault(size = 20) Pageable pageable) {
-        Slice<Comment> commentSlice = commentService.getCommentSlice(postId, pageable);
+            @RequestParam(required = false) Long postId, @PageableDefault(size = 20) Pageable pageable) {
+        if (Objects.isNull(postId)) {
+            throw REQUIRED_POST_ID.getException();
+        }
 
+        Slice<Comment> commentSlice = commentService.getCommentSlice(postId, pageable);
         return new CommonSliceResponse<>(getCommentResponsesFrom(commentSlice.getContent()), SliceInfo.from(commentSlice));
     }
 
@@ -41,7 +45,11 @@ public class CommentApiController {
     }
 
     @DeleteMapping("/comments/{commentId}")
-    public void deleteComment(@SignIn SignInMember signInMember, @PathVariable Long commentId) {
+    public void deleteComment(@SignIn SignInMember signInMember, @PathVariable(required = false) Long commentId) {
+        if (Objects.isNull(commentId)) {
+            throw REQUIRED_COMMENT_ID.getException();
+        }
+
         validateCommentAccess(signInMember.getMemberId(), getCommentOwnerId(commentId));
         commentService.deleteComment(commentId);
     }
