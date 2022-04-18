@@ -13,7 +13,7 @@ public class MemberSaveForm {
     @NotBlank(message = "휴대폰 번호나 이메일을 입력해주세요")
     private String phoneNumberOrEmail;
 
-    @NotBlank(message = "성명 입력해주세요")
+    @NotBlank(message = "성명을 입력해주세요")
     @Size(max = 29, message = "성명을 30자 미만으로 입력하세요.")
     private String name;
 
