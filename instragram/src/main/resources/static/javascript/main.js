@@ -95,7 +95,7 @@ function getMembersAjax(nickname) {
             if (request.status === 200) {
                 setSearchResult(request.response);
             } else {
-                alert("request에 문제가 있습니다.")
+                alert(request.response.message);
             }
         }
     }
@@ -136,7 +136,7 @@ function getPostsAjax() {
                 setMainPost(request.response);
                 nextPostPage = request.response.sliceInfo.page + 1;
             } else {
-                alert("request에 문제가 있습니다.")
+                alert(request.response.message);
             }
         }
     }
@@ -286,7 +286,7 @@ function getCommentsAjax(postId, page) {
             if (request.status === 200) {
                 setComments(request.response);
             } else {
-                alert("request에 문제가 있습니다.")
+                alert(request.response.message);
             }
         }
     }
@@ -380,7 +380,7 @@ function getRepliesAjax(commentId, page) {
             if (request.status === 200) {
                 setReplies(request.response, commentId);
             } else {
-                alert("request에 문제가 있습니다.")
+                alert(request.response.message);
             }
         }
     }
@@ -490,14 +490,11 @@ function getPostAjax(postId) {
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
-                console.log(request.response);
                 optionBox.style.display = "none";
                 setUpdatePost(request.response, postId);
                 updatePost.style.display = "block";
-            } else if (request.status === 403){
-                alert("해당 게시물에 대한 권한이 없습니다.");
             } else {
-                alert("request에 문제가 있습니다.")
+                alert(request.response.message);
             }
         }
     }
@@ -521,14 +518,13 @@ function deleteCommentAjax(id, kinds) {
                 optionBox.style.display = "";
                 removeDeletedNode(kinds, id);
             } else {
-                alert("request에 문제가 있습니다.")
+                alert(request.response.message);
             }
-            // 성공적으로 ajax하면 댓글 초기화
-            // 권한 없는 상태 코드인 경우 알리기
         }
     }
 
     request.open("delete", `/${kinds}/${id}`);
+    request.responseType = "json";
     request.send();
 }
 
