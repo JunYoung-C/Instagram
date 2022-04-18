@@ -1,4 +1,4 @@
-package toyproject.instragram.common.exception;
+package toyproject.instragram.common.exception.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
