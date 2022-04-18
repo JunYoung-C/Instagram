@@ -1,15 +1,15 @@
 package toyproject.instragram.comment.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.instragram.comment.entity.Comment;
 import toyproject.instragram.comment.repository.CommentRepository;
-import toyproject.instragram.common.exception.api.ApiExceptionType;
+import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.repository.MemberRepository;
+import toyproject.instragram.post.entity.Post;
 import toyproject.instragram.post.repository.PostRepository;
 
 import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
@@ -26,11 +26,20 @@ public class CommentService {
     @Transactional
     public Long addComment(CommentDto commentDto) {
         Comment comment = new Comment(
-                postRepository.findById(commentDto.getPostId()).orElse(null),
-                memberRepository.findById(commentDto.getMemberId()).orElse(null),
+                getValidatedPost(commentDto.getPostId()),
+                getValidatedMember(commentDto.getMemberId()),
                 commentDto.getText());
+
         commentRepository.save(comment);
         return comment.getId();
+    }
+
+    private Member getValidatedMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(EXPIRED_SESSION::getException);
+    }
+
+    private Post getValidatedPost(Long postId) {
+        return postRepository.findById(postId).orElseThrow(NOT_FOUND_POST::getException);
     }
 
     public Slice<Comment> getCommentSlice(Long postId, Pageable pageable) {

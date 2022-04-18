@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import toyproject.instragram.common.exception.CustomException;
 import toyproject.instragram.common.exception.api.httpstatusexception.ForbiddenException;
 import toyproject.instragram.common.exception.api.httpstatusexception.NotFoundException;
+import toyproject.instragram.common.exception.api.httpstatusexception.UnauthorizedException;
 
 @Getter
 @RequiredArgsConstructor
@@ -20,6 +21,8 @@ public enum ApiExceptionType {
 
     NOT_FOUND_REPLY(new NotFoundException("해당 답글이 존재하지 않습니다.")),
     FORBIDDEN_REPLY(new ForbiddenException("해당 답글에 대한 접근 권한이 없습니다.")),
+
+    EXPIRED_SESSION(new UnauthorizedException("세션이 만료되었습니다.")),
     ;
 
     private final CustomException exception;
