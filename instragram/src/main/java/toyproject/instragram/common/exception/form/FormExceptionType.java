@@ -32,7 +32,7 @@ public enum FormExceptionType {
             "다른 계정에서 이미 사용중인 사용자 이름입니다.", "nickname", "duplicate")),
     DUPLICATE_EMAIL(new DuplicateEmailException(
             "다른 계정에서 이미 사용중인 이메일입니다.", "phoneNumberOrEmail", "duplicate")),
-    DUPLICATE_PHONE_NUMBER(new DuplicateEmailException(
+    DUPLICATE_PHONE_NUMBER(new DuplicatePhoneNumberException(
             "다른 계정에서 이미 사용중인 휴대폰 번호입니다.", "phoneNumberOrEmail", "duplicate")),
     INVALID_NICKNAME_BY_NUMBER(new InvalidNicknameByNumberException(
             "사용자의 이름에 숫자만 포함할 수는 없습니다.", "nickname", "invalid")),
