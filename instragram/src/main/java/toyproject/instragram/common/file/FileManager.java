@@ -35,7 +35,7 @@ public class FileManager {
     private void validateImageFiles(List<MultipartFile> multipartFiles) {
         for (MultipartFile multipartFile : multipartFiles) {
             validateEmptyFile(multipartFile);
-            validateImageExtension(extractExtension(multipartFile.getOriginalFilename()))
+            validateImageExtension(extractExtension(multipartFile.getOriginalFilename()));
         }
     }
 
