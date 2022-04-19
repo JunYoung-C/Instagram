@@ -1,4 +1,4 @@
-package toyproject.instragram.repository;
+package toyproject.instragram.member.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

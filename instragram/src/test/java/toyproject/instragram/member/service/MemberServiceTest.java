@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class MemberServiceMockTest {
+class MemberServiceTest {
 
     @InjectMocks
     MemberService memberService;
@@ -38,9 +38,9 @@ class MemberServiceMockTest {
     @Mock
     MemberRepository memberRepository;
 
-    @Nested
     @DisplayName("회원가입")
-    class signUp {
+    @Nested
+    class signUpTest {
         @DisplayName("성공")
         @Test
         void success() {
@@ -126,9 +126,9 @@ class MemberServiceMockTest {
     }
 
 
-    @Nested
     @DisplayName("로그인")
-    class signIn {
+    @Nested
+    class signInTest {
         @DisplayName("성공")
         @ParameterizedTest
         @CsvSource({
