@@ -43,7 +43,7 @@ class CommentServiceTest {
     PostRepository postRepository;
 
     @Nested
-    @DisplayName("게시물 등록")
+    @DisplayName("댓글 등록")
     class addCommentTest {
         @DisplayName("성공")
         @Test
@@ -66,13 +66,14 @@ class CommentServiceTest {
             assertThatNoException().isThrownBy(() -> commentService.addComment(commentDto));
         }
 
-        @DisplayName("회원 세션 만료로 인한 실패")
+        @DisplayName("실패 - 회원 세션 만료")
         @Test
         void failByMember() {
             //given
             CommentDto commentDto = new CommentDto(1L, 2L, "댓글");
 
-            when(postRepository.findById(anyLong())).thenReturn(Optional.of(new Post(null, "게시물")));
+            when(postRepository.findById(anyLong()))
+                    .thenReturn(Optional.of(new Post(null, "게시물")));
 
             //when
             //then
@@ -80,15 +81,10 @@ class CommentServiceTest {
                     .isExactlyInstanceOf(EXPIRED_SESSION.getException().getClass());
         }
 
-        @DisplayName("게시물 검증 실패")
+        @DisplayName("실패 - 존재하지 않는 게시물")
         @Test
         void failByPost() {
             //given
-            Member member = new Member(
-                    Privacy.create("1234", "01011111111"),
-                    "nickname",
-                    "name");
-
             CommentDto commentDto = new CommentDto(1L, 2L, "댓글");
 
             //when
@@ -168,7 +164,7 @@ class CommentServiceTest {
             assertThat(comment).isEqualTo(findComment);
         }
 
-        @DisplayName("실패")
+        @DisplayName("실패 - 존재하지 않는 댓글")
         @Test
         void fail() {
             //given

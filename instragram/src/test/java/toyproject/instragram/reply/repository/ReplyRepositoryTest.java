@@ -1,4 +1,4 @@
-package toyproject.instragram.repository;
+package toyproject.instragram.reply.repository;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

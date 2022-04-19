@@ -11,5 +11,4 @@ public class InstragramApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InstragramApplication.class, args);
 	}
-	//TODO 예외 테스트 코드 보완
 }
