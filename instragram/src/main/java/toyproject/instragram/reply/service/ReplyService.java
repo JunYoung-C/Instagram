@@ -1,7 +1,6 @@
 package toyproject.instragram.reply.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
@@ -26,17 +25,20 @@ public class ReplyService {
 
     @Transactional
     public Long addReply(ReplyDto replyDto) {
-        Reply reply = new Reply(getValidatedComment(replyDto), getValidatedMember(replyDto), replyDto.getText());
+        Reply reply = new Reply(
+                getValidatedComment(replyDto.getCommentId()),
+                getValidatedMember(replyDto.getMemberId()),
+                replyDto.getText());
         replyRepository.save(reply);
         return reply.getId();
     }
 
-    private Member getValidatedMember(ReplyDto replyDto) {
-        return memberRepository.findById(replyDto.getMemberId()).orElseThrow(EXPIRED_SESSION::getException);
+    private Member getValidatedMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(EXPIRED_SESSION::getException);
     }
 
-    private Comment getValidatedComment(ReplyDto replyDto) {
-        return commentRepository.findById(replyDto.getCommentId()).orElseThrow(NOT_FOUND_COMMENT::getException);
+    private Comment getValidatedComment(Long commentId) {
+        return commentRepository.findById(commentId).orElseThrow(NOT_FOUND_COMMENT::getException);
     }
 
     public Slice<Reply> getReplySlice(Long commentId, Pageable pageable) {
@@ -53,12 +55,10 @@ public class ReplyService {
         replyRepository.deleteById(replyId);
     }
 
-    // TODO 테스트코드 작성
     public Long getReplyCount(Long commentId) {
         return replyRepository.countRepliesByCommentId(commentId);
     }
 
-    // TODO 테스트 코드 작성
     public Reply getReply(Long replyId) {
         return replyRepository.findById(replyId)
                 .orElseThrow(NOT_FOUND_REPLY::getException);
