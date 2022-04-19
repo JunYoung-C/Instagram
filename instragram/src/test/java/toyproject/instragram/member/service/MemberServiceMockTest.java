@@ -1,17 +1,16 @@
 package toyproject.instragram.member.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import toyproject.instragram.common.exception.form.signin.IncorrectPasswordException;
 import toyproject.instragram.common.exception.form.signin.NotFoundAccountByEmailException;
 import toyproject.instragram.common.exception.form.signin.NotFoundAccountByNicknameException;
@@ -23,12 +22,11 @@ import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.repository.MemberRepository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -209,5 +207,14 @@ class MemberServiceMockTest {
 
     @Test
     void searchProfiles() {
+        //given
+        when(memberRepository.searchProfiles(anyString(), any(Pageable.class)))
+                .thenReturn(new ArrayList<>());
+
+        //when
+        //then
+        assertThatNoException().isThrownBy(() ->
+                memberService.searchProfiles("nickname", PageRequest.of(0, 1)));
+
     }
 }
