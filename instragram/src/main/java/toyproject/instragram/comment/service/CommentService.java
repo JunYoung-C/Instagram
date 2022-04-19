@@ -56,12 +56,10 @@ public class CommentService {
         commentRepository.deleteById(commentId);
     }
 
-    // TODO 테스트 코드 작성
     public Long getCommentCount(Long postId) {
         return commentRepository.countCommentsByPostId(postId);
     }
 
-    // TODO 테스트 코드 작성
     public Comment getComment(Long commentId) {
         return commentRepository.findById(commentId)
                 .orElseThrow(NOT_FOUND_COMMENT::getException);
