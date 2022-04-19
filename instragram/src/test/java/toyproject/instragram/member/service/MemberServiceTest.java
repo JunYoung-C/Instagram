@@ -58,7 +58,7 @@ class MemberServiceTest {
             assertThatNoException().isThrownBy(() -> memberService.signUp(memberDto));
         }
 
-        @DisplayName("닉네임 중복으로 인한 실패")
+        @DisplayName("실패 - 닉네임 중복")
         @Test
         void failByDuplicateNickname() {
             //given
@@ -80,7 +80,7 @@ class MemberServiceTest {
                     .isExactlyInstanceOf(DuplicateNicknameException.class);
         }
 
-        @DisplayName("이메일 중복으로 인한 실패")
+        @DisplayName("실패 - 이메일 중복")
         @Test
         void failByDuplicateEmail() {
             //given
@@ -103,7 +103,7 @@ class MemberServiceTest {
         }
 
         @Test
-        @DisplayName("휴대폰 번호 중복으로 인한 실패")
+        @DisplayName("실패 - 휴대폰 번호 중복")
         void failByDuplicatePhoneNumber() {
             //given
             String phoneNumber = "01011111111";
@@ -155,7 +155,7 @@ class MemberServiceTest {
             assertThatNoException().isThrownBy(() -> memberService.signIn(signInId, password));
         }
 
-        @DisplayName("아이디 틀림")
+        @DisplayName("실패 - 존재하지 않는 아이디")
         @ParameterizedTest
         @CsvSource({
                 "nickname1, 1234",
@@ -177,7 +177,7 @@ class MemberServiceTest {
                             NotFoundAccountByPhoneNumberException.class);
         }
 
-        @DisplayName("비밀번호 틀림")
+        @DisplayName("실패 - 비밀번호 에러")
         @ParameterizedTest
         @CsvSource({
                 "nickname, 1111",

@@ -59,7 +59,7 @@ class PostServiceTest {
             assertThatNoException().isThrownBy(() -> postService.addPost(postDto));
         }
 
-        @DisplayName("회원 세션 만료로 인한 실패")
+        @DisplayName("실패 - 회원 세션 만료")
         @Test
         void fail() {
             //given
@@ -91,15 +91,18 @@ class PostServiceTest {
         @Test
         void success() {
             //given
+            Post post = new Post(null, "게시물");
             when(postRepository.findById(anyLong()))
-                    .thenReturn(Optional.of(new Post(null, "테스트")));
+                    .thenReturn(Optional.of(post));
 
             //when
+            Post findPost = postService.getPost(1L);
+
             //then
-            assertThatNoException().isThrownBy(() -> postService.getPost(1L));
+            assertThat(findPost).isEqualTo(post);
         }
 
-        @DisplayName("실패")
+        @DisplayName("실패 - 존재하지 않는 게시물")
         @Test
         void fail() {
             //given
@@ -129,7 +132,7 @@ class PostServiceTest {
             assertThat(post.getText()).isEqualTo(modifiedText);
         }
 
-        @DisplayName("실패")
+        @DisplayName("실패 - 존재하지 않는 게시물")
         @Test
         void fail() {
             //given
@@ -155,7 +158,7 @@ class PostServiceTest {
             assertThatNoException().isThrownBy(() -> postService.deletePost(1L));
         }
 
-        @DisplayName("실패")
+        @DisplayName("실패 - 존재하지 않는 게시물")
         @Test
         void fail() {
             //given
