@@ -35,7 +35,7 @@ public class PostService {
 
     private Member getValidatedMember(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(NOT_FOUND_MEMBER::getException);
+                .orElseThrow(EXPIRED_SESSION::getException);
     }
 
     public Slice<Post> getPostSlice(Pageable pageable) {
