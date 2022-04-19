@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import toyproject.instragram.common.exception.CustomException;
 import toyproject.instragram.common.exception.form.addpost.EmptyFileException;
+import toyproject.instragram.common.exception.form.addpost.InvalidImageExtensionException;
 import toyproject.instragram.common.exception.form.signin.IncorrectPasswordException;
 import toyproject.instragram.common.exception.form.signin.NotFoundAccountByEmailException;
 import toyproject.instragram.common.exception.form.signin.NotFoundAccountByNicknameException;
@@ -43,7 +44,9 @@ public enum FormExceptionType {
             "유효한 휴대폰 번호를 입력하세요.", "phoneNumberOrEmail", "invalid")),
 
     // 파일 관련
-    EMPTY_FILE(new EmptyFileException("파일을 하나 이상 첨부하세요.", "files", "required"));
+    EMPTY_FILE(new EmptyFileException("파일을 하나 이상 첨부하세요.", "files", "required")),
+    INVALID_IMAGE_EXTENSION(new InvalidImageExtensionException(
+            "확장자는 JPG, JPEG, PNG만 가능합니다.", "files", "invalid"));
 
     private final CustomException exception;
 }

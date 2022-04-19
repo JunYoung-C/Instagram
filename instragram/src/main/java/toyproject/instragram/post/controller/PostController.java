@@ -2,7 +2,6 @@ package toyproject.instragram.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +35,7 @@ public class PostController {
                           BindingResult bindingResult, Model model) throws IOException {
         try {
             if (!bindingResult.hasFieldErrors()) {
-                List<FileDto> fileDtos = fileManager.storeFiles(form.getFiles());
+                List<FileDto> fileDtos = fileManager.storeImageFiles(form.getFiles());
                 postService.addPost(new PostDto(signInMember.getMemberId(), fileDtos, form.getText()));
             }
         } catch (CustomFormException e) {
