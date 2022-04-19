@@ -273,11 +273,6 @@
               <div class="add-post__text-options post-modal__text-options">
                 <i class="far fa-smile add-post__text-icons post-modal__text-icons"></i>
 
-                <div class="form-errors--add-form" th:if="${#fields.hasAnyErrors()}">
-                  <p class="form-error--add-form" th:each="err : ${#fields.allErrors()}"
-                     th:text="${err}">에러 메세지</p>
-                </div>
-
                 <span class="add-post__text-info post-modal__text-info"
                   ><span class="add-post__text-count">0</span>/2,200</span
                 >
