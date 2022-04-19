@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.SliceImpl;
+import toyproject.instragram.common.exception.api.ApiExceptionType;
 import toyproject.instragram.common.exception.api.httpstatusexception.NotFoundException;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.Privacy;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -66,7 +68,7 @@ class PostServiceTest {
             //when
             //then
             assertThatThrownBy(() -> postService.addPost(postDto))
-                    .isExactlyInstanceOf(NotFoundException.class);
+                    .isExactlyInstanceOf(NOT_FOUND_MEMBER.getException().getClass());
         }
     }
 
@@ -104,7 +106,7 @@ class PostServiceTest {
             //when
             //then
             assertThatThrownBy(() -> postService.getPost(1L))
-                    .isExactlyInstanceOf(NotFoundException.class);
+                    .isExactlyInstanceOf(NOT_FOUND_POST.getException().getClass());
         }
     }
 
@@ -134,7 +136,7 @@ class PostServiceTest {
             //when
             //then
             assertThatThrownBy(() -> postService.modifyPostText(1L, "수정"))
-                    .isExactlyInstanceOf(NotFoundException.class);
+                    .isExactlyInstanceOf(NOT_FOUND_POST.getException().getClass());
         }
     }
 
@@ -160,7 +162,7 @@ class PostServiceTest {
             //when
             //then
             assertThatThrownBy(() -> postService.deletePost(1L))
-                    .isExactlyInstanceOf(NotFoundException.class);
+                    .isExactlyInstanceOf(NOT_FOUND_POST.getException().getClass());
         }
     }
 }
