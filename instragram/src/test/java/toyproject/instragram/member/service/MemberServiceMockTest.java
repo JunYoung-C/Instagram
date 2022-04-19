@@ -5,10 +5,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import toyproject.instragram.common.exception.form.signin.IncorrectPasswordException;
+import toyproject.instragram.common.exception.form.signin.NotFoundAccountByEmailException;
+import toyproject.instragram.common.exception.form.signin.NotFoundAccountByNicknameException;
+import toyproject.instragram.common.exception.form.signin.NotFoundAccountByPhoneNumberException;
 import toyproject.instragram.common.exception.form.signup.DuplicateEmailException;
 import toyproject.instragram.common.exception.form.signup.DuplicateNicknameException;
 import toyproject.instragram.common.exception.form.signup.DuplicatePhoneNumberException;
@@ -36,8 +43,8 @@ class MemberServiceMockTest {
     @Nested
     @DisplayName("회원가입")
     class signUp {
-        @Test
         @DisplayName("성공")
+        @Test
         void success() {
             //given
             Member member = new Member(
@@ -53,8 +60,8 @@ class MemberServiceMockTest {
             assertThatNoException().isThrownBy(() -> memberService.signUp(memberDto));
         }
 
-        @Test
         @DisplayName("닉네임 중복으로 인한 실패")
+        @Test
         void failByDuplicateNickname() {
             //given
             String nickname = "nickname";
@@ -75,8 +82,8 @@ class MemberServiceMockTest {
                     .isExactlyInstanceOf(DuplicateNicknameException.class);
         }
 
-        @Test
         @DisplayName("이메일 중복으로 인한 실패")
+        @Test
         void failByDuplicateEmail() {
             //given
             String email = "email@naver.com";
@@ -112,7 +119,7 @@ class MemberServiceMockTest {
 
             MemberDto memberDto =
                     new MemberDto(phoneNumber, "name", "nickname", "1234");
-            
+
             //when
             //then
             assertThatThrownBy(() -> memberService.signUp(memberDto))
@@ -121,9 +128,83 @@ class MemberServiceMockTest {
     }
 
 
+    @Nested
+    @DisplayName("로그인")
+    class signIn {
+        @DisplayName("성공")
+        @ParameterizedTest
+        @CsvSource({
+                "nickname, 1234",
+                "01011111111, 1234",
+                "email@naver.com, 1234"
+        })
+        void success(String signInId, String password) {
+            //given
+            Member member = new Member(
+                    Privacy.create("1234", "01011111111"),
+                    "nickname",
+                    "name");
 
-    @Test
-    void signIn() {
+            lenient().when(memberRepository.findByPrivacyEmail("email@naver.com"))
+                    .thenReturn(Optional.of(member));
+            lenient().when(memberRepository.findByPrivacyPhoneNumber("01011111111"))
+                    .thenReturn(Optional.of(member));
+            lenient().when(memberRepository.findByNickname("nickname"))
+                    .thenReturn(Optional.of(member));
+
+            //when
+            //then
+            assertThatNoException().isThrownBy(() -> memberService.signIn(signInId, password));
+        }
+
+        @DisplayName("아이디 틀림")
+        @ParameterizedTest
+        @CsvSource({
+                "nickname1, 1234",
+                "010111111112, 1234",
+                "email1@naver.com, 1234",
+        })
+        void failById(String signInId, String password) {
+            //given
+            Member member = new Member(
+                    Privacy.create("1234", "01011111111"),
+                    "nickname",
+                    "name");
+
+            //when
+            //then
+            assertThatThrownBy(() -> memberService.signIn(signInId, password))
+                    .isInstanceOfAny(NotFoundAccountByEmailException.class,
+                            NotFoundAccountByNicknameException.class,
+                            NotFoundAccountByPhoneNumberException.class);
+        }
+
+        @DisplayName("비밀번호 틀림")
+        @ParameterizedTest
+        @CsvSource({
+                "nickname, 1111",
+                "01011111111, 1111",
+                "email@naver.com, 1111"
+        })
+        void failByPassword(String signInId, String password) {
+            //given
+            Member member = new Member(
+                    Privacy.create("1234", "01011111111"),
+                    "nickname",
+                    "name");
+
+            lenient().when(memberRepository.findByPrivacyEmail("email@naver.com"))
+                    .thenReturn(Optional.of(member));
+            lenient().when(memberRepository.findByPrivacyPhoneNumber("01011111111"))
+                    .thenReturn(Optional.of(member));
+            lenient().when(memberRepository.findByNickname("nickname"))
+                    .thenReturn(Optional.of(member));
+
+            //when
+            //then
+            assertThatThrownBy(() -> memberService.signIn(signInId, password))
+                    .isExactlyInstanceOf(IncorrectPasswordException.class);
+        }
     }
 
     @Test
