@@ -59,6 +59,7 @@ public class PostService {
         postRepository.deleteById(postId);
     }
 
+    //TODO 테스트 보완 필요
     private void deletePostFiles(Post post) {
         post.getPostFiles().forEach((postFile) ->
                 fileManager.deleteFile(postFile.getStoreFileName(), postFile.getExtension()));
