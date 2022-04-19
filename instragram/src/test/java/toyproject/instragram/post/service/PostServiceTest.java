@@ -59,7 +59,7 @@ class PostServiceTest {
             assertThatNoException().isThrownBy(() -> postService.addPost(postDto));
         }
 
-        @DisplayName("회원 검증 실패")
+        @DisplayName("회원 세션 만료로 인한 실패")
         @Test
         void fail() {
             //given
@@ -68,7 +68,7 @@ class PostServiceTest {
             //when
             //then
             assertThatThrownBy(() -> postService.addPost(postDto))
-                    .isExactlyInstanceOf(NOT_FOUND_MEMBER.getException().getClass());
+                    .isExactlyInstanceOf(EXPIRED_SESSION.getException().getClass());
         }
     }
 
