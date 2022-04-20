@@ -14,7 +14,6 @@ import java.net.MalformedURLException;
 public class FileApiController {
     private final FileManager fileManager;
 
-    //TODO 예외클래스 변경
     @GetMapping("/images/{originalFileName}")
     public Resource getImage(@PathVariable String originalFileName) throws MalformedURLException {
         return new UrlResource("file:" + fileManager.getFullPath(originalFileName));
