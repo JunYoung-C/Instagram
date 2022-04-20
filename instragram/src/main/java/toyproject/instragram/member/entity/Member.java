@@ -47,8 +47,12 @@ public class Member extends BaseEntity {
         }
     }
 
-    private boolean isNumber(String str) {
-        return str.chars().allMatch(Character::isDigit);
+    private boolean isNumber(String nickname) {
+        if (nickname.isBlank()) {
+            return false;
+        }
+
+        return nickname.chars().allMatch(Character::isDigit);
     }
 
     private boolean isValidFormat(String nickname) {
