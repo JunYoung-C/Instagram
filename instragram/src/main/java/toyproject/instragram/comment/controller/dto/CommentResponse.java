@@ -20,7 +20,7 @@ public class CommentResponse {
     private LocalDateTime createdDate;
     private Long replyCount;
 
-    public static CommentResponse from(Comment comment, Long replyCount) {
+    public static CommentResponse of(Comment comment, Long replyCount) {
         return new CommentResponse(
                 comment.getId(),
                 InnerMemberResponse.from(comment.getMember()),

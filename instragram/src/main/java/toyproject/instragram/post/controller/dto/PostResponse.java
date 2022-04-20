@@ -23,7 +23,7 @@ public class PostResponse {
     private LocalDateTime createdDate;
     private Long commentCount;
 
-    public static PostResponse from(Post post, Long commentCount) {
+    public static PostResponse of(Post post, Long commentCount) {
         return new PostResponse(
                 post.getId(),
                 InnerMemberResponse.from(post.getMember()),
@@ -34,7 +34,7 @@ public class PostResponse {
     }
 
     public static PostResponse from(Post post) {
-        return PostResponse.from(post, null);
+        return PostResponse.of(post, null);
     }
 
     private static List<String> getFilePaths(Post post) {

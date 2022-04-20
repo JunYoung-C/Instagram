@@ -39,7 +39,7 @@ public class PostApiController {
 
     private List<PostResponse> getPostResponses(Slice<Post> postSlice) {
         return postSlice.getContent().stream()
-                .map(post -> PostResponse.from(post, commentService.getCommentCount(post.getId())))
+                .map(post -> PostResponse.of(post, commentService.getCommentCount(post.getId())))
                 .collect(Collectors.toList());
     }
 

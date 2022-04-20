@@ -40,7 +40,7 @@ public class CommentApiController {
 
     private List<CommentResponse> getCommentResponsesFrom(List<Comment> contents) {
         return contents.stream()
-                .map(comment -> CommentResponse.from(comment, replyService.getReplyCount(comment.getId())))
+                .map(comment -> CommentResponse.of(comment, replyService.getReplyCount(comment.getId())))
                 .collect(Collectors.toList());
     }
 
