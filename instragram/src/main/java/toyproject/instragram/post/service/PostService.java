@@ -27,7 +27,7 @@ public class PostService {
     public Long addPost(PostDto postDto) {
         Post post = new Post(getValidatedMember(postDto.getMemberId()), postDto.getText());
         postDto.getFileDtos().forEach(file -> post.addPostFile(
-                new PostFile(post, file.getUploadFileName(), file.getStoreFileName(), file.getExtension())));
+                new PostFile(file.getUploadFileName(), file.getStoreFileName(), file.getExtension())));
 
         postRepository.save(post);
         return post.getId();

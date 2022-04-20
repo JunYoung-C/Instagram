@@ -41,6 +41,7 @@ public class Post extends BaseEntity {
 
     public void addPostFile(PostFile postFile) {
         postFiles.add(postFile);
+        postFile.setPost(this);
     }
 
     public void changeText(String text) {

@@ -23,11 +23,14 @@ public class PostFile {
     private String storeFileName;
     private String extension;
 
-    public PostFile(Post post, String uploadFileName, String storeFileName, String extension) {
-        this.post = post;
+    public PostFile(String uploadFileName, String storeFileName, String extension) {
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
         this.extension = extension;
+    }
+
+    protected void setPost(Post post) {
+        this.post = post;
     }
 
     public String getOriginalStoreFileName() {

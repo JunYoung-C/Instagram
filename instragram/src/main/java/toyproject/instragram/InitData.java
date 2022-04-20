@@ -52,21 +52,21 @@ public class InitData {
             em.persist(member2);
 
             for (int i = 0; i < 20; i++) {
-                Post post = new Post(member1 , "테스트 게시물" + i);
-                post.addPostFile(new PostFile(post, "01", "01", "png"));
-                post.addPostFile(new PostFile(post, "02", "02", "png"));
-                post.addPostFile(new PostFile(post, "03", "03", "png"));
+                Post post = new Post(member1, "테스트 게시물" + i);
+                post.addPostFile(new PostFile("02", "02", "png"));
+                post.addPostFile(new PostFile("03", "03", "png"));
+                post.addPostFile(new PostFile("01", "01", "png"));
                 em.persist(post);
             }
 
             Post post1 = new Post(member1, "안녕하세요~");
-            post1.addPostFile(new PostFile(post1, "02", "01", "png"));
-            post1.addPostFile(new PostFile(post1, "01", "02", "png"));
-            post1.addPostFile(new PostFile(post1, "03", "03", "png"));
+            post1.addPostFile(new PostFile("02", "01", "png"));
+            post1.addPostFile(new PostFile("01", "02", "png"));
+            post1.addPostFile(new PostFile("03", "03", "png"));
             em.persist(post1);
 
             Post post2 = new Post(member2, "반갑습니다~");
-            post2.addPostFile(new PostFile(post2, "playstore", "playstore", "png"));
+            post2.addPostFile(new PostFile("playstore", "playstore", "png"));
             em.persist(post2);
 
             Comment comment1 = new Comment(post1, member1, "정말 멋있어요!");
