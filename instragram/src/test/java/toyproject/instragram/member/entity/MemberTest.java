@@ -51,6 +51,7 @@ class MemberTest {
         }
     }
 
+    @DisplayName("게시물 프로필 사진 변경")
     @Test
     void changeProfileImage() {
         //given
@@ -65,6 +66,7 @@ class MemberTest {
         assertThat(memberImage.getMember()).isEqualTo(member);
     }
 
+    @DisplayName("비밀번호 확인")
     @Test
     void isCorrectPassword() {
         //given

@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 class PrivacyTest {
 
     @Nested
-    @DisplayName("휴대폰 번호가 맞는지 확인")
+    @DisplayName("휴대폰 번호 확인")
     class isPhoneNumberTest {
 
         @DisplayName("성공")
@@ -43,7 +43,7 @@ class PrivacyTest {
     }
 
     @Nested
-    @DisplayName("이메일이 맞는지 확인")
+    @DisplayName("이메일 확인")
     class isEmailTest {
 
         @DisplayName("성공")
