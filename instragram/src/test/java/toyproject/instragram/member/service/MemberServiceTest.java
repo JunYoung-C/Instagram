@@ -205,6 +205,7 @@ class MemberServiceTest {
         }
     }
 
+    @DisplayName("프로필 검색")
     @Test
     void searchProfiles() {
         //given
