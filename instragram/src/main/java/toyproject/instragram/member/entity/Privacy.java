@@ -48,8 +48,8 @@ public class Privacy {
         }
     }
 
-    public static boolean isPhoneNumber(String str) {
-        return str.matches("\\d{9,11}");
+    public static boolean isPhoneNumber(String phoneNumber) {
+        return phoneNumber.matches("\\d{9,11}");
     }
 
     private void validateEmail(String email) {
@@ -58,7 +58,7 @@ public class Privacy {
         }
     }
 
-    public static boolean isEmail(String str) {
-        return str.matches("^[A-Za-z\\d+_.-]+@(.+)$");
+    public static boolean isEmail(String email) {
+        return email.matches("^[A-Za-z\\d_.-]+@(.+)$");
     }
 }
