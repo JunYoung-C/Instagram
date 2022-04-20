@@ -44,9 +44,6 @@ class ReplyServiceTest {
     @Mock
     MemberRepository memberRepository;
 
-    @Mock
-    PostRepository postRepository;
-
     @Nested
     @DisplayName("답글 등록")
     class addReplyTest {
