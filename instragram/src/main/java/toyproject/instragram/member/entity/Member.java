@@ -36,7 +36,7 @@ public class Member extends BaseEntity {
         this.privacy = privacy;
         this.nickname = nickname;
         this.name = name;
-        this.memberImage = MemberImage.createBasicImage();
+        changeProfileImage(MemberImage.createBasicImage());
     }
 
     private void validateNickname(String nickname) {
