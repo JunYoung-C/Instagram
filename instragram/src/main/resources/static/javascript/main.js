@@ -407,6 +407,7 @@ function setReplies(response, commentId) {
         showReplies.setAttribute("nextPage", sliceInfo.page + 1);
         document.querySelector(`.comment-${commentId} .comment-divider__reply-count`).innerText -= replies.length;
     } else {
+        document.querySelector(`.comment-${commentId} .comment-divider__show-replies`).innerText = "답글 모두 보기"
         showReplies.style.display = "none";
         hideReplies.style.display = "";
         showReplies.setAttribute("hasNext", "false");
