@@ -30,7 +30,7 @@ class PostRepositoryTest {
     PostRepository postRepository;
 
     @Nested
-    @DisplayName("먼저 생성된 날짜 순으로 게시물 조회")
+    @DisplayName("최근에 생성된 순서으로 게시물 조회")
     class getPostsByOrderByCreatedDateDescTest {
         @DisplayName("성공")
         @Test

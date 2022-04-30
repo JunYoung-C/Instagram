@@ -54,7 +54,7 @@ class CommentRepositoryTest {
         assertThat(commentCount).isEqualTo(5);
     }
 
-    @DisplayName("생성 날짜가 빠른 순으로 댓글 조회")
+    @DisplayName("최근에 생성된 순서로 댓글 조회")
     @Test
     void getCommentsByPostIdOrderByCreatedDateDesc() {
         //given

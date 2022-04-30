@@ -19,3 +19,6 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
+
+file:
+  dir: C:/Users/chlwn/Desktop/myproject1/instragram/src/test/resources/files/

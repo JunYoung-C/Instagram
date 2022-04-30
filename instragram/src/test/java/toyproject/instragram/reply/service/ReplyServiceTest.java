@@ -16,7 +16,6 @@ import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.repository.MemberRepository;
 import toyproject.instragram.post.entity.Post;
-import toyproject.instragram.post.repository.PostRepository;
 import toyproject.instragram.reply.entity.Reply;
 import toyproject.instragram.reply.repository.ReplyRepository;
 
@@ -100,7 +99,7 @@ class ReplyServiceTest {
     @Test
     void getReplySlice() {
         //given
-        when(replyRepository.getRepliesByCommentIdOrderByCreatedDateDesc(anyLong(), any(Pageable.class)))
+        when(replyRepository.getRepliesByCommentId(anyLong(), any(Pageable.class)))
                 .thenReturn(new SliceImpl<>(new ArrayList<>()));
 
         //when

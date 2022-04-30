@@ -57,9 +57,9 @@ class ReplyRepositoryTest {
         assertThat(replyCount).isEqualTo(25);
     }
 
-    @DisplayName("생성 날짜가 빠른 순으로 답글 조회")
+    @DisplayName("먼저 생성된 순서로 답글 조회")
     @Test
-    void getRepliesByCommentIdOrderByCreatedDateDesc() {
+    void getRepliesByCommentId() {
         //given
         Member member1 = new Member(null, "nickname1", "이름1");
         Member member2 = new Member(null, "nickname2", "이름2");
@@ -80,21 +80,21 @@ class ReplyRepositoryTest {
 
         //when
         Slice<Reply> firstReplySlice = replyRepository
-                .getRepliesByCommentIdOrderByCreatedDateDesc(comment.getId(), PageRequest.of(0, 20));
+                .getRepliesByCommentId(comment.getId(), PageRequest.of(0, 20));
         Slice<Reply> lastReplySlice = replyRepository
-                .getRepliesByCommentIdOrderByCreatedDateDesc(comment.getId(), PageRequest.of(1, 20));
+                .getRepliesByCommentId(comment.getId(), PageRequest.of(1, 20));
 
         //then
         assertThat(firstReplySlice.isFirst()).isTrue();
         assertThat(firstReplySlice.isLast()).isFalse();
         assertThat(firstReplySlice.getContent()).hasSize(20);
         assertThat(firstReplySlice.getContent())
-                .isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
+                .isSortedAccordingTo((o1, o2) -> o1.getCreatedDate().compareTo(o2.getCreatedDate()));
 
         assertThat(lastReplySlice.isFirst()).isFalse();
         assertThat(lastReplySlice.isLast()).isTrue();
         assertThat(lastReplySlice.getContent()).hasSize(5);
         assertThat(lastReplySlice.getContent())
-                .isSortedAccordingTo((o1, o2) -> o2.getCreatedDate().compareTo(o1.getCreatedDate()));
+                .isSortedAccordingTo((o1, o2) -> o1.getCreatedDate().compareTo(o2.getCreatedDate()));
     }
 }
