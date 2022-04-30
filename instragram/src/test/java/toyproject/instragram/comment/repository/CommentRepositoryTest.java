@@ -74,9 +74,9 @@ class CommentRepositoryTest {
 
         //when
         Slice<Comment> firstCommentSlice = commentRepository
-                .getCommentsByPostIdOrderByCreatedDateDesc(post.getId(), PageRequest.of(0, 20));
+                .getCommentsByPostIdOrderByIdDesc(post.getId(), PageRequest.of(0, 20));
         Slice<Comment> lastCommentSlice = commentRepository
-                .getCommentsByPostIdOrderByCreatedDateDesc(post.getId(), PageRequest.of(3, 20));
+                .getCommentsByPostIdOrderByIdDesc(post.getId(), PageRequest.of(3, 20));
 
         //then
         List<Comment> findFirstComments = firstCommentSlice.getContent();

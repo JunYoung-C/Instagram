@@ -98,7 +98,7 @@ class CommentServiceTest {
     @Test
     void getCommentSlice() {
         //given
-        when(commentRepository.getCommentsByPostIdOrderByCreatedDateDesc(anyLong(), any(Pageable.class)))
+        when(commentRepository.getCommentsByPostIdOrderByIdDesc(anyLong(), any(Pageable.class)))
                 .thenReturn(new SliceImpl<>(new ArrayList<>()));
 
         //when

@@ -10,8 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.SliceImpl;
-import toyproject.instragram.common.exception.api.ApiExceptionType;
-import toyproject.instragram.common.exception.api.httpstatusexception.NotFoundException;
 import toyproject.instragram.member.entity.Member;
 import toyproject.instragram.member.entity.Privacy;
 import toyproject.instragram.member.repository.MemberRepository;
@@ -23,7 +21,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static toyproject.instragram.common.exception.api.ApiExceptionType.*;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.EXPIRED_SESSION;
+import static toyproject.instragram.common.exception.api.ApiExceptionType.NOT_FOUND_POST;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -76,7 +75,7 @@ class PostServiceTest {
     @Test
     void getPostSlice() {
         //given
-        when(postRepository.getPostsByOrderByCreatedDateDesc(any(Pageable.class)))
+        when(postRepository.getPostsByOrderByIdDesc(any(Pageable.class)))
                 .thenReturn(new SliceImpl<>(new ArrayList<>()));
 
         //when

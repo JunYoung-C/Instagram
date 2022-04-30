@@ -59,7 +59,7 @@ class PostRepositoryTest {
 
             //when
             int size = 10;
-            Slice<Post> slice = postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(0, size));
+            Slice<Post> slice = postRepository.getPostsByOrderByIdDesc(PageRequest.of(0, size));
 
             //then
             List<Post> posts = slice.getContent();
@@ -76,7 +76,7 @@ class PostRepositoryTest {
             //given
             //when
             // 첫번째 페이지 선택
-            Slice<Post> slice = postRepository.getPostsByOrderByCreatedDateDesc(PageRequest.of(0, 10));
+            Slice<Post> slice = postRepository.getPostsByOrderByIdDesc(PageRequest.of(0, 10));
 
             //then
             assertThat(slice.getContent()).hasSize(0);
