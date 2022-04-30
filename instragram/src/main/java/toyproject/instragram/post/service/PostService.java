@@ -39,7 +39,7 @@ public class PostService {
     }
 
     public Slice<Post> getPostSlice(Pageable pageable) {
-        return postRepository.getPostsByOrderByCreatedDateDesc(pageable);
+        return postRepository.getPostsByOrderByIdDesc(pageable);
     }
 
     public Post getPost(Long postId) {

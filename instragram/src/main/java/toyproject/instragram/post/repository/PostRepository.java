@@ -11,5 +11,5 @@ import toyproject.instragram.post.entity.Post;
 public interface PostRepository extends JpaRepository<Post, Long>{
 
     @EntityGraph(attributePaths = {"member"})
-    Slice<Post> getPostsByOrderByCreatedDateDesc(Pageable pageable);
+    Slice<Post> getPostsByOrderByIdDesc(Pageable pageable);
 }

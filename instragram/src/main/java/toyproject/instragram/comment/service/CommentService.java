@@ -43,8 +43,7 @@ public class CommentService {
     }
 
     public Slice<Comment> getCommentSlice(Long postId, Pageable pageable) {
-        return commentRepository
-                .getCommentsByPostIdOrderByCreatedDateDesc(postId, pageable);
+        return commentRepository.getCommentsByPostIdOrderByIdDesc(postId, pageable);
     }
 
     @Transactional
