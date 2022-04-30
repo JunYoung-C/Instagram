@@ -11,5 +11,5 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     Long countRepliesByCommentId(Long commentId);
 
     @EntityGraph(attributePaths = {"member"})
-    Slice<Reply> getRepliesByCommentIdOrderByCreatedDateDesc(Long commentId, Pageable pageable);
+    Slice<Reply> getRepliesByCommentId(Long commentId, Pageable pageable);
 }

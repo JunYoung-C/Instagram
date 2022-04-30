@@ -42,8 +42,7 @@ public class ReplyService {
     }
 
     public Slice<Reply> getReplySlice(Long commentId, Pageable pageable) {
-        return replyRepository
-                .getRepliesByCommentIdOrderByCreatedDateDesc(commentId, pageable);
+        return replyRepository.getRepliesByCommentId(commentId, pageable);
     }
 
     @Transactional
