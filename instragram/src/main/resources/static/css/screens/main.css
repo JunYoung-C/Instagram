@@ -179,12 +179,13 @@
 }
 
 .main-post-contents {
-  height: 216px;
+  min-height: 216px;
   padding-bottom: 54px;
 }
 
 .main-post-explanation {
   margin-bottom: 9px;
+  line-height: 1.6;
 }
 
 .main-post-explanation__owner {
