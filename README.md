@@ -11,20 +11,20 @@
 
 ## :zap: 사용 기술
 ### 1) Front-end
-<img src="https://user-images.githubusercontent.com/87891581/166086949-46111f07-3993-4dfa-8bb2-7eb2866413eb.png" width="550" height="200">
+<img src="https://user-images.githubusercontent.com/87891581/166086949-46111f07-3993-4dfa-8bb2-7eb2866413eb.png" width="300" height="120">
 
 ### 2) Back-end
-<p><img src="https://user-images.githubusercontent.com/87891581/166086436-e20beed0-87d8-4a0f-9e9b-ae9f6f79af62.png" width="300" height="150">
-<img src="https://user-images.githubusercontent.com/87891581/166087033-0e221fdf-c173-433e-8c59-b6750bce0819.png" width="200" height="170">
-<img src="https://user-images.githubusercontent.com/87891581/166087060-6a3fc7f9-be74-4acc-bca1-6a6a123e7fdb.png" width="200" height="150">
-<img src="https://user-images.githubusercontent.com/87891581/166087991-0960cc93-565e-45aa-9cf3-fc47673a8b93.png" width="160" height="150"><p>
+<p><img src="https://user-images.githubusercontent.com/87891581/166086436-e20beed0-87d8-4a0f-9e9b-ae9f6f79af62.png" width="240" height="120">
+<img src="https://user-images.githubusercontent.com/87891581/166087033-0e221fdf-c173-433e-8c59-b6750bce0819.png" width="160" height="136">
+<img src="https://user-images.githubusercontent.com/87891581/166087060-6a3fc7f9-be74-4acc-bca1-6a6a123e7fdb.png" width="160" height="120">
+<img src="https://user-images.githubusercontent.com/87891581/166087991-0960cc93-565e-45aa-9cf3-fc47673a8b93.png" width="128" height="120"><p>
 
 ### 3) Test-tool
-<p><img src="https://user-images.githubusercontent.com/87891581/166087841-5dfe4e7a-7d9e-45af-a540-4d181c282308.png" width="300" height="120">
-<img src="https://user-images.githubusercontent.com/87891581/166087801-e395615e-2440-4957-8c07-abb2897266eb.png" width="250" height="170"></p>
+<p><img src="https://user-images.githubusercontent.com/87891581/166087841-5dfe4e7a-7d9e-45af-a540-4d181c282308.png" width="240" height="96">
+<img src="https://user-images.githubusercontent.com/87891581/166087801-e395615e-2440-4957-8c07-abb2897266eb.png" width="240" height="136"></p>
 
 ### 4) DB
-<img src="https://user-images.githubusercontent.com/87891581/166086786-043fb80f-ea2f-461a-9da5-9e72e4c770d1.png" width="300" height="140">
+<img src="https://user-images.githubusercontent.com/87891581/166086786-043fb80f-ea2f-461a-9da5-9e72e4c770d1.png" width="240" height="112">
 
 ## :page_facing_up: 기능
 > [URI 문서 ver.2](https://github.com/JunYoung-C/Instagram/wiki/URI-%EB%AC%B8%EC%84%9C-ver.2)
@@ -48,7 +48,15 @@
   - 답글 삭제
 
 ## :wrench: 개선할 점
-
+- 기능 보완
+  - 게시물, 댓글, 답글 좋아요 기능
+  - 로그아웃
+  - 회원 정보 수정
+  - 팔로워, 팔로잉
+  - 팔로잉한 회원의 게시물만 조회
+  - 채팅
+- 프로젝트 배포
+- 성능 테스트 및 기능 최적화
 
 
 
