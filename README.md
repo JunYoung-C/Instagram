@@ -7,7 +7,17 @@
 - 클론 코딩 강의가 아닌, 직접 설계하고 만들어보는 인스타그램!
 
 ## :eyes: Demo
-<img src="https://img.shields.io/badge/spring%20boot-v2.6.3-green?logo=spring-boot">
+|회원가입|로그인|게시물 더보기|
+|:--:|:--:|:--:|
+|<img src="https://user-images.githubusercontent.com/87891581/166108709-0b3d10bb-ac69-48ca-b46b-e4923a132e22.gif" width="300" height="300">|<img src="https://user-images.githubusercontent.com/87891581/166108738-fae2f9d1-bfca-4422-a56e-e690ff961fdd.gif" width="300" height="300">|<img src="https://user-images.githubusercontent.com/87891581/166108747-b13fbfaf-649f-4ab0-92e5-dcfce4252e43.gif" width="300" height="300">|
+
+|닉네임으로 회원 검색|게시물 등록|게시물 수정|
+|:--:|:--:|:--:|
+|<img src="https://user-images.githubusercontent.com/87891581/166108753-fd2308e3-f32e-46c5-a984-76a5b48b6fbd.gif" width="300" height="300">|<img src="https://user-images.githubusercontent.com/87891581/166108741-0705ce3f-3552-4371-9836-3e9d4b5f88b1.gif" width="300" height="300">|<img src="https://user-images.githubusercontent.com/87891581/166108740-b6e3a5ba-2fd8-430d-b69b-c2f055cdea78.gif" width="300" height="300">|
+
+|댓글 등록 및 삭제|답글 등록 및 삭제|
+|:--:|:--:|
+|<img src="https://user-images.githubusercontent.com/87891581/166108745-4f148f7e-fa8f-41b5-a2e3-83ebff3cb52c.gif" width="300" height="300">|<img src="https://user-images.githubusercontent.com/87891581/166108731-e702bcf4-de5f-41f2-a9ff-37b2dbc8536d.gif" width="300" height="300">|
 
 ## :zap: 사용 기술
 ### 1) Front-end
@@ -50,6 +60,8 @@
 ## :wrench: 개선할 점
 - 기능 보완
   - 게시물, 댓글, 답글 좋아요 기능
+  - 동영상도 업로드 가능
+  - 페이스북 로그인
   - 로그아웃
   - 회원 정보 수정
   - 팔로워, 팔로잉
