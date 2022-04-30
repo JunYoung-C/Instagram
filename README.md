@@ -27,7 +27,8 @@
 <p><img src="https://user-images.githubusercontent.com/87891581/166086436-e20beed0-87d8-4a0f-9e9b-ae9f6f79af62.png" width="240" height="120">
 <img src="https://user-images.githubusercontent.com/87891581/166087033-0e221fdf-c173-433e-8c59-b6750bce0819.png" width="160" height="136">
 <img src="https://user-images.githubusercontent.com/87891581/166087060-6a3fc7f9-be74-4acc-bca1-6a6a123e7fdb.png" width="160" height="120">
-<img src="https://user-images.githubusercontent.com/87891581/166087991-0960cc93-565e-45aa-9cf3-fc47673a8b93.png" width="128" height="120"><p>
+<img src="https://user-images.githubusercontent.com/87891581/166087991-0960cc93-565e-45aa-9cf3-fc47673a8b93.png" width="128" height="120">
+<img src="https://user-images.githubusercontent.com/87891581/166111098-c9433ac8-1a44-4bb9-9830-1300a23bed2a.png" width="400" height="80"><p>
 
 ### 3) Test-tool
 <p><img src="https://user-images.githubusercontent.com/87891581/166087841-5dfe4e7a-7d9e-45af-a540-4d181c282308.png" width="240" height="96">
@@ -70,6 +71,7 @@
   - 채팅
 - 프로젝트 배포
 - 성능 테스트 및 기능 최적화
+- api 문서화 툴 도입
 
 
 
