@@ -16,7 +16,7 @@
 
 </br>
 
-## :eyes: Demo
+## :eyes: 
 <details>
 <summary><b>펼쳐 보기</b></summary>
 <div markdown="1">
@@ -150,7 +150,7 @@ DB에서 조회한 Entity를 그대로 JSON으로 반환하는 것은 좋지 않
 
 ### 4.2. 테스트 코드 실행 속도가 느리다.
 ### :question: Question
-- `@SpringBootTest`로 테스트 코드를 작성하면 편리하지만, 테스트에 사용되지 않는 빈들까지 모두 로드하기 때문에 속도가 느리다.
+- `@SpringBootTest`로 테스트 코드를 작성하면 편리하지만, 테스트에 사용되지 않는 빈들까지 모두 로드하기 때문에 속도가 느리다. 그러면 속도를 개선하려면 어떻게 해야할까?
 <details>
 <summary><b>기존 코드</b></summary>
   
