@@ -1,0 +1,80 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signin-form-wrap,
+.signup-suggestion-wrap {
+  text-align: center;
+  width: 350px;
+  border: var(--main-border);
+  background-color: white;
+  padding: 27px 35px 20px 35px;
+}
+
+.signin-form-wrap {
+  margin-bottom: 10px;
+}
+
+.signup-suggestion-wrap {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.signin-title {
+  font-family: "Mukta", cursive;
+  font-size: 31px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.signin-form-wrap input {
+  width: 270px;
+  height: 40px;
+}
+
+.signin-form__submit {
+  cursor: pointer;
+}
+
+.signin-form__id,
+.signin-form__password {
+  border: var(--main-border);
+  background-color: var(--main-bg-color);
+  border-radius: 3px;
+  padding-left: 7px;
+  padding-top: 2px;
+  font-size: 12px;
+}
+
+.signin-form__id:focus,
+.signin-form__password:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.signin-form__id {
+ margin-bottom: 5px; 
+}
+.signin-form__submit {
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  margin-top: 14px;
+  margin-bottom: 20px;
+  width: 270px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.signup-link {
+  font-weight: bold;
+  color: var(--dark-sky-blue);
+}
