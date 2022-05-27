@@ -1,0 +1,31 @@
+@import "reset.css";
+@import "variables.css";
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto&display=swap");
+
+/* components */
+@import "components/signInSignUp.css";
+@import "components/modal.css";
+@import "components/slideImage.css";
+@import "components/post.css";
+@import "components/postModal.css";
+
+/* screens */
+@import "screens/main.css";
+@import "screens/signIn.css";
+@import "screens/signUp.css";
+@import "screens/addPost.css";
+@import "screens/comment.css";
+@import "screens/error.css";
+
+body {
+  font-family: var(--general-font);
+  background-color: var(--main-bg-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

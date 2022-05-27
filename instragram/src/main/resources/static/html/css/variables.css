@@ -1,0 +1,9 @@
+:root {
+  --main-bg-color: #fafafa;
+  --main-border: 1px solid rgba(0, 0, 0, 0.15);
+  --sky-blue: #b2dffc;
+  --dark-sky-blue: #00b2fa;
+  --blue: #0095f6;
+  --title-font: "Cookie", cursive;
+  --general-font: "Roboto", sans-serif;
+}
