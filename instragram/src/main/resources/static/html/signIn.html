@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/screens/signIn.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="container">
+        <main>
+          <article class="signin-form-wrap">
+            <h1 class="signin-title">OurMoments</h1>
+
+            <form
+              action="/members/signin"
+              method="post"
+              class="signin-form"
+              th:object="${signInForm}"
+            >
+              <input
+                type="text"
+                placeholder="전화번호, 사용자 이름 또는 이메일"
+                class="signin-form__id"
+                th:field="*{signInId}"
+              />
+
+              <input
+                type="password"
+                placeholder="비밀번호"
+                class="signin-form__password"
+                th:field="*{password}"
+              />
+
+              <input class="signin-form__submit" type="submit" value="로그인" />
+
+              <div
+                class="signin-form__errors"
+                th:if="${#fields.hasAnyErrors()}"
+              >
+                <p
+                  class="signin-form__error"
+                  th:each="err : ${#fields.allErrors()}"
+                  th:text="${err}"
+                >
+                  에러 메세지
+                </p>
+              </div>
+            </form>
+          </article>
+
+          <article class="signup-suggestion-wrap">
+            <span class="signup-suggestion">계정이 없으신가요?&nbsp;</span>
+            <a href="/members/signup" class="signup-link">가입하기</a>
+          </article>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
