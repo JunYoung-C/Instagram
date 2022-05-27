@@ -78,3 +78,8 @@ main {
   font-weight: bold;
   color: var(--dark-sky-blue);
 }
+
+.signin-form__error {
+  color: var(--error-color);
+  margin-bottom: 10px;
+}

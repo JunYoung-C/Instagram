@@ -35,6 +35,19 @@
               />
 
               <input class="signin-form__submit" type="submit" value="로그인" />
+
+              <div
+                class="signin-form__errors"
+                th:if="${#fields.hasAnyErrors()}"
+              >
+                <p
+                  class="signin-form__error"
+                  th:each="err : ${#fields.allErrors()}"
+                  th:text="${err}"
+                >
+                  에러 메세지
+                </p>
+              </div>
             </form>
           </article>
 
