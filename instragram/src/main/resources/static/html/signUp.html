@@ -1,27 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/screens/signUp.css" />
   </head>
   <body>
     <div id="wrap">
-      <header></header>
       <div id="container">
         <main>
-          <article></article>
+          <article class="signup-form-wrap">
+            <h1 class="signup-title">OurMoments</h1>
+
+            <form
+              action="/members/signup"
+              method="post"
+              class="signup-form"
+              th:object="${memberSaveForm}"
+            >
+              <input
+                type="text"
+                placeholder="휴대폰 번호 또는 이메일 주소"
+                class="signup-form__text"
+                th:field="*{phoneNumberOrEmail}"
+              />
+              <input
+                type="text"
+                placeholder="성명"
+                class="signup-form__text"
+                th:field="*{name}"
+              />
+              <input
+                type="text"
+                placeholder="사용자 이름"
+                class="signup-form__text"
+                th:field="*{nickname}"
+              />
+              <input
+                type="password"
+                placeholder="비밀번호"
+                class="signup-form__password"
+                th:field="*{password}"
+              />
+              <input type="submit" value="가입" class="signup-form__submit" />
+
+              <div
+                class="signup-form__errors"
+                th:if="${#fields.hasAnyErrors()}"
+              >
+                <p
+                  class="signup-form__error"
+                  th:each="err : ${#fields.allErrors()}"
+                  th:text="${err}"
+                >
+                  에러 메세지
+                </p>
+              </div>
+            </form>
+          </article>
+
+          <article class="signin-suggestion-wrap">
+            <span class="signin-suggestion">계정이 있으신가요?&nbsp;</span>
+            <a class="signin-link" href="/members/signin">로그인</a>
+          </article>
         </main>
-
-        <section>
-          <article></article>
-        </section>
-
-        <aside></aside>
       </div>
-      <footer></footer>
     </div>
   </body>
 </html>
