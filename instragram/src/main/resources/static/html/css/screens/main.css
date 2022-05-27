@@ -1,4 +1,5 @@
 @import url("../components/header.css");
+@import url("../components/modal.css");
 
 .main-body {
   display: flex;
@@ -82,16 +83,17 @@
   opacity: 0.7;
 }
 
-/* option box 시작 */
-.option-box-body__buttons {
+/* post-setting modal 시작 */
+.post-setting {
   width: 400px;
   background-color: white;
   border-radius: 10px;
 }
 
-.option-box-body__delete, 
-.option-box-body__modify,
-.option-box-body__cancel {
+.post-setting__delete, 
+.post-setting__modify,
+.post-setting__follow,
+.post-setting__cancel {
   width: 100%;
   height: 50px;
   display: flex;
@@ -102,13 +104,15 @@
   cursor: pointer;
 }
 
-.option-box-body__delete {
+.post-setting__delete,
+.post-setting__follow {
   color: #de3131;
 }
 
-.option-box-body__modify {
-  border-top: var(--main-border);
+.post-setting__delete, 
+.post-setting__modify,
+.post-setting__follow {
   border-bottom: var(--main-border);
-}
 
-/* option box 끝 */
+}
+/* post-setting modal 끝 */
