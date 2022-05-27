@@ -4,24 +4,291 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OurMoment</title>
-    <link rel="stylesheet" href="/css/styles.css" />
+    <title>OurMoments</title>
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <div id="wrap">
-      <header></header>
+      <header>
+        <div class="header-title-wrap">
+          <a href="./main.html" class="header-title">OurMoments</a>
+        </div>
+
+        <div class="header-search">
+          <i class="fas fa-search header-search__icon"></i>
+
+          <input
+            type="text"
+            placeholder="사용자 검색"
+            class="header-search__input"
+          />
+
+          <div class="header-search__result">
+            <div class="header-search__triangle"></div>
+
+            <div class="search-result">
+              <a class="search-result__profile">
+                <img
+                  src="../storefiles/basic-profile-image.png"
+                  alt="프로필 이미지"
+                  class="search-result__profile-photo"
+                  width="50px"
+                  height="50px"
+                />
+
+                <div class="search-result__profile-names">
+                  <span class="search-result__profile-nickname">nickname</span>
+
+                  <span class="search-result__profile-name">name</span>
+                </div>
+              </a>
+
+              <button class="search-result__follow-button">
+                <span class="search-result__follow">팔로우</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <nav class="header-nav">
+          <a href="./main.html" class="nav nav--home">
+            <i class="fas fa-home nav-icon"></i>
+          </a>
+
+          <a href="" class="nav nav--new-post">
+            <i class="far fa-plus-square nav-icon"></i>
+          </a>
+
+          <div class="nav nav--account">
+            <i class="fas fa-user nav-icon"></i>
+
+            <div class="nav__options">
+              <div class="nav__triangle"></div>
+
+              <div class="nav-options-wrap">
+                <a class="nav-options">
+                  <div class="nav-options__my-page">
+                    <span class="nav-options__text">마이페이지</span>
+                  </div>
+
+                  <div class="nav-options__signout">
+                    <span class="nav-options__text">로그아웃</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
       <div id="container">
         <main>
-          <article></article>
+          <article class="post">
+            <div class="post__owner-profile">
+              <div class="owner-profile">
+                <img
+                  src="../storefiles/basic-profile-image.png"
+                  alt="프로필 이미지"
+                  class="owner-profile__image"
+                  width="50px"
+                  height="50px"
+                />
+
+                <div class="owner-profile__text-wrap">
+                  <span class="owner-profile__nickname">nickname</span>
+                  <span class="owner-profile__time">2022-05-27</span>
+                </div>
+              </div>
+
+              <div class="post__show-setting">
+                <i class="fas fa-ellipsis-h fa-lg post__show-setting-icon"></i>
+              </div>
+            </div>
+
+            <div class="post__files-wrap">
+              <div class="post-files__button slide-button--left">
+                <i class="fas fa-chevron-circle-left"></i>
+              </div>
+
+              <div class="post-files__button slide-button--right">
+                <i class="fas fa-chevron-circle-right"></i>
+              </div>
+
+              <div class="post-files">
+                <img
+                  src="../storefiles/01.png"
+                  alt="파일"
+                  class="post-file"
+                  width="200px"
+                  height="200px"
+                />
+
+                <img
+                  src="../storefiles/01.png"
+                  alt="파일"
+                  class="post-file"
+                  width="200px"
+                  height="200px"
+                />
+              </div>
+            </div>
+
+            <div class="post-content">
+              <div class="post-content__description">
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+              </div>
+
+              <div class="post-content__tags">
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">자연</span>
+                </div>
+
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">일상</span>
+                </div>
+
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">캠핑</span>
+                </div>
+              </div>
+
+              <div class="post-content__options">
+                <div class="post-option post-option--like">
+                  <i class="far fa-heart post-option__like-icon"></i>
+
+                  <span class="post-option__like"
+                    >좋아요
+                    <span class="post-option__like-count">8000</span>개</span
+                  >
+                </div>
+
+                <div class="post-option post-option--comment">
+                  <span class="post-option__comment"
+                    >댓글
+                    <span class="post-option__comment-count">300</span>개</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <form action="/comments" method="post" class="post__comment-form">
+              <input type="hidden" class="comment-form__hidden" />
+
+              <div class="comment-form__icon-wrap">
+                <i class="far fa-smile comment-form__smile-icon"></i>
+              </div>
+
+              <input
+                type="text"
+                placeholder="댓글 작성"
+                id="text"
+                name="text"
+                value=""
+                class="comment-form__text"
+              />
+
+              <input type="submit" value="게시" class="comment-form__submit" />
+            </form>
+          </article>
+
+          <article class="more-post-button-wrap">
+            <button type="button" class="more-post-button">더보기</button>
+          </article>
         </main>
 
-        <section>
-          <article></article>
+        <section class="modal">
+          <article class="modal-body post-setting">
+            <div class="post-setting__delete">
+              <span class="post-setting__delete-text">삭제</span>
+            </div>
+
+            <div class="post-setting__modify">
+              <span class="post-setting__modify-text">수정</span>
+            </div>
+
+            <button class="post-setting__follow">
+              <span class="post-setting__follow-text">팔로우 취소</span>
+            </button>
+
+            <div class="post-setting__cancel">
+              <span class="post-setting__cancel-text">취소</span>
+            </div>
+          </article>
         </section>
 
-        <aside></aside>
+        <section class="modal">
+          <article class="modal-body post-filter">
+            <form action="" method="post" class="post-filter-form">
+              <div class="post-filter-form__sort">
+                <i class="fas fa-sort post-filter-form__sort-icon"></i>
+
+                <select name="" id="" class="post-filter-form__select">
+                  <option value="" class="post-filter-form__option">
+                    정렬
+                  </option>
+
+                  <option value="" class="post-filter-form__option">
+                    최신순
+                  </option>
+
+                  <option value="" class="post-filter-form__option">
+                    좋아요 많은순
+                  </option>
+
+                  <option value="" class="post-filter-form__option">
+                    댓글 많은순
+                  </option>
+                </select>
+              </div>
+
+              <div class="post-filter-form__tag">
+                <i class="fas fa-search post-filter-form__search-icon"></i>
+
+                <input
+                  type="text"
+                  placeholder="태그 입력"
+                  class="post-filter-form__text"
+                />
+              </div>
+
+              <div class="post-filter-form__buttons">
+                <input
+                  type="submit"
+                  value="적용"
+                  class="post-filter-form__submit"
+                />
+
+                <input
+                  type="reset"
+                  value="취소"
+                  class="post-filter-form__reset"
+                />
+              </div>
+            </form>
+          </article>
+        </section>
+
+        <aside class="show-post-filter">
+          <i class="fas fa-filter show-post-filter__icon"></i>
+          <span class="show-post-filter__text">필터</span>
+        </aside>
       </div>
-      <footer></footer>
     </div>
+
+    <script
+      src="https://kit.fontawesome.com/b17793764c.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
