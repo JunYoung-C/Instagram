@@ -7,7 +7,9 @@ main {
 }
 
 .signin-form-wrap,
-.signup-suggestion-wrap {
+.signup-suggestion-wrap,
+.signup-form-wrap,
+.signin-suggestion-wrap {
   text-align: center;
   width: 350px;
   border: var(--main-border);
@@ -15,11 +17,13 @@ main {
   padding: 27px 35px 20px 35px;
 }
 
-.signin-form-wrap {
+.signin-form-wrap,
+.signup-form-wrap {
   margin-bottom: 10px;
 }
 
-.signup-suggestion-wrap {
+.signup-suggestion-wrap,
+.signin-suggestion-wrap {
   height: 70px;
   display: flex;
   justify-content: center;
@@ -27,24 +31,29 @@ main {
   font-size: 14px;
 }
 
-.signin-title {
+.signin-title,
+.signup-title {
   font-family: "Mukta", cursive;
   font-size: 31px;
   text-align: center;
   margin-bottom: 25px;
 }
 
-.signin-form-wrap input {
+.signin-form-wrap input,
+.signup-form-wrap input {
   width: 270px;
   height: 40px;
 }
 
-.signin-form__submit {
+.signin-form__submit,
+.signup-form__submit {
   cursor: pointer;
 }
 
 .signin-form__id,
-.signin-form__password {
+.signin-form__password,
+.signup-form__text,
+.signup-form__password {
   border: var(--main-border);
   background-color: var(--main-bg-color);
   border-radius: 3px;
@@ -54,15 +63,20 @@ main {
 }
 
 .signin-form__id:focus,
-.signin-form__password:focus {
+.signin-form__password:focus,
+.signup-form__text:focus,
+.signup-form__password:focus {
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.signin-form__id {
+.signin-form__id,
+.signup-form__text {
  margin-bottom: 5px; 
 }
-.signin-form__submit {
+
+.signin-form__submit,
+.signup-form__submit {
   border: none;
   background-color: var(--blue);
   color: white;
@@ -74,12 +88,13 @@ main {
   font-weight: bold;
 }
 
-.signup-link {
+.signup-link,
+.signin-link {
   font-weight: bold;
   color: var(--dark-sky-blue);
 }
 
-.signin-form__error {
+.signin-form__error,
+.signup-form__error {
   color: var(--error-color);
-  margin-bottom: 10px;
 }
