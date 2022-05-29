@@ -1,7 +1,7 @@
 @import url("../components/header.css");
 @import url("../components/modal.css");
-@import url("../components/post-header.css");
 @import url("../components/post.css");
+@import url("../components/slideButton.css");
 
 main {
   display: flex;
@@ -11,20 +11,11 @@ main {
   margin-top: 90px;
 }
 
-.main-post-images-wrap {
-  width: 600px;
-  /* 추후 조정 필요 */
+.main-post__files-wrap {
   height: 500px;
 }
 
-.main-post-owner-profile__time,
-.main-post__show-setting-icon {
-  opacity: 0.7;
-}
-
-.main-post-image {
-  width: 600px;
-  /* 추후 조정 필요 */
+.main-post-file {
   height: 500px;
 }
 

@@ -39,8 +39,10 @@
 
 .post-owner-profile__time {
   font-size: 14px;
+  opacity: 0.7;
 }
 
 .post__show-setting {
   cursor: pointer;
+  opacity: 0.7;
 }
