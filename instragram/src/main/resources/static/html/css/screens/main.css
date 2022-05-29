@@ -113,6 +113,86 @@
 .post-setting__modify,
 .post-setting__follow {
   border-bottom: var(--main-border);
-
 }
 /* post-setting modal 끝 */
+
+/* post-filter-form 시작 */
+.post-filter-form {
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 0px;
+}
+
+.post-filter-form__sort, 
+.post-filter-form__tag,
+.post-filter-form__buttons {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+}
+
+.post-filter-form__buttons {
+  height: 80px;
+}
+
+.post-filter-form__text,
+.post-filter-form__select {
+  width: 270px;
+  height: 40px;
+}
+
+.post-filter-form__select {
+  -webkit-appearance:none; /* 크롬 화살표 없애기 */
+  -moz-appearance:none; /* 파이어폭스 화살표 없애기 */
+  appearance:none; /* 화살표 없애기 */
+  cursor: pointer; 
+}
+
+.post-filter-form__sort-icon,
+.post-filter-form__search-icon {
+  position: absolute;
+  left: 35px;
+  top: 20px;
+  color: black;
+}
+
+.post-filter-form__sort-icon {
+  left: 37px;
+}
+
+.post-filter-form__text,
+.post-filter-form__select {
+  width: 250px;
+  height: 40px;
+  padding-left: 35px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.post-filter-form__text:focus,
+.post-filter-form__select:focus {
+  outline: none;
+}
+
+.post-filter-form__buttons {
+  gap: 55px;
+}
+
+.post-filter-form__submit,
+.post-filter-form__reset {
+  width: 80px;
+  height: 40px;
+  background-color: var(--blue);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+/* post-filter-form 끝 */

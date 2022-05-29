@@ -26,6 +26,12 @@ header a:visited {
   color: #909090;
 }
 
+.header-search__icon {
+  position: absolute;
+  left: 15px;
+  top: 9px;
+}
+
 .header-search__input {
   width: 267px;
   height: 35px;
@@ -122,12 +128,6 @@ header a:visited {
 
 .search-result__follow--cancel {
   color: black;
-}
-
-.header-search .fa-search {
-  position: absolute;
-  left: 15px;
-  top: 9px;
 }
 
 .header-nav {
