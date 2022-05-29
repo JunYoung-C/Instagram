@@ -110,18 +110,25 @@
         <main>
           <article class="post">
             <div class="post__owner-profile">
-              <div class="owner-profile">
+              <div class="post-owner-profile">
                 <img
                   src="../storefiles/basic-profile-image.png"
                   alt="프로필 이미지"
-                  class="owner-profile__image"
-                  width="50px"
-                  height="50px"
+                  onclick="location.href='./profile.html'"
+                  class="post-owner-profile__image"
                 />
 
-                <div class="owner-profile__text-wrap">
-                  <span class="owner-profile__nickname">nickname</span>
-                  <span class="owner-profile__time">2022-05-27</span>
+                <div class="post-owner-profile__info">
+                  <a
+                    href="./profile.html"
+                    class="post-owner-profile__nickname main-post-owner-profile__nickname"
+                    >nickname</a
+                  >
+
+                  <span
+                    class="post-owner-profile__time main-post-owner-profile__time"
+                    >2022-05-27</span
+                  >
                 </div>
               </div>
 
