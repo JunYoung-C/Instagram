@@ -3,6 +3,8 @@
 @import url("../components/post/postContentTag.css");
 @import url("../components/post/postFiles.css");
 @import url("../components/slideButton.css");
+@import url("../components/modal.css");
+@import url("../components/post/postSetting.css");
 
 #container {
   display: flex;

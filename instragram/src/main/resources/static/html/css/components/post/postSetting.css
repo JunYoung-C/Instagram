@@ -1,0 +1,30 @@
+.post-setting {
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.post-setting__delete, 
+.post-setting__modify,
+.post-setting__follow,
+.post-setting__cancel {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #575757;
+  cursor: pointer;
+}
+
+.post-setting__delete,
+.post-setting__follow {
+  color: #de3131;
+}
+
+.post-setting__delete, 
+.post-setting__modify,
+.post-setting__follow {
+  border-bottom: var(--main-border);
+}
