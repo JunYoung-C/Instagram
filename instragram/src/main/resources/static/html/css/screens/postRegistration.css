@@ -1,0 +1,201 @@
+@import url("../components/header.css");
+@import url("../components/slideButton.css");
+
+main {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-post-form {
+  background: white;
+  width: 950px;
+  height: 610px;
+  border-radius: 10px;
+  background-color: white;
+  border: var(--main-border);
+  border-radius: 5px;
+}
+
+/* add-form__header 시작 */
+.add-post-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 43px;
+  border-bottom: var(--main-border);
+  padding: 17px;
+}
+
+.add-post-form-header__reset,
+.add-post-form-header__submit {
+  width: 70px;
+}
+
+.add-post-form-header__reset {
+  font-size: 15px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.add-post-form-header__title {
+  font-weight: bold;
+}
+
+.add-post-form-header__submit {
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  color: var(--blue);
+  background: white;
+  cursor: pointer;
+}
+/* add-form__header 끝 */
+/* add-form__content 시작 */
+.add-post-form__content {
+  display: flex;
+  height: 100%;
+}
+
+.add-post-form__left-column {
+  position: relative;
+}
+
+.add-post-form__preview-wrap {
+  width: 500px;
+  height: 100%;
+  border-right: var(--main-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.add-post-form__files {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 500px;
+  transition: left 0.25s ease-out;
+}
+
+.add-post-form__file {
+  background-color: black;
+  width: 500px;
+  height: 410px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.slide-button {
+  top: 200px;
+}
+
+.add-post-form__file-icon-wrap {
+  font-size: 70px;
+}
+
+.add-post-form__file-explanation-wrap {
+  font-size: 22px;
+  margin-top: 27px;
+  margin-bottom: 27px;
+  opacity: 0.55;
+}
+
+.add-post-form__file-input {
+  display: none;
+}
+
+.add-post-form__file-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--blue);
+  width: 125px;
+  height: 32px;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-post-form__file-label:active {
+  background-color: var(--dark-sky-blue);
+}
+
+
+.post-modal__text-contents {
+  width: 46%;
+  height: 402px;
+  position: relative;
+}
+
+.post-modal__profile {
+  height: 65px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.post-modal__text-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.post-modal__text-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  padding: 0 18px;
+}
+
+.post-modal__profile-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.post-modal__profile-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.post-modal__text {
+  width: 350px;
+  height: 290px;
+  resize: none;
+  font-size: 16px;
+  border: none;
+}
+
+.post-modal__text:focus {
+  outline: none;
+}
+
+.post-modal__text-icons {
+  font-size: 20px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.post-modal__text-info {
+  font-size: 12px;
+  opacity: 0.3;
+  cursor: pointer;
+}
