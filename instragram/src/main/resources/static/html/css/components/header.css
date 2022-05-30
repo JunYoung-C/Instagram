@@ -11,8 +11,8 @@ header {
   padding: 17px 25px;
 }
 
-header a:visited {
-  color: black;
+a {
+  color: inherit;
 }
 
 .header-title {
