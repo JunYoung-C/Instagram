@@ -25,45 +25,76 @@
   top: 0;
   transition: left 0.25s ease-out;
 }
-/* post-contents 시작 */
-.post-contents {
-  padding: 20px 16px 0px 16px;
-  font-size: 14px;
+/* post-content 시작 */
+.post-content {
+  padding: 16px 16px 10px 16px;
+  font-size: 16px;
   position: relative;
-  /* 댓글 창이 포함된 영역의 높이 지정 필요 */
+  line-height: 22px;
 }
 
-.post-options {
+.post-content__tags {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.post-content__tag {
+  background-color: #fde2e2;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  margin-bottom: 5px;
+}
+
+.post-content__info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  font-size: 19px;
+  color: #474344;
 }
 
-.post-options-column i {
-  font-size: 24px;
+.post-content__like-icon--compacted {
+  color: red;
+}
+
+.post-content__like-icon--compacted {
+  margin-right: 3px;
+}
+
+.post-content__like-icon--unvisible {
+  display: none !important;
+}
+
+.post__option {
+  display: flex;
+  border-top: var(--main-border);
+}
+
+.post-option {
+  width: 50%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  gap: 7px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.post-options-column i:hover {
-  opacity: 0.5;
+.post-option:hover {
+  opacity: 0.7;
 }
 
-.post-options__comment {
-  margin-left: 18px;
-  margin-right: 18px;
+.post-option--like {
+  border-right: var(--main-border);
 }
-
-.post-like-text {
-  font-weight: bold;
-  margin-bottom: 14px;
-}
-
-.post-time-wrap {
-  font-size: 11px;
-  color: #9d9095;
-}
-/* post-contents 끝 */
+/* post-content 끝 */
 /* post-comment 시작 */
 .post-comment {
   position: absolute;

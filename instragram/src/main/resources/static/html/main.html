@@ -183,71 +183,105 @@
 
               <div class="post-content__tags">
                 <div class="post-content__tag">
-                  <span class="post-content__tag-name">자연</span>
+                  <span class="post-content__tag-name">#자연</span>
                 </div>
 
                 <div class="post-content__tag">
-                  <span class="post-content__tag-name">일상</span>
+                  <span class="post-content__tag-name">#일상</span>
                 </div>
 
                 <div class="post-content__tag">
-                  <span class="post-content__tag-name">캠핑</span>
+                  <span class="post-content__tag-name">#캠핑</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#instagram</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#숲</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#바다</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#물멍</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#친구들과</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#함께</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#여행</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#사진</span>
+                </div>
+                <div class="post-content__tag">
+                  <span class="post-content__tag-name">#찰칵</span>
                 </div>
               </div>
 
-              <div class="post-content__options">
-                <div class="post-option post-option--like">
-                  <i class="far fa-heart post-option__like-icon"></i>
+              <div class="post-content__info">
+                <div class="post-content__like-count">
+                  <i class="far fa-heart post-content__like-icon"></i>
 
-                  <span class="post-option__like"
-                    >좋아요
-                    <span class="post-option__like-count">8000</span>개</span
+                  <i
+                    class="fas fa-heart post-content__like-icon--compacted post-content__like-icon--unvisible"
+                  ></i>
+
+                  <span class="post-like-count-wrap">
+                    <span class="post-like-count">8000</span>개</span
                   >
                 </div>
 
-                <div class="post-option post-option--comment">
-                  <span class="post-option__comment"
-                    >댓글
-                    <span class="post-option__comment-count">300</span>개</span
+                <div class="post-content__comment-count">
+                  <span href="./post.html" class="post-comment-count-wrap"
+                    >댓글 <span class="post-comment-count">300</span>개</span
                   >
                 </div>
               </div>
             </div>
 
-            <form action="/comments" method="post" class="post__comment-form">
-              <input type="hidden" class="comment-form__hidden" />
+            <div class="post__option">
+              <div class="post-option post-option--like">
+                <i class="far fa-heart post-option__like-icon"></i>
 
-              <div class="comment-form__icon-wrap">
-                <i class="far fa-smile comment-form__smile-icon"></i>
+                <span class="post-option__like">좋아요</span>
               </div>
 
-              <input
-                type="text"
-                placeholder="댓글 작성"
-                id="text"
-                name="text"
-                value=""
-                class="comment-form__text"
-              />
+              <div
+                class="post-option post-option--comment"
+                onclick="location.href='./post.html'"
+              >
+                <i class="far fa-comment-alt post-option__comment-icon"></i>
 
-              <input type="submit" value="게시" class="comment-form__submit" />
-            </form>
+                <span class="post-option__comment">댓글 달기</span>
+              </div>
+            </div>
           </article>
 
           <article class="post">
             <div class="post__owner-profile">
-              <div class="owner-profile">
+              <div class="post-owner-profile">
                 <img
                   src="../storefiles/basic-profile-image.png"
                   alt="프로필 이미지"
-                  class="owner-profile__image"
-                  width="50px"
-                  height="50px"
+                  onclick="location.href='./profile.html'"
+                  class="post-owner-profile__image"
                 />
 
-                <div class="owner-profile__text-wrap">
-                  <span class="owner-profile__nickname">nickname</span>
-                  <span class="owner-profile__time">2022-05-27</span>
+                <div class="post-owner-profile__info">
+                  <a
+                    href="./profile.html"
+                    class="post-owner-profile__nickname main-post-owner-profile__nickname"
+                    >nickname</a
+                  >
+
+                  <span
+                    class="post-owner-profile__time main-post-owner-profile__time"
+                    >2022-05-27</span
+                  >
                 </div>
               </div>
 
@@ -256,7 +290,7 @@
               </div>
             </div>
 
-            <div class="post__files-wrap">
+            <div class="post__files-wrap main-post__files-wrap">
               <div class="post-files__button slide-button--left">
                 <i class="fas fa-chevron-circle-left"></i>
               </div>
@@ -265,11 +299,11 @@
                 <i class="fas fa-chevron-circle-right"></i>
               </div>
 
-              <div class="post-files">
+              <div class="post-files main-post-files">
                 <img
                   src="../storefiles/01.png"
                   alt="파일"
-                  class="post-file"
+                  class="post-file main-post-file"
                   width="200px"
                   height="200px"
                 />
@@ -277,7 +311,7 @@
                 <img
                   src="../storefiles/01.png"
                   alt="파일"
-                  class="post-file"
+                  class="post-file main-post-file"
                   width="200px"
                   height="200px"
                 />
@@ -300,57 +334,45 @@
                 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
               </div>
 
-              <div class="post-content__tags">
-                <div class="post-content__tag">
-                  <span class="post-content__tag-name">자연</span>
-                </div>
+              <div class="post-content__tags"></div>
 
-                <div class="post-content__tag">
-                  <span class="post-content__tag-name">일상</span>
-                </div>
+              <div class="post-content__info">
+                <div class="post-content__like-count">
+                  <i class="far fa-heart post-content__like-icon"></i>
 
-                <div class="post-content__tag">
-                  <span class="post-content__tag-name">캠핑</span>
-                </div>
-              </div>
+                  <i
+                    class="fas fa-heart post-content__like-icon--compacted post-content__like-icon--unvisible"
+                  ></i>
 
-              <div class="post-content__options">
-                <div class="post-option post-option--like">
-                  <i class="far fa-heart post-option__like-icon"></i>
-
-                  <span class="post-option__like"
-                    >좋아요
-                    <span class="post-option__like-count">8000</span>개</span
+                  <span class="post-like-count-wrap">
+                    <span class="post-like-count">8000</span>개</span
                   >
                 </div>
 
-                <div class="post-option post-option--comment">
-                  <span class="post-option__comment"
-                    >댓글
-                    <span class="post-option__comment-count">300</span>개</span
+                <div class="post-content__comment-count">
+                  <span href="./post.html" class="post-comment-count-wrap"
+                    >댓글 <span class="post-comment-count">300</span>개</span
                   >
                 </div>
               </div>
             </div>
 
-            <form action="/comments" method="post" class="post__comment-form">
-              <input type="hidden" class="comment-form__hidden" />
+            <div class="post__option">
+              <div class="post-option post-option--like">
+                <i class="far fa-heart post-option__like-icon"></i>
 
-              <div class="comment-form__icon-wrap">
-                <i class="far fa-smile comment-form__smile-icon"></i>
+                <span class="post-option__like">좋아요</span>
               </div>
 
-              <input
-                type="text"
-                placeholder="댓글 작성"
-                id="text"
-                name="text"
-                value=""
-                class="comment-form__text"
-              />
+              <div
+                class="post-option post-option--comment"
+                onclick="location.href='./post.html'"
+              >
+                <i class="far fa-comment-alt post-option__comment-icon"></i>
 
-              <input type="submit" value="게시" class="comment-form__submit" />
-            </form>
+                <span class="post-option__comment">댓글 달기</span>
+              </div>
+            </div>
           </article>
 
           <article class="more-post-button-wrap">
