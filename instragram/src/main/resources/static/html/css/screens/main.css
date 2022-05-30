@@ -1,6 +1,8 @@
 @import url("../components/header.css");
 @import url("../components/modal.css");
-@import url("../components/post/post.css");
+@import url("../components/post/postHeader.css");
+@import url("../components/post/postContentTag.css");
+@import url("../components/post/postFiles.css");
 @import url("../components/slideButton.css");
 
 main {
@@ -11,19 +13,75 @@ main {
   margin-top: 90px;
 }
 
-.main-post__files-wrap {
-  height: 500px;
-}
-
-.main-post {
+.post {
+  background-color: white;
+  border: var(--main-border);
   border-radius: 5px;
+  width: 600px;
+  margin-bottom: 27px;
 }
 
-.main-post-file {
+.post__files-wrap {
+  width: 600px;
+  position: relative;
+  overflow: hidden;
   height: 500px;
 }
 
-/* main content 영역 끝 */
+.post-content {
+  padding: 16px 16px 10px 16px;
+  font-size: 16px;
+  position: relative;
+  line-height: 22px;
+}
+
+.post-content__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 19px;
+  color: #474344;
+}
+
+.post-like-count-wrap {
+  margin-left: 2px;
+}
+.post-content__like-icon--compacted {
+  color: red;
+}
+
+.post-content__like-icon--compacted {
+  margin-right: 3px;
+}
+
+.post-content__like-icon--unvisible {
+  display: none !important;
+}
+
+.post__option {
+  display: flex;
+  border-top: var(--main-border);
+}
+
+.post-option {
+  width: 50%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 19px;
+  gap: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.post-option:hover {
+  opacity: 0.7;
+}
+
+.post-option--like {
+  border-right: var(--main-border);
+}
 
 .more-post-button-wrap {
   display: flex;
@@ -59,9 +117,6 @@ main {
   cursor: pointer;
   margin-left: 500px;
   margin-bottom: 20px;
-  /* position: absolute;
-  top: 90px;
-  right: 200px; */
 }
 
 .show-post-filter:active {

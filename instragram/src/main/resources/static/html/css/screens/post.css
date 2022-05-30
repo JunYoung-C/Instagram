@@ -1,0 +1,287 @@
+@import url("../components/header.css");
+@import url("../components/post/postHeader.css");
+@import url("../components/post/postContentTag.css");
+@import url("../components/post/postFiles.css");
+@import url("../components/slideButton.css");
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.post {
+  background-color: white;
+  border: var(--main-border);
+  border-radius: 5px;
+  width: 1055px;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* post__left-column 시작 */
+.post__left-column {
+  width: 555px;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.post__left-column {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.post__left-column::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.post__files-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 555px;
+  height: 450px;
+}
+
+.post-file {
+  width: 555px;
+}
+
+.post-content {
+  padding: 16px 16px 10px 16px;
+  font-size: 16px;
+  position: relative;
+  line-height: 22px;
+}
+/* post-left-column 끝 */
+
+/* post-rignt-column 시작 */
+.post__right-column {
+  position: relative;
+  width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: var(--main-border);
+}
+
+.post__owner-profile {
+  width: 500px;
+  height: 80px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* comments 시작 */
+.post__comments {
+  width: 500px;
+  height: 100%;
+  padding: 24px 16px 0px 16px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.post__comments::-webkit-scrollbar {
+  display: none;
+}
+
+.comment-owner {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-right: 38px;
+}
+
+.comment-owner__photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: var(--main-border);
+  cursor: pointer;
+}
+
+.comment-owner__text-wrap {
+  line-height: 1.3;
+  margin-top: 3px;
+}
+.comment-owner__name {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.comment-owner__options {
+  font-size: 13px;
+  color: gray;
+  margin-top: 17px;
+  margin-bottom: 25px;
+}
+
+.comment-owner__liker,
+.comment_owner__reply,
+.comment_owner__option {
+  margin-left: 13px;
+}
+
+.comment-owner__liker,
+.comment_owner__reply {
+  font-weight: bold;
+}
+
+.comment-owner__created-time,
+.comment-owner__liker,
+.comment_owner__reply,
+.comment_owner__option {
+  cursor: pointer;
+}
+
+.comment-owner__heart-wrap {
+  position: absolute;
+  right: 0;
+  top: 11px;
+}
+
+.comment-owner__heart {
+  cursor: pointer;
+}
+
+.comment-owner__heart--compacted {
+  color: red;
+  cursor: pointer;
+}
+
+.comment-owner__heart--unvisible {
+  display: none !important;
+}
+
+.comment-divider {
+  font-size: 12px;
+  color: gray;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.comment-divider__line {
+  background-color: gray;
+  margin-left: 63px;
+  margin-right: 20px;
+}
+
+.comment-divider__line {
+  width: 24px;
+  height: 0.5px;
+}
+
+.replies {
+  margin-left: 63px;
+}
+
+.more-comment {
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.more-comment__button {
+  width: 24px;
+  height: 24px;
+  border: 2.5px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+}
+/* comments 끝 */
+.post__options {
+  padding: 16px;
+  height: 100px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.post-option__heart {
+  margin-right: 13px;
+  cursor: pointer;
+}
+
+.post-option__heart--compacted {
+  color: red;
+  cursor: pointer;
+}
+
+.post-option__heart--unvisible {
+  display: none !important;
+}
+
+.post-option__comment {
+  cursor: pointer;
+}
+
+.post-option__icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.post-option__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 19px;
+  color: #474344;
+}
+
+.post__comment-form {
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.comment-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.comment-form__icons-wrap {
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+}
+
+.comment-form__text {
+  margin-left: 15px;
+  font-size: 17px;
+  border: none;
+  width: 100%;
+  height: 38px;
+}
+
+.comment-form__text:focus {
+  outline: none;
+}
+
+.comment-form__submit {
+  margin-left: 15px;
+  border: none;
+  background-color: white;
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 17px;
+  cursor: pointer;
+}
+/* comment-right-section 끝 */

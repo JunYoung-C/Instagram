@@ -1,0 +1,13 @@
+.post-files {
+  width: 600px;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.25s ease-out;
+}
+
+.post-file {
+  width: 600px;
+  height: 500px;
+}
