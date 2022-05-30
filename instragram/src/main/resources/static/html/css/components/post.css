@@ -58,6 +58,9 @@
   color: #474344;
 }
 
+.post-like-count-wrap {
+  margin-left: 2px;
+}
 .post-content__like-icon--compacted {
   color: red;
 }
@@ -81,7 +84,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 19px;
   gap: 7px;
   font-weight: bold;
   cursor: pointer;
@@ -95,6 +98,12 @@
   border-right: var(--main-border);
 }
 /* post-content 끝 */
+
+
+
+
+
+
 /* post-comment 시작 */
 .post-comment {
   position: absolute;
