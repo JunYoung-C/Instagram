@@ -1,4 +1,6 @@
 @import url("../components/header.css");
+@import url("../components/post/postHeader.css");
+@import url("../components/post/postContentTag.css");
 @import url("../components/slideButton.css");
 
 main {
@@ -11,7 +13,7 @@ main {
 .add-post-form {
   background: white;
   width: 950px;
-  height: 610px;
+  height: 630px;
   border-radius: 10px;
   background-color: white;
   border: var(--main-border);
@@ -23,7 +25,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 43px;
+  height: 50px;
   border-bottom: var(--main-border);
   padding: 17px;
 }
@@ -54,59 +56,81 @@ main {
   cursor: pointer;
 }
 /* add-form__header 끝 */
-/* add-form__content 시작 */
 .add-post-form__content {
   display: flex;
   height: 100%;
 }
 
+/* add-post-form__left-column 시작 */
 .add-post-form__left-column {
   position: relative;
+  width: 500px;
+  height: 580px;
+  border-right: var(--main-border);
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; */
 }
 
 .add-post-form__preview-wrap {
   width: 500px;
-  height: 100%;
-  border-right: var(--main-border);
+  height: 410px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-left: 25px;
   padding-right: 25px;
-  position: absolute;
+  position: relative;
   overflow: hidden;
+}
+
+.add-post-form__files-wrap {
+  
 }
 
 .add-post-form__files {
   display: flex;
+  align-items: center;
   position: absolute;
   left: 0;
   top: 0;
   width: 500px;
+  height: 100%;
+  background-color: black;
   transition: left 0.25s ease-out;
 }
 
 .add-post-form__file {
-  background-color: black;
   width: 500px;
   height: 410px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1;
+}
+
+.add-post-form__files--no-file {
+  display: none !important;
 }
 
 .slide-button {
   top: 200px;
 }
 
+.add-post-form__select-files {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .add-post-form__file-icon-wrap {
-  font-size: 70px;
+  font-size: 100px;
 }
 
 .add-post-form__file-explanation-wrap {
-  font-size: 22px;
+  font-size: 26px;
   margin-top: 27px;
   margin-bottom: 27px;
   opacity: 0.55;
@@ -121,11 +145,11 @@ main {
   justify-content: center;
   align-items: center;
   background-color: var(--blue);
-  width: 125px;
-  height: 32px;
+  width: 130px;
+  height: 45px;
   color: white;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -134,7 +158,37 @@ main {
   background-color: var(--dark-sky-blue);
 }
 
+.add-post-form__tags {
+  width: 500px;
+  height: 170px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
 
+.post-tags__input-wrap {
+  font-size: 20px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 5px;
+}
+
+.post-tags__input {
+  font-size: 20px;
+  border: none;
+  width: 430px;
+  outline: none;
+}
+
+.post-content__tags {
+  height: 100px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.post-content__tags::-webkit-scrollbar {
+  display: none;
+}
+/* add-post-form__left-column 끝 */
 .post-modal__text-contents {
   width: 46%;
   height: 402px;

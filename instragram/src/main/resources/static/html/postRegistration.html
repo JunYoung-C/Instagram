@@ -135,51 +135,127 @@
               <div class="add-post-form__content">
                 <div class="add-post-form__left-column">
                   <div class="add-post-form__preview-wrap">
-                    <div class="slide-button slide-button--left">
-                      <i class="fas fa-chevron-circle-left"></i>
+                    <div class="add-post-form__files-wrap">
+                      <div class="slide-button slide-button--left">
+                        <i class="fas fa-chevron-circle-left"></i>
+                      </div>
+
+                      <div class="slide-button slide-button--right">
+                        <i class="fas fa-chevron-circle-right"></i>
+                      </div>
+
+                      <div
+                        class="add-post-form__files add-post-form__files--no-file"
+                      >
+                        <img
+                          src="../storefiles/01.png"
+                          alt="파일"
+                          class="add-post-form__file"
+                        />
+
+                        <img
+                          src="../storefiles/01.png"
+                          alt="파일"
+                          class="add-post-form__file"
+                        />
+                      </div>
                     </div>
 
-                    <div class="slide-button slide-button--right">
-                      <i class="fas fa-chevron-circle-right"></i>
-                    </div>
+                    <div class="add-post-form__select-files">
+                      <div class="add-post-form__file-icon-wrap">
+                        <i
+                          class="fas fa-photo-video add-post-form__file-icon"
+                        ></i>
+                      </div>
 
-                    <div class="add-post-form__files" style="display: none">
-                      <img
-                        src="../storefiles/01.png"
-                        alt="파일"
-                        class="add-post-form__file"
+                      <div class="add-post-form__file-explanation-wrap">
+                        <span class="add-post-form__file-explanation"
+                          >사진과 동영상을 등록해보세요</span
+                        >
+                      </div>
+
+                      <div class="add-post-form__file-input-wrap">
+                        <label for="files" class="add-post-form__file-label"
+                          >컴퓨터에서 선택</label
+                        >
+
+                        <input
+                          type="file"
+                          id="files"
+                          multiple
+                          class="add-post-form__file-input"
+                          th:field="*{files}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="add-post-form__tags">
+                    <div class="post-tags__input-wrap">
+                      <i class="fas fa-tags"></i>
+
+                      <input
+                        type="text"
+                        placeholder="태그 입력..."
+                        class="post-tags__input"
                       />
-
-                      <img
-                        src="../storefiles/01.png"
-                        alt="파일"
-                        class="add-post-form__file"
-                      />
                     </div>
-                  </div>
 
-                  <div class="add-post-form__file-icon-wrap">
-                    <i class="fas fa-photo-video add-post-form__file-icon"></i>
-                  </div>
+                    <div class="post-content__tags">
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#자연</span>
+                      </div>
 
-                  <div class="add-post-form__file-explanation-wrap">
-                    <span class="add-post-form__file-explanation"
-                      >사진과 동영상을 등록해보세요</span
-                    >
-                  </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#일상</span>
+                      </div>
 
-                  <div class="add-post-form__file-input-wrap">
-                    <label for="files" class="add-post-form__file-label"
-                      >컴퓨터에서 선택</label
-                    >
-
-                    <input
-                      type="file"
-                      id="files"
-                      multiple
-                      class="add-post-form__file-input"
-                      th:field="*{files}"
-                    />
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#캠핑</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#instagram</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#숲</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#바다</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#물멍</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#친구들과</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#함께</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#여행</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#사진</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#찰칵</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#찰칵</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#찰칵</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#찰칵</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#찰칵</span>
+                      </div>
+                      <div class="post-content__tag">
+                        <span class="post-content__tag-name">#찰칵</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
