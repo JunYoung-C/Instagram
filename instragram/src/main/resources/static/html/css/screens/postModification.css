@@ -10,7 +10,7 @@ main {
   align-items: center;
 }
 
-.add-post-form {
+.update-post-form {
   background: white;
   width: 950px;
   height: 630px;
@@ -20,8 +20,8 @@ main {
   border-radius: 5px;
 }
 
-/* add-form__header 시작 */
-.add-post-form__header {
+/* update-form__header 시작 */
+.update-post-form__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,12 +30,12 @@ main {
   padding: 17px;
 }
 
-.add-post-form__reset,
-.add-post-form__submit {
+.update-post-form__reset,
+.update-post-form__submit {
   width: 70px;
 }
 
-.add-post-form__reset {
+.update-post-form__reset {
   font-size: 15px;
   cursor: pointer;
   background-color: white;
@@ -43,11 +43,11 @@ main {
   font-weight: bold;
 }
 
-.add-post-form__title {
+.update-post-form__title {
   font-weight: bold;
 }
 
-.add-post-form__submit {
+.update-post-form__submit {
   font-weight: bold;
   font-size: 15px;
   border: none;
@@ -55,34 +55,28 @@ main {
   background: white;
   cursor: pointer;
 }
-/* add-form__header 끝 */
-.add-post-form__content {
+/* update-form__header 끝 */
+.update-post-form__content {
   display: flex;
   height: 100%;
 }
 
-/* add-post-form__left-column 시작 */
-.add-post-form__left-column {
+/* update-post-form__left-column 시작 */
+.update-post-form__left-column {
   position: relative;
   width: 500px;
   height: 580px;
   border-right: var(--main-border);
 }
 
-.add-post-form__preview-wrap {
+.update-post-form__files-wrap {
   width: 500px;
   height: 410px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-left: 25px;
-  padding-right: 25px;
   position: relative;
   overflow: hidden;
 }
 
-.add-post-form__files {
+.update-post-form__files {
   display: flex;
   align-items: center;
   position: absolute;
@@ -94,13 +88,13 @@ main {
   transition: left 0.25s ease-out;
 }
 
-.add-post-form__file {
+.update-post-form__file {
   width: 500px;
   height: 410px;
   z-index: 1;
 }
 
-.add-post-form__files--no-file {
+.update-post-form__files--no-file {
   display: none !important;
 }
 
@@ -108,7 +102,7 @@ main {
   top: 200px;
 }
 
-.add-post-form__select-files {
+.update-post-form__select-files {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -116,22 +110,22 @@ main {
   gap: 20px;
 }
 
-.add-post-form__file-icon-wrap {
+.update-post-form__file-icon-wrap {
   font-size: 100px;
 }
 
-.add-post-form__file-explanation-wrap {
+.update-post-form__file-explanation-wrap {
   font-size: 26px;
   margin-top: 27px;
   margin-bottom: 27px;
   opacity: 0.55;
 }
 
-.add-post-form__file-input {
+.update-post-form__file-input {
   display: none;
 }
 
-.add-post-form__file-label {
+.update-post-form__file-label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,11 +139,11 @@ main {
   cursor: pointer;
 }
 
-.add-post-form__file-label:active {
+.update-post-form__file-label:active {
   background-color: var(--dark-sky-blue);
 }
 
-.add-post-form__tags {
+.update-post-form__tags {
   width: 500px;
   height: 170px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -179,8 +173,8 @@ main {
 .post-content__tags::-webkit-scrollbar {
   display: none;
 }
-/* add-post-form__left-column 끝 */
-.add-post-form__right-column {
+/* update-post-form__left-column 끝 */
+.update-post-form__right-column {
   width: 450px;
   height: 580px;
   position: relative;
@@ -191,7 +185,7 @@ main {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.add-post-form__text-wrap {
+.update-post-form__text-wrap {
   display: flex;
   height: 510px;
   flex-direction: column;
@@ -200,14 +194,14 @@ main {
   padding: 16px;
 }
 
-.add-post-form__text {
+.update-post-form__text {
   resize: none;
   font-size: 16px;
   border: none;
   height: 465px;
 }
 
-.add-post-form__text-options {
+.update-post-form__text-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -216,16 +210,16 @@ main {
   padding-top: 16px;
 }
 
-.add-post-form__text:focus {
+.update-post-form__text:focus {
   outline: none;
 }
 
-.add-post-form__text-icon {
+.update-post-form__text-icon {
   font-size: 20px;
   opacity: 0.5;
 }
 
-.add-post-form__text-info {
+.update-post-form__text-info {
   font-size: 12px;
   opacity: 0.3;
   cursor: pointer;
