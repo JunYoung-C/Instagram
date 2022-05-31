@@ -2,6 +2,7 @@
 @import url("../components/modal.css");
 @import url("../components/post/postHeader.css");
 @import url("../components/post/postContentTag.css");
+@import url("../components/post/morePostButton.css");
 @import url("../components/post/postFiles.css");
 @import url("../components/slideButton.css");
 @import url("../components/post/postSetting.css");
@@ -82,25 +83,6 @@ main {
 
 .post-option--like {
   border-right: var(--main-border);
-}
-
-.more-post-button-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 27px;
-}
-
-.more-post-button {
-  width: 100px;
-  height: 50px;
-  background-color: white;
-  border: var(--main-border);
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.more-post-button:active {
-  opacity: 0.7;
 }
 
 .show-post-filter {
