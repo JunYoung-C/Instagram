@@ -1,5 +1,6 @@
 @import url("../components/header.css");
 @import url("../components/post/morePostButton.css");
+@import url("../components/modal.css");
 
 main {
   margin-top: 100px;
@@ -109,3 +110,91 @@ main {
   cursor: pointer;
 }
 /* posts-wrap 끝 */
+/* profile-edit 시작 */
+.profile-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: white;
+  width: 350px;
+  height: 570px;
+  padding: 50px 40px 30px 40px;
+  border-radius: 5px;
+}
+
+.profile-edit__title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.profile-edit__image-wrap {
+  position: relative;
+  margin: 15px 0px 20px 0px;
+}
+
+.profile-edit__image {
+  width: 115px;
+  height: 115px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+}
+
+.profile-edit__file {
+  display: none;
+}
+
+.profile-edit__file-label {
+  border-radius: 5px;
+  font-size: 22px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.profile-edit__name-wrap,
+.profile-edit__nickname-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.profile-edit__name-input,
+.profile-edit__nickname-input {
+  height: 25px;
+  outline: none;
+}
+
+.profile-edit__introduction {
+  width: 100%;
+  height: 160px;
+  resize: none;
+  outline: none;
+  margin: 15px 0px;
+}
+
+.profile-edit__buttons {
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-edit__submit,
+.profile-edit__cancel {
+  width: 80px;
+  height: 40px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+/* profile-edit 끝 */
