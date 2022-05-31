@@ -117,18 +117,14 @@
               th:object="${postSaveForm}"
             >
               <div class="add-post-form__header">
-                <input
-                  type="reset"
-                  value="취소"
-                  class="add-form-header__reset"
-                />
+                <input type="reset" value="취소" class="add-post-form__reset" />
 
-                <h1 class="add-form-header__title">새 게시물 만들기</h1>
+                <h1 class="add-post-form__title">새 게시물 만들기</h1>
 
                 <input
                   type="submit"
                   value="공유하기"
-                  class="add-form-header__submit"
+                  class="add-post-form__submit"
                 />
               </div>
 
@@ -260,25 +256,40 @@
                 </div>
 
                 <div class="add-post-form__right-column">
-                  <div class="add-post__profile post-modal__profile">
-                    <img
-                      th:src="|/images/${signInMember.originalStoreFileName}|"
-                      src="images/03.png"
-                      class="add-post__profile-image post-modal__profile-image"
-                    />
-                    <span
-                      class="add-post__profile-name post-modal__profile-name"
-                      th:text="${signInMember.nickname}"
-                      >최준영</span
-                    >
+                  <div class="post__owner-profile">
+                    <div class="post-owner-profile">
+                      <img
+                        src="../storefiles/basic-profile-image.png"
+                        alt="프로필 이미지"
+                        onclick="location.href='./profile.html'"
+                        class="post-owner-profile__image"
+                      />
+
+                      <div class="post-owner-profile__info">
+                        <a
+                          href="./profile.html"
+                          class="post-owner-profile__nickname"
+                          >nickname</a
+                        >
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="add-post__text-wrap post-modal__text-wrap">
+                  <div class="add-post-form__text-wrap">
                     <textarea
                       placeholder="문구 입력..."
-                      class="add-post__text post-modal__text"
+                      class="add-post-form__text"
                       th:field="*{text}"
                     ></textarea>
+
+                    <div class="add-post-form__text-options">
+                      <i class="far fa-smile add-post-form__text-icon"></i>
+
+                      <span class="add-post-form__text-info"
+                        ><span class="add-post-form__text-count">0</span
+                        >/2,200</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
