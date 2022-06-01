@@ -1,27 +1,5 @@
 const updatePostFormText = document.querySelector(".update-post-form__text");
 
-function showPreviewFiles(event) {
-  const files = event.target.files;
-  const addPostFormFiles = document.createElement("div");
-  addPostFormFiles.classList.add("add-post-form__files");
-  
-  Array.from(files).forEach((file) => {
-      const reader = new FileReader();
-
-      reader.addEventListener("load", function (event) {
-          const img = document.createElement("img");
-          img.src = event.target.result;
-          img.classList.add("add-post-form__file");
-
-          addPostFormFiles.appendChild(img);
-      });
-
-      reader.readAsDataURL(file);
-  });
-  document.querySelector(".add-post-form__files-wrap").appendChild(addPostFormFiles);
-  addPreviewSlidingEvent(addPostFormFiles, files.length);
-}
-
 function addPostSlidingEvent() {
   const POST_IMAGE_WIDTH = 500;
   const leftSlideButton = document.querySelector(".slide-button--left");
@@ -36,21 +14,6 @@ function addPostSlidingEvent() {
 
   rightSlideButton.addEventListener("click", (event) => {
     postFileSlideController.slide(event.currentTarget);
-  });
-}
-
-function addPreviewSlidingEvent(addPostFormFiles, fileCount) {
-  const PREVIEW_IMAGE_WIDTH = 500;
-  const leftSlideButton = document.querySelector(".slide-button--left");
-  const rightSlideButton = document.querySelector(".slide-button--right");
-  const previewSlideController = new SlideController(PREVIEW_IMAGE_WIDTH, fileCount, leftSlideButton, rightSlideButton, addPostFormFiles);
-
-  leftSlideButton.addEventListener("click", (event) => {
-    previewSlideController.slide(event.currentTarget);
-  });
-
-  rightSlideButton.addEventListener("click", (event) => {
-    previewSlideController.slide(event.currentTarget);
   });
 }
 
