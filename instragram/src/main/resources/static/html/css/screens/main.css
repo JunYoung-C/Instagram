@@ -187,3 +187,24 @@ main {
 }
 /* post-filter-form 끝 */
 
+.post-page {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 27px;
+}
+
+.post-page a {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border : var(--main-border);
+  border-radius: 3px;
+}
+
+.post-page__left-button,
+.post-page__right-button {
+  background-color: var(--blue);
+  color: white;
+}
