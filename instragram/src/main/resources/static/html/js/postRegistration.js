@@ -1,3 +1,5 @@
+const addPostFormText = document.querySelector(".add-post-form__text");
+
 function showPreviewFiles(event) {
   const files = event.target.files;
   const addPostFormFiles = document.createElement("div");
@@ -35,4 +37,22 @@ function addPreviewSlidingEvent(addPostFormFiles, fileCount) {
   });
 }
 
-document.querySelector(".add-post-form__file-input").addEventListener("change", showPreviewFiles);
+function addTextEvent() {
+  validateStringLimit();
+  document.querySelector(".add-post-form__text-count").textContent = addPostFormText.value.length;
+}
+
+function validateStringLimit() {
+  const MAX_STRING_LENGTH = 2200;
+  if (addPostFormText.value.length > MAX_STRING_LENGTH) {
+    addPostFormText.value = addPostFormText.value.substring(0, MAX_STRING_LENGTH);
+  }
+}
+
+function addPostRegistrationPageEvent() {
+  document.querySelector(".add-post-form__file-input").addEventListener("change", showPreviewFiles);
+
+  addPostFormText.addEventListener("keyup", addTextEvent);
+}
+
+addPostRegistrationPageEvent();
