@@ -1,7 +1,7 @@
 const postContentTags = document.querySelector(".post-content__tags");
 const postTagsInput = document.querySelector(".post-tags__input");
 
-document.querySelector(".post-tags__input").addEventListener("keydown", function(event) {
+function addTagEvent(event) {
   event.preventDefault();
   if (event.keyCode == 13 || event.keyCode == 32) {
     if (postTagsInput.value === "") {
@@ -10,7 +10,7 @@ document.querySelector(".post-tags__input").addEventListener("keydown", function
     postContentTags.appendChild(createTag());
     postTagsInput.value = "";
   }
-});
+}
 
 function createTag() {
   const tagName = document.createElement("div");
@@ -27,3 +27,6 @@ function createTag() {
 
   return tag;
 }
+
+document.querySelector(".post-tags__input").addEventListener("keydown", addTagEvent);
+
