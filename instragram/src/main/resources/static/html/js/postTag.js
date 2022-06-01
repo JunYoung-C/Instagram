@@ -20,12 +20,23 @@ function createTag() {
   const tag = document.createElement("div");
   tag.classList.add("post-content__tag");
   tag.appendChild(tagName);
+  tag.appendChild(createHiddenInput());
 
   tag.addEventListener("click", function() {
     postContentTags.removeChild(tag);
   });
 
   return tag;
+}
+
+function createHiddenInput() {
+  const input = document.createElement("input");
+  input.setAttribute("type", "hidden");
+  input.setAttribute("id", "tag");
+  input.setAttribute("name", "tag");
+  input.value = postTagsInput.value;
+
+  return input;
 }
 
 document.querySelector(".post-tags__input").addEventListener("keydown", addTagEvent);
