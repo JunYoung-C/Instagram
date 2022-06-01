@@ -24,7 +24,7 @@ function hidePostSetting() {
   });
 }
 
-function showPostSetting(postElement, isMyPost, isFollowed) {
+function showPostSetting(isMyPost, isFollowed) {
   const modifyButton = document.querySelector(".post-setting__modify");
   const deleteButton = document.querySelector(".post-setting__delete");
   const followButton = document.querySelector(".post-setting__follow");

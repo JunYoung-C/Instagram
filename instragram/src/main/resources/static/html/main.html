@@ -113,7 +113,7 @@
             <span class="show-post-filter__text">필터</span>
           </div>
 
-          <article class="post" onclick="showPostSetting(this, true, false)">
+          <article class="post">
             <div class="post__owner-profile">
               <div class="post-owner-profile">
                 <img
@@ -132,7 +132,10 @@
                 </div>
               </div>
 
-              <div class="post__show-setting">
+              <div
+                class="post__show-setting"
+                onclick="showPostSetting(true, false)"
+              >
                 <i class="fas fa-ellipsis-h fa-lg post__show-setting-icon"></i>
               </div>
             </div>
@@ -249,7 +252,7 @@
             </div>
           </article>
 
-          <article class="post" onclick="showPostSetting(this, false, true)">
+          <article class="post">
             <div class="post__owner-profile">
               <div class="post-owner-profile">
                 <img
@@ -268,7 +271,10 @@
                 </div>
               </div>
 
-              <div class="post__show-setting">
+              <div
+                class="post__show-setting"
+                onclick="showPostSetting(false, true)"
+              >
                 <i class="fas fa-ellipsis-h fa-lg post__show-setting-icon"></i>
               </div>
             </div>
@@ -346,7 +352,7 @@
             </div>
           </article>
 
-          <article class="post" onclick="showPostSetting(this, false, false)">
+          <article class="post">
             <div class="post__owner-profile">
               <div class="post-owner-profile">
                 <img
@@ -365,7 +371,10 @@
                 </div>
               </div>
 
-              <div class="post__show-setting">
+              <div
+                class="post__show-setting"
+                onclick="showPostSetting(false, false)"
+              >
                 <i class="fas fa-ellipsis-h fa-lg post__show-setting-icon"></i>
               </div>
             </div>
