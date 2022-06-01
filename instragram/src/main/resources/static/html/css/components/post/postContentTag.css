@@ -7,6 +7,7 @@
 
 .post-content__tag {
   background-color: #fde2e2;
+  height: 26px;
   padding: 5px 10px;
   display: flex;
   justify-content: center;
