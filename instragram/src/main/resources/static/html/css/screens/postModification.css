@@ -164,7 +164,7 @@ main {
 }
 
 .post-content__tags {
-  height: 100px;
+  max-height: 100px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

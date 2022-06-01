@@ -2,8 +2,8 @@ const postContentTags = document.querySelector(".post-content__tags");
 const postTagsInput = document.querySelector(".post-tags__input");
 
 function addTagEvent(event) {
-  event.preventDefault();
   if (event.keyCode == 13 || event.keyCode == 32) {
+    event.preventDefault();
     if (postTagsInput.value === "") {
       return;
     }
