@@ -117,7 +117,12 @@
               th:object="${postSaveForm}"
             >
               <div class="add-post-form__header">
-                <input type="reset" value="취소" class="add-post-form__reset" />
+                <input
+                  type="reset"
+                  value="취소"
+                  class="add-post-form__reset"
+                  onclick="history.back()"
+                />
 
                 <h1 class="add-post-form__title">새 게시물 만들기</h1>
 
@@ -138,22 +143,6 @@
 
                       <div class="slide-button slide-button--right">
                         <i class="fas fa-chevron-circle-right"></i>
-                      </div>
-
-                      <div
-                        class="add-post-form__files add-post-form__files--no-file"
-                      >
-                        <img
-                          src="../storefiles/01.png"
-                          alt="파일"
-                          class="add-post-form__file"
-                        />
-
-                        <img
-                          src="../storefiles/01.png"
-                          alt="파일"
-                          class="add-post-form__file"
-                        />
                       </div>
                     </div>
 
@@ -303,5 +292,8 @@
       src="https://kit.fontawesome.com/b17793764c.js"
       crossorigin="anonymous"
     ></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/slideController.js"></script>
+    <script src="./js/postRegistration.js"></script>
   </body>
 </html>

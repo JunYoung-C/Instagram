@@ -59,6 +59,8 @@ function addPostFilterEvent() {
   });
 }
 
+// 좋아요 ajax
+
 function addMainPageEvent() {
   postArr.forEach(post => addPostSlidingEvent(post));
   hidePostSetting();
