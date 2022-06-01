@@ -113,7 +113,7 @@
             <span class="show-post-filter__text">필터</span>
           </div>
 
-          <article class="post">
+          <article class="post" onclick="showPostSetting(this, true, false)">
             <div class="post__owner-profile">
               <div class="post-owner-profile">
                 <img
@@ -249,7 +249,104 @@
             </div>
           </article>
 
-          <article class="post">
+          <article class="post" onclick="showPostSetting(this, false, true)">
+            <div class="post__owner-profile">
+              <div class="post-owner-profile">
+                <img
+                  src="../storefiles/basic-profile-image.png"
+                  alt="프로필 이미지"
+                  onclick="location.href='./profile.html'"
+                  class="post-owner-profile__image"
+                />
+
+                <div class="post-owner-profile__info">
+                  <a href="./profile.html" class="post-owner-profile__nickname"
+                    >nickname</a
+                  >
+
+                  <span class="post-owner-profile__time">2022-05-27</span>
+                </div>
+              </div>
+
+              <div class="post__show-setting">
+                <i class="fas fa-ellipsis-h fa-lg post__show-setting-icon"></i>
+              </div>
+            </div>
+
+            <div class="post__files-wrap">
+              <div class="post-files__button slide-button--left">
+                <i class="fas fa-chevron-circle-left"></i>
+              </div>
+
+              <div class="post-files__button slide-button--right">
+                <i class="fas fa-chevron-circle-right"></i>
+              </div>
+
+              <div class="post-files">
+                <img src="../storefiles/01.png" alt="파일" class="post-file" />
+
+                <img src="../storefiles/01.png" alt="파일" class="post-file" />
+              </div>
+            </div>
+
+            <div class="post-content">
+              <div class="post-content__description">
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+                안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~
+                반가워요~ 안녕하세요~ 반가워요~ 안녕하세요~ 반가워요~
+              </div>
+
+              <div class="post-content__tags"></div>
+
+              <div class="post-content__info">
+                <div class="post-content__like-count">
+                  <i class="far fa-heart post-content__like-icon"></i>
+
+                  <i
+                    class="fas fa-heart post-content__like-icon--compacted post-content__like-icon--unvisible"
+                  ></i>
+
+                  <span class="post-like-count-wrap">
+                    <span class="post-like-count">8000</span>개</span
+                  >
+                </div>
+
+                <div class="post-content__comment-count">
+                  <span href="./post.html" class="post-comment-count-wrap"
+                    >댓글 <span class="post-comment-count">300</span>개</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="post__option">
+              <div class="post-option post-option--like">
+                <i class="far fa-heart post-option__like-icon"></i>
+
+                <span class="post-option__like">좋아요</span>
+              </div>
+
+              <div
+                class="post-option post-option--comment"
+                onclick="location.href='./post.html'"
+              >
+                <i class="far fa-comment-alt post-option__comment-icon"></i>
+
+                <span class="post-option__comment">댓글 달기</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="post" onclick="showPostSetting(this, false, false)">
             <div class="post__owner-profile">
               <div class="post-owner-profile">
                 <img
@@ -361,7 +458,7 @@
           </div>
         </main>
 
-        <section class="modal">
+        <section class="modal post-setting-modal">
           <article class="modal-body">
             <div class="post-setting">
               <div class="post-setting__delete">
@@ -446,5 +543,6 @@
     ></script>
     <script src="./js/header.js"></script>
     <script src="./js/slideController.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
