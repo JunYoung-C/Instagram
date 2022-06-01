@@ -184,6 +184,12 @@ main {
   font-size: 16px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-filter-form__submit:active,
+.post-filter-form__reset:active {
+  opacity: 0.7;
 }
 /* post-filter-form 끝 */
 

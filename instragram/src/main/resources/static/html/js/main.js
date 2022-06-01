@@ -48,5 +48,21 @@ function showPostSetting(isMyPost, isFollowed) {
   postSettingModal.style.display = "block";
 }
 
-postArr.forEach(post => addPostSlidingEvent(post));
-hidePostSetting();
+function addPostFilterEvent() {
+  const postFilterModal = document.querySelector(".post-filter-modal");
+  document.querySelector(".show-post-filter").addEventListener("click", function() {
+    postFilterModal.style.display = "block";
+  });
+  
+  document.querySelector(".post-filter-form__reset").addEventListener("click", function() {
+    postFilterModal.style.display = "none";
+  });
+}
+
+function addMainPageEvent() {
+  postArr.forEach(post => addPostSlidingEvent(post));
+  hidePostSetting();
+  addPostFilterEvent();
+}
+
+addMainPageEvent();
