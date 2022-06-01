@@ -60,6 +60,12 @@
   position: relative;
   line-height: 22px;
 }
+
+.post-content__more-description {
+  font-weight: bold;
+  color: gray;
+  cursor: pointer;
+}
 /* post-left-column 끝 */
 
 /* post-rignt-column 시작 */

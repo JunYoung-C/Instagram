@@ -37,6 +37,12 @@ main {
   line-height: 22px;
 }
 
+.post-content__more-description {
+  font-weight: bold;
+  color: gray;
+  cursor: pointer;
+}
+
 .post-content__info {
   display: flex;
   justify-content: space-between;
