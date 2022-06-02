@@ -218,8 +218,11 @@
 }
 
 .post-option__heart {
-  margin-right: 13px;
   cursor: pointer;
+}
+
+.post-option__comment {
+  margin-left: 13px;
 }
 
 .post-option__heart--compacted {
