@@ -202,7 +202,7 @@
                 </div>
               </div>
 
-              <div class="post__show-setting">
+              <div class="post__show-setting" onclick="showPostSetting(true)">
                 <i class="fas fa-ellipsis-h fa-lg post__show-setting-icon"></i>
               </div>
             </div>
@@ -528,19 +528,18 @@
       </div>
     </div>
 
-    <section class="modal">
+    <section class="modal post-setting-modal">
       <article class="modal-body">
         <div class="post-setting">
           <div class="post-setting__delete">
             <span class="post-setting__delete-text">삭제</span>
           </div>
 
-          <div class="post-setting__modify">
-            <span class="post-setting__modify-text">수정</span>
-          </div>
-
-          <div class="post-setting__follow">
-            <span class="post-setting__follow-text">팔로우 취소</span>
+          <div
+            class="post-setting__modify"
+            onclick="location.href='./postModification.html'"
+          >
+            <a class="post-setting__modify-text">수정</a>
           </div>
 
           <div class="post-setting__cancel">
@@ -556,6 +555,7 @@
     ></script>
     <script src="./js/header.js"></script>
     <script src="./js/slideController.js"></script>
+    <script src="./js/postSetting.js"></script>
     <script src="./js/post.js"></script>
   </body>
 </html>
