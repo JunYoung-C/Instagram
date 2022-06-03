@@ -58,10 +58,6 @@ main {
   color: red;
 }
 
-.post-content__like-icon--compacted {
-  margin-right: 3px;
-}
-
 .post-content__like-icon--unvisible {
   display: none !important;
 }
