@@ -254,6 +254,11 @@ class MemberServiceTest {
 
 ## :closed_book: 배운 점
 - Spring, JPA 학습 직후 프로젝트를 통한 체화
-- 프로젝트 전용 예외 클래스를 정의하여 예외 처리
-  - form 관련 예외는 try ~ catch로 잡아서 biding
-
+- 프로젝트 전용 예외 클래스를 정의하여 처리. form과 api 예외를 서로 다르게 처리.
+  - form 관련 예외 발생 시
+    1. Bean Validation : `@Valid`와 `BidingResult`를 사용. 이후 thymeleaf로 관련 에러 메세지 출력
+    2. form 관련 예외가 던져지는 경우 : Controller의 catch문에서 `BidingResult.rejectValue()`로 처리. 이후 thymeleaf로 관련 에러 메세지 출력
+  - api 관련 예외 발생 시
+    - `@ExceptionHandler`로 일괄적으로 처리
+- 테스트 코드 작성
+  - `JUnit`과 `Mockito`를 사용
