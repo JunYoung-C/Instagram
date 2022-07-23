@@ -124,7 +124,7 @@ DB에서 조회한 Entity를 그대로 JSON으로 반환하는 것은 좋지 않
 
 ### 2. 테스트 코드 실행 속도가 느리다.
 ### :question: Question
-- `@SpringBootTest`로 테스트 코드를 작성하면 편리하지만, 테스트에 사용되지 않는 bean까지 모두 로드하기 때문에 속도가 느리다. 그러면 속도를 개선하기 위해서 어떻게 해야 할까?
+- `@SpringBootTest`로 테스트 코드를 작성하면 편리하지만, 테스트에 사용되지 않는 bean까지 모두 로드하기 때문에 속도가 느리다. 속도를 개선하려면 어떻게 해야 할까?
 <details>
 <summary><b>기존 코드</b></summary>
 
@@ -251,6 +251,8 @@ class MemberServiceTest {
 - [로그인, 회원가입, 메인 페이지 예외 처리하기](https://github.com/JunYoung-C/Instagram/issues/38)
 - [회원 가입한 회원이 게시물을 등록하고 수정하려할 때 권한이 없는 현상](https://github.com/JunYoung-C/Instagram/issues/40)
 - [테스트 코드 보완하기](https://github.com/JunYoung-C/Instagram/issues/43)
+
+</br>
 
 ## :closed_book: 배운 점
 - Spring, JPA 학습 직후 프로젝트를 통한 체화
