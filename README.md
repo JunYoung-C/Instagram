@@ -6,7 +6,7 @@
 
 ## :bookmark: Intro
 - 직접 고민하며 만들어본 인스타그램 클론 코딩
-- 게시물 등록, 수정
+- 게시물, 댓글, 답글 기능을 제공합니다.
 
 </br>
 
@@ -50,31 +50,24 @@
 - QueryDSL
 - Thymeleaf
 - Gradle
-### 2) DB
 - H2
-### 3) test-tool
 - JUnit5
 - Mockito
-### 4) Front-end
+
+### 2) Front-end
 - HTML
 - CSS
 - JavaScript
 
 </br>
 
-## :pushpin: 구조
-### 1) 전체 흐름
-![api 흐름](https://user-images.githubusercontent.com/87891581/166135748-6f183e5f-c3af-4d10-aa7d-7cf615f94391.png)
+## :pushpin: ERD 설계
 
-### 2) ERD
 ![image](https://user-images.githubusercontent.com/87891581/166134604-5b94d7e3-c4ca-4adf-b77e-9fd702e81ad1.png)
-
-### 3) 클래스 다이어그램
-![image](https://user-images.githubusercontent.com/87891581/166135741-5d56b43e-6b74-4a00-9570-1664ead8a2e4.png)
 
 </br>
 
-## :page_facing_up: 기능
+## :page_facing_up: 기능 목록
 > [URI 문서 ver.2](https://github.com/JunYoung-C/Instagram/wiki/URI-%EB%AC%B8%EC%84%9C-ver.2)
 
 - 회원 기능
@@ -129,7 +122,7 @@ DB에서 조회한 Entity를 그대로 JSON으로 반환하는 것은 좋지 않
 
 ---
 
-### 4.2. 테스트 코드 실행 속도가 느리다.
+### 2. 테스트 코드 실행 속도가 느리다.
 ### :question: Question
 - `@SpringBootTest`로 테스트 코드를 작성하면 편리하지만, 테스트에 사용되지 않는 bean까지 모두 로드하기 때문에 속도가 느리다. 그러면 속도를 개선하기 위해서 어떻게 해야 할까?
 <details>
@@ -242,17 +235,25 @@ class MemberServiceTest {
 
 </br>
 
-## :wrench: 개선할 점
-- 기능 보완
-  - 게시물, 댓글, 답글 좋아요 기능
-  - 좋아요가 많은 댓글, 답글 순서로 조회
-  - 동영상도 업로드 가능
-  - 페이스북 로그인
-  - 로그아웃
-  - 회원 정보 수정
-  - 팔로워, 팔로잉
-  - 팔로잉한 회원의 게시물만 조회
-  - 채팅
-- 프로젝트 배포
-- 성능 테스트 및 기능 최적화
-- api 문서화 툴 도입
+## :file_folder: 자문자답하며 고민한 이슈들
+- [이번 프로젝트를 진행하는 이유는?](https://github.com/JunYoung-C/Instagram/issues/1)
+- [프로젝트 주제는?](https://github.com/JunYoung-C/Instagram/issues/3)
+- [프로젝트 제작 전 할일](https://github.com/JunYoung-C/Instagram/issues/4)
+- [폴더 구조는 어떤 식으로 잡아야 할까?](https://github.com/JunYoung-C/Instagram/issues/9)
+- [회원 관련 기능 구현](https://github.com/JunYoung-C/Instagram/issues/15)
+- [게시물 관련 기능 구현](https://github.com/JunYoung-C/Instagram/issues/16)
+- [댓글 관련 기능 구현](https://github.com/JunYoung-C/Instagram/issues/17)
+- [api 작성](https://github.com/JunYoung-C/Instagram/issues/22)
+- [Entity를 dto로 변환하는 로직은 어떤 계층에 와야할까?](https://github.com/JunYoung-C/Instagram/issues/24)
+- [ajax를 적용해서 동적인 페이지로 만들기](https://github.com/JunYoung-C/Instagram/issues/29)
+- [게시물을 ajax로 가져오면 기존 게시물 슬라이드 버튼 이벤트가 작동하지 않는 현상](https://github.com/JunYoung-C/Instagram/issues/30)
+- [게시물 등록 시 이미지 업로드 실패](https://github.com/JunYoung-C/Instagram/issues/34)
+- [로그인, 회원가입, 메인 페이지 예외 처리하기](https://github.com/JunYoung-C/Instagram/issues/38)
+- [회원 가입한 회원이 게시물을 등록하고 수정하려할 때 권한이 없는 현상](https://github.com/JunYoung-C/Instagram/issues/40)
+- [테스트 코드 보완하기](https://github.com/JunYoung-C/Instagram/issues/43)
+
+## :closed_book: 배운 점
+- Spring, JPA 학습 직후 프로젝트를 통한 체화
+- 프로젝트 전용 예외 클래스를 정의하여 예외 처리
+  - form 관련 예외는 try ~ catch로 잡아서 biding
+
