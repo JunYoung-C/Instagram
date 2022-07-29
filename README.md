@@ -95,7 +95,7 @@ DB에서 조회한 Entity를 그대로 JSON으로 반환하는 것은 좋지 않
 ### :bulb: Answer
 먼저 OSIV를 true로 할지 false로 할지 결정해야 한다. 왜냐하면 OSIV를 끈다면, 모든 지연 로딩을 트랜잭션 안에서 처리해야 하므로 dto 변환을 Controller에서 할 수 없다. 그러면 어떤 선택을 해야 할까?
 #### 1) OSIV에 대한 고민
-만약 실제 인스타그램이라면, OSIV를 true로 설정하면 트래픽이 상당한 서비스라 커넥션이 부족해질 것이다. 하지만 내 프로젝트는 트래픽이 사실상 없다고 봐도 무방하기 때문에 OSIV를 true로 설정하겠다.
+만약 실제 인스타그램이라면, OSIV를 true로 설정하면 트래픽이 상당한 서비스라 커넥션이 부족해질 것이다. 하지만 내 프로젝트는 트래픽이 사실상 없다고 봐도 무방하므로 OSIV를 true로 설정하겠다.
 > 1번 결론 : OSIV를 true로 설정할 것이기 때문에 Controller를 포함하여 고민해보자
 #### 2) 변환 로직 위치에 대한 고민
 우선 엔티티는 핵심 비즈니스이기 때문에 대부분의 로직은 엔티티가 필요하다. 이런 상황에서 특정 계층에 엔티티의 의존성을 제한하는 것은 유연하지 못하다고 생각한다. 또한, dto는 api를 사용하는 클라이언트와 연관성이 있으므로 보다 가까운 위치인 Controller에 오는 것이 설계상 바람직하다고 생각한다.
@@ -235,7 +235,7 @@ class MemberServiceTest {
 ## :file_folder: 자문자답하며 고민한 이슈들
 - [이번 프로젝트를 진행하는 이유는?](https://github.com/JunYoung-C/Instagram/issues/1)
 - [프로젝트 주제는?](https://github.com/JunYoung-C/Instagram/issues/3)
-- [프로젝트 제작 전 할일](https://github.com/JunYoung-C/Instagram/issues/4)
+- [프로젝트 제작 전 할 일](https://github.com/JunYoung-C/Instagram/issues/4)
 - [폴더 구조는 어떤 식으로 잡아야 할까?](https://github.com/JunYoung-C/Instagram/issues/9)
 - [회원 관련 기능 구현](https://github.com/JunYoung-C/Instagram/issues/15)
 - [게시물 관련 기능 구현](https://github.com/JunYoung-C/Instagram/issues/16)
@@ -259,5 +259,5 @@ class MemberServiceTest {
         - 107개의 테스트 코드
         - 통합 테스트에서 `Mockito`를 사용한 단위 테스트로 변경하여 속도 개선
     - form과 api 예외를 각각 처리
-        - form 예외는 `Bean Validation` 또는 `try ~ catch`로 잡은 후 Front 단에서 관련 에러 메세지 출력
+        - form 예외는 `Bean Validation` 또는 `try ~ catch`로 잡은 후 Front 단에서 관련 에러 메시지 출력
         - api 예외는`@RestControllerAdvice`와 `@ExceptionHandler`로 한곳에서 처리
