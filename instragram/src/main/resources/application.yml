@@ -31,7 +31,7 @@ logging.level:
 #        http11: debug
 
 file:
-  dir: C:/Users/chlwn/Desktop/myproject1/instragram/src/main/resources/static/storefiles/
+  dir: C:/Users/chlwn/Desktop/프로젝트/개인 프로젝트/myproject1/instragram/src/main/resources/static/storefiles/
 
 server:
   servlet:
