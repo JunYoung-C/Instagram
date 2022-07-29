@@ -1,18 +1,16 @@
 # Instagram 구현
-> 스프링과 JPA를 학습하고 체화하기 위한 개인 웹 프로젝트
 <p align="center"><img src="https://user-images.githubusercontent.com/87891581/165957434-b4f0ae25-853a-4757-aa2e-6a9386edd949.png" width="300" height="300"></p>
 
 </br>
 
 ## :bookmark: Intro
+- Spring, JPA 학습 직후 진행한 개인 프로젝트
 - 직접 고민하면서 구현한 인스타그램 클론 코딩
-- 게시물, 댓글, 답글 관련 기능 제공
 
 </br>
 
-## :calendar: 제작 기간 & 참여 인원
+## :calendar: 기간
 - 2022년 2월 10일 ~ 4월 20일
-- 개인 프로젝트
 
 </br>
 
@@ -68,7 +66,6 @@
 </br>
 
 ## :page_facing_up: 기능 목록
-> [URI 문서 ver.2](https://github.com/JunYoung-C/Instagram/wiki/URI-%EB%AC%B8%EC%84%9C-ver.2)
 
 - 회원 기능
   - 회원 등록
@@ -254,13 +251,13 @@ class MemberServiceTest {
 
 </br>
 
-## :closed_book: 배운 점
-- Spring, JPA 학습 직후 프로젝트를 통한 체화
-- 프로젝트 전용 예외 클래스를 정의하여 처리. form과 api 예외를 서로 다르게 처리.
-  - form 관련 예외 발생 시
-    1. Bean Validation : `@Valid`와 `BidingResult`를 사용. 이후 thymeleaf로 관련 에러 메세지 출력
-    2. form 관련 예외가 던져지는 경우 : Controller의 catch문에서 `BidingResult.rejectValue()`로 처리. 이후 thymeleaf로 관련 에러 메세지 출력
-  - api 관련 예외 발생 시
-    - `@ExceptionHandler`로 일괄적으로 처리
-- 테스트 코드 작성
-  - `JUnit`과 `Mockito`를 사용
+## :closed_book: 경험한 것
+- Front-End : 게시물 페이지, 게시물 상세 페이지, 게시물 수정 페이지, 로그인, 회원가입
+- Back-End
+    - 게시물, 댓글, 답글, 회원 관련 기능 구현 - [URI 문서](https://github.com/JunYoung-C/Instagram/wiki/URI-%EB%AC%B8%EC%84%9C-ver.2)
+    - 테스트 코드 작성
+        - 107개의 테스트 코드
+        - 통합 테스트에서 `Mockito`를 사용한 단위 테스트로 변경하여 속도 개선
+    - form과 api 예외를 각각 처리
+        - form 예외는 `Bean Validation` 또는 `try ~ catch`로 잡은 후 Front 단에서 관련 에러 메세지 출력
+        - api 예외는`@RestControllerAdvice`와 `@ExceptionHandler`로 한곳에서 처리
