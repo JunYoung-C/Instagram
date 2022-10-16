@@ -20,18 +20,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class FileManagerTest {
-    final String FILE_DIR = "C:/Users/chlwn/Desktop/프로젝트/개인 프로젝트/myproject1/instragram/src/test/resources/files/";
+    final String FILE_DIR = "C:/Users/chlwn/Desktop/취업/프로젝트/개인 프로젝트/myproject1/instragram/src/test/resources/files/";
     FileManager fileManager = new FileManager(FILE_DIR);
     List<MultipartFile> multipartFiles;
     List<FileDto> fileDtos = new ArrayList<>();
-
-    //    @BeforeAll
-    void init() throws IOException {
-        multipartFiles = List.of(
-                createMockMultipartFile("files", "test-image1.pNg", MediaType.IMAGE_PNG_VALUE),
-                createMockMultipartFile("files", "test-image2.JpEg", MediaType.IMAGE_JPEG_VALUE));
-        fileDtos = fileManager.storeImageFiles(multipartFiles);
-    }
 
     @DisplayName("전체 경로 조회")
     @Test
